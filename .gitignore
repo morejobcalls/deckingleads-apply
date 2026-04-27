@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+._*
+
+# Node
+node_modules/
+
+# Working artifacts (screenshot-driven design iteration)
+temporary screenshots/
+
+# Editor
+.vscode/
+.idea/
+*.swp
