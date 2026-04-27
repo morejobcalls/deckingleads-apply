@@ -85,20 +85,32 @@
   }
   .logo-cell {
     flex: 0 0 auto;
-    height: 32px;
+    height: 56px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 4px;
-    color: #6B7280;
-    font-weight: 800;
-    letter-spacing: 0.06em;
-    font-size: 14px;
-    white-space: nowrap;
+    padding: 0 8px;
     opacity: 0.85;
-    transition: opacity 180ms ease, color 180ms ease;
+    transition: opacity 180ms ease, transform 180ms ease;
   }
-  .logo-cell:hover { opacity: 1; color: #F5F2EB; }
+  .logo-cell:hover { opacity: 1; transform: translateY(-1px); }
+  .logo-cell img {
+    max-height: 44px;
+    max-width: 180px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+  /* Logos delivered as black-on-transparent: invert to white for charcoal bg */
+  .logo-cell--invert img { filter: brightness(0) invert(1); }
+  /* Logos with opaque (white) backgrounds: wrap in a soft white pill so they look intentional */
+  .logo-cell--card {
+    background: #F5F2EB;
+    border-radius: 8px;
+    padding: 6px 14px;
+  }
+  .logo-cell--card img { max-height: 36px; }
 </style>
 </head>
 <body class="bg-bg text-ink antialiased">
@@ -152,27 +164,35 @@
     </p>
     <div class="marquee">
       <div class="marquee-track">
-        <div class="logo-cell">ALL PRO DECKS</div>
-        <div class="logo-cell">BEND FENCE &amp; DECK</div>
-        <div class="logo-cell">OASIS CUSTOM DECKS</div>
-        <div class="logo-cell">PAYNTER CONSTRUCTION</div>
-        <div class="logo-cell">CERVANTES BUILDERS</div>
-        <div class="logo-cell">ENGLE OUTDOOR LIVING</div>
-        <div class="logo-cell">BUILDER 07</div>
-        <div class="logo-cell">BUILDER 08</div>
-        <div class="logo-cell">BUILDER 09</div>
-        <div class="logo-cell">BUILDER 10</div>
+        <div class="logo-cell"><img src="logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
+        <div class="logo-cell"><img src="logos/all-decked-out.webp" alt="All Decked Out"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/biviano.png" alt="Biviano"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/jb-renovations.png" alt="JB Renovations"></div>
+        <div class="logo-cell logo-cell--invert"><img src="logos/morse-builders.png" alt="Morse Builders"></div>
+        <div class="logo-cell logo-cell--invert"><img src="logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/mr-patio-cover.jpg" alt="Mr Patio Cover"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
+        <div class="logo-cell logo-cell--invert"><img src="logos/paynter-construction.png" alt="Paynter Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/prodeck-construction.png" alt="ProDeck Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/tw-construction.png" alt="TW Construction"></div>
+        <div class="logo-cell logo-cell--invert"><img src="logos/upgryd.avif" alt="Upgryd"></div>
+        <div class="logo-cell"><img src="logos/western-rockies-construction.webp" alt="Western Rockies Construction"></div>
         <!-- duplicate set for seamless loop -->
-        <div class="logo-cell">ALL PRO DECKS</div>
-        <div class="logo-cell">BEND FENCE &amp; DECK</div>
-        <div class="logo-cell">OASIS CUSTOM DECKS</div>
-        <div class="logo-cell">PAYNTER CONSTRUCTION</div>
-        <div class="logo-cell">CERVANTES BUILDERS</div>
-        <div class="logo-cell">ENGLE OUTDOOR LIVING</div>
-        <div class="logo-cell">BUILDER 07</div>
-        <div class="logo-cell">BUILDER 08</div>
-        <div class="logo-cell">BUILDER 09</div>
-        <div class="logo-cell">BUILDER 10</div>
+        <div class="logo-cell"><img src="logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
+        <div class="logo-cell"><img src="logos/all-decked-out.webp" alt="All Decked Out"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/biviano.png" alt="Biviano"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/jb-renovations.png" alt="JB Renovations"></div>
+        <div class="logo-cell logo-cell--invert"><img src="logos/morse-builders.png" alt="Morse Builders"></div>
+        <div class="logo-cell logo-cell--invert"><img src="logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/mr-patio-cover.jpg" alt="Mr Patio Cover"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
+        <div class="logo-cell logo-cell--invert"><img src="logos/paynter-construction.png" alt="Paynter Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/prodeck-construction.png" alt="ProDeck Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="logos/tw-construction.png" alt="TW Construction"></div>
+        <div class="logo-cell logo-cell--invert"><img src="logos/upgryd.avif" alt="Upgryd"></div>
+        <div class="logo-cell"><img src="logos/western-rockies-construction.webp" alt="Western Rockies Construction"></div>
       </div>
     </div>
   </div>
