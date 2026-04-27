@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<title>The Decking Growth Operating System | DeckingLeads</title>
-<meta name="description" content="100 exclusive deck appointments in 100 days. Or $2,000 cash + full refund + free work until we hit 100. For deck builders doing $1M-$3M/year.">
+<title>More Deck Job Calls. Guaranteed. | DeckingLeads</title>
+<meta name="description" content="100 exclusive sales appointment opportunities in 100 days. Or you get paid three ways. For deck builders doing $1M+/yr. One builder per market.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -47,193 +47,416 @@
   .display-lg { font-family: 'Inter', system-ui, sans-serif; letter-spacing: -0.04em; font-weight: 800; }
   details > summary { list-style: none; }
   details > summary::-webkit-details-marker { display: none; }
-  .gold-gradient {
-    background-image: linear-gradient(to bottom, #c7963f 0%, #ab8032 100%);
-  }
-  .gold-gradient-hover:hover {
-    background-image: linear-gradient(to bottom, #d4a14a 0%, #ba8f3b 100%);
-  }
-  /* GHL iframe sizing */
-  iframe.ghl-embed { width: 100% !important; min-height: 720px !important; display: block !important; border: 0 !important; }
+  .gold-gradient { background-image: linear-gradient(to bottom, #c7963f 0%, #ab8032 100%); }
+  .gold-gradient-hover:hover { background-image: linear-gradient(to bottom, #d4a14a 0%, #ba8f3b 100%); }
+
   /* Sticky bottom CTA hidden until scroll */
   .sticky-cta { transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease-out; }
   .sticky-cta[aria-hidden="true"] { transform: translateY(120%); opacity: 0; pointer-events: none; }
+
   /* Modal animation */
   .qualify-modal { transition: opacity 220ms ease-out; }
   .qualify-modal[aria-hidden="true"] { opacity: 0; pointer-events: none; }
   .qualify-sheet { transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1); }
   .qualify-modal[aria-hidden="true"] .qualify-sheet { transform: translateY(40px); }
-  /* Step transitions */
   .step { display: none; }
   .step.active { display: block; animation: fadeIn 200ms ease-out; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  /* Body scroll lock when modal open */
   body.modal-open { overflow: hidden; }
+
+  /* Proof card hover */
+  .proof-thumb .play-icon { transition: transform 200ms ease-out; }
+  .proof-thumb:hover .play-icon { transform: scale(1.08); }
 </style>
 </head>
 <body class="bg-bg text-ink antialiased">
 
-<!-- Top utility bar -->
+<!-- ============================================== -->
+<!-- TOP UTILITY BAR                                  -->
+<!-- ============================================== -->
 <header class="border-b border-border/50 relative z-10">
-  <div class="max-w-2xl mx-auto px-5 py-3.5 flex items-center justify-between">
+  <div class="max-w-3xl mx-auto px-5 py-3.5 flex items-center justify-between">
     <span class="font-black text-[13px] tracking-[0.18em] uppercase text-ink">Decking<span class="text-gold">Leads</span><sup class="text-[9px] text-ink-muted align-top ml-0.5">.com</sup></span>
     <button data-open-qualify class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-md gold-gradient gold-gradient-hover text-black text-sm font-semibold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-      See If You Qualify <span>→</span>
+      Reserve My Zip Code <span>→</span>
     </button>
   </div>
 </header>
 
-<!-- HERO -->
+<!-- ============================================== -->
+<!-- HERO                                             -->
+<!-- ============================================== -->
 <section class="relative overflow-hidden">
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(199, 150, 63, 0.14) 0%, transparent 60%), radial-gradient(ellipse 80% 40% at 80% 100%, rgba(199, 150, 63, 0.06) 0%, transparent 60%);"></div>
+  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(199, 150, 63, 0.14) 0%, transparent 60%);"></div>
 
-  <div class="relative max-w-2xl mx-auto px-5 pt-8 pb-12 sm:pt-12 sm:pb-16">
-    <!-- Pre-headline pill -->
+  <div class="relative max-w-3xl mx-auto px-5 pt-10 pb-10 sm:pt-14 sm:pb-12 text-center">
+
+    <!-- Eyebrow: scarcity tag, NO pulse (live status is for terminal pages only) -->
     <div class="inline-flex items-center gap-2 mb-5">
       <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-      <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">For Deck Builders Doing $1M+/Year</span>
+      <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">1 Builder Per Market</span>
     </div>
 
     <!-- H1 -->
-    <h1 class="display-lg text-[38px] leading-[1.02] sm:text-[56px] sm:leading-[1.02] mb-5">
-      100 Exclusive Deck Appointments In 100 Days.
-      <span class="text-gold block mt-2">Or You Get Paid Three Ways.</span>
+    <h1 class="display-lg text-[36px] leading-[1.05] sm:text-[58px] sm:leading-[1.02] mb-5 max-w-2xl mx-auto">
+      More Deck Job Calls.
+      <span class="text-gold block mt-2">Guaranteed.</span>
     </h1>
 
-    <!-- Sub -->
-    <p class="text-base sm:text-lg text-ink-muted leading-relaxed mb-6 max-w-xl">
-      The Decking Growth Operating System. We install it inside your business for deck builders doing <span class="text-ink font-semibold">$1M+ a year</span> with a real crew. If we miss 100 appointments in 100 days, you get <span class="text-ink font-semibold">$2,000 cash, a full refund, and free work until we hit it.</span>
+    <!-- Sub paragraph -->
+    <p class="text-base sm:text-lg text-ink-muted leading-relaxed mb-4 max-w-xl mx-auto">
+      <span class="text-ink font-semibold">100 exclusive sales appointment opportunities in 100 days.</span>
+      Or you get paid three ways.
     </p>
 
-    <!-- Primary CTA -->
-    <button data-open-qualify class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-4 rounded-md gold-gradient gold-gradient-hover text-black font-bold text-[15px] sm:text-base shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-      See If You Qualify <span>→</span>
-    </button>
+    <!-- Filter line -->
+    <p class="text-sm sm:text-base text-ink-muted leading-relaxed mb-7 max-w-lg mx-auto">
+      Only questions left: is your market open — and can your team handle the volume?
+    </p>
 
-    <!-- Micro row -->
-    <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4">
-      <span class="text-[13px] text-ink-muted">Free · Takes 2–3 minutes</span>
-      <span class="inline-flex items-center gap-1.5 text-[13px] text-ink">
-        <svg class="w-4 h-4 text-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        One builder per market
-      </span>
+    <!-- BUTTON 1 -->
+    <div class="flex justify-center">
+      <button data-open-qualify class="cta-btn w-full sm:w-auto inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+        <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
+        <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
+      </button>
     </div>
+
+    <p class="text-[12px] text-ink-subtle mt-4">2–3 minutes · Free · One deck builder per market</p>
+
   </div>
 </section>
 
-<!-- VIDEO PROOF -->
-<section class="px-5 pb-14 max-w-2xl mx-auto">
-  <p class="text-[12px] font-semibold tracking-[0.14em] uppercase text-ink-muted mb-3">Watch: How The System Works In 100 Days</p>
-  <div class="rounded-2xl overflow-hidden bg-elevated border border-border shadow-card relative" style="aspect-ratio: 16/9;">
-    <img src="https://placehold.co/640x360/0D0D0D/c7963f?text=Brian+Wallace+%22I+wanted+to+call+your+bluff%22" alt="Brian Wallace testimonial clip" class="w-full h-full object-cover">
-    <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
-    <button class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full gold-gradient gold-gradient-hover text-black flex items-center justify-center shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform" aria-label="Play testimonial">
-      <svg class="w-7 h-7 ml-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
-    </button>
+<!-- ============================================== -->
+<!-- PROOF — 12 cards (6 real + 6 placeholders)      -->
+<!-- ============================================== -->
+<section id="proof" class="px-5 py-14 sm:py-16 max-w-5xl mx-auto border-t border-border/50">
+  <div class="text-center mb-9">
+    <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-3">Proof · Watch The Numbers</p>
+    <h2 class="display text-[28px] sm:text-[40px] leading-[1.05] mb-3">
+      Real builders. Real numbers. <span class="text-gold">Recent.</span>
+    </h2>
+    <p class="text-base text-ink-muted max-w-xl mx-auto">
+      Tap any card to watch the story. These are deck builders who said the same thing on day one — *"too good to be true"* — and changed their minds because the system kept delivering.
+    </p>
   </div>
-  <p class="mt-3 text-sm text-ink-muted leading-relaxed">
-    <span class="text-ink font-medium">Brian Wallace</span> · Bend Fence & Deck, OR · 60 estimates sent · 25 closed · 6 weeks.
-  </p>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+
+    <!-- ====== Card 01 — Justin Wylie ====== -->
+    <article>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border bg-gradient-to-br from-elevated to-surface group">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
+            <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
+          <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">CPL $400 → $30 in 14 days</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink text-sm font-bold leading-tight">Justin Wylie</p>
+        <p class="text-ink-muted text-xs leading-tight mt-0.5">All Pro Decks &amp; Patios · San Antonio, TX</p>
+      </div>
+    </article>
+
+    <!-- ====== Card 02 — Brian Wallace ====== -->
+    <article>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border bg-gradient-to-br from-elevated to-surface group">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
+            <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
+          <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">60 estimates · 25 closed · 6 weeks</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink text-sm font-bold leading-tight">Brian Wallace</p>
+        <p class="text-ink-muted text-xs leading-tight mt-0.5">Bend Fence &amp; Deck · Bend, OR</p>
+      </div>
+    </article>
+
+    <!-- ====== Card 03 — Jacob Weaver ====== -->
+    <article>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border bg-gradient-to-br from-elevated to-surface group">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
+            <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
+          <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$480K closed in 21 days</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink text-sm font-bold leading-tight">Jacob Weaver</p>
+        <p class="text-ink-muted text-xs leading-tight mt-0.5">Oasis Custom Decks · Pennsylvania</p>
+      </div>
+    </article>
+
+    <!-- ====== Card 04 — Chip Paynter ====== -->
+    <article>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border bg-gradient-to-br from-elevated to-surface group">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
+            <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
+          <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$200K from 4 leads · 21 days</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink text-sm font-bold leading-tight">Chip Paynter</p>
+        <p class="text-ink-muted text-xs leading-tight mt-0.5">Paynter Construction · Loomis, CA</p>
+      </div>
+    </article>
+
+    <!-- ====== Card 05 — Ricardo Cervantes ====== -->
+    <article>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border bg-gradient-to-br from-elevated to-surface group">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
+            <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
+          <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$105K closed in 7 days</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink text-sm font-bold leading-tight">Ricardo Cervantes</p>
+        <p class="text-ink-muted text-xs leading-tight mt-0.5">Colorado</p>
+      </div>
+    </article>
+
+    <!-- ====== Card 06 — Eric Engle ====== -->
+    <article>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border bg-gradient-to-br from-elevated to-surface group">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
+            <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
+          <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$3M → $8M tracking · last man standing</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink text-sm font-bold leading-tight">Eric Engle</p>
+        <p class="text-ink-muted text-xs leading-tight mt-0.5">Los Angeles, CA</p>
+      </div>
+    </article>
+
+    <!-- ====== Cards 07–12 — PLACEHOLDERS (swap in real videos + stats later) ====== -->
+    <article data-placeholder>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border/60 bg-gradient-to-br from-surface to-bg group opacity-75">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
+            <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+          <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink-muted text-sm font-bold leading-tight">Builder #07</p>
+        <p class="text-ink-subtle text-xs leading-tight mt-0.5">City, State</p>
+      </div>
+    </article>
+
+    <article data-placeholder>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border/60 bg-gradient-to-br from-surface to-bg group opacity-75">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
+            <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+          <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink-muted text-sm font-bold leading-tight">Builder #08</p>
+        <p class="text-ink-subtle text-xs leading-tight mt-0.5">City, State</p>
+      </div>
+    </article>
+
+    <article data-placeholder>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border/60 bg-gradient-to-br from-surface to-bg group opacity-75">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
+            <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+          <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink-muted text-sm font-bold leading-tight">Builder #09</p>
+        <p class="text-ink-subtle text-xs leading-tight mt-0.5">City, State</p>
+      </div>
+    </article>
+
+    <article data-placeholder>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border/60 bg-gradient-to-br from-surface to-bg group opacity-75">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
+            <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+          <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink-muted text-sm font-bold leading-tight">Builder #10</p>
+        <p class="text-ink-subtle text-xs leading-tight mt-0.5">City, State</p>
+      </div>
+    </article>
+
+    <article data-placeholder>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border/60 bg-gradient-to-br from-surface to-bg group opacity-75">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
+            <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+          <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink-muted text-sm font-bold leading-tight">Builder #11</p>
+        <p class="text-ink-subtle text-xs leading-tight mt-0.5">City, State</p>
+      </div>
+    </article>
+
+    <article data-placeholder>
+      <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-border/60 bg-gradient-to-br from-surface to-bg group opacity-75">
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
+            <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+          </div>
+        </div>
+        <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+          <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
+        </div>
+      </a>
+      <div class="mt-2.5 px-1">
+        <p class="text-ink-muted text-sm font-bold leading-tight">Builder #12</p>
+        <p class="text-ink-subtle text-xs leading-tight mt-0.5">City, State</p>
+      </div>
+    </article>
+
+  </div>
 </section>
 
-<!-- TRUSTED BY -->
-<section class="border-y border-border/50 bg-surface">
-  <div class="max-w-2xl mx-auto px-5 py-8">
-    <p class="text-center text-[11px] font-bold tracking-[0.22em] uppercase text-ink-muted mb-4">Trusted By Deck Builders In</p>
-    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] font-semibold text-ink-muted/80">
-      <span>SAN ANTONIO</span>
-      <span>BEND</span>
-      <span>LOOMIS</span>
-      <span>DENVER</span>
-      <span>PITTSBURGH</span>
-      <span>ATLANTA</span>
-      <span>MINNEAPOLIS</span>
-      <span>HOUSTON</span>
-    </div>
-  </div>
-</section>
-
-<!-- THE REAL PROBLEM -->
-<section class="px-5 py-14 max-w-2xl mx-auto">
-  <div class="inline-flex items-center gap-2 mb-4">
-    <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-    <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">The Real Problem</span>
-  </div>
-  <h2 class="display text-[32px] leading-[1.05] sm:text-[44px] mb-5">
-    You Built a Real Business.
-    <span class="text-gold block mt-1">But Your Revenue Is Leaking.</span>
-  </h2>
-  <p class="text-base text-ink-muted leading-relaxed mb-6">
-    You're not guessing anymore. You've got a real crew. Your sales close rate is solid when you get in front of homeowners. But the lead flow is choking you:
-  </p>
-  <ul class="space-y-3 mb-8 text-[15px]">
-    <li class="flex items-start gap-3">
-      <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gold mt-2.5"></span>
-      <span class="text-ink">Calendar swings between feast and famine.</span>
-    </li>
-    <li class="flex items-start gap-3">
-      <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gold mt-2.5"></span>
-      <span class="text-ink">Most booked calls are unqualified or no-show.</span>
-    </li>
-    <li class="flex items-start gap-3">
-      <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gold mt-2.5"></span>
-      <span class="text-ink">Close rate is inconsistent and hard to diagnose.</span>
-    </li>
-    <li class="flex items-start gap-3">
-      <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gold mt-2.5"></span>
-      <span class="text-ink">Every agency promised the world. Same slide deck, same voicemail.</span>
-    </li>
-    <li class="flex items-start gap-3">
-      <span class="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-gold mt-2.5"></span>
-      <span class="text-ink">You're tired of trusting strangers with your ad budget.</span>
-    </li>
-  </ul>
-  <button data-open-qualify class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-md gold-gradient gold-gradient-hover text-black font-bold text-[15px] shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-    See If You Qualify <span>→</span>
+<!-- ============================================== -->
+<!-- BUTTON 2                                         -->
+<!-- ============================================== -->
+<section class="px-5 py-10 max-w-3xl mx-auto text-center">
+  <button data-open-qualify class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+    <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
+    <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
   </button>
+  <p class="text-[12px] text-ink-subtle mt-3">2–3 minutes · Free · One per market</p>
 </section>
 
-<!-- THE SYSTEM -->
-<section class="px-5 py-14 max-w-2xl mx-auto border-t border-border/50">
-  <div class="inline-flex items-center gap-2 mb-4">
-    <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-    <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">The System</span>
-  </div>
-  <h2 class="display text-[32px] leading-[1.05] sm:text-[44px] mb-3">
-    The Decking Growth Operating System.
-  </h2>
-  <p class="text-base text-ink-muted leading-relaxed mb-8">
-    Six components, installed inside accounts you own. In 100 days we turn your existing lead flow into a predictable engine.
-  </p>
+<!-- ============================================== -->
+<!-- THE GUARANTEE                                    -->
+<!-- ============================================== -->
+<section class="bg-surface border-y border-border/50">
+  <div class="max-w-3xl mx-auto px-5 py-14 sm:py-16">
+    <div class="text-center mb-9">
+      <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-3">The Guarantee</p>
+      <h2 class="display text-[28px] sm:text-[40px] leading-[1.05]">
+        100 sales appointments in 100 days.
+        <span class="text-gold block mt-2">Or you get paid three ways.</span>
+      </h2>
+    </div>
 
-  <div class="space-y-3">
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div class="rounded-xl bg-elevated border border-gold/30 p-6 text-center">
+        <p class="text-[11px] font-bold tracking-wider uppercase text-gold mb-2">Prong 1</p>
+        <p class="display text-[28px] leading-tight text-ink mb-2">$2,000</p>
+        <p class="text-sm text-ink font-bold mb-1">Cash to you.</p>
+        <p class="text-[13px] text-ink-muted leading-snug">Not credit. Not a discount. Cash, instead of an apology.</p>
+      </div>
+      <div class="rounded-xl bg-elevated border border-gold/30 p-6 text-center">
+        <p class="text-[11px] font-bold tracking-wider uppercase text-gold mb-2">Prong 2</p>
+        <p class="display text-[28px] leading-tight text-ink mb-2">100%</p>
+        <p class="text-sm text-ink font-bold mb-1">Full refund.</p>
+        <p class="text-[13px] text-ink-muted leading-snug">Every dollar of your management fee back. No partial refunds.</p>
+      </div>
+      <div class="rounded-xl bg-elevated border border-gold/30 p-6 text-center">
+        <p class="text-[11px] font-bold tracking-wider uppercase text-gold mb-2">Prong 3</p>
+        <p class="display text-[28px] leading-tight text-ink mb-2">Free</p>
+        <p class="text-sm text-ink font-bold mb-1">Work until 100.</p>
+        <p class="text-[13px] text-ink-muted leading-snug">We keep running your campaigns at no cost until the 100th lands.</p>
+      </div>
+    </div>
+
+    <p class="text-center text-sm text-ink-muted mt-7">No asterisk. No "conditions apply." In writing, in the agreement, enforced at day 100.</p>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- BUTTON 3                                         -->
+<!-- ============================================== -->
+<section class="px-5 py-10 max-w-3xl mx-auto text-center">
+  <button data-open-qualify class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+    <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
+    <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
+  </button>
+  <p class="text-[12px] text-ink-subtle mt-3">2–3 minutes · Free · One per market</p>
+</section>
+
+<!-- ============================================== -->
+<!-- THE SYSTEM                                       -->
+<!-- ============================================== -->
+<section class="px-5 py-14 sm:py-16 max-w-4xl mx-auto border-t border-border/50">
+  <div class="text-center mb-9">
+    <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-3">The System</p>
+    <h2 class="display text-[28px] sm:text-[40px] leading-[1.05] mb-3">
+      The Decking Growth Operating System.
+    </h2>
+    <p class="text-base text-ink-muted max-w-md mx-auto">Six components installed inside accounts you own. You keep everything we build.</p>
+  </div>
+
+  <div class="grid sm:grid-cols-2 gap-3">
     <div class="p-5 rounded-xl bg-surface border border-border">
       <div class="flex items-baseline gap-3 mb-1.5">
         <span class="text-gold font-bold text-[13px] tracking-wider">01</span>
-        <h3 class="font-bold text-ink text-[15px]">Agency Audit & Recovery Plan</h3>
+        <h3 class="font-bold text-ink text-[15px]">Agency Audit &amp; Recovery Plan</h3>
       </div>
-      <p class="text-sm text-ink-muted leading-relaxed">Written breakdown of why your previous agencies failed, plus a 100-day opportunity plan. First deliverable, before any ads go live.</p>
+      <p class="text-sm text-ink-muted leading-relaxed">A written breakdown of what your previous agencies cost you, plus a 100-day recovery plan. First deliverable, before any ads go live.</p>
     </div>
     <div class="p-5 rounded-xl bg-surface border border-border">
       <div class="flex items-baseline gap-3 mb-1.5">
         <span class="text-gold font-bold text-[13px] tracking-wider">02</span>
         <h3 class="font-bold text-ink text-[15px]">7-Day Launch Sprint</h3>
       </div>
-      <p class="text-sm text-ink-muted leading-relaxed">Multi-step qualification funnel, targeting tuned to your zip codes, tracking and automations in your CRM. Inside your own accounts.</p>
+      <p class="text-sm text-ink-muted leading-relaxed">Multi-step qualification funnel, targeting tuned to your zip codes, tracking and automations wired in your own CRM.</p>
     </div>
     <div class="p-5 rounded-xl bg-surface border border-border">
       <div class="flex items-baseline gap-3 mb-1.5">
         <span class="text-gold font-bold text-[13px] tracking-wider">03</span>
         <h3 class="font-bold text-ink text-[15px]">Referral Generator</h3>
       </div>
-      <p class="text-sm text-ink-muted leading-relaxed">Captures homeowners before they price-shop. Proof-heavy creative so leads feel like referrals when they land on your calendar.</p>
+      <p class="text-sm text-ink-muted leading-relaxed">Captures homeowners before they price-shop. Proof-heavy creative so leads feel like referrals when they hit your calendar.</p>
     </div>
     <div class="p-5 rounded-xl bg-surface border border-border">
       <div class="flex items-baseline gap-3 mb-1.5">
         <span class="text-gold font-bold text-[13px] tracking-wider">04</span>
         <h3 class="font-bold text-ink text-[15px]">Lead Handling War Room</h3>
       </div>
-      <p class="text-sm text-ink-muted leading-relaxed">Week-one call with owner, sales, and admin. Scripts, speed-to-lead rules, and daily activity targets installed.</p>
+      <p class="text-sm text-ink-muted leading-relaxed">Week-one call with you, your closer, and your admin. Scripts, speed-to-lead rules, and daily activity targets installed.</p>
     </div>
     <div class="p-5 rounded-xl bg-surface border border-border">
       <div class="flex items-baseline gap-3 mb-1.5">
@@ -247,135 +470,20 @@
         <span class="text-gold font-bold text-[13px] tracking-wider">06</span>
         <h3 class="font-bold text-ink text-[15px]">Pipeline Pulse Reporting</h3>
       </div>
-      <p class="text-sm text-ink-muted leading-relaxed">Simple weekly Loom report. New opportunities, appointments, jobs sold. Numbers that back every claim.</p>
+      <p class="text-sm text-ink-muted leading-relaxed">A simple weekly Loom report. New opportunities, appointments booked, jobs sold. Numbers that back every claim.</p>
     </div>
   </div>
 </section>
 
-<!-- PROOF -->
-<section class="px-5 py-14 max-w-2xl mx-auto border-t border-border/50">
-  <div class="inline-flex items-center gap-2 mb-4">
-    <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-    <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">Proof</span>
-  </div>
-  <h2 class="display text-[32px] leading-[1.05] sm:text-[44px] mb-3">
-    Make More Money From
-    <span class="text-gold block mt-1">The Ad Spend You're Already Running.</span>
-  </h2>
-  <p class="text-base text-ink-muted leading-relaxed mb-7">
-    Here's what happens when a deck builder installs the system. Real clients, real cities, real numbers.
-  </p>
-
-  <div class="space-y-4">
-    <article class="rounded-2xl bg-surface border border-border p-6 shadow-card">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-11 h-11 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-sm">BW</div>
-        <div>
-          <p class="font-bold text-ink text-[15px] leading-tight">Brian Wallace</p>
-          <p class="text-xs text-ink-muted leading-tight mt-0.5">Bend Fence & Deck · Bend, OR</p>
-        </div>
-      </div>
-      <p class="text-sm text-gold font-bold mb-3 tracking-wide">60 estimates sent · 25 closed · 6 weeks</p>
-      <p class="text-[15px] text-ink leading-relaxed mb-2 italic">"I saw your ad on Facebook and, to be honest, I wanted to call your bluff. It sounded too good to be true."</p>
-      <p class="text-[15px] text-ink leading-relaxed italic">"We've done more appointments in the last six weeks than I did all of last year."</p>
-    </article>
-
-    <article class="rounded-2xl bg-surface border border-border p-6 shadow-card">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-11 h-11 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-sm">JW</div>
-        <div>
-          <p class="font-bold text-ink text-[15px] leading-tight">Justin Wylie</p>
-          <p class="text-xs text-ink-muted leading-tight mt-0.5">All Pro Decks & Patios · San Antonio, TX</p>
-        </div>
-      </div>
-      <p class="text-sm text-gold font-bold mb-3 tracking-wide">6 agencies before · Best year in 15 years</p>
-      <p class="text-[15px] text-ink leading-relaxed italic mb-3">"I've hired six other companies involved in this space in my life. And you came out of the gate, I mean, just killing it for us. This is your guy right here."</p>
-      <p class="text-sm text-ink-muted leading-relaxed">First 14 days: CPL from $400 to under $30. Volume from 15 leads/month to 30/week. First week of January: nearly $1M in quotes.</p>
-    </article>
-
-    <article class="rounded-2xl bg-surface border border-border p-6 shadow-card">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-11 h-11 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-sm">JW</div>
-        <div>
-          <p class="font-bold text-ink text-[15px] leading-tight">Jacob Weaver</p>
-          <p class="text-xs text-ink-muted leading-tight mt-0.5">Oasis Custom Decks · Pennsylvania</p>
-        </div>
-      </div>
-      <p class="text-sm text-gold font-bold mb-3 tracking-wide">$480K closed in 21 days · First time crossing $1M</p>
-      <p class="text-[15px] text-ink leading-relaxed italic">"For the first time in business, I crossed over $1 million top line. From March 10th until March 31st, I closed $480,000 in 21 days. My guys are booked till September right now."</p>
-    </article>
-
-    <article class="rounded-2xl bg-surface border border-border p-6 shadow-card">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-11 h-11 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-sm">CP</div>
-        <div>
-          <p class="font-bold text-ink text-[15px] leading-tight">Chip Paynter</p>
-          <p class="text-xs text-ink-muted leading-tight mt-0.5">Paynter Construction · Loomis, CA</p>
-        </div>
-      </div>
-      <p class="text-sm text-gold font-bold mb-3 tracking-wide">$200K from 4 converted leads · 21 days</p>
-      <p class="text-[15px] text-ink leading-relaxed italic mb-3">"I would say we're close to $200,000 that I converted. And that's only four converted leads. That's not 60 converted leads, that's four."</p>
-      <p class="text-sm text-ink-muted leading-relaxed">30-year contractor. Retired firefighter. "This is your guy right here."</p>
-    </article>
-
-    <article class="rounded-2xl bg-surface border border-border p-6 shadow-card">
-      <div class="flex items-center gap-3 mb-4">
-        <div class="w-11 h-11 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-sm">RC</div>
-        <div>
-          <p class="font-bold text-ink text-[15px] leading-tight">Ricardo Cervantes</p>
-          <p class="text-xs text-ink-muted leading-tight mt-0.5">Colorado</p>
-        </div>
-      </div>
-      <p class="text-sm text-gold font-bold mb-3 tracking-wide">$105K closed in 7 days · $180K more in bids</p>
-      <p class="text-[15px] text-ink leading-relaxed italic">"Within the first seven days, we got enough leads to close $105,000 in new jobs. Now we got another $180,000 in new bids out, and you've spent less than $1,000 on ads."</p>
-    </article>
+<!-- ============================================== -->
+<!-- FAQ                                              -->
+<!-- ============================================== -->
+<section class="px-5 py-14 max-w-3xl mx-auto border-t border-border/50">
+  <div class="text-center mb-8">
+    <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-3">A Few Things Worth Knowing</p>
+    <h2 class="display text-[28px] sm:text-[36px] leading-[1.08]">Most builders ask these first.</h2>
   </div>
 
-  <button data-open-qualify class="w-full mt-7 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-md gold-gradient gold-gradient-hover text-black font-bold text-[15px] shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-    See If You Qualify <span>→</span>
-  </button>
-</section>
-
-<!-- GUARANTEE RESTATED -->
-<section class="px-5 py-14 max-w-2xl mx-auto">
-  <div class="text-center rounded-3xl border border-gold/30 p-7 sm:p-10 relative overflow-hidden" style="background: linear-gradient(135deg, #141414 0%, #0D0D0D 100%);">
-    <div class="absolute -top-24 -left-24 w-52 h-52 rounded-full bg-gold/20 blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-24 -right-24 w-52 h-52 rounded-full bg-gold/15 blur-3xl pointer-events-none"></div>
-    <div class="relative">
-      <div class="inline-flex items-center gap-2 mb-3">
-        <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-        <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">The Guarantee</span>
-      </div>
-      <h2 class="display text-[30px] leading-[1.08] sm:text-[40px] mb-5">
-        100 Appointments in 100 Days. Or All Three.
-      </h2>
-      <div class="grid sm:grid-cols-3 gap-3 mb-6">
-        <div class="p-4 rounded-xl bg-black/40 border border-border">
-          <p class="text-[11px] font-bold tracking-wider uppercase text-gold mb-1">Prong 1</p>
-          <p class="text-ink font-bold text-[15px]">$2,000 Cash</p>
-          <p class="text-xs text-ink-muted mt-1">Into your pocket. Not credit.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-black/40 border border-border">
-          <p class="text-[11px] font-bold tracking-wider uppercase text-gold mb-1">Prong 2</p>
-          <p class="text-ink font-bold text-[15px]">Full Refund</p>
-          <p class="text-xs text-ink-muted mt-1">Every dollar of management fee back.</p>
-        </div>
-        <div class="p-4 rounded-xl bg-black/40 border border-border">
-          <p class="text-[11px] font-bold tracking-wider uppercase text-gold mb-1">Prong 3</p>
-          <p class="text-ink font-bold text-[15px]">Free Work Until 100</p>
-          <p class="text-xs text-ink-muted mt-1">We keep running until it lands.</p>
-        </div>
-      </div>
-      <p class="text-sm text-ink-muted">No asterisk. No "conditions apply." One builder per market. In writing.</p>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="px-5 py-14 max-w-2xl mx-auto border-t border-border/50">
-  <h2 class="display text-[30px] leading-[1.08] sm:text-[40px] mb-7">
-    A few things worth knowing.
-  </h2>
   <div class="space-y-2.5">
     <details class="group rounded-xl bg-surface border border-border overflow-hidden">
       <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3">
@@ -383,7 +491,7 @@
         <svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
       </summary>
       <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border">
-        <p class="pt-4">That's exactly why this offer exists. We start with an Agency Audit on everyone you've hired. It's a written document showing why they failed and what we're doing differently. Then we tie our own neck to a clear number: 100 exclusive opportunities in 100 days, or you get $2,000 cash, a full refund, and we keep working free until you hit it. You don't have to trust my words. You can trust the structure.</p>
+        <p class="pt-4">That's exactly why this offer exists. We start with an Agency Audit on every agency you've hired before us. It's a written document showing why they failed and what we're doing differently. Then we tie our own neck to a clear number: 100 exclusive opportunities in 100 days, or you get $2,000 cash, a full refund, and we keep working free until you hit it. You don't have to trust my words. You can trust the structure.</p>
       </div>
     </details>
 
@@ -433,44 +541,75 @@
         <svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
       </summary>
       <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border">
-        <p class="pt-4">Fair question, and one every out-of-state client has asked before hiring us. We're not local and we don't pretend to be. What we are is operators who've installed this exact system in deck businesses across the country. The market intelligence comes from data, not zip codes. Your best customer profile. Your competitor pricing. Your top-converting project types. The call recordings that tell us what your buyers actually say.</p>
+        <p class="pt-4">Fair question, and one every out-of-state client has asked before hiring us. We're not local and we don't pretend to be. What we are is operators who've installed this exact system in deck businesses across the country. The market intelligence comes from data, not zip codes — your best customer profile, your competitor pricing, your top-converting project types, and the call recordings that tell us what your buyers actually say.</p>
       </div>
     </details>
   </div>
 </section>
 
-<!-- FINAL CTA -->
-<section class="px-5 py-16 max-w-2xl mx-auto text-center border-t border-border/50">
-  <h2 class="display text-[30px] leading-[1.08] sm:text-[40px] mb-4">
-    See if your market is still open.
+<!-- ============================================== -->
+<!-- FINAL CTA                                        -->
+<!-- ============================================== -->
+<section class="px-5 py-16 max-w-3xl mx-auto text-center border-t border-border/50">
+  <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-4">The Last Question</p>
+  <h2 class="display-lg text-[30px] sm:text-[44px] leading-[1.05] mb-5 max-w-xl mx-auto">
+    See if your market is still <span class="text-gold">open.</span>
   </h2>
-  <p class="text-base text-ink-muted leading-relaxed mb-7 max-w-md mx-auto">
-    Takes 2–3 minutes. If you qualify, you'll book a 20-minute call. If you don't, you'll know why and we part ways friends.
-  </p>
-  <button data-open-qualify class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-md gold-gradient gold-gradient-hover text-black font-bold text-base shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-    See If You Qualify <span>→</span>
-  </button>
-  <p class="text-[13px] text-ink-muted mt-4">One builder per market. Your market may already be taken.</p>
+  <p class="text-base text-ink-muted mb-7 max-w-md mx-auto">Takes 2–3 minutes. If you qualify, you'll book a strategy session. If you don't, you'll know why and we part ways friends.</p>
+
+  <div class="flex justify-center">
+    <button data-open-qualify class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-10 py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+      <span class="text-lg sm:text-xl font-black tracking-wider uppercase">Get More Deck Jobs</span>
+      <span class="text-sm font-medium opacity-85">Reserve My Zip Code →</span>
+    </button>
+  </div>
+
+  <p class="text-[13px] text-ink-muted mt-5">One deck builder per market. Your market may already be taken.</p>
 </section>
 
-<!-- FOOTER -->
+<!-- ============================================== -->
+<!-- TRUST BAR                                        -->
+<!-- ============================================== -->
+<section class="border-t border-border/50 bg-surface">
+  <div class="max-w-3xl mx-auto px-5 py-7 text-center">
+    <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-ink-muted mb-3">Trusted By Deck Builders In</p>
+    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] font-semibold text-ink-muted/80">
+      <span>SAN ANTONIO</span>
+      <span>BEND</span>
+      <span>LOOMIS</span>
+      <span>DENVER</span>
+      <span>PITTSBURGH</span>
+      <span>ATLANTA</span>
+      <span>MINNEAPOLIS</span>
+      <span>HOUSTON</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================== -->
+<!-- FOOTER                                           -->
+<!-- ============================================== -->
 <footer class="px-5 py-10 border-t border-border/50 text-center text-xs text-ink-muted pb-28 sm:pb-10">
   <p class="font-bold text-ink mb-1.5 tracking-wider">DECKINGLEADS<span class="text-gold">.COM</span></p>
   <p class="leading-relaxed">Spencer Wright · One deck builder per market.</p>
 </footer>
 
-<!-- STICKY BOTTOM CTA (mobile-first) -->
+<!-- ============================================== -->
+<!-- STICKY BOTTOM CTA (mobile-first)                 -->
+<!-- ============================================== -->
 <div id="sticky-cta" aria-hidden="true" class="sticky-cta fixed bottom-0 inset-x-0 z-30 px-4 pb-4 pt-3 bg-gradient-to-t from-black via-black/95 to-transparent">
-  <button data-open-qualify class="w-full inline-flex items-center justify-center gap-2 px-6 py-4 rounded-md gold-gradient gold-gradient-hover text-black font-bold text-[15px] shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-    See If You Qualify <span>→</span>
+  <button data-open-qualify class="w-full inline-flex flex-col items-center justify-center gap-0.5 px-6 py-3.5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+    <span class="text-[15px] font-black tracking-wider uppercase">Get More Deck Jobs</span>
+    <span class="text-[12px] font-medium opacity-85">Reserve My Zip Code →</span>
   </button>
 </div>
 
-<!-- QUALIFY MODAL (7 steps) -->
+<!-- ============================================== -->
+<!-- QUALIFY MODAL (7 steps + loading)                -->
+<!-- ============================================== -->
 <div id="qualify-modal" class="qualify-modal fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="qualify-title">
   <div class="qualify-sheet w-full sm:max-w-lg bg-white text-black rounded-t-3xl sm:rounded-3xl shadow-modal max-h-[90vh] overflow-y-auto">
     <div class="p-6 sm:p-8">
-      <!-- Top bar -->
       <div class="flex items-center justify-between mb-6">
         <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-gray-500">Step 1 of 7</span>
         <button id="modal-back" class="inline-flex items-center gap-1 text-sm font-semibold text-gray-600 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1 py-0.5" aria-label="Back">
@@ -479,7 +618,6 @@
         </button>
       </div>
 
-      <!-- Progress bar -->
       <div class="h-1 bg-gray-100 rounded-full overflow-hidden mb-7">
         <div id="progress-bar" class="h-full gold-gradient transition-all duration-300" style="width: 14.28%;"></div>
       </div>
@@ -569,7 +707,7 @@
         </p>
       </div>
 
-      <!-- LOADING STATE: shown after submit while we "check market availability" -->
+      <!-- LOADING STATE -->
       <div class="step" data-step="loading">
         <div class="py-8 text-center">
           <div class="inline-block w-12 h-12 border-4 border-gray-200 border-t-black rounded-full animate-spin mb-6" aria-hidden="true"></div>
@@ -582,7 +720,9 @@
   </div>
 </div>
 
-<!-- APP LOGIC -->
+<!-- ============================================== -->
+<!-- APP LOGIC                                        -->
+<!-- ============================================== -->
 <script>
 (function () {
   const modal = document.getElementById('qualify-modal');
@@ -611,18 +751,15 @@
     btn.addEventListener('click', openModal);
   });
 
-  // ESC closes
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
       closeModal();
     }
   });
-  // Click outside sheet closes
   modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
   });
 
-  // Step navigation
   function goToStep(stepNum) {
     currentStep = stepNum;
     steps.forEach(s => s.classList.remove('active'));
@@ -650,7 +787,6 @@
     if (currentStep > 1) goToStep(currentStep - 1);
   });
 
-  // Choice buttons auto-advance
   modal.querySelectorAll('.choice-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       formData[btn.dataset.field] = btn.dataset.value;
@@ -658,7 +794,6 @@
     });
   });
 
-  // Zip input validation
   const zipInput = document.getElementById('zip-input');
   const zipNext = document.getElementById('zip-next');
   zipInput.addEventListener('input', () => {
@@ -670,7 +805,6 @@
     goToStep(4);
   });
 
-  // Name input
   const nameInput = document.getElementById('name-input');
   const nameNext = document.getElementById('name-next');
   nameInput.addEventListener('input', () => {
@@ -681,7 +815,6 @@
     goToStep(7);
   });
 
-  // Phone formatting
   const phoneInput = document.getElementById('phone-input');
   phoneInput.addEventListener('input', () => {
     const digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
@@ -694,17 +827,9 @@
     phoneInput.value = formatted;
   });
 
-  // Submit
-  const emailInput = document.getElementById('email-input');
-  const emailError = document.getElementById('email-error');
-  const phoneError = document.getElementById('phone-error');
-  const submitBtn = document.getElementById('submit-btn');
-
   // ICP routing — V1 rule (loose, optimized for Meta training volume).
   // Non-ICP only if ALL THREE bottom-tier signals fire together:
   //   revenue under $500K AND no crews AND $0–$500/mo ad spend.
-  // Anyone else (even sub-$1M with one crew, or no-crew with real ad spend)
-  // routes to the pixeled page so Meta learns from a wider qualified pool.
   function isICP(d) {
     const bottomTier =
       d.revenue === 'under_500k' &&
@@ -732,6 +857,11 @@
     }, 4000);
   }
 
+  const emailInput = document.getElementById('email-input');
+  const emailError = document.getElementById('email-error');
+  const phoneError = document.getElementById('phone-error');
+  const submitBtn = document.getElementById('submit-btn');
+
   submitBtn.addEventListener('click', () => {
     const email = emailInput.value.trim();
     const phone = phoneInput.value.replace(/\D/g, '');
@@ -752,27 +882,23 @@
     const icp = isICP(formData);
     formData.icp = icp;
 
-    // TEMP DEBUG — remove once routing is confirmed working in prod.
-    // Open DevTools → Console BEFORE submitting to see what was captured.
+    // TEMP DEBUG — open DevTools → Console BEFORE submitting to see capture.
     console.log('[DL] formData at submit:', JSON.parse(JSON.stringify(formData)));
     console.log('[DL] isICP check — revenue:', formData.revenue, '| crews:', formData.crews, '| ad_spend:', formData.ad_spend);
     console.log('[DL] isICP result:', icp, '→ redirecting to:', icp ? 'qualified/' : 'scheduling/');
 
-    // Persist for the next page (GHL prefill) and any later analytics.
     try {
       sessionStorage.setItem('dl_qualify_data', JSON.stringify(formData));
       sessionStorage.setItem('dl_qualify_icp', icp ? '1' : '0');
     } catch (_) { /* sessionStorage may be unavailable in private mode */ }
 
     goToStep('loading');
-    // Relative paths so this works on both the github.io project URL
-    // (https://morejobcalls.github.io/deckingleads-apply/) and the
-    // production custom domain (https://apply.deckingleads.com/).
+    // Relative paths so this works on both the github.io project URL and apply.deckingleads.com.
     runLoadingThenRedirect(icp ? 'qualified/' : 'scheduling/');
   });
 
   // Sticky CTA show after scroll past hero
-  const heroHeight = 520;
+  const heroHeight = 600;
   function updateStickyCta() {
     const showIt = window.scrollY > heroHeight && modal.getAttribute('aria-hidden') !== 'false';
     stickyCta.setAttribute('aria-hidden', showIt ? 'false' : 'true');
