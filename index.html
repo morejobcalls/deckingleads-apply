@@ -75,6 +75,48 @@
   .proof-thumb .play-icon { transition: transform 200ms ease-out; }
   .proof-thumb:hover .play-icon { transform: scale(1.08); }
 
+  /* Video lightbox modal — plays YouTube inline so users don't leave the page */
+  body.modal-open { overflow: hidden; }
+  .video-modal {
+    position: fixed; inset: 0; z-index: 60;
+    background: rgba(0, 0, 0, 0.92);
+    display: flex; align-items: center; justify-content: center;
+    padding: 1rem;
+    opacity: 0; pointer-events: none;
+    transition: opacity 220ms ease-out;
+  }
+  .video-modal[aria-hidden="false"] { opacity: 1; pointer-events: auto; }
+  .video-modal-inner {
+    position: relative;
+    width: 100%; max-width: 960px;
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.6);
+  }
+  .video-modal-inner iframe {
+    width: 100%; height: 100%;
+    border: 0; display: block;
+  }
+  .video-modal-close {
+    position: absolute;
+    top: -40px; right: 0;
+    background: transparent;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    padding: 6px 8px;
+    font: 600 13px/1 'Inter', system-ui, sans-serif;
+    display: inline-flex; align-items: center; gap: 6px;
+    opacity: 0.85;
+    transition: opacity 160ms ease;
+  }
+  .video-modal-close:hover { opacity: 1; }
+  @media (max-width: 640px) {
+    .video-modal-close { top: -36px; }
+  }
+
   /* Logo marquee */
   .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
   .marquee-track { display: inline-flex; gap: 56px; animation: marquee-scroll 38s linear infinite; }
@@ -666,6 +708,17 @@
   <p class="leading-relaxed">Spencer Wright · One deck builder per market.</p>
 </footer>
 
+<!-- VIDEO LIGHTBOX MODAL (plays proof videos inline; no leaving the page) -->
+<div id="video-modal" class="video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Testimonial video">
+  <div class="video-modal-inner">
+    <button class="video-modal-close" aria-label="Close video">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 6l12 12M6 18L18 6"/></svg>
+      Close
+    </button>
+    <iframe id="video-modal-iframe" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
+  </div>
+</div>
+
 <!-- STICKY BOTTOM CTA -->
 <div id="sticky-cta" aria-hidden="true" class="sticky-cta fixed bottom-0 inset-x-0 z-30 px-4 pb-4 pt-3 bg-gradient-to-t from-black via-black/95 to-transparent">
   <a href="#apply" class="w-full inline-flex flex-col items-center justify-center gap-0.5 px-6 py-3.5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
@@ -801,6 +854,58 @@
     goToStep('loading');
     runLoadingThenRedirect(icp ? 'qualified/' : 'scheduling/');
   });
+
+  // Video lightbox — keep proof video plays on-page (no redirect to YouTube)
+  (function initVideoModal() {
+    const vmodal = document.getElementById('video-modal');
+    const vframe = document.getElementById('video-modal-iframe');
+    const vclose = vmodal.querySelector('.video-modal-close');
+
+    function extractYouTubeId(href) {
+      // Supports https://youtu.be/ID, https://www.youtube.com/watch?v=ID, https://www.youtube.com/embed/ID
+      try {
+        const u = new URL(href);
+        if (u.hostname.includes('youtu.be')) return u.pathname.slice(1);
+        if (u.hostname.includes('youtube.com')) {
+          if (u.pathname.startsWith('/embed/')) return u.pathname.split('/')[2];
+          return u.searchParams.get('v');
+        }
+      } catch (_) {}
+      return null;
+    }
+
+    function openVideo(id) {
+      vframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
+      vmodal.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+    }
+    function closeVideo() {
+      vmodal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+      // Clearing src halts playback immediately
+      vframe.src = '';
+    }
+
+    document.querySelectorAll('.proof-thumb').forEach(link => {
+      link.addEventListener('click', (e) => {
+        const href = link.getAttribute('href');
+        const id = href ? extractYouTubeId(href) : null;
+        if (!id) {
+          // Placeholder card with href="#" — kill the hash jump, do nothing else
+          e.preventDefault();
+          return;
+        }
+        e.preventDefault();
+        openVideo(id);
+      });
+    });
+
+    vclose.addEventListener('click', closeVideo);
+    vmodal.addEventListener('click', (e) => { if (e.target === vmodal) closeVideo(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && vmodal.getAttribute('aria-hidden') === 'false') closeVideo();
+    });
+  })();
 
   // Sticky CTA — show after scroll past hero, hide when apply section is in view
   const heroHeight = 600;
