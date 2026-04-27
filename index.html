@@ -752,6 +752,12 @@
     const icp = isICP(formData);
     formData.icp = icp;
 
+    // TEMP DEBUG — remove once routing is confirmed working in prod.
+    // Open DevTools → Console BEFORE submitting to see what was captured.
+    console.log('[DL] formData at submit:', JSON.parse(JSON.stringify(formData)));
+    console.log('[DL] isICP check — revenue:', formData.revenue, '| crews:', formData.crews, '| ad_spend:', formData.ad_spend);
+    console.log('[DL] isICP result:', icp, '→ redirecting to:', icp ? 'qualified/' : 'scheduling/');
+
     // Persist for the next page (GHL prefill) and any later analytics.
     try {
       sessionStorage.setItem('dl_qualify_data', JSON.stringify(formData));
