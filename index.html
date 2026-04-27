@@ -519,7 +519,7 @@
     <div class="max-w-xl mx-auto mb-7 rounded-xl bg-elevated border border-border p-5">
       <div class="flex items-center gap-2 mb-2.5">
         <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-        <span class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold">100-Day Triple Guarantee</span>
+        <span class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold">100 in 100 Triple Guarantee</span>
       </div>
       <p class="text-[13px] sm:text-sm text-ink-muted leading-relaxed">
         100 exclusive sales appointment opportunities in 100 days. If we miss:
@@ -529,12 +529,12 @@
     </div>
 
     <!-- Form card -->
-    <div class="max-w-xl mx-auto bg-paper rounded-3xl border border-paper-border shadow-apply p-7 sm:p-10">
+    <div class="max-w-xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply p-7 sm:p-10">
 
       <div class="flex items-start justify-between mb-7">
         <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-paper-subtle">Step 1 of 6</span>
-        <button id="form-back" class="inline-flex flex-col items-end text-[13px] font-semibold text-paper-muted hover:text-paper-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1 leading-tight" aria-label="Back" style="visibility:hidden;">
-          <svg class="w-3.5 h-3.5 mb-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 12H5m0 0l7-7m-7 7l7 7"/></svg>
+        <button id="form-back" class="inline-flex flex-col items-center text-[13px] font-semibold text-paper-muted hover:text-paper-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1 leading-none" aria-label="Back" style="visibility:hidden;">
+          <svg class="w-3.5 h-3.5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
           Back
         </button>
       </div>
@@ -590,7 +590,7 @@
       <div class="step" data-step="5">
         <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">What's your full name?</h3>
         <p class="text-sm text-paper-subtle mb-6">First and last. So we know who we're talking to before the call.</p>
-        <input id="name-input" type="text" autocomplete="name" placeholder="First and last name" class="w-full px-5 py-4 text-[15px] font-semibold border-2 border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
+        <input id="name-input" type="text" autocomplete="name" placeholder="First and last name" class="w-full px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
         <div class="flex justify-end mt-6">
           <button id="name-next" class="inline-flex items-center gap-1.5 px-2 py-1.5 text-[15px] font-bold text-paper-text hover:text-black disabled:opacity-30 disabled:cursor-not-allowed transition-colors" disabled>Next <span>→</span></button>
         </div>
@@ -600,20 +600,23 @@
       <div class="step" data-step="6">
         <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">How do we reach you?</h3>
         <p class="text-sm text-paper-subtle mb-6">We'll send your call confirmation here.</p>
-        <input id="email-input" type="email" autocomplete="email" placeholder="Email address" class="w-full px-5 py-4 text-[15px] font-semibold border-2 border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper mb-3">
+        <input id="email-input" type="email" autocomplete="email" placeholder="Email address" class="w-full px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper mb-3">
         <p id="email-error" class="text-xs text-red-600 font-medium mb-3 hidden">Please enter a valid email address.</p>
         <div class="flex gap-2">
-          <div class="flex-shrink-0 inline-flex items-center gap-1 px-3.5 py-4 border-2 border-paper-border rounded-2xl bg-cream font-semibold text-[15px] text-paper-text">
+          <div class="flex-shrink-0 inline-flex items-center gap-1 px-3.5 py-4 border border-paper-border rounded-2xl bg-cream font-semibold text-[15px] text-paper-text">
             <span>🇺🇸</span><span>+1</span>
           </div>
-          <input id="phone-input" type="tel" autocomplete="tel" inputmode="numeric" placeholder="Phone number" maxlength="14" class="flex-1 min-w-0 px-5 py-4 text-[15px] font-semibold border-2 border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
+          <input id="phone-input" type="tel" autocomplete="tel" inputmode="numeric" placeholder="Phone number" maxlength="14" class="flex-1 min-w-0 px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
         </div>
         <p id="phone-error" class="text-xs text-red-600 font-medium mt-2 hidden">Please enter a valid 10-digit phone number.</p>
         <div class="flex justify-end mt-7">
           <button id="submit-btn" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-paper-text text-gold font-bold text-[15px] hover:bg-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-all">Submit Application <span>→</span></button>
         </div>
         <p class="text-[11px] leading-relaxed text-paper-subtle mt-5">
-          By submitting this form, you agree to be contacted by DeckingLeads / Spencer Wright via phone, text, email, or mail using automated technology. Message and data rates may apply. Reply STOP to opt out.
+          By submitting this form, you agree to be contacted by DeckingLeads / Spencer Wright via phone, text, email, or mail using automated technology, even if your number is on a state or national Do Not Call list.
+        </p>
+        <p class="text-[11px] leading-relaxed text-paper-subtle mt-2">
+          Message and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for assistance.
         </p>
       </div>
 
