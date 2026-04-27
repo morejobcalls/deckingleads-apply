@@ -759,7 +759,10 @@
     } catch (_) { /* sessionStorage may be unavailable in private mode */ }
 
     goToStep('loading');
-    runLoadingThenRedirect(icp ? '/qualified/' : '/scheduling/');
+    // Relative paths so this works on both the github.io project URL
+    // (https://morejobcalls.github.io/deckingleads-apply/) and the
+    // production custom domain (https://apply.deckingleads.com/).
+    runLoadingThenRedirect(icp ? 'qualified/' : 'scheduling/');
   });
 
   // Sticky CTA show after scroll past hero
