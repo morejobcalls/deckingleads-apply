@@ -21,33 +21,32 @@
           surface: '#0D0D0D',
           elevated: '#141414',
           border: '#222222',
-          'border-strong': '#2A2A2A',
           ink: '#F5F2EB',
           'ink-muted': '#9CA3AF',
           'ink-subtle': '#6B7280',
           gold: '#c7963f',
           'gold-deep': '#ab8032',
-          'gold-soft': 'rgba(199, 150, 63, 0.12)',
+          live: '#10b981',
+          'live-bright': '#34d399',
         },
         fontFamily: {
           display: ['Inter', 'system-ui', 'sans-serif'],
           sans: ['Inter', 'system-ui', 'sans-serif'],
-        },
-        boxShadow: {
-          'gold': '0 8px 32px -8px rgba(199, 150, 63, 0.35)',
-          'card': '0 8px 24px -8px rgba(0, 0, 0, 0.6)',
         },
       }
     }
   }
 </script>
 <style>
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  html, body { height: 100%; }
+  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow: hidden; }
   .display { font-family: 'Inter', system-ui, sans-serif; letter-spacing: -0.035em; font-weight: 800; }
-  .display-lg { font-family: 'Inter', system-ui, sans-serif; letter-spacing: -0.04em; font-weight: 800; }
-  .gold-gradient { background-image: linear-gradient(to bottom, #c7963f 0%, #ab8032 100%); }
-  iframe.ghl-embed { width: 100% !important; min-height: 740px !important; display: block !important; border: 0 !important; background: #fff; }
+  iframe.ghl-embed { width: 100% !important; height: 100% !important; display: block !important; border: 0 !important; background: #fff; }
+  @media (max-height: 700px) {
+    html, body { height: auto; }
+    body { overflow: auto; }
+    .calendar-shell { min-height: 720px; }
+  }
 </style>
 
 <!--
@@ -62,228 +61,54 @@
 -->
 
 </head>
-<body class="bg-bg text-ink antialiased">
+<body class="bg-bg text-ink antialiased flex flex-col">
 
-<!-- Top utility bar -->
-<header class="border-b border-border/50 relative z-10">
-  <div class="max-w-3xl mx-auto px-5 py-3.5">
-    <span class="font-black text-[13px] tracking-[0.18em] uppercase text-ink">Decking<span class="text-gold">Leads</span><sup class="text-[9px] text-ink-muted align-top ml-0.5">.com</sup></span>
+<!-- Top bar (thin) -->
+<header class="flex-shrink-0 border-b border-border/50">
+  <div class="max-w-3xl mx-auto px-5 py-2.5">
+    <span class="font-black text-[12px] tracking-[0.18em] uppercase text-ink">Decking<span class="text-gold">Leads</span><sup class="text-[8px] text-ink-muted align-top ml-0.5">.com</sup></span>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="relative overflow-hidden">
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(199, 150, 63, 0.14) 0%, transparent 60%);"></div>
+<!-- Hero (compact, centered) -->
+<div class="flex-shrink-0 px-5 py-4 sm:py-5 text-center">
 
-  <div class="relative max-w-3xl mx-auto px-5 pt-10 pb-8 sm:pt-14 sm:pb-10 text-center">
-
-    <!-- Status pill -->
-    <div class="inline-flex items-center gap-2 mb-5 px-3 py-1.5 rounded-full border border-gold/40 bg-gold-soft">
-      <span class="relative flex w-2 h-2">
-        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold opacity-75"></span>
-        <span class="relative inline-flex rounded-full h-2 w-2 bg-gold"></span>
-      </span>
-      <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">Market Open · Application Accepted</span>
-    </div>
-
-    <!-- H1 -->
-    <h1 class="display-lg text-[34px] leading-[1.05] sm:text-[52px] sm:leading-[1.02] mb-5 max-w-2xl mx-auto" id="hero-h1">
-      Your market is open.
-      <span class="text-gold block mt-2">Book your Deck Jobs Strategy Session below.</span>
-    </h1>
-
-    <p class="text-base sm:text-lg text-ink leading-relaxed mb-3 max-w-xl mx-auto font-medium">
-      45-minute Google Meet. Bring your numbers, your ad accounts, and your skepticism.
-    </p>
-    <p class="text-base sm:text-lg text-ink-muted leading-relaxed max-w-xl mx-auto">
-      We open your ad accounts together. Audit what's running. Walk the 100-day plan in your market. End with a yes, a no, or a "fix this first." No slide deck. No follow-up sequence if it's not a fit.
-    </p>
-
-  </div>
-</section>
-
-<!-- WHAT WE'LL COVER -->
-<section class="px-5 py-10 max-w-3xl mx-auto">
-  <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold text-center mb-6">Here's what the call covers</p>
-
-  <div class="grid sm:grid-cols-2 gap-3">
-    <div class="p-5 rounded-xl bg-surface border border-border">
-      <div class="flex items-baseline gap-3 mb-1.5">
-        <span class="text-gold font-bold text-[13px] tracking-wider">01</span>
-        <h3 class="font-bold text-ink text-[15px]">Audit your current setup.</h3>
-      </div>
-      <p class="text-sm text-ink-muted leading-relaxed">What you've tried, what's working, what's leaking. No slides.</p>
-    </div>
-    <div class="p-5 rounded-xl bg-surface border border-border">
-      <div class="flex items-baseline gap-3 mb-1.5">
-        <span class="text-gold font-bold text-[13px] tracking-wider">02</span>
-        <h3 class="font-bold text-ink text-[15px]">Run the numbers on your market.</h3>
-      </div>
-      <p class="text-sm text-ink-muted leading-relaxed">What the system has produced for deck builders at your revenue level.</p>
-    </div>
-    <div class="p-5 rounded-xl bg-surface border border-border">
-      <div class="flex items-baseline gap-3 mb-1.5">
-        <span class="text-gold font-bold text-[13px] tracking-wider">03</span>
-        <h3 class="font-bold text-ink text-[15px]">Walk through the 100-day plan.</h3>
-      </div>
-      <p class="text-sm text-ink-muted leading-relaxed">How the Decking Growth Operating System would deploy in your business.</p>
-    </div>
-    <div class="p-5 rounded-xl bg-surface border border-border">
-      <div class="flex items-baseline gap-3 mb-1.5">
-        <span class="text-gold font-bold text-[13px] tracking-wider">04</span>
-        <h3 class="font-bold text-ink text-[15px]">Straight answer on fit.</h3>
-      </div>
-      <p class="text-sm text-ink-muted leading-relaxed">Yes, no, or "fix this first." No pitch. No follow-up sequence if it's not a fit.</p>
-    </div>
-  </div>
-</section>
-
-<!-- CALENDAR -->
-<section id="book" class="px-5 py-6 max-w-3xl mx-auto">
-
-  <div class="text-center mb-5">
-    <h2 class="display text-[24px] sm:text-[30px] leading-[1.1] mb-2">Pick a time that works.</h2>
-    <p class="text-sm text-ink-muted">One deck builder per market. Your slot is held for 30 minutes while you book.</p>
+  <!-- Eyebrow: green pulsing dot + MARKET OPEN -->
+  <div class="inline-flex items-center gap-2 mb-2 px-2.5 py-1 rounded-full border border-live/40" style="background: rgba(16, 185, 129, 0.10);">
+    <span class="relative flex w-2 h-2">
+      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-live opacity-75"></span>
+      <span class="relative inline-flex rounded-full h-2 w-2 bg-live"></span>
+    </span>
+    <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-live-bright">Market Open</span>
   </div>
 
-  <section class="rounded-2xl overflow-hidden border border-border bg-elevated shadow-card" style="min-height: 760px;">
-    <iframe
-      id="ghl-booking"
-      src="https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo"
-      scrolling="no"
-      title="Book your Deck Jobs Strategy Session"
-      class="ghl-embed">
-    </iframe>
-  </section>
-
-  <p class="text-[12px] text-ink-subtle text-center mt-4">
-    Trouble seeing the calendar? <a href="mailto:spencer@seasonproofgrowth.com" class="text-gold underline underline-offset-2">Email Spencer</a> and we'll get you booked manually.
-  </p>
-</section>
-
-<!-- TRUSTED BY -->
-<section class="border-y border-border/50 bg-surface mt-8">
-  <div class="max-w-3xl mx-auto px-5 py-7">
-    <p class="text-center text-[11px] font-bold tracking-[0.22em] uppercase text-ink-muted mb-3">Trusted By Deck Builders In</p>
-    <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-[13px] font-semibold text-ink-muted/80">
-      <span>SAN ANTONIO</span>
-      <span>BEND</span>
-      <span>LOOMIS</span>
-      <span>DENVER</span>
-      <span>PITTSBURGH</span>
-      <span>ATLANTA</span>
-      <span>MINNEAPOLIS</span>
-      <span>HOUSTON</span>
-    </div>
-  </div>
-</section>
-
-<!-- PROOF (condensed for terminal page) -->
-<section class="px-5 py-12 max-w-3xl mx-auto">
-  <h2 class="display text-[24px] sm:text-[32px] leading-[1.1] text-center mb-2">
-    Real builders. Real numbers. <span class="text-gold">Recent.</span>
-  </h2>
-  <p class="text-sm text-ink-muted text-center mb-7 max-w-md mx-auto">
-    Quick proof while you book. Full case studies live on the main page.
+  <h1 id="hero-h1" class="display text-[26px] sm:text-[36px] leading-[1.05] mb-2 max-w-2xl mx-auto">
+    Your market is open.
+  </h1>
+  <p class="text-sm sm:text-base text-ink-muted leading-snug max-w-xl mx-auto">
+    45-minute Google Meet. Bring your numbers, your ad accounts, and your skepticism.
   </p>
 
-  <div class="grid sm:grid-cols-3 gap-3">
+</div>
 
-    <article class="rounded-xl bg-surface border border-border p-5">
-      <div class="flex items-center gap-2.5 mb-3">
-        <div class="w-9 h-9 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-[12px]">JW</div>
-        <div>
-          <p class="font-bold text-ink text-[13px] leading-tight">Justin Wylie</p>
-          <p class="text-[11px] text-ink-muted leading-tight mt-0.5">San Antonio, TX</p>
-        </div>
-      </div>
-      <p class="text-[12px] text-gold font-bold mb-2 tracking-wide leading-tight">CPL $400 → under $30 in 14 days</p>
-      <p class="text-[13px] text-ink leading-snug italic">"I've hired six other companies. This is your guy right here."</p>
-    </article>
-
-    <article class="rounded-xl bg-surface border border-border p-5">
-      <div class="flex items-center gap-2.5 mb-3">
-        <div class="w-9 h-9 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-[12px]">BW</div>
-        <div>
-          <p class="font-bold text-ink text-[13px] leading-tight">Brian Wallace</p>
-          <p class="text-[11px] text-ink-muted leading-tight mt-0.5">Bend, OR</p>
-        </div>
-      </div>
-      <p class="text-[12px] text-gold font-bold mb-2 tracking-wide leading-tight">60 estimates · 25 closed · 6 weeks</p>
-      <p class="text-[13px] text-ink leading-snug italic">"More appointments in 6 weeks than I did all of last year."</p>
-    </article>
-
-    <article class="rounded-xl bg-surface border border-border p-5">
-      <div class="flex items-center gap-2.5 mb-3">
-        <div class="w-9 h-9 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-[12px]">JW</div>
-        <div>
-          <p class="font-bold text-ink text-[13px] leading-tight">Jacob Weaver</p>
-          <p class="text-[11px] text-ink-muted leading-tight mt-0.5">Pennsylvania</p>
-        </div>
-      </div>
-      <p class="text-[12px] text-gold font-bold mb-2 tracking-wide leading-tight">$480K closed in 21 days</p>
-      <p class="text-[13px] text-ink leading-snug italic">"First time in business I crossed $1M top line. Booked till September."</p>
-    </article>
-
+<!-- Social proof banner (1 line) -->
+<div class="flex-shrink-0 border-y border-border/50 bg-surface">
+  <div class="max-w-3xl mx-auto px-5 py-2 text-center">
+    <p class="text-[10px] sm:text-[11px] tracking-[0.18em] text-ink-muted uppercase font-semibold">
+      Trusted by deck builders in San Antonio · Bend · Denver · Atlanta · Pittsburgh
+    </p>
   </div>
-</section>
+</div>
 
-<!-- WHAT TO BRING -->
-<section class="px-5 py-10 max-w-3xl mx-auto border-t border-border/50">
-  <div class="grid sm:grid-cols-[auto_1fr] sm:gap-10 gap-6 items-start">
-    <div>
-      <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold mb-2">Before The Call</p>
-      <h2 class="display text-[22px] sm:text-[28px] leading-[1.1]">
-        What to have <span class="text-gold">ready.</span>
-      </h2>
-    </div>
-    <ul class="space-y-3 text-[15px]">
-      <li class="flex items-start gap-3">
-        <span class="flex-shrink-0 w-5 h-5 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-[11px] mt-0.5">1</span>
-        <span class="text-ink">A rough monthly revenue range. No need to be exact.</span>
-      </li>
-      <li class="flex items-start gap-3">
-        <span class="flex-shrink-0 w-5 h-5 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-[11px] mt-0.5">2</span>
-        <span class="text-ink">What you're currently spending on advertising and where (Meta, Google, magazines, lead services).</span>
-      </li>
-      <li class="flex items-start gap-3">
-        <span class="flex-shrink-0 w-5 h-5 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-[11px] mt-0.5">3</span>
-        <span class="text-ink">A short list of what you've tried before and why it didn't stick.</span>
-      </li>
-      <li class="flex items-start gap-3">
-        <span class="flex-shrink-0 w-5 h-5 rounded-full gold-gradient flex items-center justify-center text-black font-bold text-[11px] mt-0.5">4</span>
-        <span class="text-ink">A quiet 45 minutes. We move fast and I'll need your full attention.</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- WHAT HAPPENS NEXT -->
-<section class="px-5 py-10 max-w-3xl mx-auto">
-  <div class="rounded-2xl border border-border bg-surface p-7 sm:p-9">
-    <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold mb-3">After You Book</p>
-    <ol class="space-y-3 text-[14px] sm:text-[15px] text-ink-muted leading-relaxed">
-      <li><span class="text-ink font-semibold">1. Instant confirmation.</span> Text + email with your Google Meet link and an add-to-calendar button.</li>
-      <li><span class="text-ink font-semibold">2. A short pre-call note.</span> Two minutes of context I'll send the day before so we don't waste time on the call.</li>
-      <li><span class="text-ink font-semibold">3. The Google Meet.</span> 45 minutes together. Live audit of your accounts. Walk the 100-day plan in your market.</li>
-      <li><span class="text-ink font-semibold">4. A straight answer.</span> Fit, not-fit, or fix-this-first. No surprise follow-up sequence.</li>
-    </ol>
-  </div>
-</section>
-
-<!-- BACK TO TOP / SECONDARY CTA -->
-<section class="px-5 py-10 max-w-3xl mx-auto text-center">
-  <a href="#book" class="inline-flex items-center justify-center gap-2 px-6 py-4 rounded-md gold-gradient text-black font-bold text-[15px] shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-    Pick a time <span>↑</span>
-  </a>
-  <p class="text-[12px] text-ink-subtle mt-3">One deck builder per market. Your slot holds for 30 minutes.</p>
-</section>
-
-<!-- Footer -->
-<footer class="px-5 py-8 border-t border-border/50 text-center text-xs text-ink-muted">
-  <p class="font-bold text-ink mb-1.5 tracking-wider">DECKINGLEADS<span class="text-gold">.COM</span></p>
-  <p class="leading-relaxed">Spencer Wright · One deck builder per market.</p>
-</footer>
+<!-- Calendar fills remaining viewport -->
+<div class="flex-1 min-h-0 calendar-shell">
+  <iframe
+    id="ghl-booking"
+    src="https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo"
+    title="Book your Deck Jobs Strategy Session"
+    class="ghl-embed">
+  </iframe>
+</div>
 
 <!-- GHL embed runtime -->
 <script src="https://api.seasonproofgrowth.com/js/form_embed.js" type="text/javascript"></script>
@@ -295,15 +120,14 @@
   try { data = JSON.parse(sessionStorage.getItem('dl_qualify_data') || '{}'); }
   catch (_) { data = {}; }
 
-  // Personalize the hero copy when we have it
   if (data.name) {
     const first = data.name.trim().split(/\s+/)[0];
     const heroH1 = document.getElementById('hero-h1');
     if (heroH1 && first) {
-      heroH1.innerHTML = `${first}, your market is open. <span class="text-gold block mt-2">Book your Deck Jobs Strategy Session below.</span>`;
+      heroH1.textContent = `${first}, your market is open.`;
     }
   }
-  // Prefill GHL booking widget via query params
+
   const iframe = document.getElementById('ghl-booking');
   if (iframe && data.email) {
     const url = new URL(iframe.src);
