@@ -15,7 +15,6 @@
     theme: {
       extend: {
         colors: {
-          // Dark palette (hero, guarantee, final CTA, footer)
           bg: '#000000',
           surface: '#0D0D0D',
           elevated: '#141414',
@@ -28,7 +27,6 @@
           gold: '#c7963f',
           'gold-deep': '#ab8032',
           'gold-soft': 'rgba(199, 150, 63, 0.12)',
-          // Light palette (proof, system)
           paper: '#FFFFFF',
           cream: '#F5F2EB',
           'paper-text': '#171717',
@@ -44,7 +42,7 @@
           'gold': '0 8px 32px -8px rgba(199, 150, 63, 0.35)',
           'card': '0 8px 24px -8px rgba(0, 0, 0, 0.6)',
           'card-light': '0 8px 24px -8px rgba(0, 0, 0, 0.08)',
-          'modal': '0 24px 80px -12px rgba(0, 0, 0, 0.8)',
+          'apply': '0 24px 60px -16px rgba(0, 0, 0, 0.18)',
         },
       }
     }
@@ -60,31 +58,24 @@
   .gold-gradient { background-image: linear-gradient(to bottom, #c7963f 0%, #ab8032 100%); }
   .gold-gradient-hover:hover { background-image: linear-gradient(to bottom, #d4a14a 0%, #ba8f3b 100%); }
 
-  /* Section anchor color resets */
   .sec-dark { background:#000000; color:#F5F2EB; }
   .sec-charcoal { background:#141414; color:#F5F2EB; }
   .sec-paper { background:#FFFFFF; color:#171717; }
   .sec-cream { background:#F5F2EB; color:#171717; }
 
-  /* Sticky bottom CTA hidden until scroll */
   .sticky-cta { transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease-out; }
   .sticky-cta[aria-hidden="true"] { transform: translateY(120%); opacity: 0; pointer-events: none; }
 
-  /* Modal */
-  .qualify-modal { transition: opacity 220ms ease-out; }
-  .qualify-modal[aria-hidden="true"] { opacity: 0; pointer-events: none; }
-  .qualify-sheet { transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1); }
-  .qualify-modal[aria-hidden="true"] .qualify-sheet { transform: translateY(40px); }
+  /* Step transitions for inline survey */
   .step { display: none; }
   .step.active { display: block; animation: fadeIn 200ms ease-out; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
-  body.modal-open { overflow: hidden; }
 
   /* Proof card hover */
   .proof-thumb .play-icon { transition: transform 200ms ease-out; }
   .proof-thumb:hover .play-icon { transform: scale(1.08); }
 
-  /* Logo marquee — infinite seamless scroll */
+  /* Logo marquee */
   .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
   .marquee-track { display: inline-flex; gap: 56px; animation: marquee-scroll 38s linear infinite; }
   .marquee:hover .marquee-track { animation-play-state: paused; }
@@ -108,32 +99,25 @@
     transition: opacity 180ms ease, color 180ms ease;
   }
   .logo-cell:hover { opacity: 1; color: #F5F2EB; }
-  .logo-cell .logo-mono { font-family: 'Inter', sans-serif; }
 </style>
 </head>
 <body class="bg-bg text-ink antialiased">
 
-<!-- ============================================== -->
-<!-- TOP UTILITY BAR                                 -->
-<!-- ============================================== -->
+<!-- TOP UTILITY BAR -->
 <header class="sec-dark border-b border-border/50 relative z-10">
   <div class="max-w-3xl mx-auto px-5 py-3.5 flex items-center justify-between">
     <span class="font-black text-[13px] tracking-[0.18em] uppercase text-ink">Decking<span class="text-gold">Leads</span><sup class="text-[9px] text-ink-muted align-top ml-0.5">.com</sup></span>
-    <button data-open-qualify class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-md gold-gradient gold-gradient-hover text-black text-sm font-semibold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+    <a href="#apply" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-md gold-gradient gold-gradient-hover text-black text-sm font-semibold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
       Reserve My Zip Code <span>→</span>
-    </button>
+    </a>
   </div>
 </header>
 
-<!-- ============================================== -->
-<!-- HERO  (pure black + gold radial glow)            -->
-<!-- ============================================== -->
+<!-- HERO -->
 <section class="sec-dark relative overflow-hidden">
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(199, 150, 63, 0.14) 0%, transparent 60%);"></div>
 
   <div class="relative max-w-3xl mx-auto px-5 pt-10 pb-12 sm:pt-14 sm:pb-14 text-center">
-
-    <!-- Eyebrow: scarcity tag -->
     <div class="inline-flex items-center gap-2 mb-5">
       <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
       <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">1 Builder Per Market</span>
@@ -150,62 +134,51 @@
     </p>
 
     <div class="flex justify-center">
-      <button data-open-qualify class="cta-btn w-full sm:w-auto inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+      <a href="#apply" class="cta-btn w-full sm:w-auto inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
         <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
         <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
-      </button>
+      </a>
     </div>
 
     <p class="text-[12px] text-ink-subtle mt-4">2–3 minutes · Free · One per market</p>
-
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- LOGO TRUST BAR — scrolling marquee, charcoal     -->
-<!-- ============================================== -->
+<!-- LOGO MARQUEE -->
 <section class="sec-charcoal border-y border-border/40">
   <div class="max-w-6xl mx-auto px-5 py-7 sm:py-8">
     <p class="text-center text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase text-ink-subtle mb-5">
       Trusted By Deck Builders Across The Country
     </p>
-
     <div class="marquee">
       <div class="marquee-track">
-        <!-- Each set of placeholder logos is rendered TWICE for seamless loop. -->
-        <!-- Replace the .logo-cell innerText with real wordmarks (or swap to <img>) when you have logos. -->
-
-        <!-- Set 1 -->
-        <div class="logo-cell"><span class="logo-mono">ALL PRO DECKS</span></div>
-        <div class="logo-cell"><span class="logo-mono">BEND FENCE &amp; DECK</span></div>
-        <div class="logo-cell"><span class="logo-mono">OASIS CUSTOM DECKS</span></div>
-        <div class="logo-cell"><span class="logo-mono">PAYNTER CONSTRUCTION</span></div>
-        <div class="logo-cell"><span class="logo-mono">CERVANTES BUILDERS</span></div>
-        <div class="logo-cell"><span class="logo-mono">ENGLE OUTDOOR LIVING</span></div>
-        <div class="logo-cell"><span class="logo-mono">BUILDER 07</span></div>
-        <div class="logo-cell"><span class="logo-mono">BUILDER 08</span></div>
-        <div class="logo-cell"><span class="logo-mono">BUILDER 09</span></div>
-        <div class="logo-cell"><span class="logo-mono">BUILDER 10</span></div>
-
-        <!-- Set 2 — duplicate for seamless loop -->
-        <div class="logo-cell"><span class="logo-mono">ALL PRO DECKS</span></div>
-        <div class="logo-cell"><span class="logo-mono">BEND FENCE &amp; DECK</span></div>
-        <div class="logo-cell"><span class="logo-mono">OASIS CUSTOM DECKS</span></div>
-        <div class="logo-cell"><span class="logo-mono">PAYNTER CONSTRUCTION</span></div>
-        <div class="logo-cell"><span class="logo-mono">CERVANTES BUILDERS</span></div>
-        <div class="logo-cell"><span class="logo-mono">ENGLE OUTDOOR LIVING</span></div>
-        <div class="logo-cell"><span class="logo-mono">BUILDER 07</span></div>
-        <div class="logo-cell"><span class="logo-mono">BUILDER 08</span></div>
-        <div class="logo-cell"><span class="logo-mono">BUILDER 09</span></div>
-        <div class="logo-cell"><span class="logo-mono">BUILDER 10</span></div>
+        <div class="logo-cell">ALL PRO DECKS</div>
+        <div class="logo-cell">BEND FENCE &amp; DECK</div>
+        <div class="logo-cell">OASIS CUSTOM DECKS</div>
+        <div class="logo-cell">PAYNTER CONSTRUCTION</div>
+        <div class="logo-cell">CERVANTES BUILDERS</div>
+        <div class="logo-cell">ENGLE OUTDOOR LIVING</div>
+        <div class="logo-cell">BUILDER 07</div>
+        <div class="logo-cell">BUILDER 08</div>
+        <div class="logo-cell">BUILDER 09</div>
+        <div class="logo-cell">BUILDER 10</div>
+        <!-- duplicate set for seamless loop -->
+        <div class="logo-cell">ALL PRO DECKS</div>
+        <div class="logo-cell">BEND FENCE &amp; DECK</div>
+        <div class="logo-cell">OASIS CUSTOM DECKS</div>
+        <div class="logo-cell">PAYNTER CONSTRUCTION</div>
+        <div class="logo-cell">CERVANTES BUILDERS</div>
+        <div class="logo-cell">ENGLE OUTDOOR LIVING</div>
+        <div class="logo-cell">BUILDER 07</div>
+        <div class="logo-cell">BUILDER 08</div>
+        <div class="logo-cell">BUILDER 09</div>
+        <div class="logo-cell">BUILDER 10</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- PROOF — paper white                              -->
-<!-- ============================================== -->
+<!-- PROOF -->
 <section id="proof" class="sec-paper">
   <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
     <div class="text-center mb-10">
@@ -219,8 +192,6 @@
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-
-      <!-- Card 01 — Justin Wylie -->
       <article>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group shadow-card-light">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -238,7 +209,6 @@
         </div>
       </article>
 
-      <!-- Card 02 — Brian Wallace -->
       <article>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group shadow-card-light">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -256,7 +226,6 @@
         </div>
       </article>
 
-      <!-- Card 03 — Jacob Weaver -->
       <article>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group shadow-card-light">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -274,7 +243,6 @@
         </div>
       </article>
 
-      <!-- Card 04 — Chip Paynter -->
       <article>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group shadow-card-light">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -292,7 +260,6 @@
         </div>
       </article>
 
-      <!-- Card 05 — Ricardo Cervantes -->
       <article>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group shadow-card-light">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -310,7 +277,6 @@
         </div>
       </article>
 
-      <!-- Card 06 — Eric Engle -->
       <article>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group shadow-card-light">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -328,125 +294,86 @@
         </div>
       </article>
 
-      <!-- Cards 07–12 — placeholders -->
+      <!-- placeholders 7-12 -->
       <article data-placeholder>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group opacity-75">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
-              <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
+            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center"><svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
           <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
             <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
           </div>
         </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Builder #07</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p>
-        </div>
+        <div class="mt-2.5 px-1"><p class="text-paper-text text-sm font-bold leading-tight">Builder #07</p><p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p></div>
       </article>
-
       <article data-placeholder>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group opacity-75">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
-              <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
+            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center"><svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
           <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
             <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
           </div>
         </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Builder #08</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p>
-        </div>
+        <div class="mt-2.5 px-1"><p class="text-paper-text text-sm font-bold leading-tight">Builder #08</p><p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p></div>
       </article>
-
       <article data-placeholder>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group opacity-75">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
-              <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
+            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center"><svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
           <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
             <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
           </div>
         </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Builder #09</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p>
-        </div>
+        <div class="mt-2.5 px-1"><p class="text-paper-text text-sm font-bold leading-tight">Builder #09</p><p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p></div>
       </article>
-
       <article data-placeholder>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group opacity-75">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
-              <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
+            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center"><svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
           <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
             <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
           </div>
         </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Builder #10</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p>
-        </div>
+        <div class="mt-2.5 px-1"><p class="text-paper-text text-sm font-bold leading-tight">Builder #10</p><p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p></div>
       </article>
-
       <article data-placeholder>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group opacity-75">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
-              <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
+            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center"><svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
           <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
             <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
           </div>
         </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Builder #11</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p>
-        </div>
+        <div class="mt-2.5 px-1"><p class="text-paper-text text-sm font-bold leading-tight">Builder #11</p><p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p></div>
       </article>
-
       <article data-placeholder>
         <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group opacity-75">
           <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center">
-              <svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
+            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center"><svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
           </div>
           <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
             <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
           </div>
         </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Builder #12</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p>
-        </div>
+        <div class="mt-2.5 px-1"><p class="text-paper-text text-sm font-bold leading-tight">Builder #12</p><p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p></div>
       </article>
-
     </div>
 
-    <!-- BUTTON 2 — sits at the end of the paper section, same color block -->
     <div class="text-center mt-12 sm:mt-14">
-      <button data-open-qualify class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+      <a href="#apply" class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
         <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
         <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
-      </button>
+      </a>
       <p class="text-[12px] text-paper-subtle mt-3">2–3 minutes · Free · One per market</p>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- THE GUARANTEE — back to dark                     -->
-<!-- ============================================== -->
+<!-- GUARANTEE -->
 <section class="sec-dark">
   <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20">
     <div class="text-center mb-10">
@@ -480,20 +407,17 @@
 
     <p class="text-center text-sm text-ink-muted mt-7 mb-12">No asterisk. No "conditions apply." In writing, in the agreement, enforced at day 100.</p>
 
-    <!-- BUTTON 3 — sits at the end of the dark guarantee block -->
     <div class="text-center">
-      <button data-open-qualify class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+      <a href="#apply" class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
         <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
         <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
-      </button>
+      </a>
       <p class="text-[12px] text-ink-subtle mt-3">2–3 minutes · Free · One per market</p>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- THE SYSTEM — cream                               -->
-<!-- ============================================== -->
+<!-- THE SYSTEM -->
 <section class="sec-cream">
   <div class="max-w-4xl mx-auto px-5 py-16 sm:py-20">
     <div class="text-center mb-10">
@@ -506,54 +430,34 @@
 
     <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
       <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5">
-          <span class="text-gold font-bold text-[13px] tracking-wider">01</span>
-          <h3 class="font-bold text-paper-text text-[15px]">Agency Audit &amp; Recovery Plan</h3>
-        </div>
+        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">01</span><h3 class="font-bold text-paper-text text-[15px]">Agency Audit &amp; Recovery Plan</h3></div>
         <p class="text-sm text-paper-muted leading-relaxed">A written breakdown of what your previous agencies cost you, plus a 100-day recovery plan. First deliverable, before any ads go live.</p>
       </div>
       <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5">
-          <span class="text-gold font-bold text-[13px] tracking-wider">02</span>
-          <h3 class="font-bold text-paper-text text-[15px]">7-Day Launch Sprint</h3>
-        </div>
+        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">02</span><h3 class="font-bold text-paper-text text-[15px]">7-Day Launch Sprint</h3></div>
         <p class="text-sm text-paper-muted leading-relaxed">Multi-step qualification funnel, targeting tuned to your zip codes, tracking and automations wired in your own CRM.</p>
       </div>
       <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5">
-          <span class="text-gold font-bold text-[13px] tracking-wider">03</span>
-          <h3 class="font-bold text-paper-text text-[15px]">Referral Generator</h3>
-        </div>
+        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">03</span><h3 class="font-bold text-paper-text text-[15px]">Referral Generator</h3></div>
         <p class="text-sm text-paper-muted leading-relaxed">Captures homeowners before they price-shop. Proof-heavy creative so leads feel like referrals when they hit your calendar.</p>
       </div>
       <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5">
-          <span class="text-gold font-bold text-[13px] tracking-wider">04</span>
-          <h3 class="font-bold text-paper-text text-[15px]">Lead Handling War Room</h3>
-        </div>
+        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">04</span><h3 class="font-bold text-paper-text text-[15px]">Lead Handling War Room</h3></div>
         <p class="text-sm text-paper-muted leading-relaxed">Week-one call with you, your closer, and your admin. Scripts, speed-to-lead rules, and daily activity targets installed.</p>
       </div>
       <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5">
-          <span class="text-gold font-bold text-[13px] tracking-wider">05</span>
-          <h3 class="font-bold text-paper-text text-[15px]">Sales Calendar Max-Out Kit</h3>
-        </div>
+        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">05</span><h3 class="font-bold text-paper-text text-[15px]">Sales Calendar Max-Out Kit</h3></div>
         <p class="text-sm text-paper-muted leading-relaxed">Routing rules, SMS and email sequences, no-show recovery, reactivation automations. Nothing slips through.</p>
       </div>
       <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5">
-          <span class="text-gold font-bold text-[13px] tracking-wider">06</span>
-          <h3 class="font-bold text-paper-text text-[15px]">Pipeline Pulse Reporting</h3>
-        </div>
+        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">06</span><h3 class="font-bold text-paper-text text-[15px]">Pipeline Pulse Reporting</h3></div>
         <p class="text-sm text-paper-muted leading-relaxed">A simple weekly Loom report. New opportunities, appointments booked, jobs sold. Numbers that back every claim.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- FAQ — charcoal                                   -->
-<!-- ============================================== -->
+<!-- FAQ -->
 <section class="sec-charcoal">
   <div class="max-w-3xl mx-auto px-5 py-14 sm:py-18">
     <div class="text-center mb-8">
@@ -563,212 +467,168 @@
 
     <div class="space-y-2.5">
       <details class="group rounded-xl bg-bg border border-border overflow-hidden">
-        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3">
-          <span>I've been burned by agencies. Why would this be any different?</span>
-          <svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border">
-          <p class="pt-4">That's exactly why this offer exists. We start with an Agency Audit on every agency you've hired before us. It's a written document showing why they failed and what we're doing differently. Then we tie our own neck to a clear number: 100 exclusive opportunities in 100 days, or you get $2,000 cash, a full refund, and we keep working free until you hit it. You don't have to trust my words. You can trust the structure.</p>
-        </div>
+        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3"><span>I've been burned by agencies. Why would this be any different?</span><svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border"><p class="pt-4">That's exactly why this offer exists. We start with an Agency Audit on every agency you've hired before us. It's a written document showing why they failed and what we're doing differently. Then we tie our own neck to a clear number: 100 exclusive opportunities in 100 days, or you get $2,000 cash, a full refund, and we keep working free until you hit it. You don't have to trust my words. You can trust the structure.</p></div>
       </details>
-
       <details class="group rounded-xl bg-bg border border-border overflow-hidden">
-        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3">
-          <span>This still sounds too good to be true.</span>
-          <svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border">
-          <p class="pt-4">That's the right reaction, and I'd be skeptical too. It is too good, on paper. The reason it works is the system has the math and the proof behind it, and we'd rather pay than apologize. Miss the 100? You get $2,000 cash, every dollar of your management fee refunded, and we keep working free until you hit it. Anyone can write a guarantee. They can't copy actual calendars, pipelines, and recordings from contractors who said the same thing on day one. Justin. Brian. Eric. All of them changed their mind because the system kept delivering.</p>
-        </div>
+        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3"><span>This still sounds too good to be true.</span><svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border"><p class="pt-4">That's the right reaction, and I'd be skeptical too. It is too good, on paper. The reason it works is the system has the math and the proof behind it, and we'd rather pay than apologize. Miss the 100? You get $2,000 cash, every dollar of your management fee refunded, and we keep working free until you hit it. Anyone can write a guarantee. They can't copy actual calendars, pipelines, and recordings from contractors who said the same thing on day one. Justin. Brian. Eric. All of them changed their mind because the system kept delivering.</p></div>
       </details>
-
       <details class="group rounded-xl bg-bg border border-border overflow-hidden">
-        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3">
-          <span>What if the appointments are junk?</span>
-          <svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border">
-          <p class="pt-4">We don't sell shared, recycled leads. These are exclusive, pre-qualified appointment opportunities. The funnel filters for project type, budget, timing, and decision-makers before they hit your calendar. Your CRM gets scripts and automations so your team stops chasing ghosts.</p>
-        </div>
+        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3"><span>What if the appointments are junk?</span><svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border"><p class="pt-4">We don't sell shared, recycled leads. These are exclusive, pre-qualified appointment opportunities. The funnel filters for project type, budget, timing, and decision-makers before they hit your calendar. Your CRM gets scripts and automations so your team stops chasing ghosts.</p></div>
       </details>
-
       <details class="group rounded-xl bg-bg border border-border overflow-hidden">
-        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3">
-          <span>I don't want to get locked into another contract or lose my accounts.</span>
-          <svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border">
-          <p class="pt-4">You own the accounts, the data, and the system from day one. The sprint is 100 days. If we stop working together after that, nothing breaks. The engine stays in your business.</p>
-        </div>
+        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3"><span>I don't want to get locked into another contract or lose my accounts.</span><svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border"><p class="pt-4">You own the accounts, the data, and the system from day one. The sprint is 100 days. If we stop working together after that, nothing breaks. The engine stays in your business.</p></div>
       </details>
-
       <details class="group rounded-xl bg-bg border border-border overflow-hidden">
-        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3">
-          <span>I'm not sure we can handle more volume.</span>
-          <svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border">
-          <p class="pt-4">Let's be honest. If you truly can't run 3–5 appointments per day, this will overwhelm you. In that case, we pause and fix ops first. This offer is for companies ready to step on the gas, not add more chaos.</p>
-        </div>
+        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3"><span>I'm not sure we can handle more volume.</span><svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border"><p class="pt-4">Let's be honest. If you truly can't run 3–5 appointments per day, this will overwhelm you. In that case, we pause and fix ops first. This offer is for companies ready to step on the gas, not add more chaos.</p></div>
       </details>
-
       <details class="group rounded-xl bg-bg border border-border overflow-hidden">
-        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3">
-          <span>You're not even in my state. How do you know my market?</span>
-          <svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-        </summary>
-        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border">
-          <p class="pt-4">Fair question, and one every out-of-state client has asked before hiring us. We're not local and we don't pretend to be. What we are is operators who've installed this exact system in deck businesses across the country. The market intelligence comes from data, not zip codes — your best customer profile, your competitor pricing, your top-converting project types, and the call recordings that tell us what your buyers actually say.</p>
-        </div>
+        <summary class="cursor-pointer p-5 font-bold text-ink text-[15px] flex items-start justify-between gap-3"><span>You're not even in my state. How do you know my market?</span><svg class="flex-shrink-0 w-5 h-5 text-ink-muted mt-0.5 group-open:rotate-180 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></summary>
+        <div class="px-5 pb-5 text-sm text-ink-muted leading-relaxed border-t border-border"><p class="pt-4">Fair question, and one every out-of-state client has asked before hiring us. We're not local and we don't pretend to be. What we are is operators who've installed this exact system in deck businesses across the country. The market intelligence comes from data, not zip codes — your best customer profile, your competitor pricing, your top-converting project types, and the call recordings that tell us what your buyers actually say.</p></div>
       </details>
     </div>
   </div>
 </section>
 
 <!-- ============================================== -->
-<!-- FINAL CTA — black                                -->
+<!-- APPLY SECTION (inline survey, no popup)         -->
 <!-- ============================================== -->
-<section class="sec-dark">
-  <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20 text-center">
-    <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-4">· The Last Question</p>
-    <h2 class="display-lg text-[30px] sm:text-[48px] leading-[1.05] mb-5 max-w-xl mx-auto">
-      See if your market is still <span class="text-gold">open.</span>
-    </h2>
-    <p class="text-base text-ink-muted mb-7 max-w-md mx-auto">Takes 2–3 minutes. If you qualify, you'll book a strategy session. If you don't, you'll know why and we part ways friends.</p>
+<section id="apply" class="sec-paper scroll-mt-4">
+  <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20">
 
-    <div class="flex justify-center">
-      <button data-open-qualify class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-10 py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-        <span class="text-lg sm:text-xl font-black tracking-wider uppercase">Get More Deck Jobs</span>
-        <span class="text-sm font-medium opacity-85">Reserve My Zip Code →</span>
-      </button>
+    <!-- CTA header above form -->
+    <div class="text-center mb-9">
+      <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-3">· Reserve Your Zip Code</p>
+      <h2 class="display-lg text-[30px] sm:text-[48px] leading-[1.04] mb-4 max-w-xl mx-auto text-paper-text">
+        Get More Deck Jobs.
+      </h2>
+      <p class="text-base text-paper-muted max-w-lg mx-auto">
+        Apply below. We respond within 24 hours. One builder per market — yours may already be taken.
+      </p>
     </div>
 
-    <p class="text-[13px] text-ink-muted mt-5">One deck builder per market. Your market may already be taken.</p>
-  </div>
-</section>
+    <!-- Form card -->
+    <div class="max-w-xl mx-auto bg-paper rounded-2xl border border-paper-border shadow-apply p-6 sm:p-8">
 
-<!-- ============================================== -->
-<!-- FOOTER                                           -->
-<!-- ============================================== -->
-<footer class="sec-dark px-5 py-10 border-t border-border/50 text-center text-xs text-ink-muted pb-28 sm:pb-10">
-  <p class="font-bold text-ink mb-1.5 tracking-wider">DECKINGLEADS<span class="text-gold">.COM</span></p>
-  <p class="leading-relaxed">Spencer Wright · One deck builder per market.</p>
-</footer>
-
-<!-- STICKY BOTTOM CTA (mobile) -->
-<div id="sticky-cta" aria-hidden="true" class="sticky-cta fixed bottom-0 inset-x-0 z-30 px-4 pb-4 pt-3 bg-gradient-to-t from-black via-black/95 to-transparent">
-  <button data-open-qualify class="w-full inline-flex flex-col items-center justify-center gap-0.5 px-6 py-3.5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-    <span class="text-[15px] font-black tracking-wider uppercase">Get More Deck Jobs</span>
-    <span class="text-[12px] font-medium opacity-85">Reserve My Zip Code →</span>
-  </button>
-</div>
-
-<!-- ============================================== -->
-<!-- QUALIFY MODAL (7 steps + loading)                -->
-<!-- ============================================== -->
-<div id="qualify-modal" class="qualify-modal fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="qualify-title">
-  <div class="qualify-sheet w-full sm:max-w-lg bg-white text-black rounded-t-3xl sm:rounded-3xl shadow-modal max-h-[90vh] overflow-y-auto">
-    <div class="p-6 sm:p-8">
       <div class="flex items-center justify-between mb-6">
-        <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-gray-500">Step 1 of 7</span>
-        <button id="modal-back" class="inline-flex items-center gap-1 text-sm font-semibold text-gray-600 hover:text-black focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1 py-0.5" aria-label="Back">
+        <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-paper-subtle">Step 1 of 6</span>
+        <button id="form-back" class="inline-flex items-center gap-1 text-sm font-semibold text-paper-muted hover:text-paper-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1 py-0.5" aria-label="Back" style="visibility:hidden;">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/></svg>
           Back
         </button>
       </div>
 
-      <div class="h-1 bg-gray-100 rounded-full overflow-hidden mb-7">
-        <div id="progress-bar" class="h-full gold-gradient transition-all duration-300" style="width: 14.28%;"></div>
+      <div class="h-1 bg-paper-border rounded-full overflow-hidden mb-7">
+        <div id="progress-bar" class="h-full gold-gradient transition-all duration-300" style="width: 16.66%;"></div>
       </div>
 
+      <!-- Step 1: own a deck contracting business? -->
       <div class="step active" data-step="1">
-        <h2 id="qualify-title" class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-black" style="letter-spacing: -0.02em;">What's your annual revenue?</h2>
-        <p class="text-sm text-gray-500 mb-6">Rough range is fine. No wrong answers.</p>
-        <div class="grid grid-cols-1 gap-2.5">
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="revenue" data-value="under_500k">Below $500,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="revenue" data-value="500k_1m">$500,000 – $1,000,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="revenue" data-value="1m_3m">$1,000,000 – $3,000,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="revenue" data-value="3m_plus">$3,000,000+</button>
+        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">Do you own — or are you actively building — a deck contracting business?</h3>
+        <p class="text-sm text-paper-subtle mb-6">We'll route you to the right place either way.</p>
+        <div class="grid grid-cols-2 gap-2.5">
+          <button class="choice-btn text-center p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="own_business" data-value="yes">Yes</button>
+          <button class="choice-btn text-center p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="own_business" data-value="no">No</button>
         </div>
       </div>
 
+      <!-- Step 2: biggest pain point -->
       <div class="step" data-step="2">
-        <h2 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-black" style="letter-spacing: -0.02em;">How many install crews are you running?</h2>
-        <p class="text-sm text-gray-500 mb-6">We need at least one crew that isn't you swinging the hammer.</p>
-        <div class="grid grid-cols-2 gap-2.5">
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="crews" data-value="0">No crews (me only)</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="crews" data-value="1">1 crew</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="crews" data-value="2">2 crews</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="crews" data-value="3_plus">3+ crews</button>
-        </div>
-      </div>
-
-      <div class="step" data-step="3">
-        <h2 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-black" style="letter-spacing: -0.02em;">What's your primary market zip code?</h2>
-        <p class="text-sm text-gray-500 mb-6">We check market availability. One builder per market.</p>
-        <input id="zip-input" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="5" placeholder="e.g. 78216" class="w-full p-4 text-[15px] font-semibold border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none text-black placeholder-gray-400">
-        <button id="zip-next" class="w-full mt-4 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-black text-white font-bold disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform" disabled>Next <span>→</span></button>
-      </div>
-
-      <div class="step" data-step="4">
-        <h2 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-black" style="letter-spacing: -0.02em;">What are you currently spending on advertising?</h2>
-        <p class="text-sm text-gray-500 mb-6">Monthly ad spend — everything combined (Meta, Google, Yelp, magazines, lead services).</p>
+        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">Which of these best describes your biggest problem right now?</h3>
+        <p class="text-sm text-paper-subtle mb-6">Pick the one that hits hardest. We'll dig deeper on the call.</p>
         <div class="grid grid-cols-1 gap-2.5">
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="ad_spend" data-value="0_500">$0 – $500/month</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="ad_spend" data-value="500_2k">$500 – $2,000/month</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="ad_spend" data-value="2k_5k">$2,000 – $5,000/month</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="ad_spend" data-value="5k_10k">$5,000 – $10,000/month</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="ad_spend" data-value="10k_plus">$10,000+/month</button>
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="pain" data-value="feast_famine">My calendar swings between feast and famine</button>
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="pain" data-value="lead_quality">Most leads are unqualified or won't pick up the phone</button>
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="pain" data-value="agency_burned">I've hired agencies — same pitch, same promises, no results</button>
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="pain" data-value="attribution">I don't know which marketing actually works</button>
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="pain" data-value="stuck_scaling">I need to scale but I'm stuck at my current revenue</button>
         </div>
       </div>
 
-      <div class="step" data-step="5">
-        <h2 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-black" style="letter-spacing: -0.02em;">If we determine there's a strong fit, how soon would you realistically want to begin?</h2>
-        <p class="text-sm text-gray-500 mb-6">No wrong answers — helps us prioritize your application.</p>
+      <!-- Step 3: revenue -->
+      <div class="step" data-step="3">
+        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">What's your annual revenue?</h3>
+        <p class="text-sm text-paper-subtle mb-6">Rough range is fine. No wrong answers.</p>
+        <div class="grid grid-cols-1 gap-2.5">
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="under_500k">Below $500,000</button>
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="500k_1m">$500,000 – $1,000,000</button>
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="1m_3m">$1,000,000 – $3,000,000</button>
+          <button class="choice-btn text-left p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="3m_plus">$3,000,000+</button>
+        </div>
+      </div>
+
+      <!-- Step 4: timing -->
+      <div class="step" data-step="4">
+        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">How soon would you realistically want to begin?</h3>
+        <p class="text-sm text-paper-subtle mb-6">No wrong answers — helps us prioritize your application.</p>
         <div class="grid grid-cols-2 gap-2.5">
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="timing" data-value="asap">ASAP</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="timing" data-value="2_4_weeks">Next 2–4 weeks</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="timing" data-value="later">Later</button>
-          <button class="choice-btn text-left p-4 rounded-xl border-2 border-gray-200 hover:border-black focus-visible:border-black focus-visible:outline-none font-semibold text-[15px] transition-colors" data-field="timing" data-value="researching">Just researching</button>
+          <button class="choice-btn text-center p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="timing" data-value="asap">ASAP</button>
+          <button class="choice-btn text-center p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="timing" data-value="2_4_weeks">Next 2–4 weeks</button>
+          <button class="choice-btn text-center p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="timing" data-value="later">Later this year</button>
+          <button class="choice-btn text-center p-4 rounded-xl border-2 border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="timing" data-value="researching">Just researching</button>
         </div>
       </div>
 
-      <div class="step" data-step="6">
-        <h2 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-black" style="letter-spacing: -0.02em;">What's your full name?</h2>
-        <p class="text-sm text-gray-500 mb-6">So we know who we're talking to before the call.</p>
-        <input id="name-input" type="text" autocomplete="name" placeholder="Full name" class="w-full p-4 text-[15px] font-semibold border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none text-black placeholder-gray-400">
-        <button id="name-next" class="w-full mt-4 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-black text-white font-bold disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform" disabled>Next <span>→</span></button>
+      <!-- Step 5: name -->
+      <div class="step" data-step="5">
+        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">What's your full name?</h3>
+        <p class="text-sm text-paper-subtle mb-6">So we know who we're talking to before the call.</p>
+        <input id="name-input" type="text" autocomplete="name" placeholder="Full name" class="w-full p-4 text-[15px] font-semibold border-2 border-paper-border rounded-xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
+        <button id="name-next" class="w-full mt-4 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-paper-text text-paper font-bold disabled:opacity-40 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform" disabled>Next <span>→</span></button>
       </div>
 
-      <div class="step" data-step="7">
-        <h2 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-black" style="letter-spacing: -0.02em;">How do we reach you?</h2>
-        <p class="text-sm text-gray-500 mb-6">We'll send your call confirmation here.</p>
-        <input id="email-input" type="email" autocomplete="email" placeholder="Email address" class="w-full p-4 text-[15px] font-semibold border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none text-black placeholder-gray-400 mb-3">
+      <!-- Step 6: email + phone + submit -->
+      <div class="step" data-step="6">
+        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">How do we reach you?</h3>
+        <p class="text-sm text-paper-subtle mb-6">We'll send your call confirmation here.</p>
+        <input id="email-input" type="email" autocomplete="email" placeholder="Email address" class="w-full p-4 text-[15px] font-semibold border-2 border-paper-border rounded-xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper mb-3">
         <p id="email-error" class="text-xs text-red-600 font-medium mb-3 hidden">Please enter a valid email address.</p>
         <div class="flex gap-2">
-          <div class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-4 border-2 border-gray-200 rounded-xl bg-gray-50 font-semibold text-[15px]">
-            <span>🇺🇸</span>
-            <span>+1</span>
+          <div class="flex-shrink-0 inline-flex items-center gap-1 px-3 py-4 border-2 border-paper-border rounded-xl bg-cream font-semibold text-[15px] text-paper-text">
+            <span>🇺🇸</span><span>+1</span>
           </div>
-          <input id="phone-input" type="tel" autocomplete="tel" inputmode="numeric" placeholder="Phone number" maxlength="14" class="flex-1 min-w-0 p-4 text-[15px] font-semibold border-2 border-gray-200 rounded-xl focus:border-black focus:outline-none text-black placeholder-gray-400">
+          <input id="phone-input" type="tel" autocomplete="tel" inputmode="numeric" placeholder="Phone number" maxlength="14" class="flex-1 min-w-0 p-4 text-[15px] font-semibold border-2 border-paper-border rounded-xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
         </div>
         <p id="phone-error" class="text-xs text-red-600 font-medium mt-2 hidden">Please enter a valid 10-digit phone number.</p>
-        <button id="submit-btn" class="w-full mt-5 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl bg-black text-white font-bold shadow-modal focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">Submit Application <span>→</span></button>
-        <p class="text-[11px] leading-relaxed text-gray-500 mt-4">
+        <button id="submit-btn" class="w-full mt-5 inline-flex items-center justify-center gap-2 px-6 py-4 rounded-xl gold-gradient gold-gradient-hover text-black font-black tracking-wider uppercase text-[15px] shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">Submit Application <span>→</span></button>
+        <p class="text-[11px] leading-relaxed text-paper-subtle mt-4">
           By submitting this form, you agree to be contacted by DeckingLeads / Spencer Wright via phone, text, email, or mail using automated technology. Message and data rates may apply. Reply STOP to opt out.
         </p>
       </div>
 
+      <!-- Loading state shown after submit -->
       <div class="step" data-step="loading">
         <div class="py-8 text-center">
-          <div class="inline-block w-12 h-12 border-4 border-gray-200 border-t-black rounded-full animate-spin mb-6" aria-hidden="true"></div>
-          <p id="loading-text" class="text-lg font-bold text-black mb-2">Checking your zip code…</p>
-          <p class="text-sm text-gray-500">One moment.</p>
+          <div class="inline-block w-12 h-12 border-4 border-paper-border border-t-paper-text rounded-full animate-spin mb-6" aria-hidden="true"></div>
+          <p id="loading-text" class="text-lg font-bold text-paper-text mb-2">Checking your application…</p>
+          <p class="text-sm text-paper-subtle">One moment.</p>
         </div>
       </div>
 
     </div>
+
+    <p class="text-center text-[12px] text-paper-subtle mt-6">
+      One deck builder per market. Your market may already be taken.
+    </p>
   </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="sec-dark px-5 py-10 border-t border-border/50 text-center text-xs text-ink-muted pb-28 sm:pb-10">
+  <p class="font-bold text-ink mb-1.5 tracking-wider">DECKINGLEADS<span class="text-gold">.COM</span></p>
+  <p class="leading-relaxed">Spencer Wright · One deck builder per market.</p>
+</footer>
+
+<!-- STICKY BOTTOM CTA -->
+<div id="sticky-cta" aria-hidden="true" class="sticky-cta fixed bottom-0 inset-x-0 z-30 px-4 pb-4 pt-3 bg-gradient-to-t from-black via-black/95 to-transparent">
+  <a href="#apply" class="w-full inline-flex flex-col items-center justify-center gap-0.5 px-6 py-3.5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+    <span class="text-[15px] font-black tracking-wider uppercase">Get More Deck Jobs</span>
+    <span class="text-[12px] font-medium opacity-85">Reserve My Zip Code →</span>
+  </a>
 </div>
 
 <!-- ============================================== -->
@@ -776,78 +636,54 @@
 <!-- ============================================== -->
 <script>
 (function () {
-  const modal = document.getElementById('qualify-modal');
-  const sheet = modal.querySelector('.qualify-sheet');
+  const apply = document.getElementById('apply');
   const stepIndicator = document.getElementById('step-indicator');
-  const backBtn = document.getElementById('modal-back');
+  const backBtn = document.getElementById('form-back');
   const progressBar = document.getElementById('progress-bar');
-  const steps = modal.querySelectorAll('.step');
+  const steps = apply.querySelectorAll('.step');
   const stickyCta = document.getElementById('sticky-cta');
-  const totalSteps = 7;
+  const totalSteps = 6;
   const formData = {};
   let currentStep = 1;
-
-  function openModal() {
-    modal.setAttribute('aria-hidden', 'false');
-    document.body.classList.add('modal-open');
-    goToStep(1);
-  }
-  function closeModal() {
-    modal.setAttribute('aria-hidden', 'true');
-    document.body.classList.remove('modal-open');
-  }
-
-  document.querySelectorAll('[data-open-qualify]').forEach(btn => {
-    btn.addEventListener('click', openModal);
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') closeModal();
-  });
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
   function goToStep(stepNum) {
     currentStep = stepNum;
     steps.forEach(s => s.classList.remove('active'));
-    const target = modal.querySelector(`[data-step="${stepNum}"]`);
+    const target = apply.querySelector(`[data-step="${stepNum}"]`);
     if (target) target.classList.add('active');
+
     if (stepNum === 'loading') {
       stepIndicator.textContent = 'Checking market availability…';
       backBtn.style.visibility = 'hidden';
       progressBar.style.width = '100%';
       return;
     }
+
     stepIndicator.textContent = `Step ${stepNum} of ${totalSteps}`;
     backBtn.style.visibility = stepNum === 1 ? 'hidden' : 'visible';
     progressBar.style.width = `${(stepNum / totalSteps) * 100}%`;
-    sheet.scrollTop = 0;
+
     setTimeout(() => {
       const focusable = target.querySelector('input, button');
-      if (focusable) focusable.focus();
+      if (focusable) focusable.focus({ preventScroll: true });
     }, 50);
   }
 
-  backBtn.addEventListener('click', () => { if (currentStep > 1) goToStep(currentStep - 1); });
+  backBtn.addEventListener('click', () => {
+    if (currentStep > 1 && currentStep !== 'loading') goToStep(currentStep - 1);
+  });
 
-  modal.querySelectorAll('.choice-btn').forEach(btn => {
+  apply.querySelectorAll('.choice-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       formData[btn.dataset.field] = btn.dataset.value;
       if (currentStep < totalSteps) goToStep(currentStep + 1);
     });
   });
 
-  const zipInput = document.getElementById('zip-input');
-  const zipNext = document.getElementById('zip-next');
-  zipInput.addEventListener('input', () => {
-    zipInput.value = zipInput.value.replace(/\D/g, '').slice(0, 5);
-    zipNext.disabled = zipInput.value.length !== 5;
-  });
-  zipNext.addEventListener('click', () => { formData.zip = zipInput.value; goToStep(4); });
-
   const nameInput = document.getElementById('name-input');
   const nameNext = document.getElementById('name-next');
   nameInput.addEventListener('input', () => { nameNext.disabled = nameInput.value.trim().length < 2; });
-  nameNext.addEventListener('click', () => { formData.name = nameInput.value.trim(); goToStep(7); });
+  nameNext.addEventListener('click', () => { formData.name = nameInput.value.trim(); goToStep(6); });
 
   const phoneInput = document.getElementById('phone-input');
   phoneInput.addEventListener('input', () => {
@@ -858,15 +694,14 @@
     phoneInput.value = formatted;
   });
 
-  // ICP routing — V1 (loose, optimized for Meta training volume).
-  // Non-ICP only if all three bottom-tier signals fire together:
-  //   revenue under $500K AND no crews AND $0–$500/mo ad spend.
+  // ICP routing — V2 (input set changed: own_business, pain, revenue, timing, name, contact).
+  // Hard non-ICP: not a deck builder.
+  // Loose non-ICP: tiny revenue + just-researching (lowest-intent combo).
+  // Anyone else routes to the pixeled page.
   function isICP(d) {
-    const bottomTier =
-      d.revenue === 'under_500k' &&
-      d.crews === '0' &&
-      d.ad_spend === '0_500';
-    return !bottomTier;
+    if (d.own_business !== 'yes') return false;
+    if (d.revenue === 'under_500k' && d.timing === 'researching') return false;
+    return true;
   }
 
   function runLoadingThenRedirect(targetPath) {
@@ -909,7 +744,7 @@
 
     // TEMP DEBUG — open DevTools → Console BEFORE submitting to see capture.
     console.log('[DL] formData at submit:', JSON.parse(JSON.stringify(formData)));
-    console.log('[DL] isICP check — revenue:', formData.revenue, '| crews:', formData.crews, '| ad_spend:', formData.ad_spend);
+    console.log('[DL] isICP check — own_business:', formData.own_business, '| revenue:', formData.revenue, '| timing:', formData.timing);
     console.log('[DL] isICP result:', icp, '→ redirecting to:', icp ? 'qualified/' : 'scheduling/');
 
     try {
@@ -921,13 +756,16 @@
     runLoadingThenRedirect(icp ? 'qualified/' : 'scheduling/');
   });
 
-  // Sticky CTA — show after scrolling past hero
+  // Sticky CTA — show after scroll past hero, hide when apply section is in view
   const heroHeight = 600;
   function updateStickyCta() {
-    const showIt = window.scrollY > heroHeight && modal.getAttribute('aria-hidden') !== 'false';
+    const applyRect = apply.getBoundingClientRect();
+    const applyInView = applyRect.top < window.innerHeight && applyRect.bottom > 0;
+    const showIt = window.scrollY > heroHeight && !applyInView;
     stickyCta.setAttribute('aria-hidden', showIt ? 'false' : 'true');
   }
   window.addEventListener('scroll', updateStickyCta, { passive: true });
+  window.addEventListener('resize', updateStickyCta);
   updateStickyCta();
 })();
 </script>
