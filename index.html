@@ -117,9 +117,9 @@
     .video-modal-close { top: -36px; }
   }
 
-  /* Logo marquee */
+  /* Logo marquee — sized at ~70% of prior values */
   .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
-  .marquee-track { display: inline-flex; gap: 56px; animation: marquee-scroll 38s linear infinite; }
+  .marquee-track { display: inline-flex; gap: 40px; animation: marquee-scroll 38s linear infinite; }
   .marquee:hover .marquee-track { animation-play-state: paused; }
   @keyframes marquee-scroll {
     from { transform: translateX(0); }
@@ -127,18 +127,18 @@
   }
   .logo-cell {
     flex: 0 0 auto;
-    height: 88px;
+    height: 62px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 8px;
+    padding: 0 6px;
     opacity: 0.85;
     transition: opacity 180ms ease, transform 180ms ease;
   }
   .logo-cell:hover { opacity: 1; transform: translateY(-1px); }
   .logo-cell img {
-    max-height: 76px;
-    max-width: 260px;
+    max-height: 53px;
+    max-width: 182px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -146,13 +146,13 @@
   }
   /* Logos delivered as black-on-transparent: invert to white for charcoal bg */
   .logo-cell--invert img { filter: brightness(0) invert(1); }
-  /* Logos with opaque (white) backgrounds: wrap in a soft white pill so they look intentional */
+  /* Logos with opaque (white) backgrounds: wrap in a soft cream pill so they look intentional */
   .logo-cell--card {
     background: #F5F2EB;
     border-radius: 8px;
-    padding: 2px 12px;
+    padding: 2px 9px;
   }
-  .logo-cell--card img { max-height: 84px; max-width: 280px; }
+  .logo-cell--card img { max-height: 59px; max-width: 196px; }
 </style>
 </head>
 <body class="bg-bg text-ink antialiased">
@@ -201,7 +201,7 @@
 <!-- LOGO MARQUEE -->
 <section class="sec-charcoal border-y border-border/40">
   <div class="max-w-6xl mx-auto px-5 py-4 sm:py-5">
-    <p class="text-center text-[10px] sm:text-[11px] font-bold tracking-[0.22em] uppercase text-ink-subtle mb-4">
+    <p class="text-center text-[9px] sm:text-[11px] font-bold tracking-[0.10em] sm:tracking-[0.22em] uppercase text-ink-subtle mb-4 whitespace-nowrap">
       Trusted By Deck Builders Across The Country
     </p>
     <div class="marquee">
