@@ -92,6 +92,23 @@
     .pulse-ring, .pulse-core { animation: none; }
   }
 
+  /* Editorial pull-quote mark (Brian Wallace skeptic-defuse section) */
+  .pullquote-mark {
+    font-family: Georgia, 'Times New Roman', 'Cormorant Garamond', serif;
+    font-size: 96px;
+    line-height: 0.6;
+    color: #c7963f;
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    margin-bottom: 18px;
+    user-select: none;
+    text-shadow: 0 8px 24px rgba(199, 150, 63, 0.18);
+  }
+  @media (min-width: 640px) {
+    .pullquote-mark { font-size: 128px; margin-bottom: 22px; }
+  }
+
   /* === 100-Day Operator Track === */
   .track { position: relative; padding: 0; margin: 0; list-style: none; }
   .track-rail {
@@ -454,9 +471,7 @@
 <!-- V2 NEW: SKEPTIC-DEFUSE QUOTE — sits between marquee and proof for cold traffic -->
 <section class="sec-dark border-b border-border/40">
   <div class="max-w-3xl mx-auto px-5 py-12 sm:py-14 text-center">
-    <svg class="w-8 h-8 mx-auto mb-4 text-gold opacity-60" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
-      <path d="M9 4C5 4 2 7 2 11c0 4 3 7 7 7v6c-5 0-9-4-9-9 0-6 4-11 9-11v0zM23 4c-4 0-7 3-7 7 0 4 3 7 7 7v6c-5 0-9-4-9-9 0-6 4-11 9-11v0z" transform="translate(4,2)"/>
-    </svg>
+    <div class="pullquote-mark" aria-hidden="true">&ldquo;</div>
     <p class="display text-[22px] sm:text-[30px] leading-[1.25] mb-5 max-w-2xl mx-auto text-ink">
       I saw your ad and I wanted to <span class="text-gold">call your bluff.</span>
       Six weeks later, we've done more appointments than I did all of last year.
