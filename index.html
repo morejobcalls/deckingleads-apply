@@ -96,15 +96,16 @@
   .track { position: relative; padding: 0; margin: 0; list-style: none; }
   .track-rail {
     position: absolute;
-    top: 28px;
-    bottom: 28px;
-    left: 27px;
-    width: 2px;
-    background: rgba(199, 150, 63, 0.16);
+    /* top + bottom set by JS to align with first + last node centers */
+    top: 30px;
+    bottom: 30px;
+    left: 29px;
+    width: 1.5px;
+    background: rgba(199, 150, 63, 0.14);
     border-radius: 2px;
     overflow: hidden;
   }
-  @media (min-width: 640px) { .track-rail { left: 35px; } }
+  @media (min-width: 640px) { .track-rail { left: 39px; } }
   .track-rail-fill {
     position: absolute;
     top: 0;
@@ -112,42 +113,45 @@
     width: 100%;
     height: 0;
     background: linear-gradient(180deg, #c7963f 0%, #ab8032 100%);
-    transition: height 600ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition: height 700ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .track-row {
     position: relative;
     display: flex;
     align-items: flex-start;
-    gap: 16px;
-    padding-bottom: 24px;
+    gap: 18px;
+    padding-bottom: 28px;
   }
   @media (min-width: 640px) {
-    .track-row { gap: 24px; padding-bottom: 28px; }
+    .track-row { gap: 28px; padding-bottom: 36px; }
   }
   .track-row:last-child { padding-bottom: 0; }
   .track-node {
     position: relative;
     z-index: 2;
     flex-shrink: 0;
-    width: 56px;
+    width: 60px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 2px; /* aligns node center with card eyebrow visually */
   }
-  @media (min-width: 640px) { .track-node { width: 72px; } }
+  @media (min-width: 640px) { .track-node { width: 80px; } }
   .track-node-num {
     width: 56px;
     height: 56px;
     border-radius: 999px;
     background: #FFFFFF;
-    border: 2px solid rgba(199, 150, 63, 0.28);
-    color: rgba(199, 150, 63, 0.55);
-    font-weight: 800;
-    font-size: 14px;
-    letter-spacing: 0.04em;
+    border: 1.5px solid rgba(199, 150, 63, 0.30);
+    color: rgba(23, 23, 23, 0.45);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    font-feature-settings: "tnum" 1, "lnum" 1;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 6px -2px rgba(23, 23, 23, 0.06);
     transition: background 500ms cubic-bezier(0.16, 1, 0.3, 1),
                 border-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
                 color 500ms cubic-bezier(0.16, 1, 0.3, 1),
@@ -155,86 +159,88 @@
                 transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
   }
   .track-node-tag {
-    margin-top: 8px;
-    font-size: 9px;
+    margin-top: 10px;
+    font-size: 9.5px;
     font-weight: 800;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #737373;
+    color: #8c8c8c;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1.15;
     white-space: nowrap;
     transition: color 400ms ease-out;
   }
-  @media (min-width: 640px) { .track-node-tag { font-size: 10px; letter-spacing: 0.18em; } }
+  @media (min-width: 640px) { .track-node-tag { font-size: 10px; letter-spacing: 0.20em; } }
   .track-row.is-consumed .track-node-num,
   .track-row.is-active .track-node-num {
-    background: linear-gradient(180deg, #c7963f 0%, #ab8032 100%);
+    background: linear-gradient(180deg, #d4a14a 0%, #ab8032 100%);
     border-color: #c7963f;
     color: #FFFFFF;
-    box-shadow: 0 10px 28px -10px rgba(199, 150, 63, 0.55);
+    box-shadow: 0 12px 28px -10px rgba(199, 150, 63, 0.55), inset 0 1px 0 rgba(255,255,255,0.18);
   }
   .track-row.is-consumed .track-node-tag,
   .track-row.is-active .track-node-tag { color: #ab8032; }
   .track-row.is-active .track-node-num {
-    transform: scale(1.06);
-    animation: track-node-pulse 2.2s ease-in-out infinite;
+    transform: scale(1.05);
+    animation: track-node-pulse 2.4s ease-in-out infinite;
   }
   @keyframes track-node-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(199, 150, 63, 0.42), 0 10px 28px -10px rgba(199, 150, 63, 0.55); }
-    70%      { box-shadow: 0 0 0 14px rgba(199, 150, 63, 0), 0 10px 28px -10px rgba(199, 150, 63, 0.55); }
+    0%, 100% { box-shadow: 0 0 0 0 rgba(199, 150, 63, 0.40), 0 12px 28px -10px rgba(199, 150, 63, 0.55), inset 0 1px 0 rgba(255,255,255,0.18); }
+    70%      { box-shadow: 0 0 0 14px rgba(199, 150, 63, 0), 0 12px 28px -10px rgba(199, 150, 63, 0.55), inset 0 1px 0 rgba(255,255,255,0.18); }
   }
   .track-card {
+    position: relative;
     flex: 1;
     background: #FFFFFF;
-    border: 1px solid #E5E5E5;
-    border-radius: 14px;
-    padding: 16px 18px;
+    border: 1px solid rgba(23, 23, 23, 0.06);
+    border-radius: 16px;
+    padding: 18px 20px;
     margin-top: 0;
+    box-shadow: 0 1px 2px rgba(23, 23, 23, 0.04), 0 8px 24px -16px rgba(23, 23, 23, 0.10);
     transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
                 border-color 400ms ease-out,
                 box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1);
   }
-  @media (min-width: 640px) { .track-card { padding: 20px 22px; } }
-  .track-card-head {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-  }
-  .track-card-cad {
+  @media (min-width: 640px) { .track-card { padding: 22px 26px; } }
+  .track-card-eyebrow {
     font-size: 10px;
     font-weight: 800;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.20em;
     text-transform: uppercase;
     color: #c7963f;
+    margin-bottom: 6px;
   }
-  .track-card h3 {
-    color: #171717;
+  .track-card-title {
+    color: #0F0F0F;
     font-weight: 700;
-    font-size: 15px;
-    line-height: 1.3;
+    font-size: 17px;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px 0;
+  }
+  @media (min-width: 640px) { .track-card-title { font-size: 19px; } }
+  .track-card-body {
+    color: #4a4a4a;
+    font-size: 14px;
+    line-height: 1.6;
     margin: 0;
   }
-  @media (min-width: 640px) { .track-card h3 { font-size: 17px; } }
-  .track-card p {
-    color: #525252;
-    font-size: 13.5px;
-    line-height: 1.55;
-    margin: 0;
-  }
-  @media (min-width: 640px) { .track-card p { font-size: 14.5px; } }
+  @media (min-width: 640px) { .track-card-body { font-size: 15px; } }
   .track-row.is-active .track-card {
     transform: translateY(-2px);
-    border-color: rgba(199, 150, 63, 0.42);
-    box-shadow: 0 14px 36px -12px rgba(0, 0, 0, 0.10), 0 0 0 3px rgba(199, 150, 63, 0.08);
+    border-color: rgba(199, 150, 63, 0.35);
+    box-shadow: 0 1px 2px rgba(23, 23, 23, 0.04),
+                0 18px 40px -16px rgba(23, 23, 23, 0.14),
+                0 0 0 4px rgba(199, 150, 63, 0.06);
   }
   /* Outcome row — dark inverted card sealing the loop back to the guarantee */
+  .track-row--outcome { padding-top: 6px; }
   .track-row--outcome .track-node-num {
     background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
     border-color: #c7963f;
     color: #c7963f;
+    font-size: 14px;
+    box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(199,150,63,0.22);
   }
   .track-row--outcome.is-active .track-node-num,
   .track-row--outcome.is-consumed .track-node-num {
@@ -242,14 +248,17 @@
     color: #c7963f;
   }
   .track-row--outcome .track-card {
-    background: linear-gradient(180deg, #0D0D0D 0%, #000000 100%);
-    border: 1px solid rgba(199, 150, 63, 0.42);
-    box-shadow: 0 18px 44px -14px rgba(0, 0, 0, 0.30);
+    background: linear-gradient(180deg, #111111 0%, #000000 100%);
+    border: 1px solid rgba(199, 150, 63, 0.32);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.40),
+                0 22px 44px -18px rgba(0, 0, 0, 0.55),
+                inset 0 1px 0 rgba(199, 150, 63, 0.10);
   }
-  .track-row--outcome .track-card h3 { color: #F5F2EB; font-size: 17px; }
-  @media (min-width: 640px) { .track-row--outcome .track-card h3 { font-size: 19px; } }
-  .track-row--outcome .track-card p { color: #9CA3AF; }
-  .track-row--outcome .track-card .gold { color: #c7963f; font-weight: 700; }
+  .track-row--outcome .track-card-eyebrow { color: #c7963f; }
+  .track-row--outcome .track-card-title { color: #F5F2EB; font-size: 19px; }
+  @media (min-width: 640px) { .track-row--outcome .track-card-title { font-size: 22px; } }
+  .track-row--outcome .track-card-body { color: #9CA3AF; }
+  .track-row--outcome .track-card-body .gold { color: #c7963f; font-weight: 700; }
   @media (prefers-reduced-motion: reduce) {
     .track-rail-fill { transition: none; }
     .track-card, .track-node-num, .track-node-tag { transition: none; }
@@ -857,14 +866,12 @@
       <li class="track-row" data-step="1">
         <div class="track-node">
           <div class="track-node-num">01</div>
-          <div class="track-node-tag">Day 1</div>
+          <div class="track-node-tag">Day 0</div>
         </div>
         <div class="track-card">
-          <div class="track-card-head">
-            <span class="track-card-cad">Kickoff</span>
-            <h3>Agency Audit &amp; Recovery Plan</h3>
-          </div>
-          <p>A written breakdown of where your last agencies cost you money — and a 100-day plan to recover it. First deliverable. Before any ads run.</p>
+          <div class="track-card-eyebrow">Kickoff</div>
+          <h3 class="track-card-title">Agency Audit &amp; Recovery Plan</h3>
+          <p class="track-card-body">A written breakdown of where your last agencies cost you money — and a 100-day plan to recover it. First deliverable, before any ads run.</p>
         </div>
       </li>
 
@@ -874,39 +881,33 @@
           <div class="track-node-tag">Days 1–7</div>
         </div>
         <div class="track-card">
-          <div class="track-card-head">
-            <span class="track-card-cad">Build Sprint</span>
-            <h3>Referral Generator Build</h3>
-          </div>
-          <p>We build your full system inside accounts you own: qualification funnel, ad creative, audience targeting, CRM automations, lead routing — all wired to your domain, your zip codes, your brand.</p>
+          <div class="track-card-eyebrow">Build Sprint</div>
+          <h3 class="track-card-title">Referral Generator Build</h3>
+          <p class="track-card-body">We build your full system inside accounts you own — qualification funnel, ad creative, audience targeting, CRM automations, lead routing — all wired to your domain, your zip codes, your brand.</p>
         </div>
       </li>
 
       <li class="track-row" data-step="3">
         <div class="track-node">
           <div class="track-node-num">03</div>
-          <div class="track-node-tag">Day 7</div>
+          <div class="track-node-tag">Day 8</div>
         </div>
         <div class="track-card">
-          <div class="track-card-head">
-            <span class="track-card-cad">Live Call</span>
-            <h3>Lead Handling War Room</h3>
-          </div>
-          <p>You, your closer, and your admin on one call. We hand off the scripts, speed-to-lead rules, and daily activity targets. Your team learns the system <em>before</em> launch — not after.</p>
+          <div class="track-card-eyebrow">Go Live</div>
+          <h3 class="track-card-title">Referral Generator Launch</h3>
+          <p class="track-card-body">Ads go live. Targeting locked. Tracking firing. Homeowners start hitting your calendar pre-qualified, pre-warmed, and pre-routed — with the same vibe your best referrals walk in with.</p>
         </div>
       </li>
 
       <li class="track-row" data-step="4">
         <div class="track-node">
           <div class="track-node-num">04</div>
-          <div class="track-node-tag">Day 8</div>
+          <div class="track-node-tag">Weekly</div>
         </div>
         <div class="track-card">
-          <div class="track-card-head">
-            <span class="track-card-cad">Go Live</span>
-            <h3>Referral Generator Launch</h3>
-          </div>
-          <p>Ads go live. Targeting locked. Tracking firing. Homeowners start hitting your calendar pre-qualified, pre-warmed, and pre-routed — with the same vibe your best referrals walk in with.</p>
+          <div class="track-card-eyebrow">Reporting</div>
+          <h3 class="track-card-title">Pipeline Pulse</h3>
+          <p class="track-card-body">A 5-minute Loom every week: new opportunities, appointments booked, jobs sold. Numbers that back every claim. No dashboards you have to log into.</p>
         </div>
       </li>
 
@@ -916,25 +917,21 @@
           <div class="track-node-tag">Weekly</div>
         </div>
         <div class="track-card">
-          <div class="track-card-head">
-            <span class="track-card-cad">Reporting</span>
-            <h3>Pipeline Pulse</h3>
-          </div>
-          <p>A 5-minute Loom every week: new opportunities, appointments booked, jobs sold. Numbers that back every claim. No dashboards you have to log into.</p>
+          <div class="track-card-eyebrow">Ops Call</div>
+          <h3 class="track-card-title">War Rooms</h3>
+          <p class="track-card-body">Every week, you, your closer, and your admin meet with us. We tune scripts, drill speed-to-lead, review the pipeline, and fix what slipped. Your team gets sharper every 7 days.</p>
         </div>
       </li>
 
       <li class="track-row" data-step="6">
         <div class="track-node">
           <div class="track-node-num">06</div>
-          <div class="track-node-tag">Every 2 Wks</div>
+          <div class="track-node-tag">Monthly</div>
         </div>
         <div class="track-card">
-          <div class="track-card-head">
-            <span class="track-card-cad">Strategy</span>
-            <h3>Scale Calls</h3>
-          </div>
-          <p>Every other week we look at what's working, what's leaking, and where to push budget. The system gets sharper as the data compounds.</p>
+          <div class="track-card-eyebrow">Strategy</div>
+          <h3 class="track-card-title">Scale Calls</h3>
+          <p class="track-card-body">Every 30 days we step up to the strategic layer — what's working, what's leaking, where to push budget, what new market lever to pull. The system gets sharper as the data compounds.</p>
         </div>
       </li>
 
@@ -944,11 +941,9 @@
           <div class="track-node-tag">Day 100</div>
         </div>
         <div class="track-card">
-          <div class="track-card-head">
-            <span class="track-card-cad gold">Outcome</span>
-            <h3>100 sales appointments. Delivered.</h3>
-          </div>
-          <p>Or you get paid <span class="gold">three ways</span> — $2,000 cash, full refund of management fees, and continued service until the 100th appointment lands.</p>
+          <div class="track-card-eyebrow">Outcome</div>
+          <h3 class="track-card-title">100 sales appointments. Delivered.</h3>
+          <p class="track-card-body">Or you get paid <span class="gold">three ways</span> — $2,000 cash, full refund of management fees, and continued service until the 100th appointment lands.</p>
         </div>
       </li>
     </ol>
@@ -1265,8 +1260,9 @@
   const track = document.querySelector('.track');
   if (!track) return;
   const rows = Array.from(track.querySelectorAll('.track-row'));
+  const rail = track.querySelector('.track-rail');
   const railFill = track.querySelector('.track-rail-fill');
-  if (!rows.length || !railFill) return;
+  if (!rows.length || !rail || !railFill) return;
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -1284,19 +1280,33 @@
   }, { rootMargin: '-42% 0px -45% 0px', threshold: 0 });
   rows.forEach((row) => observer.observe(row));
 
-  // Rail fill follows the playhead through the track
+  // Bind rail top/bottom to the actual first + last node centers — no dangling line
+  function setRailBounds() {
+    const firstNode = rows[0].querySelector('.track-node-num');
+    const lastNode = rows[rows.length - 1].querySelector('.track-node-num');
+    if (!firstNode || !lastNode) return;
+    const trackRect = track.getBoundingClientRect();
+    const firstRect = firstNode.getBoundingClientRect();
+    const lastRect = lastNode.getBoundingClientRect();
+    const top = (firstRect.top + firstRect.height / 2) - trackRect.top;
+    const bottom = trackRect.bottom - (lastRect.top + lastRect.height / 2);
+    rail.style.top = top + 'px';
+    rail.style.bottom = bottom + 'px';
+  }
+
+  // Rail fill follows the playhead through the rail span (not the whole track)
   let ticking = false;
   function updateRail() {
-    const rect = track.getBoundingClientRect();
+    const railRect = rail.getBoundingClientRect();
     const winH = window.innerHeight || document.documentElement.clientHeight;
     const playhead = winH * 0.55;
     let pct;
-    if (rect.top >= playhead) {
+    if (railRect.top >= playhead) {
       pct = 0;
-    } else if (rect.top + rect.height <= playhead) {
+    } else if (railRect.bottom <= playhead) {
       pct = 100;
     } else {
-      pct = ((playhead - rect.top) / rect.height) * 100;
+      pct = ((playhead - railRect.top) / railRect.height) * 100;
     }
     railFill.style.height = Math.max(0, Math.min(100, pct)) + '%';
     ticking = false;
@@ -1307,13 +1317,24 @@
       ticking = true;
     }
   }
+  function onResize() {
+    setRailBounds();
+    updateRail();
+  }
+
+  setRailBounds();
 
   if (reduceMotion) {
     railFill.style.height = '100%';
     rows.forEach(r => r.classList.add('is-consumed'));
   } else {
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', onResize);
+    // Re-measure once fonts have settled (web font + Tailwind CDN apply async)
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(onResize);
+    }
+    setTimeout(onResize, 250);
     updateRail();
   }
 })();
