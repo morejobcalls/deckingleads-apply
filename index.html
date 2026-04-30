@@ -72,6 +72,26 @@
   .step.active { display: block; animation: fadeIn 200ms ease-out; }
   @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
+  /* Premium pulse for the eyebrow status dot */
+  @keyframes premium-pulse {
+    0%   { transform: scale(0.9);  opacity: 0.55; }
+    70%  { transform: scale(2.6);  opacity: 0; }
+    100% { transform: scale(2.6);  opacity: 0; }
+  }
+  .pulse-ring {
+    animation: premium-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+    transform-origin: center;
+    will-change: transform, opacity;
+  }
+  @keyframes premium-pulse-core {
+    0%, 100% { opacity: 1; }
+    50%      { opacity: 0.78; }
+  }
+  .pulse-core { animation: premium-pulse-core 2.4s ease-in-out infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-ring, .pulse-core { animation: none; }
+  }
+
   /* Proof card hover */
   .proof-thumb .play-icon { transition: transform 200ms ease-out; }
   .proof-thumb:hover .play-icon { transform: scale(1.08); }
@@ -174,7 +194,10 @@
 
   <div class="relative max-w-3xl mx-auto px-5 pt-10 pb-12 sm:pt-14 sm:pb-14 text-center">
     <div class="inline-flex items-center gap-2 mb-5">
-      <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+      <span class="relative inline-flex w-1.5 h-1.5" aria-hidden="true">
+        <span class="absolute inset-0 rounded-full bg-gold pulse-ring"></span>
+        <span class="relative w-1.5 h-1.5 rounded-full bg-gold pulse-core"></span>
+      </span>
       <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">1 Builder Per Market</span>
     </div>
 
