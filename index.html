@@ -92,6 +92,170 @@
     .pulse-ring, .pulse-core { animation: none; }
   }
 
+  /* === 100-Day Operator Track === */
+  .track { position: relative; padding: 0; margin: 0; list-style: none; }
+  .track-rail {
+    position: absolute;
+    top: 28px;
+    bottom: 28px;
+    left: 27px;
+    width: 2px;
+    background: rgba(199, 150, 63, 0.16);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  @media (min-width: 640px) { .track-rail { left: 35px; } }
+  .track-rail-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: linear-gradient(180deg, #c7963f 0%, #ab8032 100%);
+    transition: height 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .track-row {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding-bottom: 24px;
+  }
+  @media (min-width: 640px) {
+    .track-row { gap: 24px; padding-bottom: 28px; }
+  }
+  .track-row:last-child { padding-bottom: 0; }
+  .track-node {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+    width: 56px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  @media (min-width: 640px) { .track-node { width: 72px; } }
+  .track-node-num {
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    background: #FFFFFF;
+    border: 2px solid rgba(199, 150, 63, 0.28);
+    color: rgba(199, 150, 63, 0.55);
+    font-weight: 800;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 500ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+                color 500ms cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1),
+                transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .track-node-tag {
+    margin-top: 8px;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #737373;
+    text-align: center;
+    line-height: 1.2;
+    white-space: nowrap;
+    transition: color 400ms ease-out;
+  }
+  @media (min-width: 640px) { .track-node-tag { font-size: 10px; letter-spacing: 0.18em; } }
+  .track-row.is-consumed .track-node-num,
+  .track-row.is-active .track-node-num {
+    background: linear-gradient(180deg, #c7963f 0%, #ab8032 100%);
+    border-color: #c7963f;
+    color: #FFFFFF;
+    box-shadow: 0 10px 28px -10px rgba(199, 150, 63, 0.55);
+  }
+  .track-row.is-consumed .track-node-tag,
+  .track-row.is-active .track-node-tag { color: #ab8032; }
+  .track-row.is-active .track-node-num {
+    transform: scale(1.06);
+    animation: track-node-pulse 2.2s ease-in-out infinite;
+  }
+  @keyframes track-node-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(199, 150, 63, 0.42), 0 10px 28px -10px rgba(199, 150, 63, 0.55); }
+    70%      { box-shadow: 0 0 0 14px rgba(199, 150, 63, 0), 0 10px 28px -10px rgba(199, 150, 63, 0.55); }
+  }
+  .track-card {
+    flex: 1;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    border-radius: 14px;
+    padding: 16px 18px;
+    margin-top: 0;
+    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 400ms ease-out,
+                box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @media (min-width: 640px) { .track-card { padding: 20px 22px; } }
+  .track-card-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+  }
+  .track-card-cad {
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #c7963f;
+  }
+  .track-card h3 {
+    color: #171717;
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 1.3;
+    margin: 0;
+  }
+  @media (min-width: 640px) { .track-card h3 { font-size: 17px; } }
+  .track-card p {
+    color: #525252;
+    font-size: 13.5px;
+    line-height: 1.55;
+    margin: 0;
+  }
+  @media (min-width: 640px) { .track-card p { font-size: 14.5px; } }
+  .track-row.is-active .track-card {
+    transform: translateY(-2px);
+    border-color: rgba(199, 150, 63, 0.42);
+    box-shadow: 0 14px 36px -12px rgba(0, 0, 0, 0.10), 0 0 0 3px rgba(199, 150, 63, 0.08);
+  }
+  /* Outcome row — dark inverted card sealing the loop back to the guarantee */
+  .track-row--outcome .track-node-num {
+    background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+    border-color: #c7963f;
+    color: #c7963f;
+  }
+  .track-row--outcome.is-active .track-node-num,
+  .track-row--outcome.is-consumed .track-node-num {
+    background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
+    color: #c7963f;
+  }
+  .track-row--outcome .track-card {
+    background: linear-gradient(180deg, #0D0D0D 0%, #000000 100%);
+    border: 1px solid rgba(199, 150, 63, 0.42);
+    box-shadow: 0 18px 44px -14px rgba(0, 0, 0, 0.30);
+  }
+  .track-row--outcome .track-card h3 { color: #F5F2EB; font-size: 17px; }
+  @media (min-width: 640px) { .track-row--outcome .track-card h3 { font-size: 19px; } }
+  .track-row--outcome .track-card p { color: #9CA3AF; }
+  .track-row--outcome .track-card .gold { color: #c7963f; font-weight: 700; }
+  @media (prefers-reduced-motion: reduce) {
+    .track-rail-fill { transition: none; }
+    .track-card, .track-node-num, .track-node-tag { transition: none; }
+    .track-row.is-active .track-node-num { animation: none; transform: none; }
+  }
+
   /* Proof card hover */
   .proof-thumb .play-icon { transition: transform 200ms ease-out; }
   .proof-thumb:hover .play-icon { transform: scale(1.08); }
@@ -678,41 +842,116 @@
 
 <!-- THE SYSTEM -->
 <section class="sec-cream">
-  <div class="max-w-4xl mx-auto px-5 py-16 sm:py-20">
-    <div class="text-center mb-10">
+  <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20">
+    <div class="text-center mb-12 sm:mb-14">
       <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-3">· The System</p>
       <h2 class="display text-[28px] sm:text-[44px] leading-[1.05] mb-3 text-paper-text">
-        The Decking Growth Operating System.
+        The 100-Day Operator Track.
       </h2>
-      <p class="text-base text-paper-muted max-w-md mx-auto">Six components installed inside accounts you own. You keep everything we build.</p>
+      <p class="text-base text-paper-muted max-w-md mx-auto">Every milestone, mapped to a day. Built into accounts you own — you keep everything.</p>
     </div>
 
-    <div class="grid sm:grid-cols-2 gap-3 sm:gap-4">
-      <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">01</span><h3 class="font-bold text-paper-text text-[15px]">Agency Audit &amp; Recovery Plan</h3></div>
-        <p class="text-sm text-paper-muted leading-relaxed">A written breakdown of what your previous agencies cost you, plus a 100-day recovery plan. First deliverable, before any ads go live.</p>
-      </div>
-      <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">02</span><h3 class="font-bold text-paper-text text-[15px]">7-Day Launch Sprint</h3></div>
-        <p class="text-sm text-paper-muted leading-relaxed">Multi-step qualification funnel, targeting tuned to your zip codes, tracking and automations wired in your own CRM.</p>
-      </div>
-      <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">03</span><h3 class="font-bold text-paper-text text-[15px]">Referral Generator</h3></div>
-        <p class="text-sm text-paper-muted leading-relaxed">Captures homeowners before they price-shop. Proof-heavy creative so leads feel like referrals when they hit your calendar.</p>
-      </div>
-      <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">04</span><h3 class="font-bold text-paper-text text-[15px]">Lead Handling War Room</h3></div>
-        <p class="text-sm text-paper-muted leading-relaxed">Week-one call with you, your closer, and your admin. Scripts, speed-to-lead rules, and daily activity targets installed.</p>
-      </div>
-      <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">05</span><h3 class="font-bold text-paper-text text-[15px]">Sales Calendar Max-Out Kit</h3></div>
-        <p class="text-sm text-paper-muted leading-relaxed">Routing rules, SMS and email sequences, no-show recovery, reactivation automations. Nothing slips through.</p>
-      </div>
-      <div class="bg-paper rounded-xl border border-paper-border p-5 sm:p-6 shadow-card-light">
-        <div class="flex items-baseline gap-3 mb-1.5"><span class="text-gold font-bold text-[13px] tracking-wider">06</span><h3 class="font-bold text-paper-text text-[15px]">Pipeline Pulse Reporting</h3></div>
-        <p class="text-sm text-paper-muted leading-relaxed">A simple weekly Loom report. New opportunities, appointments booked, jobs sold. Numbers that back every claim.</p>
-      </div>
-    </div>
+    <ol class="track">
+      <div class="track-rail" aria-hidden="true"><div class="track-rail-fill"></div></div>
+
+      <li class="track-row" data-step="1">
+        <div class="track-node">
+          <div class="track-node-num">01</div>
+          <div class="track-node-tag">Day 1</div>
+        </div>
+        <div class="track-card">
+          <div class="track-card-head">
+            <span class="track-card-cad">Kickoff</span>
+            <h3>Agency Audit &amp; Recovery Plan</h3>
+          </div>
+          <p>A written breakdown of where your last agencies cost you money — and a 100-day plan to recover it. First deliverable. Before any ads run.</p>
+        </div>
+      </li>
+
+      <li class="track-row" data-step="2">
+        <div class="track-node">
+          <div class="track-node-num">02</div>
+          <div class="track-node-tag">Days 1–7</div>
+        </div>
+        <div class="track-card">
+          <div class="track-card-head">
+            <span class="track-card-cad">Build Sprint</span>
+            <h3>Referral Generator Build</h3>
+          </div>
+          <p>We build your full system inside accounts you own: qualification funnel, ad creative, audience targeting, CRM automations, lead routing — all wired to your domain, your zip codes, your brand.</p>
+        </div>
+      </li>
+
+      <li class="track-row" data-step="3">
+        <div class="track-node">
+          <div class="track-node-num">03</div>
+          <div class="track-node-tag">Day 7</div>
+        </div>
+        <div class="track-card">
+          <div class="track-card-head">
+            <span class="track-card-cad">Live Call</span>
+            <h3>Lead Handling War Room</h3>
+          </div>
+          <p>You, your closer, and your admin on one call. We hand off the scripts, speed-to-lead rules, and daily activity targets. Your team learns the system <em>before</em> launch — not after.</p>
+        </div>
+      </li>
+
+      <li class="track-row" data-step="4">
+        <div class="track-node">
+          <div class="track-node-num">04</div>
+          <div class="track-node-tag">Day 8</div>
+        </div>
+        <div class="track-card">
+          <div class="track-card-head">
+            <span class="track-card-cad">Go Live</span>
+            <h3>Referral Generator Launch</h3>
+          </div>
+          <p>Ads go live. Targeting locked. Tracking firing. Homeowners start hitting your calendar pre-qualified, pre-warmed, and pre-routed — with the same vibe your best referrals walk in with.</p>
+        </div>
+      </li>
+
+      <li class="track-row" data-step="5">
+        <div class="track-node">
+          <div class="track-node-num">05</div>
+          <div class="track-node-tag">Weekly</div>
+        </div>
+        <div class="track-card">
+          <div class="track-card-head">
+            <span class="track-card-cad">Reporting</span>
+            <h3>Pipeline Pulse</h3>
+          </div>
+          <p>A 5-minute Loom every week: new opportunities, appointments booked, jobs sold. Numbers that back every claim. No dashboards you have to log into.</p>
+        </div>
+      </li>
+
+      <li class="track-row" data-step="6">
+        <div class="track-node">
+          <div class="track-node-num">06</div>
+          <div class="track-node-tag">Every 2 Wks</div>
+        </div>
+        <div class="track-card">
+          <div class="track-card-head">
+            <span class="track-card-cad">Strategy</span>
+            <h3>Scale Calls</h3>
+          </div>
+          <p>Every other week we look at what's working, what's leaking, and where to push budget. The system gets sharper as the data compounds.</p>
+        </div>
+      </li>
+
+      <li class="track-row track-row--outcome" data-step="outcome">
+        <div class="track-node">
+          <div class="track-node-num">100</div>
+          <div class="track-node-tag">Day 100</div>
+        </div>
+        <div class="track-card">
+          <div class="track-card-head">
+            <span class="track-card-cad gold">Outcome</span>
+            <h3>100 sales appointments. Delivered.</h3>
+          </div>
+          <p>Or you get paid <span class="gold">three ways</span> — $2,000 cash, full refund of management fees, and continued service until the 100th appointment lands.</p>
+        </div>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -1017,6 +1256,66 @@
   window.addEventListener('scroll', updateStickyCta, { passive: true });
   window.addEventListener('resize', updateStickyCta);
   updateStickyCta();
+})();
+
+/* ============================================================
+   100-Day Operator Track — scroll-tied lighting + rail fill
+   ============================================================ */
+(function initOperatorTrack() {
+  const track = document.querySelector('.track');
+  if (!track) return;
+  const rows = Array.from(track.querySelectorAll('.track-row'));
+  const railFill = track.querySelector('.track-rail-fill');
+  if (!rows.length || !railFill) return;
+
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Activate row when its node crosses the playhead band
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const row = entry.target;
+      if (entry.isIntersecting) {
+        row.classList.add('is-active', 'is-consumed');
+      } else {
+        row.classList.remove('is-active');
+        // is-consumed sticks once seen
+      }
+    });
+  }, { rootMargin: '-42% 0px -45% 0px', threshold: 0 });
+  rows.forEach((row) => observer.observe(row));
+
+  // Rail fill follows the playhead through the track
+  let ticking = false;
+  function updateRail() {
+    const rect = track.getBoundingClientRect();
+    const winH = window.innerHeight || document.documentElement.clientHeight;
+    const playhead = winH * 0.55;
+    let pct;
+    if (rect.top >= playhead) {
+      pct = 0;
+    } else if (rect.top + rect.height <= playhead) {
+      pct = 100;
+    } else {
+      pct = ((playhead - rect.top) / rect.height) * 100;
+    }
+    railFill.style.height = Math.max(0, Math.min(100, pct)) + '%';
+    ticking = false;
+  }
+  function onScroll() {
+    if (!ticking) {
+      window.requestAnimationFrame(updateRail);
+      ticking = true;
+    }
+  }
+
+  if (reduceMotion) {
+    railFill.style.height = '100%';
+    rows.forEach(r => r.classList.add('is-consumed'));
+  } else {
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateRail();
+  }
 })();
 </script>
 
