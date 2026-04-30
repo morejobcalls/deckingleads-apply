@@ -755,7 +755,7 @@
     <div class="max-w-xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply p-7 sm:p-10">
 
       <div class="flex items-start justify-between mb-7">
-        <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-paper-subtle">Step 1 of 4</span>
+        <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-paper-subtle">Step 1 of 5</span>
         <button id="form-back" class="inline-flex flex-col items-center text-[13px] font-semibold text-paper-muted hover:text-paper-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1 leading-none" aria-label="Back" style="visibility:hidden;">
           <svg class="w-3.5 h-3.5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
           Back
@@ -796,8 +796,19 @@
         </div>
       </div>
 
-      <!-- Step 4: combined name + email + phone + submit (V2 simplification) -->
+      <!-- Step 4: zip code -->
       <div class="step" data-step="4">
+        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">What's your service area zip code?</h3>
+        <p class="text-sm text-paper-subtle mb-6">We use this to check if your market is still open. One deck builder per market.</p>
+        <input id="zip-input" type="text" autocomplete="postal-code" inputmode="numeric" placeholder="ZIP code" maxlength="5" class="w-full px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
+        <p id="zip-error" class="text-xs text-red-600 font-medium mt-2 hidden">Please enter a valid 5-digit US ZIP code.</p>
+        <div class="flex justify-end mt-7">
+          <button id="zip-next-btn" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-paper-text text-gold font-bold text-[15px] hover:bg-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-all">Next <span>→</span></button>
+        </div>
+      </div>
+
+      <!-- Step 5: combined name + email + phone + submit -->
+      <div class="step" data-step="5">
         <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">Last step. How do we reach you?</h3>
         <p class="text-sm text-paper-subtle mb-6">We'll send your call confirmation to the email + phone you provide.</p>
         <input id="name-input" type="text" autocomplete="name" placeholder="First and last name" class="w-full px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper mb-3">
@@ -826,8 +837,7 @@
       <div class="step" data-step="loading">
         <div class="py-8 text-center">
           <div class="inline-block w-12 h-12 border-4 border-paper-border border-t-paper-text rounded-full animate-spin mb-6" aria-hidden="true"></div>
-          <p id="loading-text" class="text-lg font-bold text-paper-text mb-2">Checking your application…</p>
-          <p class="text-sm text-paper-subtle">One moment.</p>
+          <p id="loading-text" class="text-lg font-bold text-paper-text">Checking your market availability…</p>
         </div>
       </div>
 
@@ -1102,7 +1112,7 @@
   const backBtn = document.getElementById('form-back');
   const steps = apply.querySelectorAll('.step');
   const stickyCta = document.getElementById('sticky-cta');
-  const totalSteps = 4; // V2: simplified from 6 steps
+  const totalSteps = 5; // V2: 4 questions + zip step
   const formData = {};
   let currentStep = 1;
 
@@ -1138,7 +1148,40 @@
     });
   });
 
-  // V2: name lives on step 4 alongside email + phone — validated together at submit
+  // Step 4: zip code
+  const zipInput = document.getElementById('zip-input');
+  const zipError = document.getElementById('zip-error');
+  const zipNextBtn = document.getElementById('zip-next-btn');
+  if (zipInput) {
+    zipInput.addEventListener('input', () => {
+      zipInput.value = zipInput.value.replace(/\D/g, '').slice(0, 5);
+      if (zipInput.value.length === 5) {
+        zipError.classList.add('hidden');
+        zipInput.classList.remove('border-red-500');
+      }
+    });
+    zipInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && zipInput.value.length === 5) {
+        e.preventDefault();
+        zipNextBtn.click();
+      }
+    });
+  }
+  if (zipNextBtn) {
+    zipNextBtn.addEventListener('click', () => {
+      const zip = zipInput.value.replace(/\D/g, '');
+      if (zip.length !== 5) {
+        zipError.classList.remove('hidden');
+        zipInput.classList.add('border-red-500');
+        zipInput.focus();
+        return;
+      }
+      formData.zip = zip;
+      goToStep(5);
+    });
+  }
+
+  // Step 5: name + email + phone — validated together at submit
   const nameInput = document.getElementById('name-input');
 
   const phoneInput = document.getElementById('phone-input');
@@ -1161,18 +1204,9 @@
   }
 
   function runLoadingThenRedirect(targetPath) {
-    const messages = [
-      'Checking your zip code…',
-      'Verifying market availability…',
-      'Loading your booking calendar…'
-    ];
-    let i = 0;
     const loadingTextEl = document.getElementById('loading-text');
-    const interval = setInterval(() => {
-      i = (i + 1) % messages.length;
-      if (loadingTextEl) loadingTextEl.textContent = messages[i];
-    }, 1300);
-    setTimeout(() => { clearInterval(interval); window.location.href = targetPath; }, 4000);
+    if (loadingTextEl) loadingTextEl.textContent = 'Checking your market availability…';
+    setTimeout(() => { window.location.href = targetPath; }, 3500);
   }
 
   const emailInput = document.getElementById('email-input');
