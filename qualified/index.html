@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#000000">
 <title>You Took The Bet · Book Your Deck Jobs Strategy Session</title>
 <meta name="description" content="Pick a time for your 45-minute Deck Jobs Strategy Session.">
 <meta name="robots" content="noindex, nofollow">
@@ -17,16 +17,19 @@
     theme: {
       extend: {
         colors: {
-          paper: '#FFFFFF',
-          cream: '#F5F2EB',
-          'paper-text': '#0F0F0F',
-          'paper-muted': '#525252',
-          'paper-subtle': '#737373',
-          'paper-border': '#E5E5E5',
+          bg: '#000000',
+          surface: '#0D0D0D',
+          elevated: '#141414',
+          border: '#222222',
+          ink: '#F5F2EB',
+          'ink-muted': '#9CA3AF',
+          'ink-subtle': '#6B7280',
           gold: '#c7963f',
           'gold-deep': '#ab8032',
+          paper: '#FFFFFF',
+          'paper-border': '#E5E5E5',
           live: '#10b981',
-          'live-bright': '#10b981',
+          'live-bright': '#34d399',
         },
         fontFamily: {
           display: ['Inter', 'system-ui', 'sans-serif'],
@@ -37,9 +40,11 @@
   }
 </script>
 <style>
-  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #FFFFFF; }
+  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; background: #000000; }
   .display { font-family: 'Inter', system-ui, sans-serif; letter-spacing: -0.025em; font-weight: 800; }
   iframe.ghl-embed { width: 100% !important; display: block !important; border: 0 !important; background: #fff; }
+  /* Subtle gold radial glow behind the hero, like the LP */
+  .hero-glow { background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(199, 150, 63, 0.12) 0%, transparent 60%); }
 </style>
 
 <!-- =================================================================== -->
@@ -65,51 +70,54 @@
 <!-- =================================================================== -->
 
 </head>
-<body class="text-paper-text antialiased">
+<body class="bg-bg text-ink antialiased">
 
 <!-- Slim header (logo only, centered) -->
-<header class="border-b border-paper-border">
+<header class="border-b border-border/50">
   <div class="max-w-2xl mx-auto px-5 py-3.5 text-center">
-    <span class="font-black text-[12px] tracking-[0.18em] uppercase text-paper-text">
-      Decking<span class="text-gold">Leads</span><sup class="text-[8px] text-paper-subtle align-top ml-0.5">.com</sup>
+    <span class="font-black text-[12px] tracking-[0.18em] uppercase text-ink">
+      Decking<span class="text-gold">Leads</span><sup class="text-[8px] text-ink-muted align-top ml-0.5">.com</sup>
     </span>
   </div>
 </header>
 
-<!-- Hero (compact, centered) -->
-<section class="px-5 pt-8 sm:pt-12 pb-4 text-center">
+<!-- Hero (compact, centered, with gold glow) -->
+<section class="relative px-5 pt-8 sm:pt-12 pb-4 text-center">
+  <div class="absolute inset-0 hero-glow pointer-events-none"></div>
+  <div class="relative">
 
-  <!-- Eyebrow: green pulsing dot + MARKET OPEN -->
-  <div class="inline-flex items-center gap-2 mb-4 px-2.5 py-1 rounded-full border border-live/30" style="background: rgba(16, 185, 129, 0.08);">
-    <span class="relative flex w-2 h-2">
-      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-live opacity-60"></span>
-      <span class="relative inline-flex rounded-full h-2 w-2 bg-live"></span>
-    </span>
-    <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-live-bright">Market Open</span>
+    <!-- Eyebrow: green pulsing dot + MARKET OPEN -->
+    <div class="inline-flex items-center gap-2 mb-4 px-2.5 py-1 rounded-full border border-live/40" style="background: rgba(16, 185, 129, 0.10);">
+      <span class="relative flex w-2 h-2">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-live opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2 w-2 bg-live"></span>
+      </span>
+      <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-live-bright">Market Open</span>
+    </div>
+
+    <h1 id="hero-h1" class="display text-[28px] sm:text-[40px] leading-[1.08] mb-3 max-w-xl mx-auto">
+      You took the <span class="text-gold">bet.</span> <br class="hidden sm:block">Pick a time.
+    </h1>
+    <p class="text-sm sm:text-base text-ink-muted leading-snug max-w-md mx-auto">
+      45-minute Google Meet. Bring your numbers, your ad accounts, and your skepticism.
+    </p>
+
   </div>
-
-  <h1 id="hero-h1" class="display text-[28px] sm:text-[40px] leading-[1.08] mb-3 max-w-xl mx-auto">
-    You took the <span class="text-gold">bet.</span> <br class="hidden sm:block">Pick a time.
-  </h1>
-  <p class="text-sm sm:text-base text-paper-muted leading-snug max-w-md mx-auto">
-    45-minute Google Meet. Bring your numbers, your ad accounts, and your skepticism.
-  </p>
-
 </section>
 
 <!-- Trust strip -->
-<div class="border-y border-paper-border bg-cream/40">
+<div class="border-y border-border/40 bg-surface">
   <div class="max-w-2xl mx-auto px-5 py-2.5 text-center">
-    <p class="text-[10px] sm:text-[11px] tracking-[0.18em] text-paper-subtle uppercase font-semibold">
+    <p class="text-[10px] sm:text-[11px] tracking-[0.18em] text-ink-muted uppercase font-semibold">
       Trusted by deck builders in San Antonio · Bend · Denver · Atlanta · Pittsburgh
     </p>
   </div>
 </div>
 
-<!-- Calendar (narrow centered card) -->
+<!-- Calendar (narrow white card floating on dark) -->
 <section class="px-4 sm:px-5 py-8 sm:py-10">
   <div class="max-w-2xl mx-auto bg-paper rounded-2xl border border-paper-border overflow-hidden"
-       style="box-shadow: 0 1px 2px rgba(15,15,15,0.04), 0 12px 32px -16px rgba(15,15,15,0.10);">
+       style="box-shadow: 0 1px 2px rgba(0,0,0,0.20), 0 24px 48px -16px rgba(0,0,0,0.45);">
     <iframe
       id="ghl-booking"
       src="https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo"
@@ -122,7 +130,7 @@
 
 <!-- Footer micro-line -->
 <footer class="px-5 pt-2 pb-10 text-center">
-  <p class="text-[11px] text-paper-subtle">
+  <p class="text-[11px] text-ink-subtle">
     © 2026 SeasonProof Growth LLC · One deck builder per market.
   </p>
 </footer>
