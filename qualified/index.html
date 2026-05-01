@@ -48,8 +48,9 @@
 </style>
 
 <!-- =================================================================== -->
-<!-- META PIXEL — ICP-ONLY CONVERSION TRAINING                             -->
-<!-- This page is reached only by traffic that matched ICP criteria.       -->
+<!-- META PIXEL — PageView only.                                           -->
+<!-- The "Lead" event fires on the LP at survey-submit time (with an       -->
+<!-- eventID for CAPI dedupe). Firing Lead again here would double-count.  -->
 <!-- Replace YOUR_PIXEL_ID below with the real Meta Pixel ID before ship.  -->
 <!-- =================================================================== -->
 <script>
@@ -63,10 +64,9 @@
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', 'YOUR_PIXEL_ID');
   fbq('track', 'PageView');
-  fbq('track', 'Lead');
 </script>
 <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=Lead&noscript=1"/></noscript>
+  src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
 <!-- =================================================================== -->
 
 </head>

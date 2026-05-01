@@ -7,6 +7,28 @@
 <title>I'll Put $2,000 On It | DeckingLeads (v6)</title>
 <meta name="description" content="Brian Wallace called my bluff. Six weeks later: 60 appointments, 25 closed jobs. Want to call mine? I'll put $2,000 on it. Deck builders, $1M+/yr.">
 <meta name="robots" content="noindex, nofollow">
+
+<!-- ================================================================== -->
+<!-- META PIXEL — base code. PageView fires now, Lead fires on submit    -->
+<!-- only for ICP-qualified submitters (see submit handler below).       -->
+<!-- Replace YOUR_PIXEL_ID with the real Meta Pixel ID before launch.    -->
+<!-- ================================================================== -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', 'YOUR_PIXEL_ID');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+<!-- ================================================================== -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -1197,11 +1219,13 @@
 
   // ICP routing — V2 LP (4-step survey: own_business, revenue, timing, name+contact).
   // Hard non-ICP: not a deck builder.
-  // Loose non-ICP: tiny revenue + just-researching (lowest-intent combo).
-  // Anyone else routes to the pixeled /qualified/ page.
+  // Avatar floor: deck contractor doing $1M+/yr (Justin Wylie ICP).
+  // Anything below $1M routes to /scheduling/ — the offer doesn't pencil there
+  // and we don't want Meta optimizing for sub-floor lookalikes.
+  // $1M+ "just researching" still routes to /qualified/ — high-value capture.
   function isICP(d) {
     if (d.own_business !== 'yes') return false;
-    if (d.revenue === 'under_500k' && d.timing === 'researching') return false;
+    if (d.revenue === 'under_500k' || d.revenue === '500k_1m') return false;
     return true;
   }
 
@@ -1243,10 +1267,29 @@
     const icp = isICP(formData);
     formData.icp = icp;
 
+    // Generate a dedupe ID so browser Pixel + (future) GHL CAPI count as ONE Lead.
+    const event_id = (window.crypto && crypto.randomUUID)
+      ? crypto.randomUUID()
+      : 'dl_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+    formData.event_id = event_id;
+
     // TEMP DEBUG — open DevTools → Console BEFORE submitting to see capture.
     console.log('[DL v2] formData at submit:', JSON.parse(JSON.stringify(formData)));
     console.log('[DL v2] isICP check — own_business:', formData.own_business, '| revenue:', formData.revenue, '| timing:', formData.timing);
     console.log('[DL v2] isICP result:', icp, '→ redirecting to:', icp ? '/qualified/' : '/scheduling/');
+
+    // Fire Meta Lead — ONLY for ICP-qualified submitters.
+    // Non-ICP traffic must not train the conversion model.
+    if (icp && typeof fbq === 'function') {
+      try {
+        fbq('track', 'Lead', {
+          content_name: 'Deck Jobs Strategy Session',
+          value: 0,
+          currency: 'USD'
+        }, { eventID: event_id });
+        console.log('[DL v2] fbq Lead fired with eventID:', event_id);
+      } catch (e) { console.warn('[DL v2] fbq Lead failed:', e); }
+    }
 
     try {
       sessionStorage.setItem('dl_qualify_data', JSON.stringify(formData));
