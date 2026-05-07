@@ -179,10 +179,10 @@ V1 uses 6 fields (own_business, pain, revenue, timing, name, contact). V2 uses 4
 ### Video lightbox (proof grid)
 Every wired proof card opens in an on-page lightbox modal — no redirect to YouTube. ESC, click-outside, and a Close button all close the modal and stop playback (`iframe.src = ''`).
 
-### Wired proof cards (8 of 12)
+### Wired proof cards (10 total)
 1. **Justin Wylie** · All Pro Decks · `youtu.be/YJQxX5ZQ3aI` · "CPL $400 → $30 in 14 days"
-2. Brian Wallace — placeholder
-3. Jacob Weaver — placeholder
+2. **Brian Wallace** · Bend Fence & Deck · `youtu.be/4TP1sTRASoA` · "60 estimates · 25 closed · 6 weeks"
+3. **Jacob Weaver** · `youtu.be/Xt4TVn4zP7s` · "$500K last year → $1M by April 21"
 4. **Chip Paynter** · Paynter Construction · `youtu.be/ERQ84Dgz-Ow` · "$200K from 4 leads · 21 days"
 5. **Ricardo Cervantes** · Colorado · `youtu.be/djsZ_YNn7wY` · "$105K closed in 7 days"
 6. **Eric Engle** · Mr. Patio Cover · `youtu.be/kK3oXzLb4-0` · "65–70 appointments per week"
@@ -190,8 +190,6 @@ Every wired proof card opens in an on-page lightbox modal — no redirect to You
 8. **Mike Biviano** · Biviano General · `youtu.be/NV836FEEIcU` · "$12K spent → $225K profit"
 9. **Mike Holst** · Foremost Construction · `youtu.be/vxqYn1E86LA` · "52 appointments in 10 days"
 10. **Jason Flynn** · PROdeck Construction · `youtu.be/thmY9E9PYqY` · "$100K/mo → $500K/mo in 90 days"
-11. Placeholder (Builder #11)
-12. Placeholder (Builder #12)
 
 ### Logo marquee
 `/logos/` folder contains 28 wordmarks/PNGs/SVGs. CSS `.logo-cell--invert` flips dark logos to white via `filter: brightness(0) invert(1)`. `.logo-cell--card` wraps logos with white backgrounds in a soft cream pill so they look intentional. Marquee sized at 70% of original (height 62px, gap 40px). Trust label `whitespace-nowrap` so it never breaks to two lines on mobile.
@@ -227,7 +225,6 @@ V3 inserts a charcoal section (the long-form lead) between marquee and proof, th
 
 | # | Item | Notes |
 |---|---|---|
-| 6 | **Wire remaining proof video URLs** | Brian Wallace (#02), Jacob Weaver (#03), and slots #11 + #12 are placeholders. When videos are captured, replace `href="#"` with `href="https://youtu.be/VIDEO_ID"` on each card; the lightbox auto-handles. |
 | 7 | **Real builder logos in marquee** | Currently using actual logo PNGs from `/logos/`. If Spencer wants additional builders rotating through, drop new files in `/logos/` and add `<div class="logo-cell">` entries. |
 | 8 | **A/B/C ad-set test setup** | When Spencer is ready: split Meta traffic 1/3 each between V1, V2, V3 at the ad-set level. Track scroll-depth past hero, scroll-depth past lead, form-start, form-completion, ICP-rate. Threshold: ~100 visitors per arm before drawing conclusions. |
 

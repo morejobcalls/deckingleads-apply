@@ -649,7 +649,6 @@
         </div>
       </article>
 
-      <!-- placeholders 7-12 -->
       <article>
         <a href="https://youtu.be/_djYzxfITps" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
           <img src="https://img.youtube.com/vi/_djYzxfITps/maxresdefault.jpg" alt="Justin Wylie — $1.2M closed in slow season (Jan–Feb)" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
@@ -717,28 +716,6 @@
           <p class="text-paper-text text-sm font-bold leading-tight">Jason Flynn</p>
           <p class="text-paper-muted text-xs leading-tight mt-0.5">PROdeck Construction · Northern Virginia</p>
         </div>
-      </article>
-      <article data-placeholder>
-        <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group opacity-75">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center"><svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
-            <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1"><p class="text-paper-text text-sm font-bold leading-tight">Builder #11</p><p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p></div>
-      </article>
-      <article data-placeholder>
-        <a href="#" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-gradient-to-br from-elevated to-bg group opacity-75">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full bg-elevated border border-border-strong flex items-center justify-center"><svg class="w-6 h-6 ml-1 text-ink-muted" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
-            <p class="text-ink-muted font-semibold text-[12px] sm:text-[13px] leading-tight tracking-tight uppercase">Video coming soon</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1"><p class="text-paper-text text-sm font-bold leading-tight">Builder #12</p><p class="text-paper-muted text-xs leading-tight mt-0.5">City, State</p></div>
       </article>
     </div>
 
@@ -962,6 +939,23 @@
   const formData = {};
   let currentStep = 1;
 
+  // Capture UTM + click IDs on first touch; persist across page navigations.
+  // Read URL params, merge into sessionStorage, treat sessionStorage as truth at submit.
+  const ATTR_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'];
+  const attribution = (() => {
+    let stored = {};
+    try { stored = JSON.parse(sessionStorage.getItem('dl_attribution') || '{}'); } catch (_) {}
+    const params = new URLSearchParams(window.location.search);
+    ATTR_KEYS.forEach(k => {
+      const v = params.get(k);
+      if (v && !stored[k]) stored[k] = v; // first-touch wins
+    });
+    if (!stored.landing_url) stored.landing_url = window.location.href;
+    if (!stored.referrer) stored.referrer = document.referrer || '';
+    try { sessionStorage.setItem('dl_attribution', JSON.stringify(stored)); } catch (_) {}
+    return stored;
+  })();
+
   function goToStep(stepNum) {
     currentStep = stepNum;
     steps.forEach(s => s.classList.remove('active'));
@@ -1117,6 +1111,44 @@
       sessionStorage.setItem('dl_qualify_data', JSON.stringify(formData));
       sessionStorage.setItem('dl_qualify_icp', icp ? '1' : '0');
     } catch (_) {}
+
+    // POST to GHL inbound webhook. keepalive lets the request survive the redirect.
+    try {
+      const [first_name, ...rest] = name.split(/\s+/);
+      const last_name = rest.join(' ');
+      const ghlPayload = {
+        first_name,
+        last_name,
+        full_name: name,
+        email,
+        phone: '+1' + phone,
+        postal_code: formData.zip,
+        own_business: formData.own_business,
+        revenue: formData.revenue,
+        timing: formData.timing,
+        icp: icp ? 'yes' : 'no',
+        event_id,
+        submitted_at: formData.submitted_at,
+        source: 'deckingleads.com lp v1',
+        page_url: window.location.href,
+        utm_source: attribution.utm_source || '',
+        utm_medium: attribution.utm_medium || '',
+        utm_campaign: attribution.utm_campaign || '',
+        utm_content: attribution.utm_content || '',
+        utm_term: attribution.utm_term || '',
+        fbclid: attribution.fbclid || '',
+        gclid: attribution.gclid || '',
+        landing_url: attribution.landing_url || '',
+        referrer: attribution.referrer || ''
+      };
+      fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ghlPayload),
+        keepalive: true
+      }).catch(err => console.warn('[DL v2] GHL webhook failed:', err));
+      console.log('[DL v2] GHL webhook fired:', ghlPayload);
+    } catch (e) { console.warn('[DL v2] GHL webhook setup failed:', e); }
 
     goToStep('loading');
     // Absolute paths — v2 lives at /v2/ but terminal pages are at root /qualified/ and /scheduling/
