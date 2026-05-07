@@ -47,6 +47,19 @@
   .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
 </style>
 
+<!-- Smart routing: redirect non-ICP visitors to /scheduled/ BEFORE the pixel loads.
+     LP sets sessionStorage 'dl_qualify_icp' = '1' (ICP) or '0' (non-ICP).
+     If '0', send them to the unpixeled mirror so non-ICP traffic doesn't train the conversion model. -->
+<script>
+(function () {
+  try {
+    if (sessionStorage.getItem('dl_qualify_icp') === '0') {
+      window.location.replace('/scheduled/' + window.location.search + window.location.hash);
+    }
+  } catch (_) {}
+})();
+</script>
+
 <!-- Meta Pixel — fire BookedCall conversion event for booked-call optimization -->
 <script>
   !function(f,b,e,v,n,t,s)
