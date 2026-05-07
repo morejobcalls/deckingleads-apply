@@ -700,23 +700,6 @@
           <p class="text-paper-muted text-xs leading-tight mt-0.5">Foremost Construction · Minnesota</p>
         </div>
       </article>
-      <article>
-        <a href="https://youtu.be/thmY9E9PYqY" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/thmY9E9PYqY/maxresdefault.jpg" alt="Jason Flynn — $100K/mo to $500K/mo in 90 days" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$100K/mo → $500K/mo in 90 days</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Jason Flynn</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">PROdeck Construction · Northern Virginia</p>
-        </div>
-      </article>
     </div>
 
   </div>
@@ -939,12 +922,19 @@
   const formData = {};
   let currentStep = 1;
 
-  // Capture UTM + click IDs on first touch; persist across page navigations.
-  // Read URL params, merge into sessionStorage, treat sessionStorage as truth at submit.
+  // Capture UTM + click IDs on first touch; persist 30 days across tabs/visits.
+  // First-touch wins: once a value is stored, later visits don't overwrite it.
   const ATTR_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'];
+  const ATTR_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
   const attribution = (() => {
     let stored = {};
-    try { stored = JSON.parse(sessionStorage.getItem('dl_attribution') || '{}'); } catch (_) {}
+    try {
+      const raw = localStorage.getItem('dl_attribution');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed._ts && (Date.now() - parsed._ts) < ATTR_TTL_MS) stored = parsed;
+      }
+    } catch (_) {}
     const params = new URLSearchParams(window.location.search);
     ATTR_KEYS.forEach(k => {
       const v = params.get(k);
@@ -952,7 +942,8 @@
     });
     if (!stored.landing_url) stored.landing_url = window.location.href;
     if (!stored.referrer) stored.referrer = document.referrer || '';
-    try { sessionStorage.setItem('dl_attribution', JSON.stringify(stored)); } catch (_) {}
+    if (!stored._ts) stored._ts = Date.now();
+    try { localStorage.setItem('dl_attribution', JSON.stringify(stored)); } catch (_) {}
     return stored;
   })();
 
