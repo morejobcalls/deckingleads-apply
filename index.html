@@ -365,23 +365,29 @@
     align-items: center;
     justify-content: center;
     padding: 0 6px;
-    opacity: 0.40;
+    opacity: 0.55;
     transition: opacity 180ms ease;
   }
-  .logo-cell:hover { opacity: 0.75; }
+  .logo-cell:hover { opacity: 0.9; }
+  /* All logos desaturated to gray so the row reads as one quiet supporting layer. */
   .logo-cell img {
-    max-height: 48px;
-    max-width: 170px;
+    max-height: 50px;
+    max-width: 180px;
     width: auto;
     height: auto;
     object-fit: contain;
     display: block;
-    filter: brightness(0) invert(1);
+    filter: grayscale(1);
   }
-  /* Legacy modifiers kept as no-ops so existing markup renders uniformly. */
-  .logo-cell--invert,
-  .logo-cell--card { background: transparent; padding: 0 6px; border-radius: 0; }
-  .logo-cell--card img { max-height: 48px; max-width: 170px; }
+  /* Transparent-bg logos (dark marks): invert to a gray silhouette on dark. */
+  .logo-cell--invert img { filter: grayscale(1) brightness(0) invert(1); }
+  /* White-bg logos: keep a soft cream pill so the mark stays readable but blends quietly. */
+  .logo-cell--card {
+    background: rgba(245, 242, 235, 0.85);
+    border-radius: 8px;
+    padding: 2px 9px;
+  }
+  .logo-cell--card img { max-height: 56px; max-width: 188px; }
 </style>
 </head>
 <body class="bg-bg text-ink antialiased">
