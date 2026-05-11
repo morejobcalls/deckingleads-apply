@@ -835,13 +835,15 @@
       One deck builder per market. Your market may already be taken.
     </p>
 
-    <!-- Inline calendar (replaces the form card after submit) -->
-    <div id="calendar-wrap" class="hidden max-w-2xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply overflow-hidden">
+    <!-- Inline calendar (replaces the form card after submit).
+         Mobile: edge-to-edge (-mx-5 cancels the parent's px-5) so the GHL widget has full viewport width.
+         sm+: re-centered with rounded corners + shadow. -->
+    <div id="calendar-wrap" class="hidden -mx-5 sm:mx-auto max-w-2xl bg-paper sm:rounded-[28px] border-0 sm:border sm:border-paper-border sm:shadow-apply overflow-hidden">
       <div class="text-center px-6 py-5 border-b border-paper-border">
         <p class="text-[10px] font-bold tracking-[0.22em] uppercase text-paper-subtle">Pick a time</p>
         <p class="text-[15px] sm:text-base text-paper-text mt-1.5 font-semibold">Your Deck Jobs Strategy Session — 45 min on Google Meet</p>
       </div>
-      <iframe id="inline-calendar" src="" title="Book your Deck Jobs Strategy Session" style="width: 100%; height: 760px; border: 0; display: block; background: #fff;"></iframe>
+      <iframe id="inline-calendar" src="" title="Book your Deck Jobs Strategy Session" style="width: 100%; height: 820px; border: 0; display: block; background: #fff;"></iframe>
     </div>
 
   </div>
