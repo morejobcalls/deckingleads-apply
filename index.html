@@ -835,6 +835,24 @@
       One deck builder per market. Your market may already be taken.
     </p>
 
+    <!-- Post-submit hero (revealed with the inline calendar).
+         JS swaps eyebrow/h1/sub based on ICP vs non-ICP. -->
+    <div id="post-submit-hero" class="hidden text-center mb-7 px-2">
+      <div class="inline-flex items-center gap-2 mb-4 px-2.5 py-1 rounded-full border border-emerald-500/40" style="background: rgba(16, 185, 129, 0.10);">
+        <span class="relative flex w-2 h-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+        </span>
+        <span id="post-submit-eyebrow" class="text-[11px] font-bold tracking-[0.18em] uppercase text-emerald-400">Market Open</span>
+      </div>
+      <h2 id="post-submit-h1" class="display text-[26px] sm:text-[40px] leading-[1.06] mb-3 max-w-xl mx-auto text-ink">
+        100+ Sales Appointments in 100 Days<br><span class="text-gold">Or I Pay You $2,000</span>
+      </h2>
+      <p id="post-submit-sub" class="text-sm sm:text-base text-ink-muted leading-snug max-w-md mx-auto">
+        Limited To One Builder Per Market — Book Now
+      </p>
+    </div>
+
     <!-- Inline calendar (replaces the form card after submit).
          Mobile: edge-to-edge (-mx-5 cancels the parent's px-5) so the GHL widget has full viewport width.
          sm+: re-centered with rounded corners + shadow. -->
@@ -1081,6 +1099,23 @@
           const el = document.getElementById(id);
           if (el) el.classList.add('hidden');
         });
+
+        // Swap in the post-submit hero (different copy for ICP vs non-ICP).
+        const eyebrow = document.getElementById('post-submit-eyebrow');
+        const h1 = document.getElementById('post-submit-h1');
+        const sub = document.getElementById('post-submit-sub');
+        if (isIcp) {
+          if (eyebrow) eyebrow.textContent = data.zip ? `${data.zip} Is Open` : 'Market Open';
+          if (h1) h1.innerHTML = '100+ Sales Appointments in 100 Days<br><span class="text-gold">Or I Pay You $2,000</span>';
+          if (sub) sub.textContent = 'Limited To One Builder Per Market — Book Now';
+        } else {
+          if (eyebrow) eyebrow.textContent = 'Application Received';
+          if (h1) h1.innerHTML = 'Brian Wallace and dozens of other builders called this <span class="text-gold">their best decision of the year.</span> <span class="block mt-2">You\'re up.</span>';
+          if (sub) sub.textContent = '45-minute Google Meet. Bring your numbers, your ad accounts, and your skepticism.';
+        }
+        const hero = document.getElementById('post-submit-hero');
+        if (hero) hero.classList.remove('hidden');
+
         const calWrap = document.getElementById('calendar-wrap');
         if (calWrap) calWrap.classList.remove('hidden');
 
