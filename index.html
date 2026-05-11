@@ -1100,19 +1100,9 @@
           if (el) el.classList.add('hidden');
         });
 
-        // Swap in the post-submit hero (different copy for ICP vs non-ICP).
+        // Swap in the post-submit hero (same copy for ICP and non-ICP — single offer presentation).
         const eyebrow = document.getElementById('post-submit-eyebrow');
-        const h1 = document.getElementById('post-submit-h1');
-        const sub = document.getElementById('post-submit-sub');
-        if (isIcp) {
-          if (eyebrow) eyebrow.textContent = data.zip ? `${data.zip} Is Open` : 'Market Open';
-          if (h1) h1.innerHTML = '100+ Sales Appointments in 100 Days<br><span class="text-gold">Or I Pay You $2,000</span>';
-          if (sub) sub.textContent = 'Limited To One Builder Per Market — Book Now';
-        } else {
-          if (eyebrow) eyebrow.textContent = 'Application Received';
-          if (h1) h1.innerHTML = 'Brian Wallace and dozens of other builders called this <span class="text-gold">their best decision of the year.</span> <span class="block mt-2">You\'re up.</span>';
-          if (sub) sub.textContent = '45-minute Google Meet. Bring your numbers, your ad accounts, and your skepticism.';
-        }
+        if (eyebrow) eyebrow.textContent = data.zip ? `${data.zip} Is Open` : 'Market Open';
         const hero = document.getElementById('post-submit-hero');
         if (hero) hero.classList.remove('hidden');
 
