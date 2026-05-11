@@ -712,7 +712,7 @@
   <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20">
 
     <!-- Section header -->
-    <div class="text-center mb-7">
+    <div id="apply-header" class="text-center mb-7">
       <div class="inline-flex items-center gap-2 mb-3">
         <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
         <span class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold">Apply Now</span>
@@ -722,12 +722,12 @@
         <span class="text-gold block mt-1">Is Still Open</span>
       </h2>
       <p class="text-base text-ink-muted max-w-lg mx-auto">
-        60 seconds. If you qualify, you'll be redirected to book your Deck Jobs Strategy Session immediately. One builder per market.
+        60 seconds. If you qualify, you'll book your Deck Jobs Strategy Session immediately. One builder per market.
       </p>
     </div>
 
     <!-- 100 in 100 Triple Guarantee callout -->
-    <div class="max-w-xl mx-auto mb-7 rounded-xl bg-elevated border border-border p-5">
+    <div id="guarantee-callout" class="max-w-xl mx-auto mb-7 rounded-xl bg-elevated border border-border p-5">
       <div class="flex items-center gap-2 mb-2.5">
         <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
         <span class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold">100 in 100 Triple Guarantee</span>
@@ -740,7 +740,7 @@
     </div>
 
     <!-- Form card (V2: 4 steps) -->
-    <div class="max-w-xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply p-7 sm:p-10">
+    <div id="form-card" class="max-w-xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply p-7 sm:p-10">
 
       <div class="flex items-start justify-between mb-7">
         <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-paper-subtle">Step 1 of 5</span>
@@ -831,11 +831,24 @@
 
     </div>
 
-    <p class="text-center text-[12px] text-ink-subtle mt-6">
+    <p id="form-tail" class="text-center text-[12px] text-ink-subtle mt-6">
       One deck builder per market. Your market may already be taken.
     </p>
+
+    <!-- Inline calendar (replaces the form card after submit) -->
+    <div id="calendar-wrap" class="hidden max-w-2xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply overflow-hidden">
+      <div class="text-center px-6 py-5 border-b border-paper-border">
+        <p class="text-[10px] font-bold tracking-[0.22em] uppercase text-paper-subtle">Pick a time</p>
+        <p class="text-[15px] sm:text-base text-paper-text mt-1.5 font-semibold">Your Deck Jobs Strategy Session — 45 min on Google Meet</p>
+      </div>
+      <iframe id="inline-calendar" src="" title="Book your Deck Jobs Strategy Session" style="width: 100%; height: 760px; border: 0; display: block; background: #fff;"></iframe>
+    </div>
+
   </div>
 </section>
+
+<!-- GHL calendar embed runtime — loaded here so it's available when calendar shows inline -->
+<script src="https://api.seasonproofgrowth.com/js/form_embed.js" type="text/javascript"></script>
 
 <!-- FINAL CTA — scrolls back up to apply for users who read all the way through -->
 <section class="sec-dark border-t border-border/50">
@@ -1036,10 +1049,46 @@
     return true;
   }
 
-  function runLoadingThenRedirect(targetPath) {
+  // Inline calendar swap — replaces the form card with a pre-filled GHL booking widget.
+  // ICP gets the pixeled calendar (post-book redirect to /confirmation/).
+  // Non-ICP gets the non-pixeled calendar (post-book redirect to /scheduled/).
+  const CAL_ICP     = 'https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
+  const CAL_NON_ICP = 'https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
+
+  function runLoadingThenShowCalendar(isIcp, data) {
     const loadingTextEl = document.getElementById('loading-text');
     if (loadingTextEl) loadingTextEl.textContent = 'Checking your market availability…';
-    setTimeout(() => { window.location.href = targetPath; }, 3500);
+
+    setTimeout(() => {
+      try {
+        const baseUrl = isIcp ? CAL_ICP : CAL_NON_ICP;
+        const url = new URL(baseUrl);
+        if (data.name) {
+          const parts = data.name.trim().split(/\s+/);
+          url.searchParams.set('first_name', parts[0] || '');
+          if (parts.length > 1) url.searchParams.set('last_name', parts.slice(1).join(' '));
+        }
+        if (data.email) url.searchParams.set('email', data.email);
+        if (data.phone) url.searchParams.set('phone', data.phone);
+        if (data.zip)   url.searchParams.set('zip', data.zip);
+
+        const iframe = document.getElementById('inline-calendar');
+        if (iframe) iframe.src = url.toString();
+
+        ['apply-header','guarantee-callout','form-card','form-tail'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) el.classList.add('hidden');
+        });
+        const calWrap = document.getElementById('calendar-wrap');
+        if (calWrap) calWrap.classList.remove('hidden');
+
+        const applyEl = document.getElementById('apply');
+        if (applyEl) applyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      } catch (e) {
+        console.warn('[DL v2] inline calendar swap failed, falling back to redirect:', e);
+        window.location.href = isIcp ? '/qualified/' : '/scheduling/';
+      }
+    }, 1500);
   }
 
   const emailInput = document.getElementById('email-input');
@@ -1121,6 +1170,7 @@
         event_id,
         submitted_at: formData.submitted_at,
         source: 'deckingleads.com lp v1',
+        variant: 'v1',
         page_url: window.location.href,
         utm_source: attribution.utm_source || '',
         utm_medium: attribution.utm_medium || '',
@@ -1142,8 +1192,7 @@
     } catch (e) { console.warn('[DL v2] GHL webhook setup failed:', e); }
 
     goToStep('loading');
-    // Absolute paths — v2 lives at /v2/ but terminal pages are at root /qualified/ and /scheduling/
-    runLoadingThenRedirect(icp ? '/qualified/' : '/scheduling/');
+    runLoadingThenShowCalendar(icp, formData);
   });
 
   // Video lightbox — keep proof video plays on-page (no redirect to YouTube)
