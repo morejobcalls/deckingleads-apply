@@ -382,12 +382,10 @@
   /* Transparent-bg logos (dark marks): invert to a gray silhouette on dark. */
   .logo-cell--invert img { filter: grayscale(1) brightness(0) invert(1); }
   /* White-bg logos: keep a soft cream pill so the mark stays readable but blends quietly. */
-  .logo-cell--card {
-    background: rgba(245, 242, 235, 0.85);
-    border-radius: 8px;
-    padding: 2px 9px;
-  }
-  .logo-cell--card img { max-height: 56px; max-width: 188px; }
+  /* White-bg logos: invert (white→black, dark mark→light) then screen-blend so the
+     now-black background drops out against the dark page bg, leaving only the light mark visible. */
+  .logo-cell--card { background: transparent; padding: 0 6px; border-radius: 0; }
+  .logo-cell--card img { filter: grayscale(1) invert(1); mix-blend-mode: screen; max-height: 56px; max-width: 188px; }
 </style>
 </head>
 <body class="bg-bg text-ink antialiased">
