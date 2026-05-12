@@ -1055,8 +1055,8 @@
   // Inline calendar swap — replaces the form card with a pre-filled GHL booking widget.
   // ICP gets the pixeled calendar (post-book redirect to /confirmation/).
   // Non-ICP gets the non-pixeled calendar (post-book redirect to /scheduled/).
-  const CAL_ICP     = 'https://api.seasonproofgrowth.com/widget/booking/REPLACE_WITH_YT_QUALIFIED_CALENDAR_ID';
-  const CAL_NON_ICP = 'https://api.seasonproofgrowth.com/widget/booking/REPLACE_WITH_YT_SCHEDULING_CALENDAR_ID';
+  const CAL_ICP     = 'https://api.seasonproofgrowth.com/widget/booking/JeZmBetIKHWnXs2H8EQC';
+  const CAL_NON_ICP = 'https://api.seasonproofgrowth.com/widget/booking/JeZmBetIKHWnXs2H8EQC';
 
   function runLoadingThenShowCalendar(isIcp, data) {
     const loadingTextEl = document.getElementById('loading-text');
@@ -1096,7 +1096,7 @@
         if (applyEl) applyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } catch (e) {
         console.warn('[DL v2] inline calendar swap failed, falling back to redirect:', e);
-        window.location.href = isIcp ? '/yt/qualified/' : '/yt/scheduling/';
+        window.location.href = '/yt/confirmation/';
       }
     }, 1500);
   }
@@ -1142,7 +1142,7 @@
     // TEMP DEBUG — open DevTools → Console BEFORE submitting to see capture.
     console.log('[DL v2] formData at submit:', JSON.parse(JSON.stringify(formData)));
     console.log('[DL v2] isICP check — own_business:', formData.own_business, '| revenue:', formData.revenue, '| timing:', formData.timing);
-    console.log('[DL v2] isICP result:', icp, '→ redirecting to:', icp ? '/yt/qualified/' : '/yt/scheduling/');
+    console.log('[DL v2] isICP result:', icp, '→ redirecting to: /yt/confirmation/');
 
     // Fire Meta Lead — ONLY for ICP-qualified submitters.
     // Non-ICP traffic must not train the conversion model.
