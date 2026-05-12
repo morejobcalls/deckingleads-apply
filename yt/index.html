@@ -1099,7 +1099,7 @@
         if (applyEl) applyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
       } catch (e) {
         console.warn('[DL v2] inline calendar swap failed, falling back to redirect:', e);
-        window.location.href = '/yt/confirmation/';
+        window.location.href = '/yt/scheduled/';
       }
     }, 1500);
   }
@@ -1145,7 +1145,7 @@
     // TEMP DEBUG — open DevTools → Console BEFORE submitting to see capture.
     console.log('[DL v2] formData at submit:', JSON.parse(JSON.stringify(formData)));
     console.log('[DL v2] isICP check — own_business:', formData.own_business, '| revenue:', formData.revenue, '| timing:', formData.timing);
-    console.log('[DL v2] isICP result:', icp, '→ redirecting to: /yt/confirmation/');
+    console.log('[DL v2] isICP result:', icp, '→ redirecting to: /yt/scheduled/');
 
     // Fire Meta Lead — ONLY for ICP-qualified submitters.
     // Non-ICP traffic must not train the conversion model.
