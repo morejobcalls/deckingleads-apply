@@ -369,7 +369,6 @@
     transition: opacity 180ms ease;
   }
   .logo-cell:hover { opacity: 0.9; }
-  /* All logos desaturated to gray so the row reads as one quiet supporting layer. */
   .logo-cell img {
     max-height: 50px;
     max-width: 180px;
@@ -379,9 +378,8 @@
     display: block;
     filter: grayscale(1);
   }
-  /* Transparent-bg logos (dark marks): invert to a gray silhouette on dark. */
   .logo-cell--invert img { filter: grayscale(1) brightness(0) invert(1); }
-  /* White-bg logos: invert the asset (white→black, dark mark→light) then screen-blend so the
+  /* White-bg logos: invert (white→black, dark mark→light) then screen-blend so the
      now-black background drops out against the dark page bg, leaving only the light mark visible. */
   .logo-cell--card { background: transparent; padding: 0 6px; border-radius: 0; }
   .logo-cell--card img { filter: grayscale(1) invert(1); mix-blend-mode: screen; max-height: 56px; max-width: 188px; }
@@ -425,28 +423,12 @@
 
     <!-- H1 -->
     <h1 class="display-lg text-[28px] leading-[1.1] sm:text-[50px] sm:leading-[1.05] mb-4 sm:mb-8 max-w-3xl mx-auto">
-      100+ Sales Appointments in 100 Days <span class="text-gold">Or You Get Paid In 3 Ways:</span>
+      Get 100+ Sales Appointments In 100 Days <span class="text-gold">Or You Get Paid In 2 Ways:</span>
     </h1>
-
-    <!-- Three prong cards -->
-    <div class="grid sm:grid-cols-3 gap-2 sm:gap-4 mb-3 sm:mb-5">
-      <div class="rounded-xl bg-elevated border border-gold/30 p-3 sm:p-6 text-center">
-        <p class="display text-[22px] sm:text-[28px] leading-tight text-ink mb-1 sm:mb-2">$2,000</p>
-        <p class="text-[12px] sm:text-[13px] text-ink-muted leading-snug">Cash. Not credit, not a discount.</p>
-      </div>
-      <div class="rounded-xl bg-elevated border border-gold/30 p-3 sm:p-6 text-center">
-        <p class="display text-[22px] sm:text-[28px] leading-tight text-ink mb-1 sm:mb-2">100%</p>
-        <p class="text-[12px] sm:text-[13px] text-ink-muted leading-snug">Full refund. Every dollar back.</p>
-      </div>
-      <div class="rounded-xl bg-elevated border border-gold/30 p-3 sm:p-6 text-center">
-        <p class="display text-[22px] sm:text-[28px] leading-tight text-ink mb-1 sm:mb-2">Free</p>
-        <p class="text-[12px] sm:text-[13px] text-ink-muted leading-snug">System use until you hit 100.</p>
-      </div>
-    </div>
 
     <!-- Subheadline -->
     <p class="text-sm sm:text-lg text-ink-muted max-w-xl mx-auto mb-4 sm:mb-8 leading-snug">
-      Limited To One Builder Per Market — See If Yours Is Open
+      100% Refund + $2,000 Credit
     </p>
 
     <!-- CTA -->
