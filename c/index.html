@@ -1049,6 +1049,15 @@
   // Anything below $1M routes to /scheduling/ — the offer doesn't pencil there
   // and we don't want Meta optimizing for sub-floor lookalikes.
   // $1M+ "just researching" still routes to /qualified/ — high-value capture.
+  // SHA-256 hex for Meta CAPI user_data (em/ph must be hashed before sending to Graph API).
+  // Browser pixel fires Lead client-side with eventID; CAPI fires Lead server-side via GHL
+  // workflow using the SAME event_id PLUS these hashed PII fields → Meta dedupes.
+  async function sha256Hex(text) {
+    if (!text) return '';
+    const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+    return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
   function isICP(d) {
     if (d.own_business !== 'yes') return false;
     if (d.revenue === 'under_500k' || d.revenue === '500k_1m') return false;
@@ -1166,43 +1175,61 @@
     } catch (_) {}
 
     // POST to GHL inbound webhook. keepalive lets the request survive the redirect.
-    try {
-      const [first_name, ...rest] = name.split(/\s+/);
-      const last_name = rest.join(' ');
-      const ghlPayload = {
-        first_name,
-        last_name,
-        full_name: name,
-        email,
-        phone: '+1' + phone,
-        postal_code: formData.zip,
-        own_business: formData.own_business,
-        revenue: formData.revenue,
-        timing: formData.timing,
-        icp: icp ? 'yes' : 'no',
-        event_id,
-        submitted_at: formData.submitted_at,
-        source: 'deckingleads.com lp v1',
-        variant: 'v1',
-        page_url: window.location.href,
-        utm_source: attribution.utm_source || '',
-        utm_medium: attribution.utm_medium || '',
-        utm_campaign: attribution.utm_campaign || '',
-        utm_content: attribution.utm_content || '',
-        utm_term: attribution.utm_term || '',
-        fbclid: attribution.fbclid || '',
-        gclid: attribution.gclid || '',
-        landing_url: attribution.landing_url || '',
-        referrer: attribution.referrer || ''
-      };
-      fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(ghlPayload),
-        keepalive: true
-      }).catch(err => console.warn('[DL v2] GHL webhook failed:', err));
-      console.log('[DL v2] GHL webhook fired:', ghlPayload);
-    } catch (e) { console.warn('[DL v2] GHL webhook setup failed:', e); }
+    // Send to GHL inbound webhook (with Meta CAPI-ready hashed PII). Async — runs in background
+    // while the page transitions to the inline calendar.
+    (async () => {
+      try {
+        const emailNorm = email.toLowerCase().trim();
+        const phoneDigits = phone.replace(/\D/g, '');
+        const phoneForHash = phoneDigits.length === 10 ? '1' + phoneDigits : phoneDigits;
+        const [email_sha256, phone_sha256] = await Promise.all([
+          sha256Hex(emailNorm),
+          sha256Hex(phoneForHash)
+        ]);
+
+        const [first_name, ...rest] = name.split(/\s+/);
+        const last_name = rest.join(' ');
+        const ghlPayload = {
+          first_name,
+          last_name,
+          full_name: name,
+          email,
+          phone: '+1' + phone,
+          postal_code: formData.zip,
+          own_business: formData.own_business,
+          revenue: formData.revenue,
+          timing: formData.timing,
+          icp: icp ? 'yes' : 'no',
+          event_id,
+          email_sha256,
+          phone_sha256,
+          client_user_agent: navigator.userAgent || '',
+          event_time_unix: Math.floor(Date.now() / 1000),
+          submitted_at: formData.submitted_at,
+          source: 'deckingleads.com lp v1',
+          variant: 'v1',
+          page_url: window.location.href,
+          utm_source: attribution.utm_source || '',
+          utm_medium: attribution.utm_medium || '',
+          utm_campaign: attribution.utm_campaign || '',
+          utm_content: attribution.utm_content || '',
+          utm_term: attribution.utm_term || '',
+          fbclid: attribution.fbclid || '',
+          gclid: attribution.gclid || '',
+          landing_url: attribution.landing_url || '',
+          referrer: attribution.referrer || ''
+        };
+        await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(ghlPayload),
+          keepalive: true
+        });
+        console.log('[DL v2] GHL webhook fired with hashed PII:', { ...ghlPayload, email_sha256: email_sha256.slice(0,8) + '…', phone_sha256: phone_sha256.slice(0,8) + '…' });
+      } catch (e) {
+        console.warn('[DL v2] GHL webhook failed:', e);
+      }
+    })();
 
     goToStep('loading');
     runLoadingThenShowCalendar(icp, formData);
