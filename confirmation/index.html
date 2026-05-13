@@ -169,30 +169,47 @@
   }
 </style>
 
+<!-- Iframe break-out — when GHL calendar redirects this page inside its widget iframe
+     after booking, escape to the top window so the user sees a full-page confirmation
+     and Clarity records the session. Pixel + Clarity below are gated to only fire
+     when at top level (avoids spurious double-firing during the brief iframe transition). -->
+<script>
+  try {
+    if (window.top !== window.self) {
+      window.top.location.href = window.location.href;
+    }
+  } catch (e) { /* cross-origin top blocked — fall back to in-iframe load */ }
+  window.__TOP_LEVEL__ = (function () { try { return window.top === window.self; } catch (e) { return true; } })();
+</script>
+
 <!-- Meta Pixel — fire BookedCall conversion event for booked-call optimization -->
 <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '839107878270720');
-  fbq('track', 'PageView');
-  fbq('trackCustom', 'BookedCall');
+  if (window.__TOP_LEVEL__) {
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '839107878270720');
+    fbq('track', 'PageView');
+    fbq('trackCustom', 'BookedCall');
+  }
 </script>
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
 
 <!-- Microsoft Clarity (heat maps + session recordings + analytics) -->
 <script type="text/javascript">
+  if (window.__TOP_LEVEL__) {
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
         t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
         y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
     })(window, document, "clarity", "script", "wpznuz610a");
+  }
 </script>
 
 </head>
