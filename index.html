@@ -1183,13 +1183,22 @@
         // Meta phone format: digits only + country code (no '+'). LP stores phone as 10 US digits.
         const phoneDigits = phone.replace(/\D/g, '');
         const phoneForHash = phoneDigits.length === 10 ? '1' + phoneDigits : phoneDigits;
-        const [email_sha256, phone_sha256] = await Promise.all([
-          sha256Hex(emailNorm),
-          sha256Hex(phoneForHash)
-        ]);
-
         const [first_name, ...rest] = name.split(/\s+/);
         const last_name = rest.join(' ');
+        const firstNameNorm = (first_name || '').toLowerCase().trim();
+        const lastNameNorm = (last_name || '').toLowerCase().trim();
+        const zipNorm = (formData.zip || '').toString().trim();
+        const [email_sha256, phone_sha256, first_name_sha256, last_name_sha256, zip_sha256] = await Promise.all([
+          sha256Hex(emailNorm),
+          sha256Hex(phoneForHash),
+          sha256Hex(firstNameNorm),
+          sha256Hex(lastNameNorm),
+          sha256Hex(zipNorm)
+        ]);
+
+        // _fbp cookie from Meta's browser pixel — boosts CAPI match quality + improves attribution.
+        const fbp = (document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/) || [])[1] || '';
+
         const ghlPayload = {
           first_name,
           last_name,
@@ -1205,6 +1214,10 @@
           // Pre-hashed PII for Meta CAPI server-side Lead event (dedupes with browser pixel via event_id).
           email_sha256,
           phone_sha256,
+          first_name_sha256,
+          last_name_sha256,
+          zip_sha256,
+          fbp,
           // Capture client metadata for Meta CAPI user_data.client_user_agent.
           client_user_agent: navigator.userAgent || '',
           event_time_unix: Math.floor(Date.now() / 1000),
