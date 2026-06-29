@@ -167,6 +167,32 @@
     width: 14px; height: 14px; border-radius: 50%;
     background: #606060; color: #fff; font-size: 9px; font-weight: 800;
   }
+
+  /* Result-caption banner on proof thumbnails (ported from LP proof cards) */
+  .vcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 0.85rem 0.9rem 0.7rem;
+    background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.5) 58%, transparent 100%);
+    pointer-events: none;
+  }
+  .vcaption p {
+    margin: 0; color: #EBB84D; font-weight: 800;
+    font-size: 0.875rem; line-height: 1.1; letter-spacing: -.01em;
+    text-transform: uppercase;
+  }
+  .vcard .vtitle { -webkit-line-clamp: 1; font-weight: 700; }
+
+  /* Logo marquee — ported from landing page */
+  .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
+  .marquee-track { display: inline-flex; gap: 40px; animation: marquee-scroll 38s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .logo-cell { flex: 0 0 auto; height: 62px; display: inline-flex; align-items: center; justify-content: center; padding: 0 6px; opacity: .55; transition: opacity .18s ease; }
+  .logo-cell:hover { opacity: .9; }
+  .logo-cell img { max-height: 50px; max-width: 180px; width: auto; height: auto; object-fit: contain; display: block; filter: grayscale(1); }
+  .logo-cell--invert img { filter: grayscale(1) brightness(0) invert(1); }
+  .logo-cell--card img { filter: grayscale(1) invert(1); mix-blend-mode: screen; max-height: 56px; max-width: 188px; }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
 </style>
 
 <!-- Iframe break-out — when GHL calendar redirects this page inside its widget iframe
@@ -389,10 +415,55 @@
 
 
 <!-- ══════════════════════════════════
-     WHILE YOU WAIT — PLAYLIST
+     PROOF — TRUSTED BY (logo wall)
 ══════════════════════════════════ -->
-<section style="background:#F8F7F3;padding:5.5rem 1.25rem;border-top:1px solid #E2DFDA;">
-  <div style="max-width:820px;margin:0 auto;">
+<section style="background:#161614;padding:3rem 1.25rem 3.25rem;border-top:1px solid rgba(255,255,255,.06);">
+  <div style="max-width:1000px;margin:0 auto;">
+    <p style="text-align:center;font-size:.6875rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(248,247,243,.42);margin:0 0 1.5rem;">
+      Trusted By Deck Builders Across The Country
+    </p>
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
+        <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
+        <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction"></div>
+        <!-- duplicate set for seamless loop -->
+        <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
+        <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
+        <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     WHILE YOU WAIT — REAL RESULTS
+══════════════════════════════════ -->
+<section style="background:#F8F7F3;padding:5.5rem 1.25rem;">
+  <div style="max-width:980px;margin:0 auto;">
 
     <div class="rv" style="text-align:center;margin-bottom:2.75rem;">
       <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
@@ -400,26 +471,27 @@
         <span class="ey" style="color:rgba(199,150,63,.85);">Step 3 — While You Wait</span>
       </div>
       <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#1A1917;line-height:1.1;letter-spacing:-.02em;margin:0 0 .75rem;">
-        Real Builders. <span style="color:#C7963F;">Real Stories.</span>
+        Real Builders. <span style="color:#C7963F;">Real ROI.</span>
       </h2>
-      <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:520px;margin:0 auto;font-weight:500;">
-        Brian, Jake, Chip and other contractors who took the bet — plus short clips on what makes this system different. Pick any to watch.
+      <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:540px;margin:0 auto;font-weight:500;">
+        Tap any card to watch the story. Every one of these deck builders said the same thing on day one — <em>"too good to be true"</em> — then changed their mind because the system kept delivering.
       </p>
     </div>
 
     <div class="rv d1 vgrid" id="while-you-wait-grid">
-      <div class="vcard" data-vid="wDdNIx0NdKU"><div class="vthumb"><img src="https://i.ytimg.com/vi/wDdNIx0NdKU/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">50+ Home Service Appointments Per Month (Complete Marketing System)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="o3CF3EoWWk4"><div class="vthumb"><img src="https://i.ytimg.com/vi/o3CF3EoWWk4/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">Quality vs Quantity: How Contractors Get the Right Leads (Not Just More)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="4TP1sTRASoA"><div class="vthumb"><img src="https://i.ytimg.com/vi/4TP1sTRASoA/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">How I Got 60 Estimates in 6 Weeks (Deck Builder)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="NTxc9ZYN37w"><div class="vthumb"><img src="https://i.ytimg.com/vi/NTxc9ZYN37w/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">Contractors Getting Burned by Agencies: How to Spot the Red Flags</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="Xt4TVn4zP7s"><div class="vthumb"><img src="https://i.ytimg.com/vi/Xt4TVn4zP7s/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">How I Doubled My Deck Business to $1M in 4 Months</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="kFoGu0vC1G8"><div class="vthumb"><img src="https://i.ytimg.com/vi/kFoGu0vC1G8/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">New Contractor? Get Leads in 48 Hours With This Marketing Framework</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="2zTWrysgYYY"><div class="vthumb"><img src="https://i.ytimg.com/vi/2zTWrysgYYY/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">How Much Should You Pay to Get a Customer? (Most Contractors Guess Wrong)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="44fPqAocoHg"><div class="vthumb"><img src="https://i.ytimg.com/vi/44fPqAocoHg/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">You Don't Have a Lead Problem, You're Just Flying Blind (And It's Costing You Jobs)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="-q18xO92akA"><div class="vthumb"><img src="https://i.ytimg.com/vi/-q18xO92akA/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">How I Got a $500K Month on $100/Day in Ads</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="CWmxOrRn7eQ"><div class="vthumb"><img src="https://i.ytimg.com/vi/CWmxOrRn7eQ/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">What's Actually Working in Contractor Marketing Right Now (Old Playbook Is Broken)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
+      <div class="vcard" data-vid="YJQxX5ZQ3aI"><div class="vthumb"><img src="https://i.ytimg.com/vi/YJQxX5ZQ3aI/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>CPL $400 → $30 in 14 days</p></div></div><div class="vmeta"><p class="vtitle">Justin Wylie</p><p class="vchan">All Pro Decks &amp; Patios · San Antonio, TX</p></div></div>
+      <div class="vcard" data-vid="-q18xO92akA"><div class="vthumb"><img src="https://i.ytimg.com/vi/-q18xO92akA/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$500K month on $100/day ads</p></div></div><div class="vmeta"><p class="vtitle">Jason Flynn</p><p class="vchan">PROdeck Construction · Northern Virginia</p></div></div>
+      <div class="vcard" data-vid="4TP1sTRASoA"><div class="vthumb"><img src="https://i.ytimg.com/vi/4TP1sTRASoA/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>60 estimates · 25 closed · 6 weeks</p></div></div><div class="vmeta"><p class="vtitle">Brian Wallace</p><p class="vchan">Bend Fence &amp; Deck · Bend, OR</p></div></div>
+      <div class="vcard" data-vid="Xt4TVn4zP7s"><div class="vthumb"><img src="https://i.ytimg.com/vi/Xt4TVn4zP7s/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$500K last year → $1M by April 21</p></div></div><div class="vmeta"><p class="vtitle">Jacob Weaver</p><p class="vchan">Oasis Custom Decks · Pennsylvania</p></div></div>
+      <div class="vcard" data-vid="ERQ84Dgz-Ow"><div class="vthumb"><img src="https://i.ytimg.com/vi/ERQ84Dgz-Ow/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$200K from 4 leads · 21 days</p></div></div><div class="vmeta"><p class="vtitle">Chip Paynter</p><p class="vchan">Paynter Construction · Loomis, CA</p></div></div>
+      <div class="vcard" data-vid="djsZ_YNn7wY"><div class="vthumb"><img src="https://i.ytimg.com/vi/djsZ_YNn7wY/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$105K closed in 7 days</p></div></div><div class="vmeta"><p class="vtitle">Ricardo Cervantes</p><p class="vchan">Colorado</p></div></div>
+      <div class="vcard" data-vid="kK3oXzLb4-0"><div class="vthumb"><img src="https://i.ytimg.com/vi/kK3oXzLb4-0/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>65–70 appointments per week</p></div></div><div class="vmeta"><p class="vtitle">Eric Engle</p><p class="vchan">Mr. Patio Cover · Los Angeles, CA</p></div></div>
+      <div class="vcard" data-vid="_djYzxfITps"><div class="vthumb"><img src="https://i.ytimg.com/vi/_djYzxfITps/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$1.2M closed in slow season</p></div></div><div class="vmeta"><p class="vtitle">Justin Wylie</p><p class="vchan">All Pro Decks &amp; Patios · San Antonio, TX</p></div></div>
+      <div class="vcard" data-vid="NV836FEEIcU"><div class="vthumb"><img src="https://i.ytimg.com/vi/NV836FEEIcU/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$12K spent → $225K profit</p></div></div><div class="vmeta"><p class="vtitle">Mike Biviano</p><p class="vchan">Biviano General · South Shore, MA</p></div></div>
+      <div class="vcard" data-vid="ZT8C3xoQSLc"><div class="vthumb"><img src="https://i.ytimg.com/vi/ZT8C3xoQSLc/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>3 appts a week → 11 a day</p></div></div><div class="vmeta"><p class="vtitle">Mike Biviano</p><p class="vchan">Biviano General · South Shore, MA</p></div></div>
+      <div class="vcard" data-vid="vxqYn1E86LA"><div class="vthumb"><img src="https://i.ytimg.com/vi/vxqYn1E86LA/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>52 appointments in 10 days</p></div></div><div class="vmeta"><p class="vtitle">Mike Holst</p><p class="vchan">Foremost Construction · Minnesota</p></div></div>
     </div>
-    <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1.25rem 0 0;">10 videos · tap any to play</p>
+    <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1.25rem 0 0;">11 real builders · tap any to play</p>
 
     <script>
       (function () {
