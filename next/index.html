@@ -1735,11 +1735,12 @@
     var log=[]; function save(){ try{ localStorage.setItem('mjc_cal_debug', JSON.stringify(log).slice(0,6000)); }catch(_){}}
     window.addEventListener('message', function(e){
       try{
+        if(log.length>60) return;
         var o=String(e.origin||'');
-        if(o.indexOf('seasonproofgrowth')>-1||o.indexOf('leadconnector')>-1||o.indexOf('msgsndr')>-1||o.indexOf('gohighlevel')>-1){
-          var d = (e.data && typeof e.data==='object') ? JSON.stringify(e.data) : String(e.data);
-          log.push({t:Date.now(), origin:o, data:String(d).slice(0,600)}); save();
-        }
+        if(o && o.indexOf(location.origin)===0) return; // skip same-origin self chatter
+        var d = (e.data && typeof e.data==='object') ? JSON.stringify(e.data) : String(e.data);
+        if(d==='undefined'||d==='null'||d==='') return;
+        log.push({t:Date.now(), origin:o, data:String(d).slice(0,700)}); save();
       }catch(_){}
     }, false);
     var cal=document.getElementById('mc-cal');
