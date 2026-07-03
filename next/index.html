@@ -1726,6 +1726,29 @@
     el.addEventListener('click',function(e){ e.preventDefault(); openModal(); });
   });
   window.__openApply=openModal; // exposed for QA
+
+  // ── DISCOVERY (temporary): capture what the GHL calendar exposes on booking so we can
+  //    wire the confirmation-page add-to-calendar with the real appointment time.
+  //    Logs GHL widget postMessages + the same-origin iframe landing URL to localStorage
+  //    (key: mjc_cal_debug), which survives the post-booking redirect (same origin). ──
+  (function(){
+    var log=[]; function save(){ try{ localStorage.setItem('mjc_cal_debug', JSON.stringify(log).slice(0,6000)); }catch(_){}}
+    window.addEventListener('message', function(e){
+      try{
+        var o=String(e.origin||'');
+        if(o.indexOf('seasonproofgrowth')>-1||o.indexOf('leadconnector')>-1||o.indexOf('msgsndr')>-1||o.indexOf('gohighlevel')>-1){
+          var d = (e.data && typeof e.data==='object') ? JSON.stringify(e.data) : String(e.data);
+          log.push({t:Date.now(), origin:o, data:String(d).slice(0,600)}); save();
+        }
+      }catch(_){}
+    }, false);
+    var cal=document.getElementById('mc-cal');
+    if(cal) cal.addEventListener('load', function(){
+      try{ log.push({t:Date.now(), iframeUrl:this.contentWindow.location.href}); }
+      catch(err){ log.push({t:Date.now(), iframeUrlCrossOrigin:true}); }
+      save();
+    });
+  })();
 })();
 </script>
 
