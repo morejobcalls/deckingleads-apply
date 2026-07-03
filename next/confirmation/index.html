@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0D0D0D">
+<title>You're Booked · Deck Jobs Strategy Session</title>
+<meta name="description" content="Your Deck Jobs Strategy Session is booked. Watch this 2-minute video before our call.">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          canvas: '#F8F7F3',
+          ink: '#1A1917',
+          'ink-muted': '#7A7870',
+          border: '#E2DFDA',
+          dark: '#0D0D0D',
+          'dark-elevated': '#161614',
+          gold: '#C7963F',
+          'gold-deep': '#AB8032',
+          success: '#00B67A',
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+        }
+      }
+    }
+  }
+</script>
+<style>
+  *,*::before,*::after { box-sizing: border-box; }
+  html { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: #0D0D0D; }
+
+  /* Hero headline — light, mixes regular + bold weights like Ravi */
+  .ty-headline {
+    font-size: clamp(1.75rem, 4vw, 2.6rem);
+    line-height: 1.1;
+    color: #F8F7F3;
+    font-weight: 400;
+    letter-spacing: -0.025em;
+    margin: 0 0 0.75rem;
+  }
+  .ty-headline b { font-weight: 800; }
+
+  /* Eyebrow label */
+  .ey {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Scroll reveal */
+  .rv { opacity: 0; transform: translateY(18px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
+  .rv.in { opacity: 1; transform: none; }
+  .rv.d1 { transition-delay: .1s; }
+  .rv.d2 { transition-delay: .2s; }
+  .rv.d3 { transition-delay: .3s; }
+
+  /* Pulsing confirmation ring */
+  @keyframes pulse-ring { 0% { transform: scale(1); opacity: .5; } 100% { transform: scale(1.6); opacity: 0; } }
+  .confirm-ring { position: relative; display: inline-flex; align-items: center; justify-content: center; }
+  .confirm-ring::before { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 2px solid #00B67A; animation: pulse-ring 2s ease-out infinite; }
+
+  /* Confirm button — single SMS CTA */
+  .confirm-btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-weight: 700; font-size: 0.95rem;
+    border-radius: 10px; padding: 0.875rem 1.5rem;
+    text-decoration: none; transition: opacity .2s, transform .12s;
+    line-height: 1; white-space: nowrap;
+    background: #007AFF; color: #fff;
+    box-shadow: 0 8px 32px -8px rgba(0, 122, 255, 0.45);
+  }
+  .confirm-btn:hover { opacity: 0.9; }
+  .confirm-btn:active { transform: translateY(1px); }
+
+  /* Step card (dark) */
+  .step-card { display: flex; align-items: flex-start; gap: 1rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 12px; padding: 1rem 1.25rem; }
+  .step-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #C7963F; color: #fff; font-weight: 800; font-size: .875rem; display: flex; align-items: center; justify-content: center; }
+
+  /* Video wrapper */
+  .video-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 6px 48px rgba(26,25,23,.14); position: relative; padding-bottom: 56.25%; background: #fff; }
+  .video-wrap iframe { position: absolute; top: -1px; left: -1px; width: calc(100% + 2px); height: calc(100% + 2px); display: block; border: none; }
+
+  /* Prep checklist */
+  .prep-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
+  .prep-list > li { display: flex; align-items: flex-start; gap: 0.875rem; font-size: 0.9375rem; color: rgba(248,247,243,.92); line-height: 1.65; font-weight: 500; }
+  .prep-list > li .icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #071f12; border: 1.5px solid #00B67A; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .prep-list .sub { font-size: 0.8125rem; color: rgba(248,247,243,.55); line-height: 1.6; font-weight: 500; margin: 0.35rem 0 0; }
+  .prep-list .sub a { color: #C7963F; text-decoration: underline; }
+  .prep-list .sub a:hover { color: #AB8032; }
+
+  /* Guarantee card (dark variant) */
+  .gtee-card { background: rgba(199,150,63,.06); border: 1px solid rgba(199,150,63,.3); border-radius: 16px; padding: 1.75rem 2rem; }
+  .gtee-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
+  .gtee-list li { display: flex; gap: 0.6rem; color: #F8F7F3; line-height: 1.55; font-size: 0.95rem; }
+  .gtee-list li::before { content: '→'; color: #C7963F; font-weight: 700; flex-shrink: 0; }
+
+  /* Mobile padding */
+  @media (max-width: 767px) {
+    section { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
+    .gtee-card { padding: 1.5rem 1.25rem; }
+  }
+
+  /* Video grid — YouTube-style clickable cards with title + channel */
+  .vgrid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 1.25rem 0.875rem; }
+  @media (min-width: 640px) { .vgrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; } }
+  @media (min-width: 900px) { .vgrid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem 1.125rem; } }
+  .vcard { cursor: pointer; transition: transform .18s ease; }
+  .vcard:hover { transform: translateY(-2px); }
+  .vthumb {
+    position: relative; aspect-ratio: 16 / 9;
+    border-radius: 10px; overflow: hidden;
+    background: #1A1917;
+    box-shadow: 0 4px 18px rgba(26,25,23,.10);
+    transition: box-shadow .18s ease;
+  }
+  .vcard:hover .vthumb { box-shadow: 0 8px 26px rgba(26,25,23,.18); }
+  .vthumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .vthumb iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+  .vthumb .pbtn {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .vthumb .pbtn-inner {
+    width: 54px; height: 54px; border-radius: 50%;
+    background: rgba(0,0,0,.65); backdrop-filter: blur(2px);
+    display: flex; align-items: center; justify-content: center;
+    transition: background .18s ease, transform .18s ease;
+  }
+  .vcard:hover .vthumb .pbtn-inner { background: rgba(255,0,0,.85); transform: scale(1.06); }
+  .vthumb .pbtn-inner::before {
+    content: ''; display: block; width: 0; height: 0;
+    border-left: 16px solid #fff;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    margin-left: 4px;
+  }
+  /* YouTube-style metadata below thumbnail */
+  .vmeta { padding: 0.625rem 0.125rem 0; }
+  .vtitle {
+    font-size: 0.9375rem; font-weight: 600; color: #1A1917;
+    line-height: 1.35; letter-spacing: -0.005em;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+    overflow: hidden; text-overflow: ellipsis;
+    margin: 0 0 0.25rem;
+  }
+  .vchan {
+    font-size: 0.8125rem; color: #606060;
+    line-height: 1.3; font-weight: 500;
+    display: flex; align-items: center; gap: 0.375rem;
+  }
+  .vchan-verified {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 14px; height: 14px; border-radius: 50%;
+    background: #606060; color: #fff; font-size: 9px; font-weight: 800;
+  }
+
+  /* Result-caption banner on proof thumbnails (ported from LP proof cards) */
+  .vcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: 0.85rem 0.9rem 0.7rem;
+    background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.5) 58%, transparent 100%);
+    pointer-events: none;
+  }
+  .vcaption p {
+    margin: 0; color: #EBB84D; font-weight: 800;
+    font-size: 0.875rem; line-height: 1.1; letter-spacing: -.01em;
+    text-transform: uppercase;
+  }
+  .vcard .vtitle { -webkit-line-clamp: 1; font-weight: 700; }
+
+  /* Logo marquee — ported from landing page */
+  .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
+  .marquee-track { display: inline-flex; gap: 40px; animation: marquee-scroll 38s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .logo-cell { flex: 0 0 auto; height: 62px; display: inline-flex; align-items: center; justify-content: center; padding: 0 6px; opacity: .55; transition: opacity .18s ease; }
+  .logo-cell:hover { opacity: .9; }
+  .logo-cell img { max-height: 50px; max-width: 180px; width: auto; height: auto; object-fit: contain; display: block; filter: grayscale(1); }
+  .logo-cell--invert img { filter: grayscale(1) brightness(0) invert(1); }
+  .logo-cell--card img { filter: grayscale(1) invert(1); mix-blend-mode: screen; max-height: 56px; max-width: 188px; }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+</style>
+
+<!-- Iframe break-out — when GHL calendar redirects this page inside its widget iframe
+     after booking, escape to the top window so the user sees a full-page confirmation
+     and Clarity records the session. Pixel + Clarity below are gated to only fire
+     when at top level (avoids spurious double-firing during the brief iframe transition). -->
+<script>
+  try {
+    if (window.top !== window.self) {
+      window.top.location.href = window.location.href;
+    }
+  } catch (e) { /* cross-origin top blocked — fall back to in-iframe load */ }
+  window.__TOP_LEVEL__ = (function () { try { return window.top === window.self; } catch (e) { return true; } })();
+</script>
+
+<!-- Meta Pixel — fire BookedCall conversion event for booked-call optimization -->
+<script>
+  if (window.__TOP_LEVEL__) {
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '839107878270720');
+    fbq('track', 'PageView');
+    fbq('trackCustom', 'BookedCall');
+  }
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
+
+<!-- Microsoft Clarity (heat maps + session recordings + analytics) -->
+<script type="text/javascript">
+  if (window.__TOP_LEVEL__) {
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wpznuz610a");
+  }
+</script>
+
+</head>
+<body>
+
+<!-- ══════════════════════════════════
+     NAV
+══════════════════════════════════ -->
+<nav style="background:#0D0D0D;border-bottom:1px solid rgba(255,255,255,.07);padding:1rem 1.25rem;position:sticky;top:0;z-index:50;">
+  <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;">
+    <span style="font-weight:900;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#F8F7F3;">
+      More<span style="color:#C7963F;">JobCalls</span>
+    </span>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════
+     HERO — DYNAMIC CONFIRMATION
+══════════════════════════════════ -->
+<section style="background:#0D0D0D;padding:4.5rem 1.25rem 5rem;">
+  <div style="max-width:680px;margin:0 auto;text-align:center;">
+
+    <!-- Pulsing green check -->
+    <div class="rv" style="display:flex;justify-content:center;margin-bottom:2rem;">
+      <div class="confirm-ring">
+        <div style="width:68px;height:68px;border-radius:50%;background:#071f12;border:2px solid #00B67A;display:flex;align-items:center;justify-content:center;">
+          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+            <path d="M6 15l7 8L24 8" stroke="#00B67A" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Headline -->
+    <div class="rv d1" style="text-align:center;">
+      <p id="hero-h1" class="ty-headline">
+        <b>You're booked.</b> Watch this before we talk.
+      </p>
+    </div>
+
+    <!-- Supporting copy + confirm button -->
+    <div class="rv d2" style="max-width:480px;margin:1.75rem auto 0;">
+      <p style="font-size:.9375rem;color:rgba(248,247,243,.5);line-height:1.78;font-weight:400;margin:0 0 1.25rem;">
+        Check your email and phone — your confirmation and reminders just went out with the exact time and Zoom link.
+      </p>
+      <p style="font-size:.9375rem;color:rgba(248,247,243,.65);line-height:1.6;font-weight:600;margin:0 0 1.25rem;">
+        To lock in your slot, tap below and hit send:
+      </p>
+      <div style="display:flex;justify-content:center;">
+        <a class="confirm-btn" href="sms:+15012363920?&body=Yes" aria-label="Send YES via text message">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Text "Yes" To Confirm
+        </a>
+      </div>
+      <p style="font-size:.75rem;color:rgba(248,247,243,.35);margin:0.875rem 0 0;line-height:1.6;">
+        No-shows lose their slot. A quick reply locks it in.
+      </p>
+    </div>
+
+    <!-- Step cards -->
+    <p class="rv d3" style="font-size:.8125rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(248,247,243,.3);margin:2.5rem auto .875rem;">Then do these two things before our call:</p>
+    <div class="rv d3" style="display:flex;flex-direction:column;gap:.875rem;max-width:460px;margin:0 auto;text-align:left;">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div>
+          <p style="font-size:.9375rem;font-weight:700;color:#F8F7F3;margin:0 0 .2rem;">Watch the pre-call video below</p>
+          <p style="font-size:.8125rem;color:rgba(248,247,243,.45);margin:0;line-height:1.6;">Two minutes. So when we get on, we skip the warm-up and go straight to your numbers.</p>
+        </div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div>
+          <p style="font-size:.9375rem;font-weight:700;color:#F8F7F3;margin:0 0 .2rem;">Bring three things to the call</p>
+          <p style="font-size:.8125rem;color:rgba(248,247,243,.45);margin:0;line-height:1.6;">Revenue ballpark, current appointment volume, and (if you've run ads) read access to your Meta account.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     PRE-CALL VIDEO
+══════════════════════════════════ -->
+<section style="background:#F8F7F3;padding:5.5rem 1.25rem;border-top:1px solid #E2DFDA;">
+  <div style="max-width:820px;margin:0 auto;">
+
+    <div class="rv" style="text-align:center;margin-bottom:2.75rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
+        <span class="ey" style="color:rgba(199,150,63,.85);">Step 1 — Watch First</span>
+      </div>
+      <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#1A1917;line-height:1.1;letter-spacing:-.02em;margin:0 0 .75rem;">
+        Watch This <span style="color:#C7963F;">Before Our Call</span>
+      </h2>
+      <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:480px;margin:0 auto;font-weight:500;">
+        Two minutes of context so when we hop on, we can skip the preamble and get straight to whether 100 appointments in 100 days makes sense for your market.
+      </p>
+    </div>
+
+    <div class="rv d1 video-wrap">
+      <!-- Replace CZkMmNpZddg with the unlisted YouTube ID once Spencer films the mini-VSL.
+           Per Ravi's pixel rule: keep on YouTube unlisted (do not self-host) so booked prospects pixel for retargeting. -->
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/CZkMmNpZddg?rel=0&modestbranding=1"
+        title="What to expect on our Deck Jobs Strategy Session"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+    </div>
+    <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1rem 0 0;">~1:45 · Watch this before we talk</p>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     PREP CHECKLIST — THREE THINGS
+══════════════════════════════════ -->
+<section style="background:#161614;padding:5.5rem 1.25rem;">
+  <div style="max-width:680px;margin:0 auto;">
+
+    <div class="rv" style="text-align:center;margin-bottom:3rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
+        <span class="ey" style="color:rgba(199,150,63,.7);">Step 2 — Before We Meet</span>
+      </div>
+      <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#F8F7F3;line-height:1.08;letter-spacing:-.03em;margin:0 0 .75rem;">
+        Bring These <span style="color:#C7963F;">Three Things</span>
+      </h2>
+      <p style="font-size:.9375rem;color:rgba(248,247,243,.5);line-height:1.75;max-width:480px;margin:0 auto;font-weight:500;">
+        The more of this you have ready, the faster we move and the more specific your plan gets.
+      </p>
+    </div>
+
+    <div class="rv d1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:2rem 2.25rem;">
+      <ul class="prep-list">
+
+        <li>
+          <span class="icon">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </span>
+          <div>
+            <span><b style="font-weight:700;color:#F8F7F3;">Your rough monthly revenue.</b></span>
+            <p class="sub">Ballpark is fine. I need it to size the math on whether 100 appointments in 100 days makes sense for your market.</p>
+          </div>
+        </li>
+
+        <li>
+          <span class="icon">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </span>
+          <div>
+            <span><b style="font-weight:700;color:#F8F7F3;">Current appointment volume + what you've tried.</b></span>
+            <p class="sub">How many real sales appointments hit your calendar last month, and which agencies / channels you've burned on.</p>
+          </div>
+        </li>
+
+        <li>
+          <span class="icon">
+            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </span>
+          <div>
+            <span><b style="font-weight:700;color:#F8F7F3;">Read access to your Meta ad account</b> <span style="color:rgba(248,247,243,.45);">(if you've run ads).</span></span>
+            <p class="sub">I'll run the Agency Audit live on the call and save us fifteen minutes of preamble. Email it to <a href="mailto:spencer@seasonproofgrowth.com">spencer@seasonproofgrowth.com</a> before we get on.</p>
+          </div>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     PROOF — TRUSTED BY (logo wall)
+══════════════════════════════════ -->
+<section style="background:#161614;padding:3rem 1.25rem 3.25rem;border-top:1px solid rgba(255,255,255,.06);">
+  <div style="max-width:1000px;margin:0 auto;">
+    <p style="text-align:center;font-size:.6875rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(248,247,243,.42);margin:0 0 1.5rem;">
+      Trusted By Deck Builders Across The Country
+    </p>
+    <div class="marquee">
+      <div class="marquee-track">
+        <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
+        <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
+        <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction"></div>
+        <!-- duplicate set for seamless loop -->
+        <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
+        <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
+        <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
+        <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
+        <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     WHILE YOU WAIT — REAL RESULTS
+══════════════════════════════════ -->
+<section style="background:#F8F7F3;padding:5.5rem 1.25rem;">
+  <div style="max-width:980px;margin:0 auto;">
+
+    <div class="rv" style="text-align:center;margin-bottom:2.75rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
+        <span class="ey" style="color:rgba(199,150,63,.85);">Step 3 — While You Wait</span>
+      </div>
+      <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#1A1917;line-height:1.1;letter-spacing:-.02em;margin:0 0 .75rem;">
+        Real Builders. <span style="color:#C7963F;">Real ROI.</span>
+      </h2>
+      <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:540px;margin:0 auto;font-weight:500;">
+        Tap any card to watch the story. Every one of these deck builders said the same thing on day one — <em>"too good to be true"</em> — then changed their mind because the system kept delivering.
+      </p>
+    </div>
+
+    <div class="rv d1 vgrid" id="while-you-wait-grid">
+      <div class="vcard" data-vid="YJQxX5ZQ3aI"><div class="vthumb"><img src="https://i.ytimg.com/vi/YJQxX5ZQ3aI/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>CPL $400 → $30 in 14 days</p></div></div><div class="vmeta"><p class="vtitle">Justin Wylie</p><p class="vchan">All Pro Decks &amp; Patios · San Antonio, TX</p></div></div>
+      <div class="vcard" data-vid="-q18xO92akA"><div class="vthumb"><img src="https://i.ytimg.com/vi/-q18xO92akA/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$500K month on $100/day ads</p></div></div><div class="vmeta"><p class="vtitle">Jason Flynn</p><p class="vchan">PROdeck Construction · Northern Virginia</p></div></div>
+      <div class="vcard" data-vid="4TP1sTRASoA"><div class="vthumb"><img src="https://i.ytimg.com/vi/4TP1sTRASoA/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>60 estimates · 25 closed · 6 weeks</p></div></div><div class="vmeta"><p class="vtitle">Brian Wallace</p><p class="vchan">Bend Fence &amp; Deck · Bend, OR</p></div></div>
+      <div class="vcard" data-vid="Xt4TVn4zP7s"><div class="vthumb"><img src="https://i.ytimg.com/vi/Xt4TVn4zP7s/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$500K last year → $1M by April 21</p></div></div><div class="vmeta"><p class="vtitle">Jacob Weaver</p><p class="vchan">Oasis Custom Decks · Pennsylvania</p></div></div>
+      <div class="vcard" data-vid="ERQ84Dgz-Ow"><div class="vthumb"><img src="https://i.ytimg.com/vi/ERQ84Dgz-Ow/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$200K from 4 leads · 21 days</p></div></div><div class="vmeta"><p class="vtitle">Chip Paynter</p><p class="vchan">Paynter Construction · Loomis, CA</p></div></div>
+      <div class="vcard" data-vid="djsZ_YNn7wY"><div class="vthumb"><img src="https://i.ytimg.com/vi/djsZ_YNn7wY/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$105K closed in 7 days</p></div></div><div class="vmeta"><p class="vtitle">Ricardo Cervantes</p><p class="vchan">Colorado</p></div></div>
+      <div class="vcard" data-vid="kK3oXzLb4-0"><div class="vthumb"><img src="https://i.ytimg.com/vi/kK3oXzLb4-0/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>65–70 appointments per week</p></div></div><div class="vmeta"><p class="vtitle">Eric Engle</p><p class="vchan">Mr. Patio Cover · Los Angeles, CA</p></div></div>
+      <div class="vcard" data-vid="_djYzxfITps"><div class="vthumb"><img src="https://i.ytimg.com/vi/_djYzxfITps/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$1.2M closed in slow season</p></div></div><div class="vmeta"><p class="vtitle">Justin Wylie</p><p class="vchan">All Pro Decks &amp; Patios · San Antonio, TX</p></div></div>
+      <div class="vcard" data-vid="NV836FEEIcU"><div class="vthumb"><img src="https://i.ytimg.com/vi/NV836FEEIcU/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>$12K spent → $225K profit</p></div></div><div class="vmeta"><p class="vtitle">Mike Biviano</p><p class="vchan">Biviano General · South Shore, MA</p></div></div>
+      <div class="vcard" data-vid="ZT8C3xoQSLc"><div class="vthumb"><img src="https://i.ytimg.com/vi/ZT8C3xoQSLc/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>3 appts a week → 11 a day</p></div></div><div class="vmeta"><p class="vtitle">Mike Biviano</p><p class="vchan">Biviano General · South Shore, MA</p></div></div>
+      <div class="vcard" style="cursor:default"><div class="vthumb"><img src="/wins/biviano-100k.png" alt="Mike Biviano client text — booked appointment turned into a roughly $100,000 deck job" loading="lazy"></div><div class="vmeta"><p class="vtitle">Mike Biviano</p><p class="vchan">Biviano General · South Shore, MA · ~$100K deck (booked appt)</p></div></div>
+      <div class="vcard" data-vid="vxqYn1E86LA"><div class="vthumb"><img src="https://i.ytimg.com/vi/vxqYn1E86LA/hqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span><div class="vcaption"><p>52 appointments in 10 days</p></div></div><div class="vmeta"><p class="vtitle">Mike Holst</p><p class="vchan">Foremost Construction · Minnesota</p></div></div>
+    </div>
+    <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1.25rem 0 0;">12 client wins · tap any video to play</p>
+
+    <script>
+      (function () {
+        document.querySelectorAll('#while-you-wait-grid .vcard').forEach(function (card) {
+          card.addEventListener('click', function () {
+            var vid = card.getAttribute('data-vid');
+            var thumb = card.querySelector('.vthumb');
+            if (!vid || !thumb || thumb.querySelector('iframe')) return;
+            thumb.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + vid + '?autoplay=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+          });
+        });
+      })();
+    </script>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     GUARANTEE RESTATE
+══════════════════════════════════ -->
+<section style="background:#0D0D0D;padding:5rem 1.25rem;">
+  <div style="max-width:680px;margin:0 auto;">
+
+    <div class="rv" style="text-align:center;margin-bottom:2rem;">
+      <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
+        <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
+        <span class="ey" style="color:rgba(199,150,63,.7);">The Guarantee — In Writing</span>
+      </div>
+      <h2 style="font-size:clamp(1.5rem,3.6vw,2rem);font-weight:800;color:#F8F7F3;line-height:1.15;letter-spacing:-.02em;margin:0 auto;max-width:560px;">
+        100 exclusive sales appointment opportunities in 100 days. <span style="color:#C7963F;">If we miss:</span>
+      </h2>
+    </div>
+
+    <div class="rv d1 gtee-card">
+      <ul class="gtee-list">
+        <li><span><b style="font-weight:700;">$2,000 cash</b> in your pocket.</span></li>
+        <li><span>Every dollar of your <b style="font-weight:700;">management fee refunded</b>.</span></li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     RESCHEDULE LINE
+══════════════════════════════════ -->
+<section style="background:#0D0D0D;padding:0 1.25rem 4rem;">
+  <div style="max-width:680px;margin:0 auto;text-align:center;">
+    <p style="font-size:.875rem;color:rgba(248,247,243,.45);line-height:1.6;margin:0;">
+      Need to reschedule? Use the link in your confirmation email — or text <a href="sms:+15012363920" style="color:#F8F7F3;text-decoration:underline;">(501) 236-3920</a> and we'll move it.
+    </p>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════
+     FOOTER
+══════════════════════════════════ -->
+<footer style="background:#0D0D0D;border-top:1px solid rgba(255,255,255,.06);padding:3rem 1.25rem 2.5rem;">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.06);">
+      <span style="font-weight:900;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#F8F7F3;">
+        More<span style="color:#C7963F;">JobCalls</span>
+      </span>
+      <p style="font-size:.8125rem;color:rgba(248,247,243,.3);margin:0;">© 2026 SeasonProof Growth LLC · One deck builder per market.</p>
+    </div>
+  </div>
+</footer>
+
+
+<!-- Scroll reveal -->
+<script>
+  var obs = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: .07, rootMargin: '0px 0px 100px 0px' });
+  document.querySelectorAll('.rv').forEach(function (el) { obs.observe(el); });
+</script>
+
+<!-- Personalize from sessionStorage (LP form data) -->
+<script>
+(function () {
+  let data = {};
+  try { data = JSON.parse(sessionStorage.getItem('dl_qualify_data') || '{}'); }
+  catch (_) { data = {}; }
+
+  const h1 = document.getElementById('hero-h1');
+  if (h1 && data.name) {
+    const first = data.name.trim().split(/\s+/)[0];
+    if (first) {
+      h1.innerHTML = `<b>You're booked, ${first}.</b> Watch this before we talk.`;
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
