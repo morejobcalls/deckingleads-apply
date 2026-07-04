@@ -277,6 +277,49 @@
       </p>
     </div>
 
+    <!-- ═══ ADD TO CALENDAR — appointment time fetched from the mjc-appointment-time worker ═══ -->
+    <div id="add-cal" style="display:none;max-width:480px;margin:1.75rem auto 0;">
+      <div style="background:#161614;border:1px solid rgba(199,150,63,.30);border-radius:16px;padding:1.35rem 1.35rem 1.45rem;text-align:center;">
+        <p style="font-size:1rem;font-weight:800;color:#F8F7F3;margin:0 0 .35rem;letter-spacing:-.01em;">📅 Put the call on your calendar</p>
+        <p id="add-cal-when" style="font-size:.8125rem;color:rgba(199,150,63,.95);font-weight:700;margin:0 0 1.1rem;line-height:1.5;"></p>
+        <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;">
+          <a id="add-cal-google" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(180deg,#C7963F,#AB8032);color:#0D0D0D;font-weight:800;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;">Google Calendar</a>
+          <a id="add-cal-ics" download="strategy-session.ics" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:#F8F7F3;font-weight:700;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;border:1px solid rgba(248,247,243,.25);">Apple / Outlook</a>
+        </div>
+        <p style="font-size:.7rem;color:rgba(248,247,243,.35);margin:.9rem 0 0;line-height:1.5;">So it's on your calendar and you don't miss it. Your Zoom link is also in your email &amp; text.</p>
+      </div>
+    </div>
+    <script>
+    (function(){
+      var WORKER='https://mjc-appointment-time.spencer-80c.workers.dev';
+      var ref; try{ ref=JSON.parse(localStorage.getItem('mjc_booked_ref')||'null'); }catch(e){}
+      if(!ref || !ref.contactId || (Date.now()-(ref.t||0) > 15*60*1000)) return;
+      var tries=0;
+      function attempt(){
+        tries++;
+        fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contactId:ref.contactId,calendarId:ref.calendarId})})
+          .then(function(r){return r.json();})
+          .then(function(d){ if(d&&d.found&&d.startUTC){ render(d); try{localStorage.removeItem('mjc_booked_ref');}catch(_){}} else if(tries<6){ setTimeout(attempt,1300); } })
+          .catch(function(){ if(tries<6) setTimeout(attempt,1300); });
+      }
+      function render(d){
+        var start=new Date(d.startUTC), end=d.endUTC?new Date(d.endUTC):new Date(start.getTime()+45*60000);
+        var title='100 Deck Jobs in 100 Days Strategy Session';
+        var loc=d.location||'Zoom link is in your confirmation email & text';
+        var details='Your MoreJobCalls.com strategy session with Spencer. The exact Zoom link is in your confirmation email and text.';
+        function z(n){return(n<10?'0':'')+n;}
+        function u(dt){return dt.getUTCFullYear()+z(dt.getUTCMonth()+1)+z(dt.getUTCDate())+'T'+z(dt.getUTCHours())+z(dt.getUTCMinutes())+z(dt.getUTCSeconds())+'Z';}
+        var g='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+u(start)+'/'+u(end)+'&details='+encodeURIComponent(details)+'&location='+encodeURIComponent(loc);
+        document.getElementById('add-cal-google').href=g;
+        var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MoreJobCalls//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:'+u(start)+'-mjc@morejobcalls.com','DTSTAMP:'+u(new Date()),'DTSTART:'+u(start),'DTEND:'+u(end),'SUMMARY:'+title,'DESCRIPTION:'+details.replace(/,/g,'\\,'),'LOCATION:'+String(loc).replace(/,/g,'\\,'),'BEGIN:VALARM','TRIGGER:-PT30M','ACTION:DISPLAY','DESCRIPTION:Strategy session in 30 minutes','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+        document.getElementById('add-cal-ics').href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
+        try{ document.getElementById('add-cal-when').textContent=start.toLocaleString('en-US',{weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}); }catch(e){}
+        document.getElementById('add-cal').style.display='block';
+      }
+      attempt();
+    })();
+    </script>
+
     <!-- Supporting copy + confirm button -->
     <div class="rv d2" style="max-width:480px;margin:1.75rem auto 0;">
       <p style="font-size:.9375rem;color:rgba(248,247,243,.5);line-height:1.78;font-weight:400;margin:0 0 1.25rem;">

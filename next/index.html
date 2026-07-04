@@ -1727,28 +1727,23 @@
   });
   window.__openApply=openModal; // exposed for QA
 
-  // ── DISCOVERY (temporary): capture what the GHL calendar exposes on booking so we can
-  //    wire the confirmation-page add-to-calendar with the real appointment time.
-  //    Logs GHL widget postMessages + the same-origin iframe landing URL to localStorage
-  //    (key: mjc_cal_debug), which survives the post-booking redirect (same origin). ──
+  // ── Capture the just-booked appointment reference so the confirmation page can add-to-calendar.
+  //    GHL exposes the contactId via the 'set-sticky-contacts' message and the calendarId via
+  //    'msgsndr-booking-complete', but NOT the appointment time. So we stash {contactId,calendarId}
+  //    in localStorage (survives the post-booking redirect, same origin); the confirmation page
+  //    then fetches the time from the mjc-appointment-time Worker. ──
   (function(){
-    var log=[]; function save(){ try{ localStorage.setItem('mjc_cal_debug', JSON.stringify(log).slice(0,6000)); }catch(_){}}
+    var contactId=null;
     window.addEventListener('message', function(e){
       try{
-        if(log.length>60) return;
-        var o=String(e.origin||'');
-        if(o && o.indexOf(location.origin)===0) return; // skip same-origin self chatter
-        var d = (e.data && typeof e.data==='object') ? JSON.stringify(e.data) : String(e.data);
-        if(d==='undefined'||d==='null'||d==='') return;
-        log.push({t:Date.now(), origin:o, data:String(d).slice(0,700)}); save();
+        var d=e.data; if(!Array.isArray(d)) return;
+        if(d[0]==='set-sticky-contacts' && typeof d[2]==='string'){
+          var m=d[2].match(/"id":"([^"]+)"/); if(m) contactId=m[1];
+        } else if(d[0]==='msgsndr-booking-complete' && d[1] && d[1].calendarId){
+          try{ localStorage.setItem('mjc_booked_ref', JSON.stringify({contactId:contactId, calendarId:d[1].calendarId, t:Date.now()})); }catch(_){}
+        }
       }catch(_){}
     }, false);
-    var cal=document.getElementById('mc-cal');
-    if(cal) cal.addEventListener('load', function(){
-      try{ log.push({t:Date.now(), iframeUrl:this.contentWindow.location.href}); }
-      catch(err){ log.push({t:Date.now(), iframeUrlCrossOrigin:true}); }
-      save();
-    });
   })();
 })();
 </script>
