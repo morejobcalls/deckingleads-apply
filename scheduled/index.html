@@ -40,13 +40,13 @@
 <style>
   *,*::before,*::after { box-sizing: border-box; }
   html { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  body { margin: 0; background: #0D0D0D; }
+  body { margin: 0; background: #FBFAF7; }
 
   /* Hero headline — light, mixes regular + bold weights like Ravi */
   .ty-headline {
     font-size: clamp(1.75rem, 4vw, 2.6rem);
     line-height: 1.1;
-    color: #F8F7F3;
+    color: #1A1917;
     font-weight: 400;
     letter-spacing: -0.025em;
     margin: 0 0 0.75rem;
@@ -87,7 +87,7 @@
   .confirm-btn:active { transform: translateY(1px); }
 
   /* Step card (dark) */
-  .step-card { display: flex; align-items: flex-start; gap: 1rem; background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 12px; padding: 1rem 1.25rem; }
+  .step-card { display: flex; align-items: flex-start; gap: 1rem; background: rgba(26,25,23,.04); border: 1px solid rgba(26,25,23,.09); border-radius: 12px; padding: 1rem 1.25rem; }
   .step-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #C7963F; color: #fff; font-weight: 800; font-size: .875rem; display: flex; align-items: center; justify-content: center; }
 
   /* Video wrapper */
@@ -96,16 +96,16 @@
 
   /* Prep checklist */
   .prep-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
-  .prep-list > li { display: flex; align-items: flex-start; gap: 0.875rem; font-size: 0.9375rem; color: rgba(248,247,243,.92); line-height: 1.65; font-weight: 500; }
+  .prep-list > li { display: flex; align-items: flex-start; gap: 0.875rem; font-size: 0.9375rem; color: rgba(26,25,23,.92); line-height: 1.65; font-weight: 500; }
   .prep-list > li .icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #071f12; border: 1.5px solid #00B67A; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-  .prep-list .sub { font-size: 0.8125rem; color: rgba(248,247,243,.55); line-height: 1.6; font-weight: 500; margin: 0.35rem 0 0; }
+  .prep-list .sub { font-size: 0.8125rem; color: rgba(26,25,23,.55); line-height: 1.6; font-weight: 500; margin: 0.35rem 0 0; }
   .prep-list .sub a { color: #C7963F; text-decoration: underline; }
   .prep-list .sub a:hover { color: #AB8032; }
 
   /* Guarantee card (dark variant) */
   .gtee-card { background: rgba(199,150,63,.06); border: 1px solid rgba(199,150,63,.3); border-radius: 16px; padding: 1.75rem 2rem; }
   .gtee-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
-  .gtee-list li { display: flex; gap: 0.6rem; color: #F8F7F3; line-height: 1.55; font-size: 0.95rem; }
+  .gtee-list li { display: flex; gap: 0.6rem; color: #1A1917; line-height: 1.55; font-size: 0.95rem; }
   .gtee-list li::before { content: '→'; color: #C7963F; font-weight: 700; flex-shrink: 0; }
 
   /* Mobile padding */
@@ -198,9 +198,9 @@
 <!-- ══════════════════════════════════
      NAV
 ══════════════════════════════════ -->
-<nav style="background:#0D0D0D;border-bottom:1px solid rgba(255,255,255,.07);padding:1rem 1.25rem;position:sticky;top:0;z-index:50;">
+<nav style="background:#FBFAF7;border-bottom:1px solid rgba(26,25,23,.07);padding:1rem 1.25rem;position:sticky;top:0;z-index:50;">
   <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;">
-    <span style="font-weight:900;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#F8F7F3;">
+    <span style="font-weight:900;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#1A1917;">
       More<span style="color:#C7963F;">JobCalls</span>
     </span>
   </div>
@@ -210,7 +210,7 @@
 <!-- ══════════════════════════════════
      HERO — DYNAMIC CONFIRMATION
 ══════════════════════════════════ -->
-<section style="background:#0D0D0D;padding:4.5rem 1.25rem 5rem;">
+<section style="background:#FBFAF7;padding:4.5rem 1.25rem 5rem;">
   <div style="max-width:680px;margin:0 auto;text-align:center;">
 
     <!-- Pulsing green check -->
@@ -235,14 +235,14 @@
          set localStorage.mjc_booked_ref. v1 bookers never set it, so this stays invisible for them.
          Fetches the appointment time from the mjc-appointment-time worker. ═══ -->
     <div id="add-cal" style="display:none;max-width:480px;margin:1.75rem auto 0;">
-      <div style="background:#161614;border:1px solid rgba(199,150,63,.30);border-radius:16px;padding:1.35rem 1.35rem 1.45rem;text-align:center;">
-        <p style="font-size:1rem;font-weight:800;color:#F8F7F3;margin:0 0 .35rem;letter-spacing:-.01em;">📅 Put the call on your calendar</p>
+      <div style="background:#FFFFFF;border:1px solid rgba(199,150,63,.30);border-radius:16px;padding:1.35rem 1.35rem 1.45rem;text-align:center;">
+        <p style="font-size:1rem;font-weight:800;color:#1A1917;margin:0 0 .35rem;letter-spacing:-.01em;">📅 Put the call on your calendar</p>
         <p id="add-cal-when" style="font-size:.8125rem;color:rgba(199,150,63,.95);font-weight:700;margin:0 0 1.1rem;line-height:1.5;"></p>
         <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;">
           <a id="add-cal-google" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(180deg,#C7963F,#AB8032);color:#0D0D0D;font-weight:800;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;">Google Calendar</a>
-          <a id="add-cal-ics" download="strategy-session.ics" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:#F8F7F3;font-weight:700;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;border:1px solid rgba(248,247,243,.25);">Apple / Outlook</a>
+          <a id="add-cal-ics" download="strategy-session.ics" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:#1A1917;font-weight:700;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;border:1px solid rgba(26,25,23,.25);">Apple / Outlook</a>
         </div>
-        <p style="font-size:.7rem;color:rgba(248,247,243,.35);margin:.9rem 0 0;line-height:1.5;">So it's on your calendar and you don't miss it. Your Zoom link is also in your email &amp; text.</p>
+        <p style="font-size:.7rem;color:rgba(26,25,23,.35);margin:.9rem 0 0;line-height:1.5;">So it's on your calendar and you don't miss it. Your Zoom link is also in your email &amp; text.</p>
       </div>
     </div>
     <script>
@@ -278,10 +278,10 @@
 
     <!-- Supporting copy + confirm button -->
     <div class="rv d2" style="max-width:480px;margin:1.75rem auto 0;">
-      <p style="font-size:.9375rem;color:rgba(248,247,243,.5);line-height:1.78;font-weight:400;margin:0 0 1.25rem;">
+      <p style="font-size:.9375rem;color:rgba(26,25,23,.5);line-height:1.78;font-weight:400;margin:0 0 1.25rem;">
         Check your email and phone — your confirmation and reminders just went out with the exact time and Zoom link.
       </p>
-      <p style="font-size:.9375rem;color:rgba(248,247,243,.65);line-height:1.6;font-weight:600;margin:0 0 1.25rem;">
+      <p style="font-size:.9375rem;color:rgba(26,25,23,.65);line-height:1.6;font-weight:600;margin:0 0 1.25rem;">
         To lock in your slot, tap below and hit send:
       </p>
       <div style="display:flex;justify-content:center;">
@@ -292,26 +292,26 @@
           Text "Yes" To Confirm
         </a>
       </div>
-      <p style="font-size:.75rem;color:rgba(248,247,243,.35);margin:0.875rem 0 0;line-height:1.6;">
+      <p style="font-size:.75rem;color:rgba(26,25,23,.35);margin:0.875rem 0 0;line-height:1.6;">
         No-shows lose their slot. A quick reply locks it in.
       </p>
     </div>
 
     <!-- Step cards -->
-    <p class="rv d3" style="font-size:.8125rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(248,247,243,.3);margin:2.5rem auto .875rem;">Then do these two things before our call:</p>
+    <p class="rv d3" style="font-size:.8125rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(26,25,23,.3);margin:2.5rem auto .875rem;">Then do these two things before our call:</p>
     <div class="rv d3" style="display:flex;flex-direction:column;gap:.875rem;max-width:460px;margin:0 auto;text-align:left;">
       <div class="step-card">
         <div class="step-num">1</div>
         <div>
-          <p style="font-size:.9375rem;font-weight:700;color:#F8F7F3;margin:0 0 .2rem;">Watch the pre-call video below</p>
-          <p style="font-size:.8125rem;color:rgba(248,247,243,.45);margin:0;line-height:1.6;">Two minutes. So when we get on, we skip the warm-up and go straight to your numbers.</p>
+          <p style="font-size:.9375rem;font-weight:700;color:#1A1917;margin:0 0 .2rem;">Watch the pre-call video below</p>
+          <p style="font-size:.8125rem;color:rgba(26,25,23,.45);margin:0;line-height:1.6;">Two minutes. So when we get on, we skip the warm-up and go straight to your numbers.</p>
         </div>
       </div>
       <div class="step-card">
         <div class="step-num">2</div>
         <div>
-          <p style="font-size:.9375rem;font-weight:700;color:#F8F7F3;margin:0 0 .2rem;">Bring three things to the call</p>
-          <p style="font-size:.8125rem;color:rgba(248,247,243,.45);margin:0;line-height:1.6;">Revenue ballpark, current appointment volume, and (if you've run ads) read access to your Meta account.</p>
+          <p style="font-size:.9375rem;font-weight:700;color:#1A1917;margin:0 0 .2rem;">Bring three things to the call</p>
+          <p style="font-size:.8125rem;color:rgba(26,25,23,.45);margin:0;line-height:1.6;">Revenue ballpark, current appointment volume, and (if you've run ads) read access to your Meta account.</p>
         </div>
       </div>
     </div>
@@ -357,7 +357,7 @@
 <!-- ══════════════════════════════════
      PREP CHECKLIST — THREE THINGS
 ══════════════════════════════════ -->
-<section style="background:#161614;padding:5.5rem 1.25rem;">
+<section style="background:#FFFFFF;padding:5.5rem 1.25rem;">
   <div style="max-width:680px;margin:0 auto;">
 
     <div class="rv" style="text-align:center;margin-bottom:3rem;">
@@ -365,15 +365,15 @@
         <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
         <span class="ey" style="color:rgba(199,150,63,.7);">Step 2 — Before We Meet</span>
       </div>
-      <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#F8F7F3;line-height:1.08;letter-spacing:-.03em;margin:0 0 .75rem;">
+      <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#1A1917;line-height:1.08;letter-spacing:-.03em;margin:0 0 .75rem;">
         Bring These <span style="color:#C7963F;">Three Things</span>
       </h2>
-      <p style="font-size:.9375rem;color:rgba(248,247,243,.5);line-height:1.75;max-width:480px;margin:0 auto;font-weight:500;">
+      <p style="font-size:.9375rem;color:rgba(26,25,23,.5);line-height:1.75;max-width:480px;margin:0 auto;font-weight:500;">
         The more of this you have ready, the faster we move and the more specific your plan gets.
       </p>
     </div>
 
-    <div class="rv d1" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:2rem 2.25rem;">
+    <div class="rv d1" style="background:rgba(26,25,23,.03);border:1px solid rgba(26,25,23,.09);border-radius:16px;padding:2rem 2.25rem;">
       <ul class="prep-list">
 
         <li>
@@ -381,7 +381,7 @@
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </span>
           <div>
-            <span><b style="font-weight:700;color:#F8F7F3;">Your rough monthly revenue.</b></span>
+            <span><b style="font-weight:700;color:#1A1917;">Your rough monthly revenue.</b></span>
             <p class="sub">Ballpark is fine. I need it to size the math on whether 100 appointments in 100 days makes sense for your market.</p>
           </div>
         </li>
@@ -391,7 +391,7 @@
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </span>
           <div>
-            <span><b style="font-weight:700;color:#F8F7F3;">Current appointment volume + what you've tried.</b></span>
+            <span><b style="font-weight:700;color:#1A1917;">Current appointment volume + what you've tried.</b></span>
             <p class="sub">How many real sales appointments hit your calendar last month, and which agencies / channels you've burned on.</p>
           </div>
         </li>
@@ -401,7 +401,7 @@
             <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
           </span>
           <div>
-            <span><b style="font-weight:700;color:#F8F7F3;">Read access to your Meta ad account</b> <span style="color:rgba(248,247,243,.45);">(if you've run ads).</span></span>
+            <span><b style="font-weight:700;color:#1A1917;">Read access to your Meta ad account</b> <span style="color:rgba(26,25,23,.45);">(if you've run ads).</span></span>
             <p class="sub">I'll run the Agency Audit live on the call and save us fifteen minutes of preamble. Email it to <a href="mailto:spencer@seasonproofgrowth.com">spencer@seasonproofgrowth.com</a> before we get on.</p>
           </div>
         </li>
@@ -466,7 +466,7 @@
 <!-- ══════════════════════════════════
      GUARANTEE RESTATE
 ══════════════════════════════════ -->
-<section style="background:#0D0D0D;padding:5rem 1.25rem;">
+<section style="background:#FBFAF7;padding:5rem 1.25rem;">
   <div style="max-width:680px;margin:0 auto;">
 
     <div class="rv" style="text-align:center;margin-bottom:2rem;">
@@ -474,7 +474,7 @@
         <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
         <span class="ey" style="color:rgba(199,150,63,.7);">The Guarantee — In Writing</span>
       </div>
-      <h2 style="font-size:clamp(1.5rem,3.6vw,2rem);font-weight:800;color:#F8F7F3;line-height:1.15;letter-spacing:-.02em;margin:0 auto;max-width:560px;">
+      <h2 style="font-size:clamp(1.5rem,3.6vw,2rem);font-weight:800;color:#1A1917;line-height:1.15;letter-spacing:-.02em;margin:0 auto;max-width:560px;">
         100 exclusive sales appointment opportunities in 100 days. <span style="color:#C7963F;">If we miss:</span>
       </h2>
     </div>
@@ -493,10 +493,10 @@
 <!-- ══════════════════════════════════
      RESCHEDULE LINE
 ══════════════════════════════════ -->
-<section style="background:#0D0D0D;padding:0 1.25rem 4rem;">
+<section style="background:#FBFAF7;padding:0 1.25rem 4rem;">
   <div style="max-width:680px;margin:0 auto;text-align:center;">
-    <p style="font-size:.875rem;color:rgba(248,247,243,.45);line-height:1.6;margin:0;">
-      Need to reschedule? Use the link in your confirmation email — or text <a href="sms:+15012363920" style="color:#F8F7F3;text-decoration:underline;">(501) 236-3920</a> and we'll move it.
+    <p style="font-size:.875rem;color:rgba(26,25,23,.45);line-height:1.6;margin:0;">
+      Need to reschedule? Use the link in your confirmation email — or text <a href="sms:+15012363920" style="color:#1A1917;text-decoration:underline;">(501) 236-3920</a> and we'll move it.
     </p>
   </div>
 </section>
@@ -505,13 +505,13 @@
 <!-- ══════════════════════════════════
      FOOTER
 ══════════════════════════════════ -->
-<footer style="background:#0D0D0D;border-top:1px solid rgba(255,255,255,.06);padding:3rem 1.25rem 2.5rem;">
+<footer style="background:#FBFAF7;border-top:1px solid rgba(26,25,23,.06);padding:3rem 1.25rem 2.5rem;">
   <div style="max-width:860px;margin:0 auto;">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(255,255,255,.06);">
-      <span style="font-weight:900;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#F8F7F3;">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(26,25,23,.06);">
+      <span style="font-weight:900;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#1A1917;">
         More<span style="color:#C7963F;">JobCalls</span>
       </span>
-      <p style="font-size:.8125rem;color:rgba(248,247,243,.3);margin:0;">© 2026 SeasonProof Growth LLC · One deck builder per market.</p>
+      <p style="font-size:.8125rem;color:rgba(26,25,23,.3);margin:0;">© 2026 SeasonProof Growth LLC · One deck builder per market.</p>
     </div>
   </div>
 </footer>
