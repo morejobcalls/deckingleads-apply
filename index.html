@@ -41,15 +41,15 @@
     theme: {
       extend: {
         colors: {
-          bg: '#000000',
-          surface: '#0D0D0D',
-          elevated: '#141414',
-          charcoal: '#141414',
-          border: '#222222',
-          'border-strong': '#2A2A2A',
-          ink: '#F5F2EB',
-          'ink-muted': '#9CA3AF',
-          'ink-subtle': '#6B7280',
+          bg: '#FBFAF7',
+          surface: '#FFFFFF',
+          elevated: '#FFFFFF',
+          charcoal: '#F3EEE4',
+          border: '#E4DECF',
+          'border-strong': '#D8D0BE',
+          ink: '#1A1917',
+          'ink-muted': '#6B6A63',
+          'ink-subtle': '#8A8780',
           gold: '#c7963f',
           'gold-deep': '#ab8032',
           'gold-soft': 'rgba(199, 150, 63, 0.12)',
@@ -84,8 +84,8 @@
   .gold-gradient { background-image: linear-gradient(to bottom, #c7963f 0%, #ab8032 100%); }
   .gold-gradient-hover:hover { background-image: linear-gradient(to bottom, #d4a14a 0%, #ba8f3b 100%); }
 
-  .sec-dark { background:#000000; color:#F5F2EB; }
-  .sec-charcoal { background:#141414; color:#F5F2EB; }
+  .sec-dark { background:#FBFAF7; color:#1A1917; }
+  .sec-charcoal { background:#F3EEE4; color:#1A1917; }
   .sec-paper { background:#FFFFFF; color:#171717; }
   .sec-cream { background:#F5F2EB; color:#171717; }
 
@@ -379,13 +379,13 @@
     height: auto;
     object-fit: contain;
     display: block;
-    filter: grayscale(1);
+    filter: grayscale(1) brightness(0);
   }
-  .logo-cell--invert img { filter: grayscale(1) brightness(0) invert(1); }
-  /* White-bg logos: invert (white→black, dark mark→light) then screen-blend so the
-     now-black background drops out against the dark page bg, leaving only the light mark visible. */
+  .logo-cell--invert img { filter: grayscale(1) brightness(0); }
+  /* LIGHT-bg reskin: white-bg logos multiply-blend so the white background drops out
+     against the cream page, leaving the (grayscaled) dark mark visible. */
   .logo-cell--card { background: transparent; padding: 0 6px; border-radius: 0; }
-  .logo-cell--card img { filter: grayscale(1) invert(1); mix-blend-mode: screen; max-height: 56px; max-width: 188px; }
+  .logo-cell--card img { filter: grayscale(1); mix-blend-mode: multiply; max-height: 56px; max-width: 188px; }
 </style>
 <!-- Microsoft Clarity (heat maps + session recordings + analytics) -->
 <script type="text/javascript">
@@ -722,7 +722,9 @@
 </section>
 
 <!-- ============================================== -->
-<!-- APPLY SECTION (V2: moved up + simplified to 4 steps) -->
+<!-- APPLY SECTION — v2-ravi: inline flow HIDDEN; replaced by the pop-up modal below.
+     Kept in the DOM (display:none) so the legacy app-logic IIFE inits without error.
+     CTAs (a[href="#apply"]) are intercepted by the modal script to open the pop-up. -->
 <!-- ============================================== -->
 <section id="apply" class="sec-dark scroll-mt-4">
   <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20">
@@ -755,8 +757,17 @@
       </p>
     </div>
 
-    <!-- Form card (V2: 4 steps) -->
-    <div id="form-card" class="max-w-xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply p-7 sm:p-10">
+    <!-- v2-ravi: inline form replaced by the pop-up modal. This section keeps the guarantee
+         reiteration + a CTA that opens the modal. -->
+    <div class="max-w-xl mx-auto text-center">
+      <button type="button" data-open-apply class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+        <span class="text-base sm:text-lg font-black tracking-wider uppercase">See If Your Market Is Open</span>
+        <span class="text-[13px] sm:text-sm font-medium opacity-85">Takes 60 seconds →</span>
+      </button>
+    </div>
+
+    <!-- Form card (V2: 4 steps) — HIDDEN in v2-ravi (replaced by modal); kept in DOM so the legacy IIFE inits without error. -->
+    <div id="form-card" class="max-w-xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply p-7 sm:p-10" style="display:none">
 
       <div class="flex items-start justify-between mb-7">
         <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-paper-subtle">Step 1 of 5</span>
@@ -1426,6 +1437,314 @@
     setTimeout(onResize, 250);
     updateRail();
   }
+})();
+</script>
+
+<!-- ════════════════════════════════════════════════════════════
+     V2-RAVI — POP-UP APPLICATION MODAL (light theme)
+     Self-contained: namespaced #mc-* IDs + own IIFE. Opens from any
+     a[href="#apply"] / [data-open-apply] CTA. Ports v1 logic verbatim
+     (isICP, both calendars, Meta Lead+dedupe, GHL webhook w/ hashed PII)
+     and adds: contact-early order, bottleneck step, progress bar,
+     calendar preload after revenue. v1 funnel untouched (this is /next/).
+════════════════════════════════════════════════════════════ -->
+<style>
+  /* Ravi-style pop-up (like-for-like): LIGHT card on a near-opaque dark backdrop
+     (page barely visible behind). Centered; keeps the calendar scroll/height fix. */
+  #mc-overlay{position:fixed;inset:0;z-index:10000;display:none;align-items:flex-start;justify-content:center;
+    background:rgba(0,0,0,.9);padding:24px 16px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  #mc-overlay.open{display:flex;}
+  #mc-card{position:relative;width:100%;max-width:600px;margin:auto;background:#FFFFFF;border-radius:20px;
+    box-shadow:0 24px 70px rgba(0,0,0,.45);padding:26px 26px 30px;font-family:'Inter',system-ui,sans-serif;animation:mcIn .3s cubic-bezier(.16,1,.3,1);}
+  @keyframes mcIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  #mc-close{position:absolute;top:15px;right:15px;width:34px;height:34px;border:none;border-radius:50%;
+    background:#F0ECE4;color:#6B655C;font-size:16px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+  #mc-close:hover{background:#E6E0D5;}
+  #mc-top{display:flex;align-items:center;gap:14px;margin-bottom:26px;padding-right:40px;}
+  #mc-back{border:none;background:none;color:#8A8578;font-size:13px;font-weight:600;cursor:pointer;display:none;align-items:center;gap:4px;padding:4px 0;font-family:inherit;white-space:nowrap;}
+  #mc-back:hover{color:#1A1917;}
+  #mc-back.show{display:inline-flex;}
+  #mc-bar{flex:1;height:5px;border-radius:99px;background:#ECE6DA;overflow:hidden;}
+  #mc-bar-fill{height:100%;width:8%;border-radius:99px;background:linear-gradient(90deg,#C7963F,#AB8032);transition:width .35s cubic-bezier(.16,1,.3,1);}
+  .mc-step{display:none;}
+  .mc-step.active{display:block;animation:mcFade .22s ease-out;}
+  @keyframes mcFade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .mc-q{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.18;color:#1A1917;margin:0 0 6px;}
+  .mc-sub{font-size:14px;color:#7A7870;margin:0 0 22px;line-height:1.5;}
+  .mc-opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid #E2DBCE;border-radius:12px;
+    padding:16px 18px;font-size:15px;font-weight:600;color:#1A1917;cursor:pointer;margin-bottom:11px;
+    transition:border-color .15s,background .15s,box-shadow .15s,transform .05s;font-family:inherit;}
+  .mc-opt:hover{border-color:#C7963F;background:#FFFBF3;box-shadow:0 2px 10px rgba(199,150,63,.12);}
+  .mc-opt:active{transform:translateY(1px);}
+  .mc-opt .mc-optsub{display:block;font-weight:500;font-size:12.5px;color:#8A8780;margin-top:3px;}
+  .mc-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .mc-grid2 .mc-opt{margin-bottom:0;text-align:center;}
+  .mc-input{width:100%;padding:15px 17px;font-size:15px;font-weight:600;color:#1A1917;background:#fff;
+    border:1px solid #E2DBCE;border-radius:12px;font-family:inherit;margin-bottom:12px;}
+  .mc-input:focus{outline:none;border-color:#1A1917;}
+  .mc-input::placeholder{color:#A8A49B;font-weight:500;}
+  .mc-err{font-size:12.5px;color:#DC2626;font-weight:600;margin:-6px 0 12px;display:none;}
+  .mc-err.show{display:block;}
+  .mc-phone-row{display:flex;gap:8px;align-items:stretch;}
+  .mc-flag{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:0 14px;height:52px;background:#F3EEE4;border:1px solid #E2DBCE;border-radius:12px;font-weight:600;font-size:15px;color:#1A1917;}
+  .mc-next{display:inline-flex;align-items:center;gap:6px;margin-left:auto;background:none;color:#1A1917;
+    border:none;padding:10px 4px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
+  .mc-next:hover{color:#AB8032;}
+  .mc-next-row{display:flex;margin-top:10px;}
+  .mc-fine{font-size:11px;color:#9A968D;line-height:1.5;margin:14px 0 0;}
+  #mc-cal-wrap{margin:0 -6px;background:#fff;border-radius:14px;overflow:hidden;}
+  /* Tall + inner-scrollable so the GHL "Enter Details" + Schedule button is always reachable. */
+  #mc-cal{width:100%;height:74vh;min-height:540px;border:0;display:block;background:#fff;}
+  #mc-spin{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 0;text-align:center;}
+  .mc-spinner{width:44px;height:44px;border:4px solid #ECE6DA;border-top-color:#1A1917;border-radius:50%;animation:mcSpin 1s linear infinite;margin-bottom:18px;}
+  @keyframes mcSpin{to{transform:rotate(360deg)}}
+  body.mc-lock{overflow:hidden;}
+  @media(max-width:640px){#mc-card{padding:22px 18px 26px;border-radius:16px;}.mc-q{font-size:21px;}#mc-cal{height:80vh;min-height:520px;}}
+</style>
+
+<div id="mc-overlay" role="dialog" aria-modal="true" aria-label="Book a free call">
+  <div id="mc-card">
+    <button id="mc-close" type="button" aria-label="Close">&#10005;</button>
+    <div id="mc-top">
+      <button id="mc-back" type="button">&#8249; Back</button>
+      <div id="mc-bar"><div id="mc-bar-fill"></div></div>
+    </div>
+
+    <div class="mc-step active" data-step="1">
+      <h3 class="mc-q">Do you own — or are you actively building — a deck contracting business?</h3>
+      <p class="mc-sub">We'll route you to the right place either way.</p>
+      <div class="mc-grid2">
+        <button class="mc-opt" data-field="own_business" data-value="yes">Yes</button>
+        <button class="mc-opt" data-field="own_business" data-value="no">No</button>
+      </div>
+    </div>
+
+    <div class="mc-step" data-step="2">
+      <h3 class="mc-q">What's your full name?</h3>
+      <p class="mc-sub">First and last name.</p>
+      <input id="mc-name" class="mc-input" type="text" autocomplete="name" placeholder="First and last name">
+      <p id="mc-name-err" class="mc-err">Please enter your first and last name.</p>
+      <div class="mc-next-row"><button class="mc-next" type="button" data-next>Next &#8594;</button></div>
+    </div>
+
+    <div class="mc-step" data-step="3">
+      <h3 class="mc-q">Where should we send the call details?</h3>
+      <p class="mc-sub">You'll get a text with the Zoom link and a reminder before the call.</p>
+      <input id="mc-email" class="mc-input" type="email" autocomplete="email" placeholder="Email address">
+      <p id="mc-email-err" class="mc-err">Please enter a valid email address.</p>
+      <div class="mc-phone-row">
+        <span class="mc-flag">🇺🇸 +1</span>
+        <input id="mc-phone" class="mc-input" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Phone number" maxlength="14" style="flex:1;margin-bottom:0;">
+      </div>
+      <p id="mc-phone-err" class="mc-err" style="margin-top:12px;">Please enter a valid 10-digit phone number.</p>
+      <p class="mc-fine">By continuing, you agree to receive SMS/text reminders about your call. Standard rates may apply. Reply STOP to opt out.</p>
+      <div class="mc-next-row"><button class="mc-next" type="button" data-next>Next &#8594;</button></div>
+    </div>
+
+    <div class="mc-step" data-step="4">
+      <h3 class="mc-q">What's the biggest thing holding your business back right now?</h3>
+      <p class="mc-sub">Be honest — it helps us diagnose the right fix on the call.</p>
+      <button class="mc-opt" data-field="bottleneck" data-value="not_enough_appts">Not enough qualified appointments<span class="mc-optsub">I close when I'm in front of them</span></button>
+      <button class="mc-opt" data-field="bottleneck" data-value="feast_famine">Feast or famine — my lead flow is unpredictable</button>
+      <button class="mc-opt" data-field="bottleneck" data-value="referral_ceiling">Too reliant on referrals &amp; word-of-mouth</button>
+      <button class="mc-opt" data-field="bottleneck" data-value="not_sure">Not sure — I just want more good jobs</button>
+    </div>
+
+    <div class="mc-step" data-step="5">
+      <h3 class="mc-q">What's your annual revenue?</h3>
+      <p class="mc-sub">Rough range is fine. No wrong answers.</p>
+      <button class="mc-opt" data-field="revenue" data-value="under_500k">Below $500,000</button>
+      <button class="mc-opt" data-field="revenue" data-value="500k_1m">$500,000 – $1,000,000</button>
+      <button class="mc-opt" data-field="revenue" data-value="1m_3m">$1,000,000 – $3,000,000</button>
+      <button class="mc-opt" data-field="revenue" data-value="3m_plus">$3,000,000+</button>
+    </div>
+
+    <div class="mc-step" data-step="6">
+      <h3 class="mc-q">How soon would you realistically want to begin?</h3>
+      <p class="mc-sub">No wrong answers — helps us prioritize your application.</p>
+      <div class="mc-grid2">
+        <button class="mc-opt" data-field="timing" data-value="asap">ASAP</button>
+        <button class="mc-opt" data-field="timing" data-value="2_4_weeks">Next 2–4 weeks</button>
+        <button class="mc-opt" data-field="timing" data-value="later">Later this year</button>
+        <button class="mc-opt" data-field="timing" data-value="researching">Just researching</button>
+      </div>
+    </div>
+
+    <div class="mc-step" data-step="7">
+      <h3 class="mc-q">What's your service-area ZIP code?</h3>
+      <p class="mc-sub">We use this to check if your market is still open. One deck builder per market.</p>
+      <input id="mc-zip" class="mc-input" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="ZIP code" maxlength="5">
+      <p id="mc-zip-err" class="mc-err">Please enter a valid 5-digit US ZIP code.</p>
+      <div class="mc-next-row"><button class="mc-next" type="button" data-next-zip>Next &#8594;</button></div>
+    </div>
+
+    <div class="mc-step" data-step="8">
+      <div style="text-align:center;margin-bottom:14px;">
+        <h3 class="mc-q" style="margin-bottom:4px;">One last step — pick a time that works for you</h3>
+        <p class="mc-sub" style="margin-bottom:0;">Free call. We'll map out exactly what we'd build for your business.</p>
+      </div>
+      <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
+      <div id="mc-cal-wrap" style="display:none;"><iframe id="mc-cal" src="" title="Book your Deck Jobs Strategy Session" scrolling="yes"></iframe></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+(function(){
+  var overlay=document.getElementById('mc-overlay'); if(!overlay) return;
+  var card=document.getElementById('mc-card');
+  var barFill=document.getElementById('mc-bar-fill');
+  var backBtn=document.getElementById('mc-back');
+  var closeBtn=document.getElementById('mc-close');
+  var steps=overlay.querySelectorAll('.mc-step');
+  var TOTAL=8, PROG={1:8,2:40,3:65,4:75,5:82,6:90,7:96,8:100};
+  var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
+
+  var attribution=(function(){
+    try{var raw=localStorage.getItem('dl_attribution'); if(raw){var p=JSON.parse(raw); if(p&&p._ts) return p;}}catch(e){}
+    var out={}, params=new URLSearchParams(location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(function(k){var v=params.get(k); if(v) out[k]=v;});
+    out.landing_url=location.href; out.referrer=document.referrer||''; out._ts=Date.now();
+    try{localStorage.setItem('dl_attribution',JSON.stringify(out));}catch(e){}
+    return out;
+  })();
+
+  var CAL_ICP='https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
+  var CAL_NON_ICP='https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
+
+  function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='under_500k'||d.revenue==='500k_1m') return false; return true; }
+  async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
+
+  function show(n){
+    current=n;
+    steps.forEach(function(s){s.classList.remove('active');});
+    var t=overlay.querySelector('.mc-step[data-step="'+n+'"]'); if(t) t.classList.add('active');
+    barFill.style.width=(PROG[n]||8)+'%';
+    backBtn.classList.toggle('show', n>1 && n<8);
+    if(card) card.scrollTop=0;
+    setTimeout(function(){var f=t&&t.querySelector('input'); if(f) try{f.focus({preventScroll:true});}catch(e){}},60);
+  }
+  function openModal(){ overlay.classList.add('open'); document.body.classList.add('mc-lock'); if(!submitted && current<8) show(current); }
+  function closeModal(){ overlay.classList.remove('open'); document.body.classList.remove('mc-lock'); }
+
+  closeBtn.addEventListener('click',closeModal);
+  overlay.addEventListener('click',function(e){ if(e.target===overlay) closeModal(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&overlay.classList.contains('open')) closeModal(); });
+  backBtn.addEventListener('click',function(){ if(current>1) show(current-1); });
+
+  overlay.querySelectorAll('.mc-opt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      formData[btn.dataset.field]=btn.dataset.value;
+      if(btn.dataset.field==='revenue') preloadCalendar(); // ICP now determinable → preload correct calendar
+      if(current<TOTAL) show(current+1);
+    });
+  });
+
+  var nameEl=document.getElementById('mc-name'), nameErr=document.getElementById('mc-name-err');
+  var emailEl=document.getElementById('mc-email'), emailErr=document.getElementById('mc-email-err');
+  var phoneEl=document.getElementById('mc-phone'), phoneErr=document.getElementById('mc-phone-err');
+  phoneEl.addEventListener('input',function(){
+    var d=phoneEl.value.replace(/\D/g,'').slice(0,10), f=d;
+    if(d.length>=6) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+    else if(d.length>=3) f='('+d.slice(0,3)+') '+d.slice(3);
+    phoneEl.value=f;
+  });
+  var zipEl=document.getElementById('mc-zip'), zipErr=document.getElementById('mc-zip-err');
+  zipEl.addEventListener('input',function(){ zipEl.value=zipEl.value.replace(/\D/g,'').slice(0,5); if(zipEl.value.length===5) zipErr.classList.remove('show'); });
+
+  overlay.querySelectorAll('[data-next]').forEach(function(b){
+    b.addEventListener('click',function(){
+      if(current===2){
+        var name=nameEl.value.trim(), parts=name.split(/\s+/);
+        var ok=parts.length>=2 && parts[0].length>=2 && parts[1].length>=1;
+        nameErr.classList.toggle('show',!ok); if(!ok){nameEl.focus();return;}
+        formData.name=name; show(3);
+      } else if(current===3){
+        var email=emailEl.value.trim(), phone=phoneEl.value.replace(/\D/g,'');
+        var eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), pok=phone.length===10;
+        emailErr.classList.toggle('show',!eok); phoneErr.classList.toggle('show',!pok);
+        if(!eok){emailEl.focus();return;} if(!pok){phoneEl.focus();return;}
+        formData.email=email; formData.phone='+1'+phone; show(4);
+      }
+    });
+  });
+  overlay.querySelector('[data-next-zip]').addEventListener('click',function(){
+    var zip=zipEl.value.replace(/\D/g,'');
+    if(zip.length!==5){ zipErr.classList.add('show'); zipEl.focus(); return; }
+    formData.zip=zip; submitAndShowCalendar();
+  });
+
+  function buildCalUrl(){
+    var u=new URL(icp?CAL_ICP:CAL_NON_ICP);
+    if(formData.name){ var p=formData.name.trim().split(/\s+/); u.searchParams.set('first_name',p[0]||''); if(p.length>1) u.searchParams.set('last_name',p.slice(1).join(' '));
+      // Also pass combined name so a single "Full Name" field on the GHL calendar pre-fills reliably.
+      u.searchParams.set('name',formData.name); u.searchParams.set('full_name',formData.name); }
+    if(formData.email) u.searchParams.set('email',formData.email);
+    if(formData.phone) u.searchParams.set('phone',formData.phone);
+    if(formData.zip)   u.searchParams.set('zip',formData.zip);
+    return u.toString();
+  }
+  function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true; try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
+
+  function submitAndShowCalendar(){
+    icp=isICP(formData);
+    show(8);
+    try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
+    setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },1400);
+    if(submitted) return; submitted=true;
+
+    formData.icp=icp; formData.submitted_at=new Date().toISOString();
+    var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
+    formData.event_id=event_id;
+
+    if(icp && typeof fbq==='function'){ try{ fbq('track','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
+    try{ sessionStorage.setItem('dl_qualify_data',JSON.stringify(formData)); sessionStorage.setItem('dl_qualify_icp',icp?'1':'0'); }catch(e){}
+
+    (async function(){
+      try{
+        var email=formData.email, phone=(formData.phone||'').replace(/\D/g,'');
+        var phoneForHash=phone.length===11?phone:(phone.length===10?'1'+phone:phone);
+        var parts=formData.name.split(/\s+/), first_name=parts[0]||'', last_name=parts.slice(1).join(' ');
+        var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim()),sha256Hex((formData.zip||'').toString().trim())]);
+        var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
+        var payload={first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,postal_code:formData.zip,
+          own_business:formData.own_business,revenue:formData.revenue,timing:formData.timing,bottleneck:formData.bottleneck,icp:icp?'yes':'no',
+          event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],zip_sha256:h[4],fbp:fbp,
+          client_user_agent:navigator.userAgent||'',event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
+          source:'deckingleads.com lp v1',variant:'v1',lp_version:'v2-ravi',page_url:location.href,
+          utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
+          utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
+          landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
+        await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+      }catch(e){ console.warn('[v2-ravi] GHL webhook failed:',e); }
+    })();
+  }
+
+  // Wire every existing CTA (anchors to #apply) to open the modal instead of scrolling.
+  document.querySelectorAll('a[href="#apply"], [data-open-apply]').forEach(function(el){
+    el.addEventListener('click',function(e){ e.preventDefault(); openModal(); });
+  });
+  window.__openApply=openModal; // exposed for QA
+
+  // ── Capture the just-booked appointment reference so the confirmation page can add-to-calendar.
+  //    GHL exposes the contactId via the 'set-sticky-contacts' message and the calendarId via
+  //    'msgsndr-booking-complete', but NOT the appointment time. So we stash {contactId,calendarId}
+  //    in localStorage (survives the post-booking redirect, same origin); the confirmation page
+  //    then fetches the time from the mjc-appointment-time Worker. ──
+  (function(){
+    var contactId=null;
+    window.addEventListener('message', function(e){
+      try{
+        var d=e.data; if(!Array.isArray(d)) return;
+        if(d[0]==='set-sticky-contacts' && typeof d[2]==='string'){
+          var m=d[2].match(/"id":"([^"]+)"/); if(m) contactId=m[1];
+        } else if(d[0]==='msgsndr-booking-complete' && d[1] && d[1].calendarId){
+          try{ localStorage.setItem('mjc_booked_ref', JSON.stringify({contactId:contactId, calendarId:d[1].calendarId, t:Date.now()})); }catch(_){}
+        }
+      }catch(_){}
+    }, false);
+  })();
 })();
 </script>
 
