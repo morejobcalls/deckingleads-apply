@@ -26,6 +26,15 @@ An add-to-calendar block was built and verified against test params (saved WIP: 
 
 ---
 
+## v2 — LIVE (cutover 2026-07-05)
+
+- **Tag:** `funnel-v2-2026-07-05` · **Status:** LIVE at root (apply.morejobcalls.com).
+- **What shipped:** light Ravi-mirror LP + a pop-up multi-step application (contact-early, progress bar, single-click, 4-option bottleneck), calendar-last (both ICP/non-ICP GHL calendars), and an **add-to-calendar** on the confirmation pages powered by the `mjc-appointment-time` Cloudflare Worker (fetches the appointment time from the GHL API, since GHL won't pass it via redirect or postMessage). Confirmation pages (`/confirmation/` + `/scheduled/`) reskinned to light. Spencer's copy verbatim.
+- **Cutover mechanics:** root `index.html` replaced with the v2 LP; `robots` flipped noindex→index; lead webhook `source`/`variant` matched to v1 (`'deckingleads.com lp v1'` / `'v1'`) + new `lp_version:'v2-ravi'` tag so existing GHL automations keep firing while v2 leads stay identifiable.
+- **Verified before flip:** desktop + mobile layout, real bookings (Spencer's phone), Meta pixel + Lead, GHL webhook, add-to-calendar with correct time.
+- **Instant rollback:** `git checkout funnel-v1-2026-07-02 -- index.html && git push` (~2 min) restores the v1 front page. (Confirmation pages stay v2 but degrade gracefully for v1 traffic — add-to-cal is ref-gated.)
+- **Cleanup TODO:** `/next/` folder is now a redundant noindex duplicate — safe to delete. `mjc-appointment-time` Worker + its PIT secret are load-bearing (keep).
+
 ## v2 — PLANNED (in design as of 2026-07-02)
 
 **Goal:** mirror Ravi Abuvala's funnel STRUCTURE / UI end-to-end, keeping **Spencer's copy verbatim** (do not change copy).
