@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<title>More Deck Jobs. Guaranteed. | DeckingLeads</title>
+<title>100 Sales Appointments In 100 Days, Guaranteed | MoreJobCalls.com</title>
 <meta name="description" content="100 exclusive sales appointment opportunities in 100 days. Or you get paid in 2 ways. For deck builders doing $1M+/yr. One builder per market.">
 <meta name="robots" content="index, follow">
 
@@ -418,27 +418,27 @@
     <!-- Eyebrow -->
     <div class="inline-flex items-center gap-2 mb-3 sm:mb-5 px-2.5 py-1 rounded-full border border-gold/40" style="background: rgba(199, 150, 63, 0.10);">
       <span class="w-1.5 h-1.5 rounded-full bg-gold" aria-hidden="true"></span>
-      <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">More Deck Jobs Guaranteed</span>
+      <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">#1 Deck Job AI Solution of 2026</span>
     </div>
 
     <!-- H1 -->
     <h1 class="display-lg text-[28px] leading-[1.1] sm:text-[50px] sm:leading-[1.05] mb-4 sm:mb-8 max-w-3xl mx-auto">
-      Get 100+ Sales Appointments In 100 Days <span class="text-gold">Or You Get Paid In 2 Ways:</span>
+      20 Deck Jobs <span class="text-gold">in 100 Days</span>
     </h1>
 
     <!-- Subheadline -->
     <p class="text-sm sm:text-lg text-ink-muted max-w-xl mx-auto mb-4 sm:mb-8 leading-snug">
-      100% Refund + $2,000 Credit
+      The Deck Jobs System Guarantees <span class="text-ink font-semibold">100 Exclusive Sales Appointments in 100 Days</span> With Qualified Homeowners In Your Area. You close 2 of every 10 – that's your 20 deck jobs. Miss the 100? <span class="text-ink font-semibold">100% refund + $2,000 cash paid to you.</span>
     </p>
 
     <!-- CTA -->
     <div class="flex justify-center">
       <a href="#apply" class="cta-btn w-full sm:w-auto inline-flex flex-col items-center justify-center gap-1 px-8 py-3.5 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-        <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
-        <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
+        <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get 20 Deck Jobs</span>
+        <span class="text-[13px] sm:text-sm font-medium opacity-85">Claim Your Zip Code →</span>
       </a>
     </div>
-    <p class="text-[12px] text-ink-subtle mt-3">100+ Contractors Served - $100M+ Jobs Sold</p>
+    <p class="text-[12px] text-ink-subtle mt-3">1 Builder Per Market</p>
 
   </div>
 </section>
@@ -951,7 +951,7 @@
 
       <p class="mb-3"><span class="text-ink-muted font-semibold">Earnings &amp; Results Disclaimer.</span> Results, testimonials, and case studies shown on this page are actual outcomes for specific clients and are not necessarily typical. Your individual results will vary based on your geographic market, business operations, sales process, follow-up speed, advertising spend, and willingness to follow the system as designed. Building a business takes sustained effort and carries risk.</p>
 
-      <p class="mb-3"><span class="text-ink-muted font-semibold">Guarantee Terms.</span> The "100 sales appointment opportunities in 100 days" guarantee referenced on this page is governed exclusively by the written Engagement Agreement signed between you and SeasonProof Growth LLC. Marketing copy is a summary, not a contract. Full guarantee mechanics, qualifying definitions, cooperative obligations, refund procedure, and conditions are detailed in our <a href="/terms/" class="text-gold underline underline-offset-2 hover:text-ink">Terms of Service</a>. No agreement exists between you and SeasonProof Growth LLC until both parties sign the Engagement Agreement.</p>
+      <p class="mb-3"><span class="text-ink-muted font-semibold">Guarantee Terms.</span> The "100 sales appointment opportunities in 100 days" guarantee referenced on this page is governed exclusively by the written Engagement Agreement signed between you and SeasonProof Growth LLC. Marketing copy is a summary, not a contract. Any "100% refund" referenced on this page applies to fees paid directly to MoreJobCalls.com LLC (i.e., management fees); it does not include advertising spend paid to third-party platforms. Full guarantee mechanics, qualifying definitions, cooperative obligations, refund procedure, and conditions are detailed in our <a href="/terms/" class="text-gold underline underline-offset-2 hover:text-ink">Terms of Service</a>. No agreement exists between you and SeasonProof Growth LLC until both parties sign the Engagement Agreement.</p>
 
       <p class="mb-3"><span class="text-ink-muted font-semibold">Testimonials.</span> All testimonials and case studies on this page are from real clients of SeasonProof Growth LLC who have provided consent to be featured. Past client performance is not a representation, prediction, or guarantee of your future performance.</p>
 
@@ -1643,6 +1643,32 @@
   function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='under_500k'||d.revenue==='500k_1m') return false; return true; }
   async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
 
+  // ── Partial-lead capture (funnel v2.1) ──
+  // Fires ONCE, the moment the contact step (email+phone) validates, so leads who
+  // bail on the later questions still reach GHL. Posts to a DEDICATED inbound
+  // webhook (GHL workflow "1a. Partial Lead") — NOT the main lead webhook — so the
+  // "1. New Lead" workflow, its Meta CAPI Lead event, and its notifications never
+  // fire for partials and Meta optimization data stays clean.
+  // KILL SWITCH: empty string = feature OFF (no request is ever sent).
+  var PARTIAL_WEBHOOK_URL='';
+  var partialSent=false;
+  function firePartialLead(){
+    if(partialSent||submitted||!PARTIAL_WEBHOOK_URL) return; partialSent=true;
+    try{
+      var parts=(formData.name||'').trim().split(/\s+/);
+      var payload={lead_stage:'partial',partial_step:'contact-info',
+        first_name:parts[0]||'',last_name:parts.slice(1).join(' '),full_name:formData.name||'',
+        email:formData.email||'',phone:formData.phone||'',
+        own_business:formData.own_business||'',
+        submitted_at:new Date().toISOString(),
+        source:'deckingleads.com lp v1',variant:'v1',lp_version:'v2-ravi',page_url:location.href,
+        utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
+        utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
+        landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
+      fetch(PARTIAL_WEBHOOK_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+    }catch(e){ console.warn('[v2-ravi] partial-lead webhook failed:',e); }
+  }
+
   function show(n){
     current=n;
     steps.forEach(function(s){s.classList.remove('active');});
@@ -1692,7 +1718,7 @@
         var eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), pok=phone.length===10;
         emailErr.classList.toggle('show',!eok); phoneErr.classList.toggle('show',!pok);
         if(!eok){emailEl.focus();return;} if(!pok){phoneEl.focus();return;}
-        formData.email=email; formData.phone='+1'+phone; show(4);
+        formData.email=email; formData.phone='+1'+phone; firePartialLead(); show(4);
       }
     });
   });
@@ -1735,7 +1761,7 @@
         var parts=formData.name.split(/\s+/), first_name=parts[0]||'', last_name=parts.slice(1).join(' ');
         var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim()),sha256Hex((formData.zip||'').toString().trim())]);
         var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
-        var payload={first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,postal_code:formData.zip,
+        var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,postal_code:formData.zip,
           own_business:formData.own_business,revenue:formData.revenue,timing:formData.timing,bottleneck:formData.bottleneck,icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],zip_sha256:h[4],fbp:fbp,
           client_user_agent:navigator.userAgent||'',event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
