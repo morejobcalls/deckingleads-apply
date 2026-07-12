@@ -125,3 +125,11 @@ Contacts created during the test stay tagged `partial-optin` so they can be filt
 
 ### Rollback
 `git checkout main -- index.html yt/index.html` before commit; after ship, revert the commit or restore hero block from this entry's "before" strings.
+
+---
+
+## v2.3 — Legal entity sweep: SeasonProof Growth LLC → MoreJobCalls.com LLC (2026-07-11)
+
+- **What:** All footer legal references (Guarantee Terms, Testimonials, No Affiliation, © line) now name **MoreJobCalls.com LLC** as the contracting entity, matching the 2026-07-03 entity switch and the already-rebranded /terms/ + /privacy/ (which correctly keep SeasonProof Growth LLC as a named affiliate/former name — untouched).
+- **Files:** root, /yt/, /yt/scheduled/, /confirmation/, /qualified/, /scheduled/, /scheduling/, /a/ /b/ /c/ /d/, /next/* — every clean, tracked, deployed page.
+- **Skipped:** /e/–/h/ (untracked, not deployed), index-pre-tyler archive, /v2/–/v6/ (working copies carry other sessions' uncommitted edits — their deployed versions still say SPG LLC; fix when those dirs are next committed).
