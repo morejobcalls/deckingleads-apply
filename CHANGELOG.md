@@ -139,3 +139,4 @@ Contacts created during the test stay tagged `partial-optin` so they can be filt
 ## v2.3.1 — Meta descriptions synced to new hero (2026-07-11)
 
 - Root: description now mirrors the 20-jobs hero (was "Or you get paid in 2 ways"). /yt/: description still referenced the RETIRED third prong ("paid three ways") — now canonical two-prong with mgmt-fee scoping inline (meta tags have no fine-print surface).
+- **v2.3.2 (2026-07-11):** root `<title>` → `20 Deck Jobs in 100 Days | MoreJobCalls.com` (congruent with hero; framing-only — no "Guaranteed" on the jobs number, condition lives on-page). /yt/ title unchanged (appointments-led hero).
