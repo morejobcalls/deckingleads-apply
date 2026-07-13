@@ -133,3 +133,9 @@ Contacts created during the test stay tagged `partial-optin` so they can be filt
 - **What:** All footer legal references (Guarantee Terms, Testimonials, No Affiliation, © line) now name **MoreJobCalls.com LLC** as the contracting entity, matching the 2026-07-03 entity switch and the already-rebranded /terms/ + /privacy/ (which correctly keep SeasonProof Growth LLC as a named affiliate/former name — untouched).
 - **Files:** root, /yt/, /yt/scheduled/, /confirmation/, /qualified/, /scheduled/, /scheduling/, /a/ /b/ /c/ /d/, /next/* — every clean, tracked, deployed page.
 - **Skipped:** /e/–/h/ (untracked, not deployed), index-pre-tyler archive, /v2/–/v6/ (working copies carry other sessions' uncommitted edits — their deployed versions still say SPG LLC; fix when those dirs are next committed).
+
+---
+
+## v2.3.1 — Meta descriptions synced to new hero (2026-07-11)
+
+- Root: description now mirrors the 20-jobs hero (was "Or you get paid in 2 ways"). /yt/: description still referenced the RETIRED third prong ("paid three ways") — now canonical two-prong with mgmt-fee scoping inline (meta tags have no fine-print surface).
