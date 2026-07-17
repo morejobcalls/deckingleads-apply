@@ -140,3 +140,10 @@ Contacts created during the test stay tagged `partial-optin` so they can be filt
 
 - Root: description now mirrors the 20-jobs hero (was "Or you get paid in 2 ways"). /yt/: description still referenced the RETIRED third prong ("paid three ways") — now canonical two-prong with mgmt-fee scoping inline (meta tags have no fine-print surface).
 - **v2.3.2 (2026-07-11):** root `<title>` → `20 Deck Jobs in 100 Days | MoreJobCalls.com` (congruent with hero; framing-only — no "Guaranteed" on the jobs number, condition lives on-page). /yt/ title unchanged (appointments-led hero).
+
+## v3.0 — Ravi-style proof flow + Billy Stewart live threads (2026-07-17)
+
+- Replaced the flat proof grid with a 4-section flow: **proof cards** (10 case studies in Spencer's order: Stewart, Wallace, Wylie, Biviano, Flynn, Weaver, Cervantes, Gallegos, Engle card-only, Paynter) → **video wall** (order preserved; added Billy Gallegos 7/16 video `woPfBuocx-M`; Flynn overlay now "$500K month on $3K in ads") → **The Receipts** → **"Two Guarantees. Zero Risk."**
+- The Receipts: two live-scroll iMessage phone recreations — Billy Stewart week-1 thread (playable video bubble → "$191,300.86" → forehead-kiss line, verbatim) and the group thread with rep "Tim G." ($151K week, $96K day) — plus the Biviano ~$100K card. Assets in `/wins/billy-thread/`; originals archived in `Marketing/3. Proof/Billy Stewart (Trinity)/wins/2026-06_191k-text-thread/`. Billy approved publishing 2026-07-17.
+- Guarantee section mirrors Ravi's "Two Guarantees. Zero Risk." pattern — refund prong then $2K prong, remedies anchored to the 100 appointments; footer fine print (Offer Doc v2.4) unchanged.
+- A parallel session's uncommitted 7/17 index.html rework is preserved untracked at `index-other-session-backup-2026-07-17.html`.
