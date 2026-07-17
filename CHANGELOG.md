@@ -147,3 +147,14 @@ Contacts created during the test stay tagged `partial-optin` so they can be filt
 - The Receipts: two live-scroll iMessage phone recreations — Billy Stewart week-1 thread (playable video bubble → "$191,300.86" → forehead-kiss line, verbatim) and the group thread with rep "Tim G." ($151K week, $96K day) — plus the Biviano ~$100K card. Assets in `/wins/billy-thread/`; originals archived in `Marketing/3. Proof/Billy Stewart (Trinity)/wins/2026-06_191k-text-thread/`. Billy approved publishing 2026-07-17.
 - Guarantee section mirrors Ravi's "Two Guarantees. Zero Risk." pattern — refund prong then $2K prong, remedies anchored to the 100 appointments; footer fine print (Offer Doc v2.4) unchanged.
 - A parallel session's uncommitted 7/17 index.html rework is preserved untracked at `index-other-session-backup-2026-07-17.html`.
+
+## v5.0 — Merged proof architecture: v4 Ravi cards × v3 live threads (2026-07-17, Spencer-approved)
+
+Single merge of the two parallel 7/17 reworks (this session's v3 + the other session's v4 backup), reviewed and confirmed by Spencer.
+
+- **#proof cards = v4's richer design** (dark cards, accent top-bars, face avatars from `/proof-faces/`, hook-quote video thumbnails, Watch-the-call + /learn/ case-study links), **reordered to Spencer's canonical sequence**: Stewart, Wallace, Wylie, Biviano, Flynn, Weaver → CTA row → Cervantes, Gallegos, Engle, Paynter, + extras Brown, Holst.
+- **Stat lines rewritten per Spencer (transformation always explicit with units):** "$1,657 Ad Spend → $300K+ Jobs" · "25 Deck Jobs in 6 Weeks" · "$400 → $30 Appointments" · "Appointments: 3/Wk → 11/Day" · "$80K/Mo → $500K/Mo" (Flynn baseline per Spencer 7/17) · "$500K/Yr → $500K/Mo" (Weaver) · "$105K Closed · First 7 Days" · "$50K Signed · Month One" · "$4M/Yr → $8M/Yr" (Engle updated stats: CAC cut to a third, 75 appts/wk, ~20 jobs/wk, $50M goal) · "$200K From 4 Appointments" · "$1,600 Ad Spend → $100K Jobs" · "52 Appointments · First 10 Days". "Leads" labels replaced with appointments language (client verbatim quotes untouched).
+- **#receipts = Billy Stewart live iMessage phones (v3) + v4's 7-screenshot masonry.** "Want to see more?"/"Browse all client wins" box REMOVED per Spencer — masonry flows straight into #guarantees. Lamar Homes + Antonio Colon receipts confirmed cleared by Spencer 7/17.
+- **#guarantees = v4's "Two Guarantees. Zero Risk."** section unchanged (fee-scoped, compliant).
+- New tracked assets: `proof-faces/*.jpg` + `SOURCES.md`, `wins/win-*.png` (7), `RAVI-CARD-BRAND-GUIDELINE.md` (measured Ravi design system — source of truth for card design + future wins.html port).
+- Follow-up parked: morejobcalls.com wins page cards need the same personality treatment (other repo).
