@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>The Proof — MoreJobCalls.com</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+  :root{
+    --bg-outer:#f2ecdf;
+    --bg-inner:#fbf8f1;
+    --ink:#1a1712;
+    --muted:#6f6a5e;
+    --faint:#8a8478;
+    --gold:#b9862b;
+    --gold-bright:#c9962e;
+    --green:#1d8a4a;
+    --check:#2e7d32;
+    --red:#c13527;
+    --pill:#ede5d3;
+    --pill-border:#e0d7c2;
+    --card-border:#e3dbc9;
+    --panel:#16130e;
+    --panel-gold:#c9a04e;
+    --panel-muted:#b3ac9e;
+    --highlight:#f3dfa0;
+    --rule:#e6dfcf;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--bg-outer);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Helvetica Neue",Arial,sans-serif;
+    line-height:1.5;
+  }
+  .sheet{
+    max-width:1240px;
+    margin:0 auto;
+    background:var(--bg-inner);
+    box-shadow:0 0 40px rgba(0,0,0,.04);
+  }
+  .wrap{
+    max-width:1140px;
+    margin:0 auto;
+    padding:0 24px;
+  }
+  section{padding:56px 0}
+
+  /* ---------- pills / labels ---------- */
+  .pill{
+    display:inline-block;
+    background:var(--pill);
+    border:1px solid var(--pill-border);
+    border-radius:999px;
+    padding:7px 16px;
+    font-size:13px;
+    font-weight:700;
+    color:var(--ink);
+  }
+  .pill-dark{
+    display:inline-block;
+    background:var(--panel);
+    color:#fff;
+    border-radius:999px;
+    padding:9px 20px;
+    font-size:14px;
+    font-weight:700;
+  }
+  .kicker{
+    font-size:13px;
+    font-weight:800;
+    letter-spacing:.18em;
+    text-transform:uppercase;
+  }
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:64px}
+  .hero .eyebrow{
+    margin-top:36px;
+    color:#8a7a52;
+  }
+  .hero h1{
+    margin-top:14px;
+    font-size:clamp(38px,6.2vw,64px);
+    line-height:1.06;
+    font-weight:900;
+    letter-spacing:-.015em;
+  }
+  .hero h1 .gold{color:var(--gold)}
+  .hero h1 .hl{background:linear-gradient(transparent 55%,var(--highlight) 55%,var(--highlight) 92%,transparent 92%)}
+  .checks{margin-top:28px;display:flex;flex-wrap:wrap;gap:10px}
+  .checks .pill{font-size:14px}
+  .checks .tick{color:var(--check);margin-right:6px}
+  .hr{border:0;border-top:1px solid var(--rule);margin:48px 0 0}
+
+  /* ---------- paid-already stats ---------- */
+  .paid{padding-top:44px}
+  .paid .kicker{color:var(--red)}
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:28px;
+    margin-top:22px;
+  }
+  .stat-row .num{font-size:34px;font-weight:900;letter-spacing:-.01em}
+  .stat-row .cap{margin-top:6px;font-size:15px;color:var(--muted);max-width:34ch}
+
+  /* ---------- black panel ---------- */
+  .panel{
+    background:var(--panel);
+    border-radius:22px;
+    padding:40px 44px 36px;
+    margin-top:48px;
+    color:#fff;
+  }
+  .panel .kicker{color:var(--panel-gold)}
+  .panel-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:28px;
+    margin-top:20px;
+  }
+  .panel-stats .num{font-size:32px;font-weight:900}
+  .panel-stats .cap{margin-top:6px;font-size:14px;color:var(--panel-muted)}
+  .panel .fine{
+    margin-top:30px;
+    padding-top:24px;
+    border-top:1px solid rgba(255,255,255,.12);
+    font-size:14px;
+    color:var(--panel-muted);
+    line-height:1.6;
+  }
+
+  /* ---------- billy ---------- */
+  .tags{display:flex;flex-wrap:wrap;gap:10px}
+  .case h2{
+    margin-top:22px;
+    font-size:clamp(28px,4.2vw,44px);
+    line-height:1.12;
+    font-weight:900;
+    letter-spacing:-.01em;
+  }
+  .case h2 .green{color:var(--green)}
+  .case .lede{
+    margin-top:20px;
+    font-size:18px;
+    line-height:1.65;
+    max-width:75ch;
+  }
+  .ba{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:24px;
+    margin-top:36px;
+  }
+  .ba-card{
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    padding:28px 30px;
+    background:var(--bg-inner);
+  }
+  .ba-card .kicker{font-size:12px;color:var(--faint)}
+  .ba-card ul{list-style:none;margin-top:16px}
+  .ba-card li{
+    display:flex;
+    gap:12px;
+    font-size:16px;
+    line-height:1.5;
+    padding:8px 0;
+  }
+  .ba-card .x{color:var(--red);font-weight:800;flex:0 0 auto}
+  .ba-card .c{color:var(--check);font-weight:800;flex:0 0 auto}
+  .gold-stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:28px;
+    margin-top:44px;
+    padding-top:40px;
+    border-top:1px solid var(--rule);
+  }
+  .gold-stats .num{font-size:32px;font-weight:900;color:var(--gold)}
+  .gold-stats .cap{margin-top:6px;font-size:14px;color:var(--muted)}
+  .quote{
+    margin-top:36px;
+    border-left:3px solid var(--gold);
+    padding:4px 0 4px 22px;
+  }
+  .quote .q{font-size:19px;font-style:italic;line-height:1.55}
+  .quote .a{margin-top:8px;font-size:14.5px;font-weight:700;color:var(--muted)}
+
+  /* ---------- video blocks ---------- */
+  .video{
+    position:relative;
+    display:flex;
+    background:#14110c;
+    border-radius:16px;
+    overflow:hidden;
+    cursor:pointer;
+    border:none;
+    width:100%;
+    text-align:left;
+    color:#fff;
+    font-family:inherit;
+    text-decoration:none;
+    flex-direction:column;
+    justify-content:flex-end;
+    transition:transform .15s ease;
+  }
+  .video:hover{transform:translateY(-2px)}
+  .video:hover .play{transform:scale(1.08)}
+  .video-hero{aspect-ratio:16/9;margin-top:40px}
+  .video-card{aspect-ratio:16/8.2;margin-top:18px}
+  .play{
+    position:absolute;
+    top:50%;left:50%;
+    width:64px;height:64px;
+    margin:-32px 0 0 -32px;
+    border-radius:50%;
+    background:var(--gold-bright);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:transform .15s ease;
+  }
+  .video-card .play{width:50px;height:50px;margin:-25px 0 0 -25px}
+  .play svg{width:26px;height:26px;margin-left:3px;fill:#14110c}
+  .video-card .play svg{width:20px;height:20px}
+  .video .meta{position:relative;padding:18px 22px 20px}
+  .video-card .meta{padding:12px 16px 14px}
+  .video .watch{
+    font-size:12px;
+    font-weight:800;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--panel-gold);
+  }
+  .video .vtitle{
+    margin-top:5px;
+    font-size:17px;
+    font-weight:800;
+    line-height:1.3;
+    color:#fff;
+  }
+  .video-card .vtitle{font-size:14px}
+  .footnote{margin-top:22px;font-size:15px;color:var(--muted)}
+
+  /* ---------- more results ---------- */
+  .more h2{font-size:clamp(28px,3.6vw,38px);font-weight:900;letter-spacing:-.01em}
+  .grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px;
+    margin-top:30px;
+    align-items:start;
+  }
+  .rcard{
+    border:1px solid var(--card-border);
+    border-radius:18px;
+    background:#fdfbf6;
+    padding:26px 28px 26px;
+  }
+  .rcard .pill{font-size:11.5px;padding:5px 12px;color:var(--muted)}
+  .rcard .stat{
+    margin-top:16px;
+    font-size:30px;
+    line-height:1.1;
+    font-weight:900;
+    color:var(--gold);
+    letter-spacing:-.01em;
+  }
+  .rcard .sub{margin-top:7px;font-size:15.5px;font-weight:800;line-height:1.35}
+  .rcard .who{margin-top:7px;font-size:13.5px;font-weight:700;color:var(--muted)}
+  .rcard .body{margin-top:12px;font-size:14.5px;line-height:1.6;color:#3d382f}
+  .rcard .quote{margin-top:16px;padding:2px 0 2px 16px}
+  .rcard .quote .q{font-size:14.5px}
+
+  /* ---------- checkable footer ---------- */
+  .checkable{
+    border:1px solid var(--card-border);
+    border-radius:16px;
+    background:var(--pill);
+    padding:26px 30px;
+    font-size:15px;
+    line-height:1.65;
+    color:#3d382f;
+  }
+  .checkable strong{color:var(--ink)}
+  .checkable a{color:var(--gold);font-weight:700}
+  .colophon{
+    padding:26px 0 40px;
+    text-align:center;
+    font-size:13px;
+    color:var(--faint);
+  }
+
+  /* ---------- lightbox ---------- */
+  .lb{
+    position:fixed;
+    inset:0;
+    background:rgba(10,8,5,.92);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:100;
+    padding:24px;
+  }
+  .lb.open{display:flex}
+  .lb-inner{position:relative;width:min(1100px,100%)}
+  .lb-frame{width:100%;aspect-ratio:16/9;border:0;border-radius:12px;background:#000}
+  .lb-close{
+    position:absolute;
+    top:-44px;right:0;
+    background:none;
+    border:0;
+    color:#fff;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    padding:8px;
+    letter-spacing:.06em;
+  }
+  .lb-close:hover{color:var(--panel-gold)}
+
+  /* ---------- responsive ---------- */
+  @media (max-width:860px){
+    section{padding:44px 0}
+    .stat-row{grid-template-columns:1fr;gap:22px}
+    .panel{padding:30px 26px}
+    .panel-stats{grid-template-columns:1fr 1fr;gap:22px}
+    .ba{grid-template-columns:1fr}
+    .gold-stats{grid-template-columns:1fr 1fr;gap:24px}
+    .grid{grid-template-columns:1fr}
+    .video-card{aspect-ratio:16/9}
+  }
+  @media (max-width:480px){
+    .wrap{padding:0 18px}
+    .panel-stats{grid-template-columns:1fr}
+    .gold-stats{grid-template-columns:1fr}
+    .pill-dark{font-size:13px;padding:8px 14px}
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="pill-dark">We're scheduled to speak. This is a 3 minute pre-call deck.</span>
+      <p class="kicker eyebrow">For Home Service Contractors Doing $500K+ Per Year</p>
+      <h1>
+        <span class="gold">100 exclusive job calls<br>in 100 days.</span><br>
+        100% <span class="hl">refund plus $2,000 cash</span> for wasting your time.
+      </h1>
+      <div class="checks">
+        <span class="pill"><span class="tick">&#10003;</span>100% performance-guaranteed</span>
+        <span class="pill"><span class="tick">&#10003;</span>No shared leads</span>
+        <span class="pill"><span class="tick">&#10003;</span>No long-term contracts</span>
+      </div>
+      <hr class="hr">
+    </div>
+  </section>
+
+  <!-- ============ PAID ALREADY ============ -->
+  <section class="paid" style="padding-top:0">
+    <div class="wrap">
+      <p class="kicker" style="color:var(--red)">What You Have Probably Paid For Already</p>
+      <div class="stat-row">
+        <div>
+          <div class="num">$400</div>
+          <p class="cap">per shared lead one client was paying before us, sold to him and 4 competitors at once</p>
+        </div>
+        <div>
+          <div class="num">$27,000</div>
+          <p class="cap">another client burned with big-name agencies for roughly 20 deals</p>
+        </div>
+        <div>
+          <div class="num">6</div>
+          <p class="cap">marketing companies our longest-running client fired before finding us</p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <p class="kicker">Where We Stand Today</p>
+        <div class="panel-stats">
+          <div>
+            <div class="num">$100M+</div>
+            <p class="cap">in client-booked jobs, tracked across 100+ contractor accounts since 2024</p>
+          </div>
+          <div>
+            <div class="num">$10M+</div>
+            <p class="cap">lifetime ad spend managed for contractors</p>
+          </div>
+          <div>
+            <div class="num">~$250K</div>
+            <p class="cap">per month in managed ad spend right now</p>
+          </div>
+          <div>
+            <div class="num">~20</div>
+            <p class="cap">active builders on the roster</p>
+          </div>
+        </div>
+        <p class="fine">Every number in this deck is a real, named client result: sourced from a recorded call, a published video, or their own CRM read live on screen. Results are proof of what clients did with their appointments, not a promise. The only thing we guarantee is the 100 calls.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BILLY STEWART ============ -->
+  <section class="case">
+    <div class="wrap">
+      <div class="tags">
+        <span class="pill">Decks</span>
+        <span class="pill">Greenville, SC</span>
+        <span class="pill">Month one</span>
+      </div>
+      <h2>Billy Stewart put in $1,657 of ad spend.<br><span class="green">He signed $300,000+ in deck contracts in 17 days.</span></h2>
+      <p class="lede">Billy runs Trinity Decks and Patios. 25 years in construction. By his own count he had spent "at least a quarter million dollars of my life" on leads: Angi, HomeAdvisor, Facebook guy after Facebook guy, Google guy after Google guy. He almost skipped the call because it sounded too good to be true. Here is his month one.</p>
+
+      <div class="ba">
+        <div class="ba-card">
+          <p class="kicker">Before</p>
+          <ul>
+            <li><span class="x">&#10005;</span>~$250K spent on shared leads over his career, racing 4 other bidders to the same homeowner</li>
+            <li><span class="x">&#10005;</span>Quantity or quality, never both</li>
+            <li><span class="x">&#10005;</span>Average contract around $18K</li>
+            <li><span class="x">&#10005;</span>Almost didn't book the call: "sounded too good to be true"</li>
+          </ul>
+        </div>
+        <div class="ba-card">
+          <p class="kicker">After (First 17 Days)</p>
+          <ul>
+            <li><span class="c">&#10003;</span>$196,383 in signed contracts in the first 7 days</li>
+            <li><span class="c">&#10003;</span>$300,000+ signed in 17 days, on $1,657 of ad spend</li>
+            <li><span class="c">&#10003;</span>Closing 80%+ of appointments, average contract roughly doubled</li>
+            <li><span class="c">&#10003;</span>Booked out ~4 months. Started a new crew and hired a second salesman inside month one</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="gold-stats">
+        <div>
+          <div class="num">$1,657</div>
+          <p class="cap">total ad spend, first 17 days</p>
+        </div>
+        <div>
+          <div class="num">$300K+</div>
+          <p class="cap">signed contracts and deposits in 17 days</p>
+        </div>
+        <div>
+          <div class="num">80%+</div>
+          <p class="cap">of appointments closed</p>
+        </div>
+        <div>
+          <div class="num">$700K&ndash;$1M</div>
+          <p class="cap">his own month one estimate, on a recorded call, with $492K live in his CRM on screen</p>
+        </div>
+      </div>
+
+      <div class="quote">
+        <p class="q">"This is the first time I've ever had quantity AND quality. It's always been one or the other. It's never been both."</p>
+        <p class="a">Billy Stewart, Trinity Decks and Patios. His new sales rep: "These are the best leads I've ever ran in my life."</p>
+      </div>
+
+      <button class="video video-hero" data-yt="TvFv_EIM-MI" aria-label="Watch Billy Stewart's unedited testimonial">
+        <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+        <span class="meta">
+          <span class="watch">&#9654; Watch Billy Tell It (Unedited)</span>
+          <span class="vtitle" style="display:block">$300,000+ in Deck Jobs in 17 Days (On $1,657 of Ad Spend)</span>
+        </span>
+      </button>
+
+      <p class="footnote">And he took a week of that month off on family vacation. Look him up: Trinity Decks and Patios, Greenville, SC.</p>
+    </div>
+  </section>
+
+  <!-- ============ MORE RESULTS ============ -->
+  <section class="more" style="padding-top:0">
+    <div class="wrap">
+      <h2>More results.</h2>
+      <div class="grid">
+
+        <article class="rcard">
+          <span class="pill">Decks &amp; patios &middot; San Antonio, TX</span>
+          <div class="stat">$1.2M closed</div>
+          <p class="sub">in the January to February "slow season"</p>
+          <p class="who">Justin Wylie &middot; All Pro Decks &amp; Patios</p>
+          <p class="body">Fired six marketing companies before us. Went from ~15 leads a month to 30+ a week, from a $3M business to tracking $5&ndash;6M+. Cost per lead cut from $400 to under $30 in 14 days. He takes live reference calls from on-the-fence prospects.</p>
+          <div class="quote"><p class="q">"I've had six other companies involved in this space in my life... you came out of the gate, just killing it."</p></div>
+          <button class="video video-card" data-yt="_djYzxfITps" aria-label="Watch: Deck Builder Closed $1.2M in Slow Season">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">Deck Builder Closed $1.2M in "Slow Season"</span>
+            </span>
+          </button>
+          <button class="video video-card" data-yt="YJQxX5ZQ3aI" aria-label="Watch: From $400 to $30 Per Lead in 14 Days">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">From $400 to $30 Per Lead in 14 Days</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks &amp; modular &middot; Boston, MA</span>
+          <div class="stat">$225,763 profit</div>
+          <p class="sub">on $12,618 of ad spend</p>
+          <p class="who">Mike Biviano &middot; Biviano General Contracting</p>
+          <p class="body">Burned by a big-name agency: zero attention, zero results. Now runs two service lines through the system. Went from 3 appointments a week to as many as 11 a day, booked out six months by May.</p>
+          <div class="quote"><p class="q">"A thousand percent, it's changed my company... our schedule is completely booked."</p></div>
+          <button class="video video-card" data-yt="NV836FEEIcU" aria-label="Watch: Spent $12,618. Made $225,763 profit.">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">Spent $12,618. Made $225,763 PROFIT.</span>
+            </span>
+          </button>
+          <button class="video video-card" data-yt="ZT8C3xoQSLc" aria-label="Watch: From 3 Appointments a Week to 11 a Day">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch &middot; 8 Months In</span>
+              <span class="vtitle" style="display:block">From 3 Appointments a Week to 11 a Day</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Fencing &amp; decks &middot; Bend, OR</span>
+          <div class="stat">25 jobs closed</div>
+          <p class="sub">from ~60 estimates in ~45 days</p>
+          <p class="who">Brian Wallace &middot; Bend Fence &amp; Deck</p>
+          <p class="body">Booked the call specifically to catch us lying, and says so on camera. More appointments in 6 weeks than the entire year prior. Now tracking toward $10M a year. He also takes reference calls.</p>
+          <div class="quote"><p class="q">"I wanted to call your bluff." ... "I probably wouldn't have used you if you didn't have that money-back guarantee."</p></div>
+          <button class="video video-card" data-yt="4TP1sTRASoA" aria-label="Watch: How I Got 25 Deck Jobs in 6 Weeks">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">How I Got 25 Deck Jobs in 6 Weeks</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks &middot; Kennewick, WA</span>
+          <div class="stat">$100,000+ signed</div>
+          <p class="sub">in month one, on ~$1,600 of ads</p>
+          <p class="who">Jason Brown &middot; Nailed It Construction</p>
+          <p class="body">Went from 1 to 3 bids a week to 2 to 3 bids a day. Grew from 1 crew guy to 5 in a single season. Booked out ~6 weeks; now he picks and chooses jobs.</p>
+          <div class="quote"><p class="q">"If it's a scam, he wouldn't still be out there putting his face out... I prayed about it, and the rest is history."</p></div>
+          <button class="video video-card" data-yt="FKa_Zsji0bE" aria-label="Watch: From 1 Crew to 5 in One Season">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">From 1 Crew to 5 in One Season</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks &middot; Pennsylvania</span>
+          <div class="stat">$1M closed by April 21</div>
+          <p class="sub">after ~$500K in all of last year. $480K of it in 21 days</p>
+          <p class="who">Jacob Weaver &middot; Oasis Custom Decks</p>
+          <p class="body">First time over $1M top line in the company's history. Crews booked solid through September, said in April.</p>
+          <div class="quote"><p class="q">"For the first time in business, I crossed over $1 million top line."</p></div>
+          <button class="video video-card" data-yt="Xt4TVn4zP7s" aria-label="Watch: How I Doubled My Deck Business to $1M in 4 Months">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">How I Doubled My Deck Business to $1M in 4 Months</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">High-ticket composite decks &middot; Northern Virginia</span>
+          <div class="stat">Record $500K+ month</div>
+          <p class="sub">on $100/day in ad spend, after 15 years in business</p>
+          <p class="who">Jason Flynn &middot; PROdeck Construction</p>
+          <p class="body">Was stuck at ~$80K a month and had been firing agencies for 3 years straight. Went from 7 leads a week to 3 to 5 booked appointments a day. ~25X return, projecting $5M+ next year.</p>
+          <div class="quote"><p class="q">"Within 48 hours of launch... our first booked appointment without talking to a single person."</p></div>
+          <button class="video video-card" data-yt="-q18xO92akA" aria-label="Watch: How I Got a $500K Month on $100/Day in Ads">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">How I Got a $500K Month on $100/Day in Ads</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks &middot; Loomis, CA</span>
+          <div class="stat">60+ opportunities in 21 days</div>
+          <p class="sub">after 5 to 6 bids in the previous 10 months. ~$200K off the first 4 closed</p>
+          <p class="who">Chip Paynter &middot; Paynter Construction</p>
+          <p class="body">28-year firefighter and paramedic, licensed contractor since 1993. "I am not a computer guy." Two handshake deals over $100K each; confident enough to buy $150K of new equipment.</p>
+          <div class="quote"><p class="q">"These are different leads, guys. It's not this typical bullshit we've dealt with for the past 30 years."</p></div>
+          <button class="video video-card" data-yt="ERQ84Dgz-Ow" aria-label="Watch: Ads That Actually Work in 2026">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">Ads That Actually Work in 2026 ($200K+ in 21 Days)</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks &middot; Minnesota (family business)</span>
+          <div class="stat">52 appointments in 10 days</div>
+          <p class="sub">100 opportunities in week one. $45K closed in the first 14 days on ~$1,500 of ads</p>
+          <p class="who">Mike Holst &middot; Foremost Construction</p>
+          <p class="body">Before us: burned $27K with Hibu and Thrive for ~20 deals, stuck at a $1.2M plateau for 5 years. 213 opportunities in 21 days, around $10 each.</p>
+          <div class="quote"><p class="q">"This has been the best thing we've ever done... If you're tired of lighting money on fire, this is the only way to go."</p></div>
+          <button class="video video-card" data-yt="vxqYn1E86LA" aria-label="Watch: 52 Appointments in First 10 Days">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">52 Appointments in First 10 Days</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks &amp; concrete &middot; Colorado</span>
+          <div class="stat">$105,000 closed in week one</div>
+          <p class="sub">on $1,000 of ads. $180K in new bids</p>
+          <p class="who">Ricardo Cervantes &middot; AnRi Construction</p>
+          <p class="body">Burned before by Angi, HomeAdvisor, CraftJack, Thumbtack: shared leads where the cheapest guy wins. Hesitated because we're not in Colorado. It worked anyway.</p>
+          <div class="quote"><p class="q">"I feel like I'm sleeping and the system's working, making money."</p></div>
+          <button class="video video-card" data-yt="djsZ_YNn7wY" aria-label="Watch: He Spent $1,000 on Ads. He Closed $105,000 in Jobs.">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">He Spent $1,000 on Ads. He Closed $105,000 in Jobs.</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Patio covers &middot; Southern California</span>
+          <div class="stat">65&ndash;70 appointments per week</div>
+          <p class="sub">sustained. The highest-volume account on the roster</p>
+          <p class="who">Eric Engle &middot; Mr. Patio Cover</p>
+          <p class="body">Proof the system runs at volume, week after week, outside decks.</p>
+          <button class="video video-card" data-yt="kK3oXzLb4-0" aria-label="Watch: 65-70 Appointments/Week With Meta Ads">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">65&ndash;70 Appointments/Week With Meta Ads</span>
+            </span>
+          </button>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks / docks / pergolas &middot; Corpus Christi, TX</span>
+          <div class="stat">~$50K in month one</div>
+          <p class="sub">3 contracts written off his first ~7 opportunities, on $50/day in ads</p>
+          <p class="who">Billy Gallegos &middot; Lone Star Home Improvement Co.</p>
+          <p class="body">16-year contractor, ex-top-5 Renewal by Andersen rep. Sold a $16K pergola straight off an ad.</p>
+          <div class="quote"><p class="q">"I wish I'd have done this a long time ago."</p></div>
+          <a class="video video-card" href="https://youtu.be/woPfBuocx-M" target="_blank" rel="noopener" aria-label="Watch on YouTube: He Thought It Was a Scam. Then He Sold $50,000 in Decks Off His First 7 Leads.">
+            <span class="play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></span>
+            <span class="meta">
+              <span class="watch">&#9654; Watch</span>
+              <span class="vtitle" style="display:block">He Thought It Was a Scam. Then He Sold $50,000 in Decks Off His First 7 Leads.</span>
+            </span>
+          </a>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Windows &amp; decks &middot; Michigan</span>
+          <div class="stat">25 closes in 45 days</div>
+          <p class="sub">32 decks in the build queue. A booked-out January, in a Michigan winter</p>
+          <p class="who">Jeff Haring &middot; The Window Professor</p>
+          <p class="body">35-year veteran. Was wasting $1,800 a month on national SEO. Hired 3 carpenters mid-winter.</p>
+          <div class="quote"><p class="q">"Your guarantee, 100%. I probably wouldn't have used you if you didn't have that money-back guarantee... That's what got me."</p></div>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Roofing &middot; North Carolina</span>
+          <div class="stat">17 roofing deals</div>
+          <p class="sub">January to March. $65K profit on $12K of ad spend, 3.6x all-in return</p>
+          <p class="who">David Lamartiniere</p>
+          <p class="body">Proof the system carries into roofing, not just decks and patios.</p>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks &middot; Houston, TX</span>
+          <div class="stat">$17,200 deck closed</div>
+          <p class="sub">off ~$800 in ad spend. A 20X+ immediate return</p>
+          <p class="who">John Mattox &middot; JB Decked Out Living</p>
+          <p class="body">Plus a ~$30K composite deck quoted in the same window, after wasting thousands with a marketer who "didn't produce anything."</p>
+        </article>
+
+        <article class="rcard">
+          <span class="pill">Decks &middot; Idaho</span>
+          <div class="stat">Asked us to slow down</div>
+          <p class="sub">7 estimates submitted one week into launch. 60+ appointment pipeline</p>
+          <p class="who">Joe Murdock</p>
+          <div class="quote"><p class="q">"I was very skeptical... But now it's like, no, it does work. Just do it."</p></div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CHECKABLE ============ -->
+  <section style="padding-top:0">
+    <div class="wrap">
+      <div class="checkable">
+        <strong>Everything here is checkable.</strong> Named, licensed contractors and real companies you can look up. Full unedited videos at <a href="https://www.youtube.com/@spencerwrightofficial" target="_blank" rel="noopener">youtube.com/@spencerwrightofficial</a>. Current clients, including Justin Wylie and Brian Wallace, take live phone calls from on-the-fence prospects. We hand out real builders' numbers on request.
+      </div>
+      <p class="colophon">MoreJobCalls.com &middot; SeasonProof Growth LLC</p>
+    </div>
+  </section>
+
+</div>
+
+<!-- ============ LIGHTBOX ============ -->
+<div class="lb" id="lightbox" role="dialog" aria-modal="true" aria-label="Video player">
+  <div class="lb-inner">
+    <button class="lb-close" id="lbClose">CLOSE &#10005;</button>
+    <iframe class="lb-frame" id="lbFrame" src="" title="Client testimonial video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+</div>
+
+<script>
+  var lb = document.getElementById('lightbox');
+  var frame = document.getElementById('lbFrame');
+
+  function openVideo(id){
+    frame.src = 'https://www.youtube.com/embed/' + id + '?autoplay=1&rel=0';
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVideo(){
+    lb.classList.remove('open');
+    frame.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('.video[data-yt]').forEach(function(el){
+    el.addEventListener('click', function(){ openVideo(el.getAttribute('data-yt')); });
+  });
+  document.getElementById('lbClose').addEventListener('click', closeVideo);
+  lb.addEventListener('click', function(e){ if (e.target === lb) closeVideo(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeVideo(); });
+</script>
+</body>
+</html>
