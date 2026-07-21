@@ -294,6 +294,13 @@
     <script>
     (function(){
       var WORKER='https://mjc-appointment-time.spencer-80c.workers.dev';
+      // ?preview=cal — internal review switch: renders the block with a sample
+      // time (tomorrow 5:00 PM CT) without needing a real booking.
+      if(new URLSearchParams(location.search).get('preview')==='cal'){
+        var demo=new Date(Date.now()+24*60*60*1000); demo.setUTCHours(22,0,0,0);
+        render({startUTC:demo.toISOString(), endUTC:new Date(demo.getTime()+45*60000).toISOString()});
+        return;
+      }
       var ref; try{ ref=JSON.parse(localStorage.getItem('mjc_booked_ref')||'null'); }catch(e){}
       if(!ref || !ref.contactId || (Date.now()-(ref.t||0) > 15*60*1000)) return; // no fresh v2 booking → stays hidden (v1 unaffected)
       var tries=0;
