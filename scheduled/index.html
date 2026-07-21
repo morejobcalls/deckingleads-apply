@@ -250,19 +250,26 @@
       var WORKER='https://mjc-appointment-time.spencer-80c.workers.dev';
       // ?preview=cal — internal review switch: renders the block with a sample
       // time (tomorrow 5:00 PM CT) without needing a real booking.
-      if(new URLSearchParams(location.search).get('preview')==='cal'){
+      var qs=new URLSearchParams(location.search);
+      if(qs.get('preview')==='cal'){
         var demo=new Date(Date.now()+24*60*60*1000); demo.setUTCHours(22,0,0,0);
         render({startUTC:demo.toISOString(), endUTC:new Date(demo.getTime()+45*60000).toISOString()});
         return;
       }
-      var ref; try{ ref=JSON.parse(localStorage.getItem('mjc_booked_ref')||'null'); }catch(e){}
-      if(!ref || !ref.contactId || (Date.now()-(ref.t||0) > 15*60*1000)) return; // no fresh v2 booking → stays hidden (v1 unaffected)
+      // Booking ref: URL params (?c=&cal= from /book/, survives private mode)
+      // win over localStorage (set by the LP modal + /book/). 14-day window —
+      // the worker returns the UPCOMING appointment, so reminder-link revisits
+      // before the call still get the button; past the call it 404s → hidden.
+      var ref;
+      if(qs.get('c')){ ref={contactId:qs.get('c'), calendarId:qs.get('cal')||'', t:Date.now()}; }
+      else { try{ ref=JSON.parse(localStorage.getItem('mjc_booked_ref')||'null'); }catch(e){} }
+      if(!ref || !ref.contactId || (Date.now()-(ref.t||0) > 14*24*60*60*1000)) return; // no known booking → stays hidden
       var tries=0;
       function attempt(){
         tries++;
         fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contactId:ref.contactId,calendarId:ref.calendarId})})
           .then(function(r){return r.json();})
-          .then(function(d){ if(d&&d.found&&d.startUTC){ render(d); try{localStorage.removeItem('mjc_booked_ref');}catch(_){}} else if(tries<6){ setTimeout(attempt,1300); } })
+          .then(function(d){ if(d&&d.found&&d.startUTC){ render(d); } else if(tries<6){ setTimeout(attempt,1300); } })
           .catch(function(){ if(tries<6) setTimeout(attempt,1300); });
       }
       function render(d){

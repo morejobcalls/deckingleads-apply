@@ -392,7 +392,10 @@
             }));
           } catch (e) {}
           document.getElementById('book-btn-label').textContent = 'Booked! Redirecting…';
-          location.href = REDIRECT;
+          // Also carry the ref in the URL — covers Safari private mode where
+          // localStorage writes silently fail.
+          location.href = REDIRECT + '?c=' + encodeURIComponent(res.body.contactId || '') +
+            '&cal=' + encodeURIComponent(res.body.calendarId || '');
           return;
         }
         btn.disabled = false;
