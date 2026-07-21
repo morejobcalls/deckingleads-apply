@@ -382,6 +382,15 @@
       .then(function (r) { return r.json().then(function (b) { return { status: r.status, body: b }; }); })
       .then(function (res) {
         if (res.status === 200 && res.body.ok) {
+          // Same ref the main funnel sets — the confirmation pages read it and
+          // render the add-to-calendar block (via the mjc-appointment-time worker).
+          try {
+            localStorage.setItem('mjc_booked_ref', JSON.stringify({
+              contactId: res.body.contactId,
+              calendarId: res.body.calendarId,
+              t: Date.now()
+            }));
+          } catch (e) {}
           document.getElementById('book-btn-label').textContent = 'Booked! Redirecting…';
           location.href = REDIRECT;
           return;
