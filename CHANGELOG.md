@@ -158,3 +158,12 @@ Single merge of the two parallel 7/17 reworks (this session's v3 + the other ses
 - **#guarantees = v4's "Two Guarantees. Zero Risk."** section unchanged (fee-scoped, compliant).
 - New tracked assets: `proof-faces/*.jpg` + `SOURCES.md`, `wins/win-*.png` (7), `RAVI-CARD-BRAND-GUIDELINE.md` (measured Ravi design system — source of truth for card design + future wins.html port).
 - Follow-up parked: morejobcalls.com wins page cards need the same personality treatment (other repo).
+
+## v5.1 — /book/ self-book page for opt-in-no-book leads (2026-07-21, LIVE dark — unlinked + noindex, pending Spencer's review before any SMS goes out)
+
+- **New page `/book/`** — direct self-booking link for leads who opted in but never booked (sent by SMS when they reply "yes"). Approved 20-jobs hero (verbatim from root LP, incl. eyebrow + subhead + Offer Doc v2.4 fine print) with the calendar directly underneath.
+- **Calendar is NATIVE, not an iframe** — the GHL widget is click-dead in cross-origin iframes (verified 2026-07-15), and SMS links open in iPhone Safari where that failure bites hardest. Slots render as day pills + time buttons, localized to the visitor's browser timezone, fetched from the new **`mjc-self-book` Cloudflare Worker** (`https://mjc-self-book.spencer-80c.workers.dev`, source in `Foundations/Cloudflare-Workers/mjc-self-book/`), which proxies GHL free-slots and creates the appointment server-side (confirmed status, Google Meet link, assigned user — full parity with widget bookings; contact tagged `self-book-page`).
+- **ICP split mirrors the main funnel:** `?icp=yes|no` (from `contact.icp_qualified_survey`) picks the calendar (ICP `6Ck4IfG5SatgIkAZJ7yo` / non-ICP `lNcyqnixLoZa2p3S5P8I`) and the post-book redirect — ICP → `/confirmation/` (fires BookedCall pixel), non-ICP → `/scheduled/` (no pixel, by design). Missing/empty icp defaults to ICP.
+- **Link params** (all optional): `first_name` (greeting), `cid` (`{{contact.id}}` — books against the existing contact, no dupe), `icp`, plus `last_name/email/phone` fallbacks. Bare link works too: inline name/phone/email fields appear before the confirm button.
+- Recommended GHL SMS template: `https://apply.morejobcalls.com/book/?first_name={{contact.first_name}}&cid={{contact.id}}&icp={{contact.icp_qualified_survey}}`
+- Meta pixel PageView + Clarity on page; `noindex,nofollow`. E2E verified 2026-07-20 (headless click-through → real GHL appointment created → deleted; test contact removed).
