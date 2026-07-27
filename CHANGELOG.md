@@ -167,3 +167,25 @@ Single merge of the two parallel 7/17 reworks (this session's v3 + the other ses
 - **Link params** (all optional): `first_name` (greeting), `cid` (`{{contact.id}}` — books against the existing contact, no dupe), `icp`, plus `last_name/email/phone` fallbacks. Bare link works too: inline name/phone/email fields appear before the confirm button.
 - Recommended GHL SMS template: `https://apply.morejobcalls.com/book/?first_name={{contact.first_name}}&cid={{contact.id}}&icp={{contact.icp_qualified_survey}}`
 - Meta pixel PageView + Clarity on page; `noindex,nofollow`. E2E verified 2026-07-20 (headless click-through → real GHL appointment created → deleted; test contact removed).
+
+## v5.2 — Phone-input country-code bug fix (2026-07-24, STAGED — not yet pushed)
+
+**The bug (found 2026-07-24 via Anthony Cicero, who never received his SMS).**
+Every LP phone field normalized input with `value.replace(/\D/g,'').slice(0, 10)`. When a lead typed or autofilled their number **with the leading US country code** (`1 909 816 9213` = 11 digits), `.slice(0, 10)` kept the **first** ten digits and silently dropped the **last** one. The formatter then rendered the corrupted value as a plausible-looking `(190) 981-6921`, validation (`phone.length === 10`) passed, and the LP sent `'+1' + phone` → **`+11909816921`** to GHL.
+
+Result: an undeliverable number, so **no SMS in the entire nurture/confirmation sequence ever reached the lead** — and nothing surfaced the failure. The lead looked like a normal opt-in.
+
+**Blast radius:** 4 of 104 paid-traffic contacts with phones in the Data Brain (~3.8%) — Anthony Cicero (7/22), Caleb Hopke (7/22), Virgil D Ward (6/07), Mark Herrneckar (5/18). Anthony's real number was recovered from his calendar-booking submission (he re-typed it there) and corrected in GHL to `+19098169213`. The other three never booked, so their dropped digit is unrecoverable from GHL — first 9 digits known, last digit gone. Email intact for all three.
+
+**The fix — phone fields only (zip + CAPI-hash paths untouched):**
+1. **Strip the country code before truncating**, chained onto the existing digit-strip:
+   `.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '').slice(0, 10)`
+   The lookahead only fires at exactly 11 digits, so it never eats a digit mid-typing — the field self-corrects on the 11th keystroke (`(190) 981-6921` → `(909) 816-9213`).
+2. **Same normalization at submit time**, because autofill can set `.value` without firing an `input` event.
+3. **Real validation instead of a length check:** `/^[2-9]\d{9}$/.test(phone)` — NANP area codes can never start with 0 or 1, so any future corruption of this class now shows the lead an inline error instead of silently saving a dead number.
+
+**Files SHIPPED:** `index.html` + `next/index.html` (both the main form and the `mc-` modal), plus `a/ b/ c/ d/ yt/index.html` (main form). These carry the phone fix and nothing else.
+
+**Files fixed locally but NOT shipped in this commit:** `v2/ v3/ v4/ v5/ v6/index.html` also carry an unrelated, unreviewed first-touch-attribution block from another session — shipping them would push that work live too, so they're held back. `e/ f/ g/ h/index.html` are untracked (never deployed). All are fixed on disk and will go out whenever their own work is reviewed.
+
+**Rollback:** `git revert` this commit — the change is 3 lines per form, no structural edits.

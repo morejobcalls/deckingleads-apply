@@ -1073,7 +1073,7 @@
 
   const phoneInput = document.getElementById('phone-input');
   phoneInput.addEventListener('input', () => {
-    const digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+    const digits = phoneInput.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '').slice(0, 10);
     let formatted = digits;
     if (digits.length >= 6) formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
     else if (digits.length >= 3) formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
@@ -1159,13 +1159,13 @@
   submitBtn.addEventListener('click', () => {
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
-    const phone = phoneInput.value.replace(/\D/g, '');
+    const phone = phoneInput.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
 
     // Name: first + space + at least 1 char of second word
     const nameParts = name.split(/\s+/);
     const nameValid = nameParts.length >= 2 && nameParts[0].length >= 2 && nameParts[1].length >= 1;
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const phoneValid = phone.length === 10;
+    const phoneValid = /^[2-9]\d{9}$/.test(phone);
 
     if (nameError) nameError.classList.toggle('hidden', nameValid);
     emailError.classList.toggle('hidden', emailValid);
@@ -1645,7 +1645,7 @@
   var emailEl=document.getElementById('mc-email'), emailErr=document.getElementById('mc-email-err');
   var phoneEl=document.getElementById('mc-phone'), phoneErr=document.getElementById('mc-phone-err');
   phoneEl.addEventListener('input',function(){
-    var d=phoneEl.value.replace(/\D/g,'').slice(0,10), f=d;
+    var d=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'').slice(0,10), f=d;
     if(d.length>=6) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
     else if(d.length>=3) f='('+d.slice(0,3)+') '+d.slice(3);
     phoneEl.value=f;
@@ -1661,8 +1661,8 @@
         nameErr.classList.toggle('show',!ok); if(!ok){nameEl.focus();return;}
         formData.name=name; show(3);
       } else if(current===3){
-        var email=emailEl.value.trim(), phone=phoneEl.value.replace(/\D/g,'');
-        var eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), pok=phone.length===10;
+        var email=emailEl.value.trim(), phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
+        var eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), pok=/^[2-9]\d{9}$/.test(phone);
         emailErr.classList.toggle('show',!eok); phoneErr.classList.toggle('show',!pok);
         if(!eok){emailEl.focus();return;} if(!pok){phoneEl.focus();return;}
         formData.email=email; formData.phone='+1'+phone; show(4);

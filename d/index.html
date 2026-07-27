@@ -1039,7 +1039,7 @@
 
   const phoneInput = document.getElementById('phone-input');
   phoneInput.addEventListener('input', () => {
-    const digits = phoneInput.value.replace(/\D/g, '').slice(0, 10);
+    const digits = phoneInput.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '').slice(0, 10);
     let formatted = digits;
     if (digits.length >= 6) formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
     else if (digits.length >= 3) formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
@@ -1125,13 +1125,13 @@
   submitBtn.addEventListener('click', () => {
     const name = nameInput.value.trim();
     const email = emailInput.value.trim();
-    const phone = phoneInput.value.replace(/\D/g, '');
+    const phone = phoneInput.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
 
     // Name: first + space + at least 1 char of second word
     const nameParts = name.split(/\s+/);
     const nameValid = nameParts.length >= 2 && nameParts[0].length >= 2 && nameParts[1].length >= 1;
     const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const phoneValid = phone.length === 10;
+    const phoneValid = /^[2-9]\d{9}$/.test(phone);
 
     if (nameError) nameError.classList.toggle('hidden', nameValid);
     emailError.classList.toggle('hidden', emailValid);
