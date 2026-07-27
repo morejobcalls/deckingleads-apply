@@ -1326,8 +1326,8 @@
   phoneInput.addEventListener('input', () => {
     const digits = phoneInput.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '').slice(0, 10);
     let formatted = digits;
-    if (digits.length >= 6) formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
-    else if (digits.length >= 3) formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+    if (digits.length >= 7) formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+    else if (digits.length >= 4) formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
     phoneInput.value = formatted;
   });
 
@@ -1856,8 +1856,9 @@
 
     <div class="mc-step" data-step="8">
       <div style="text-align:center;margin-bottom:14px;">
-        <h3 class="mc-q" style="margin-bottom:4px;">One last step — pick a time that works for you</h3>
-        <p class="mc-sub" style="margin-bottom:0;">Free call. We'll map out exactly what we'd build for your business.</p>
+        <h3 id="mc-cal-h1" class="mc-q" style="margin-bottom:4px;">One last step — Reserve your territory and pick a time that works for you</h3>
+        <p id="mc-cal-h2" class="mc-sub" style="margin-bottom:0;font-weight:700;">20+ Deck Jobs in 100 Days or You Get Paid $2,000.</p>
+        <p id="mc-cal-h3" class="mc-sub" style="margin-bottom:0;display:none;">($25 reservation is fully refundable on request and refunded automatically if we're not a fit.)</p>
       </div>
       <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
       <div id="mc-cal-wrap" style="display:none;"><iframe id="mc-cal" src="" title="Book your Deck Jobs Strategy Session" scrolling="yes"></iframe></div>
@@ -1897,7 +1898,7 @@
   // yellow PT calendar). This listener only handles the in-page UX: funnel event + redirect
   // to /scheduled/ like the GHL calendar did.
   var NON_ICP_USE_CALENDLY=true;
-  var CALENDLY_NON_ICP='https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=caa000';
+  var CALENDLY_NON_ICP='https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=b98700&primary_color=b98700';
   window.addEventListener('message', function(e){
     try{
       if(String(e.origin).indexOf('calendly.com')===-1) return;
@@ -1993,8 +1994,8 @@
   var phoneEl=document.getElementById('mc-phone'), phoneErr=document.getElementById('mc-phone-err');
   phoneEl.addEventListener('input',function(){
     var d=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'').slice(0,10), f=d;
-    if(d.length>=6) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
-    else if(d.length>=3) f='('+d.slice(0,3)+') '+d.slice(3);
+    if(d.length>=7) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+    else if(d.length>=4) f='('+d.slice(0,3)+') '+d.slice(3);
     phoneEl.value=f;
   });
   var zipEl=document.getElementById('mc-zip'), zipErr=document.getElementById('mc-zip-err');
@@ -2040,12 +2041,55 @@
     if(formData.zip)   u.searchParams.set('zip',formData.zip);
     return u.toString();
   }
-  function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true; try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
+  // Booking-step copy differs by segment (2026-07-27, Chung/Spencer):
+  // ICP: territory + offer line, NO $25 messaging. Non-ICP: Reserve Your Territory + $25 refundable line.
+  function setCalCopy(){
+    try{
+      var h1=document.getElementById('mc-cal-h1'), h2=document.getElementById('mc-cal-h2'), h3=document.getElementById('mc-cal-h3');
+      if(icp){
+        h1.textContent='One last step — Reserve your territory and pick a time that works for you';
+        h2.textContent='20+ Deck Jobs in 100 Days or You Get Paid $2,000.';
+        h3.style.display='none';
+      } else {
+        h1.textContent='Reserve Your Territory — $25, 100% Refundable';
+        h2.textContent='20+ Deck Jobs in 100 Days or You Get Paid $2,000.';
+        h3.style.display='block';
+      }
+    }catch(e){}
+  }
+
+  // Calendly official inline widget (widget.js) — Spencer's embed snippet with dark/gold styling.
+  var calendlyScriptLoaded=false, calendlyInited=false;
+  function mountCalendly(){
+    if(calendlyInited) return; 
+    var wrap=document.getElementById('mc-cal-wrap');
+    if(!wrap) return;
+    var iframe=document.getElementById('mc-cal'); if(iframe) iframe.style.display='none';
+    var host=document.getElementById('mc-calendly');
+    if(!host){ host=document.createElement('div'); host.id='mc-calendly'; host.className='calendly-inline-widget'; host.style.cssText='min-width:320px;height:700px;'; wrap.appendChild(host); }
+    function init(){
+      if(calendlyInited || !window.Calendly) return;
+      calendlyInited=true;
+      window.Calendly.initInlineWidget({ url: CALENDLY_NON_ICP, parentElement: host, prefill: { name: formData.name||'', email: formData.email||'' } });
+    }
+    if(window.Calendly){ init(); return; }
+    if(!calendlyScriptLoaded){
+      calendlyScriptLoaded=true;
+      var sc=document.createElement('script'); sc.src='https://assets.calendly.com/assets/external/widget.js'; sc.async=true;
+      sc.onload=init; document.head.appendChild(sc);
+    }
+  }
+
+  function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true;
+    if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); return; }
+    try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
 
   function submitAndShowCalendar(){
     icp=isICP(formData);
+    setCalCopy();
     show(8);
-    try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
+    if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); }
+    else try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
     setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },1400);
     if(submitted) return; submitted=true;
     dlTrack('submit',9,{icp:icp});

@@ -1075,8 +1075,8 @@
   phoneInput.addEventListener('input', () => {
     const digits = phoneInput.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '').slice(0, 10);
     let formatted = digits;
-    if (digits.length >= 6) formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
-    else if (digits.length >= 3) formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+    if (digits.length >= 7) formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+    else if (digits.length >= 4) formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
     phoneInput.value = formatted;
   });
 
@@ -1646,8 +1646,8 @@
   var phoneEl=document.getElementById('mc-phone'), phoneErr=document.getElementById('mc-phone-err');
   phoneEl.addEventListener('input',function(){
     var d=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'').slice(0,10), f=d;
-    if(d.length>=6) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
-    else if(d.length>=3) f='('+d.slice(0,3)+') '+d.slice(3);
+    if(d.length>=7) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+    else if(d.length>=4) f='('+d.slice(0,3)+') '+d.slice(3);
     phoneEl.value=f;
   });
   var zipEl=document.getElementById('mc-zip'), zipErr=document.getElementById('mc-zip-err');

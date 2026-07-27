@@ -260,3 +260,13 @@ Both post-booking pages: Step 1 H2 becomes "Is {zip} where you want more deck jo
 ### v5.6.2 — Add-to-calendar works for Calendly bookings (2026-07-27)
 
 Step 3's add-to-calendar buttons (mjc-appointment-time worker) previously only rendered for GHL-widget bookings (needed a contactId ref). Now: the LP stashes an **email-based ref** when Calendly fires `event_scheduled`, the worker accepts `{email}` and resolves the contact + the **mirrored** GHL appointment (created server-side by calendly-ghl-webhook seconds after booking), and the pages retry up to ~13s to ride out mirror lag. GHL-widget bookings unchanged.
+
+### v5.7 — Phone backspace bug + segment-split booking copy + official Calendly embed (2026-07-27)
+
+**1. Phone input backspace bug (ALL live forms).** Spencer caught it live: with the formatter emitting trailing separators at exactly 3 digits ("(512) ") and 6 digits ("(512) 366-"), backspace deleted the separator and the immediate re-format restored it — digit count never dropped. Leads could NOT correct a wrong digit in positions 1–3 (once 3 typed) or position 6. Fix: format thresholds moved from ≥3/≥6 to ≥4/≥7 so a trailing separator only ever appears with a digit after it — every backspace now removes a digit (verified by simulated typing + backspacing). Shipped to `index.html` (both forms), `next/`, `a/ b/ c/ d/ yt/`, and `v2–v6` (the v2–v6 fix isolated from the other session's uncommitted attribution work, same procedure as v5.2b; their working-tree copies also carry the fix now).
+
+**2. Booking-step copy split by segment** (`index.html` modal step 8):
+- Non-ICP: H1 "Reserve Your Territory — $25, 100% Refundable" · H2 "20+ Deck Jobs in 100 Days or You Get Paid $2,000." · H3 "($25 reservation is fully refundable on request and refunded automatically if we're not a fit.)"
+- ICP: H1 "One last step — Reserve your territory and pick a time that works for you" · H2 same offer line · NO $25 messaging.
+
+**3. Non-ICP calendar embed → Calendly's official widget.js** (Spencer's snippet): dark/gold params (`background_color=000000&text_color=b98700&primary_color=b98700`), mounted via `Calendly.initInlineWidget` with name/email prefill inside `#mc-cal-wrap` (GHL iframe hidden, not removed — kill switch still restores everything). Legacy inline flow keeps the styled URL via `CALENDLY_NON_ICP`.
