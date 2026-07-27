@@ -256,3 +256,7 @@ Chung's direct spec, verbatim where possible, still Imperium dark UI. Both post-
 ### v5.6.1 — Zip-personalized Step-1 headline (2026-07-27)
 
 Both post-booking pages: Step 1 H2 becomes "Is {zip} where you want more deck jobs?" — zip injected from the application's sessionStorage (same source as the SMS prefill), falling back to the generic "Is this where you want more deck jobs?" when storage is empty.
+
+### v5.6.2 — Add-to-calendar works for Calendly bookings (2026-07-27)
+
+Step 3's add-to-calendar buttons (mjc-appointment-time worker) previously only rendered for GHL-widget bookings (needed a contactId ref). Now: the LP stashes an **email-based ref** when Calendly fires `event_scheduled`, the worker accepts `{email}` and resolves the contact + the **mirrored** GHL appointment (created server-side by calendly-ghl-webhook seconds after booking), and the pages retry up to ~13s to ride out mirror lag. GHL-widget bookings unchanged.

@@ -268,14 +268,14 @@
   var ref;
   if(qs.get('c')){ ref={contactId:qs.get('c'), calendarId:qs.get('cal')||'', t:Date.now()}; }
   else { try{ ref=JSON.parse(localStorage.getItem('mjc_booked_ref')||'null'); }catch(e){} }
-  if(!ref || !ref.contactId || (Date.now()-(ref.t||0) > 14*24*60*60*1000)) return;
+  if(!ref || (!ref.contactId && !ref.email) || (Date.now()-(ref.t||0) > 14*24*60*60*1000)) return;
   var tries=0;
   function attempt(){
     tries++;
-    fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contactId:ref.contactId,calendarId:ref.calendarId})})
+    fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contactId:ref.contactId||'',email:ref.email||'',calendarId:ref.calendarId})})
       .then(function(r){return r.json();})
-      .then(function(d){ if(d&&d.found&&d.startUTC){ render(d); } else if(tries<6){ setTimeout(attempt,1300); } })
-      .catch(function(){ if(tries<6) setTimeout(attempt,1300); });
+      .then(function(d){ if(d&&d.found&&d.startUTC){ render(d); } else if(tries<9){ setTimeout(attempt,1500); } })
+      .catch(function(){ if(tries<9) setTimeout(attempt,1500); });
   }
   function render(d){
     var start=new Date(d.startUTC), end=d.endUTC?new Date(d.endUTC):new Date(start.getTime()+45*60000);

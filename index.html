@@ -1903,6 +1903,9 @@
       if(String(e.origin).indexOf('calendly.com')===-1) return;
       if(!e.data || e.data.event!=='calendly.event_scheduled') return;
       if(typeof dlTrack==='function') dlTrack('booked_calendly',10);
+      // Stash an email-based booking ref so the /scheduled/ add-to-calendar block can
+      // resolve the mirrored GHL appointment (Calendly path has no GHL contactId).
+      try{ if(window.formData&&formData.email){ localStorage.setItem('mjc_booked_ref', JSON.stringify({email:formData.email, calendarId:'lNcyqnixLoZa2p3S5P8I', t:Date.now()})); } }catch(err2){}
       setTimeout(function(){ window.location.href='/scheduled/'; },1200);
     }catch(err){}
   });
