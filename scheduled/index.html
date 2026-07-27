@@ -170,7 +170,7 @@
         <p class="step-label">Step 2</p>
         <p class="step-title">Confirm your call via text</p>
         <p class="step-sub" style="margin-bottom:1rem;">It's pre-written — tap, check it looks right, hit send. This is my direct line. No-shows lose their slot; this locks yours.</p>
-        <a id="confirm-sms" class="confirm-btn" href="sms:+15012363920?&body=Hey%20Spencer%2C%20it%27s%20%5Byour%20name%5D%20%E2%80%94%20just%20booked%20my%20call.%20Locking%20in%20my%20spot%20for%20%5Byour%20zip%5D.%20See%20you%20on%20the%20call." aria-label="Send the pre-written confirmation text">
+        <a id="confirm-sms" class="confirm-btn" href="sms:+15012363920?&body=Hey%20Spencer%2C%20it%27s%20%5Byour%20name%5D%20from%20%5Bcompany%5D.%20Just%20booked%20a%20call.%20Looking%20forward%20to%20seeing%20how%20the%2020%20deck%20jobs%20in%20100%20days%20process%20could%20work%20for%20us%20here%20in%20%5Byour%20zip%5D." aria-label="Send the pre-written confirmation text">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
           </svg>
@@ -403,7 +403,7 @@
   if (sms) {
     const who = first || '[your name]';
     const zip = (data.zip || '').toString().trim() || '[your zip]';
-    const body = `Hey Spencer, it's ${who} — just booked my call. Locking in my spot for ${zip}. See you on the call.`;
+    const body = `Hey Spencer, it's ${who} from [company]. Just booked a call. Looking forward to seeing how the 20 deck jobs in 100 days process could work for us here in ${zip}.`;
     sms.href = 'sms:+15012363920?&body=' + encodeURIComponent(body);
   }
 })();

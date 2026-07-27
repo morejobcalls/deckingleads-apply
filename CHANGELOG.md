@@ -235,3 +235,7 @@ Round 3, same day. Spencer's direction: model the post-booking experience on go.
 3. **LP index.html:** Calendly listener slimmed — the GHL-inbound-webhook beacon removed (the server-side `calendly-ghl-webhook` Worker now owns tagging + appointment mirroring; the temp draft GHL bridge workflow was deleted). Listener keeps funnel tracking + the /scheduled/ redirect.
 
 **Rollback:** `git revert` this commit (previous light-theme pages live in history).
+
+### v5.5.1 — Pre-filled confirmation text, Spencer's wording (2026-07-27)
+
+Both post-booking pages: pre-filled iMessage body is now *"Hey Spencer, it's {first} from [company]. Just booked a call. Looking forward to seeing how the 20 deck jobs in 100 days process could work for us here in {zip}."* First name + zip auto-fill from the application (sessionStorage); `[company]` is a deliberate overtype placeholder — the application doesn't collect company name, and typing it adds the commitment friction the confirm step is for.
