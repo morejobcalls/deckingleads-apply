@@ -274,3 +274,9 @@ Step 3's add-to-calendar buttons (mjc-appointment-time worker) previously only r
 ### v5.7.1 — FINAL pre-call VSL cut everywhere (2026-07-27)
 
 Spencer delivered the final polished proof VSL (1:58, Jeff Haring/Window Prof results slides). Now serving in every slot: native video on `/confirmation/` + `/scheduled/` (`media/precall-proof.mp4`, 7.4MB 720p + new poster), **unlisted YouTube `R9mX0UyONjI`** (SMS/nurture link use), the LIVE "1. New Lead" no-book iMessage 2 attachment, and the draft post-booking workflow attachment (both GHL media `b0e2cc1c-…`). Prior unlisted upload `YNhnO9332U4` set private.
+
+### v5.8 — Imperium step cards + all-white text + white Calendly text (2026-07-27)
+
+Spencer's polish round (mobile-first — ~80% of traffic is FB in-app webview):
+1. **Post-booking pages:** the 3 steps are now Imperium-style **cards** — #141414 panels, gold border, gold STEP label — stacked full-width (Charlie Morgan's step-card look, kept single-column since our Step 2 holds a full video, not a thumbnail). Body copy bumped from muted cream (rgba .55) to near-white (rgba(255,255,255,.88)) for dark-bg mobile readability. Section paddings tightened between cards.
+2. **Application booking step:** Calendly widget `text_color` b98700 → **ffffff** — white text on black, gold stays as the accent/primary. (Interpreted from Spencer's lost screenshot: gold-on-black body text in the embed was the readability problem.)
