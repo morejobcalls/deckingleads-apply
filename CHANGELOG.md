@@ -225,3 +225,13 @@ Round 2 of the Chung audit implementation, same day as v5.3.
 4. Known non-blockers: Calendly bookings don't create GHL appointments, so the post-booking iMessage workflow (drafted today) won't fire for this segment until a server-side bridge creates appointments; `/scheduled/` add-to-calendar block hides itself gracefully (no GHL appointment to find).
 
 **Rollback:** flip `NON_ICP_USE_CALENDLY` (and `NON_ICP_USE_CALENDLY_L`) to `false`, or `git revert`.
+
+### v5.5 — Dark Imperium-style post-booking pages + corrected pre-call video (2026-07-27)
+
+Round 3, same day. Spencer's direction: model the post-booking experience on go.imperiumacquisition.com/thank-you-*, keep Chung's one-video-at-a-time consumption directive, dark theme.
+
+1. **Full rebuild of `/confirmation/` + `/scheduled/`** (fresh files, shared template): black (#0D0D0D/#141414) + gold, pill band at top ("⚠ IMPORTANT: YOUR CALL HAS BEEN TENTATIVELY SCHEDULED ⚠"), caps headline ("WATCH THE VIDEO BELOW AND COMPLETE THE STEPS TO CONFIRM YOUR CALL"), video front-and-center, then Imperium-style 3 step cards: (1) add to calendar — static copy + the dynamic add-to-calendar block when a booking ref exists, (2) confirm via personalized pre-filled text (same sessionStorage name+zip injection), (3) anchor to the sequential proof player. Then white-chip logo marquee, one-story-at-a-time player, guarantee restate, reschedule, footer. Tailwind CDN dropped (unused). Preserved per page: iframe breakout, Meta pixel BookedCall on /confirmation/ ONLY (none on /scheduled/, by design), Clarity on both, mjc-appointment-time worker fetch.
+2. **Pre-call video corrected:** the v5.4 upload was the WRONG cut (old edit with a flaw Spencer caught). New master `1. MARKETING/EVGVSL new edit 07272026.mov` (1:49) uploaded unlisted → **`YNhnO9332U4`**; embeds swapped on both pages; the wrong upload `OBdbWCVxGws` set PRIVATE on YouTube. Repo fallback `media/precall-proof.mp4` + poster replaced with the new cut (7.1MB 720p). The post-booking iMessage draft workflow's video attachment was also swapped to the new cut (GHL media `323d0d9b-…`).
+3. **LP index.html:** Calendly listener slimmed — the GHL-inbound-webhook beacon removed (the server-side `calendly-ghl-webhook` Worker now owns tagging + appointment mirroring; the temp draft GHL bridge workflow was deleted). Listener keeps funnel tracking + the /scheduled/ redirect.
+
+**Rollback:** `git revert` this commit (previous light-theme pages live in history).

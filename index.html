@@ -1892,21 +1892,16 @@
   // ── CALENDLY TEST (2026-07-27, Chung round 1): non-ICP books on Calendly instead of the
   // GHL widget (easier booking UI; $25 reservation collected natively by Calendly).
   // KILL SWITCH: set NON_ICP_USE_CALENDLY=false to restore the GHL calendar — no other edits needed.
-  // Bridge: on calendly.event_scheduled we beacon the lead to a GHL inbound webhook that tags
-  // booked + booked-via-calendly (so no-book nurture/AI setter treat them as booked), then
-  // redirect to /scheduled/ like the GHL calendar did.
+  // Booking lands in GHL via the calendly-ghl-webhook Cloudflare Worker (HMAC-verified,
+  // server-side: tags booked + booked-via-calendly, mirrors a real GHL appointment onto the
+  // yellow PT calendar). This listener only handles the in-page UX: funnel event + redirect
+  // to /scheduled/ like the GHL calendar did.
   var NON_ICP_USE_CALENDLY=true;
   var CALENDLY_NON_ICP='https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=caa000';
-  var CALENDLY_BRIDGE='https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/HgeZ5W08aasOAxfiTIAo';
   window.addEventListener('message', function(e){
     try{
       if(String(e.origin).indexOf('calendly.com')===-1) return;
       if(!e.data || e.data.event!=='calendly.event_scheduled') return;
-      var parts=((window.formData&&formData.name)||'').trim().split(/\s+/);
-      var payload={first_name:parts[0]||'',last_name:parts.slice(1).join(' '),full_name:(formData&&formData.name)||'',
-        email:(formData&&formData.email)||'',phone:(formData&&formData.phone)||'',postal_code:(formData&&formData.zip)||'',
-        booked_via:'calendly',calendly_event:(e.data.payload&&e.data.payload.event&&e.data.payload.event.uri)||''};
-      fetch(CALENDLY_BRIDGE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true}).catch(function(){});
       if(typeof dlTrack==='function') dlTrack('booked_calendly',10);
       setTimeout(function(){ window.location.href='/scheduled/'; },1200);
     }catch(err){}

@@ -8,197 +8,90 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D0D0D">
 <title>You're Booked · Deck Jobs Strategy Session</title>
-<meta name="description" content="Your Deck Jobs Strategy Session is booked. Watch this 2-minute video before our call.">
+<meta name="description" content="Your Deck Jobs Strategy Session is tentatively scheduled. Watch the video and complete the steps to confirm your call.">
 <meta name="robots" content="noindex, nofollow">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          canvas: '#F8F7F3',
-          ink: '#1A1917',
-          'ink-muted': '#7A7870',
-          border: '#E2DFDA',
-          dark: '#0D0D0D',
-          'dark-elevated': '#161614',
-          gold: '#C7963F',
-          'gold-deep': '#AB8032',
-          success: '#00B67A',
-        },
-        fontFamily: {
-          sans: ['Inter', 'system-ui', 'sans-serif'],
-        }
-      }
-    }
-  }
-</script>
 <style>
   *,*::before,*::after { box-sizing: border-box; }
   html { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  body { margin: 0; background: #FBFAF7; }
+  body { margin: 0; background: #0D0D0D; color: #F5F2EC; }
 
-  /* Hero headline — light, mixes regular + bold weights like Ravi */
-  .ty-headline {
-    font-size: clamp(1.75rem, 4vw, 2.6rem);
-    line-height: 1.1;
-    color: #1A1917;
-    font-weight: 400;
-    letter-spacing: -0.025em;
-    margin: 0 0 0.75rem;
-  }
-  .ty-headline b { font-weight: 800; }
-
-  /* Eyebrow label */
-  .ey {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-  }
+  .ey { font-size:.8rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; }
 
   /* Scroll reveal */
   .rv { opacity: 0; transform: translateY(18px); transition: opacity .65s cubic-bezier(.16,1,.3,1), transform .65s cubic-bezier(.16,1,.3,1); }
   .rv.in { opacity: 1; transform: none; }
   .rv.d1 { transition-delay: .1s; }
   .rv.d2 { transition-delay: .2s; }
-  .rv.d3 { transition-delay: .3s; }
 
-  /* Pulsing confirmation ring */
-  @keyframes pulse-ring { 0% { transform: scale(1); opacity: .5; } 100% { transform: scale(1.6); opacity: 0; } }
-  .confirm-ring { position: relative; display: inline-flex; align-items: center; justify-content: center; }
-  .confirm-ring::before { content: ''; position: absolute; inset: -9px; border-radius: 50%; border: 2px solid #00B67A; animation: pulse-ring 2s ease-out infinite; }
+  /* Top pill banner — Imperium style: gold caps between thin gold rules */
+  .pill-band { border-top:1px solid rgba(199,150,63,.65); border-bottom:1px solid rgba(199,150,63,.65); padding:.95rem 1.25rem; }
+  .pill-band p { margin:0; text-align:center; color:#C7963F; font-weight:800; font-size:clamp(.72rem,2.4vw,.9375rem); letter-spacing:.14em; text-transform:uppercase; line-height:1.5; }
 
-  /* Confirm button — single SMS CTA */
-  .confirm-btn {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-weight: 700; font-size: 0.95rem;
-    border-radius: 10px; padding: 0.875rem 1.5rem;
-    text-decoration: none; transition: opacity .2s, transform .12s;
-    line-height: 1; white-space: nowrap;
-    background: #007AFF; color: #fff;
-    box-shadow: 0 8px 32px -8px rgba(0, 122, 255, 0.45);
-  }
-  .confirm-btn:hover { opacity: 0.9; }
-  .confirm-btn:active { transform: translateY(1px); }
-
-  /* Step card (dark) */
-  .step-card { display: flex; align-items: flex-start; gap: 1rem; background: rgba(26,25,23,.04); border: 1px solid rgba(26,25,23,.09); border-radius: 12px; padding: 1rem 1.25rem; }
-  .step-num { flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%; background: #C7963F; color: #fff; font-weight: 800; font-size: .875rem; display: flex; align-items: center; justify-content: center; }
+  /* Big caps headline */
+  .big-h { font-size:clamp(1.5rem,4.6vw,2.6rem); font-weight:900; color:#FFFFFF; text-transform:uppercase; letter-spacing:.02em; line-height:1.18; margin:0; text-align:center; }
+  .big-h span { color:#C7963F; }
 
   /* Video wrapper */
-  .video-wrap { border-radius: 14px; overflow: hidden; box-shadow: 0 6px 48px rgba(26,25,23,.14); position: relative; padding-bottom: 56.25%; background: #fff; }
-  .video-wrap iframe { position: absolute; top: -1px; left: -1px; width: calc(100% + 2px); height: calc(100% + 2px); display: block; border: none; }
+  .video-wrap { border-radius:12px; overflow:hidden; box-shadow:0 10px 60px rgba(0,0,0,.6); position:relative; padding-bottom:56.25%; background:#000; border:1px solid rgba(199,150,63,.35); }
+  .video-wrap iframe { position:absolute; top:-1px; left:-1px; width:calc(100% + 2px); height:calc(100% + 2px); display:block; border:none; }
 
-  /* Prep checklist */
-  .prep-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 1rem; }
-  .prep-list > li { display: flex; align-items: flex-start; gap: 0.875rem; font-size: 0.9375rem; color: rgba(26,25,23,.92); line-height: 1.65; font-weight: 500; }
-  .prep-list > li .icon { flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%; background: #071f12; border: 1.5px solid #00B67A; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-  .prep-list .sub { font-size: 0.8125rem; color: rgba(26,25,23,.55); line-height: 1.6; font-weight: 500; margin: 0.35rem 0 0; }
-  .prep-list .sub a { color: #C7963F; text-decoration: underline; }
-  .prep-list .sub a:hover { color: #AB8032; }
+  /* Step cards */
+  .steps { display:grid; grid-template-columns:1fr; gap:1rem; }
+  @media(min-width:820px){ .steps { grid-template-columns:repeat(3,1fr); } }
+  .step-card { background:#141414; border:1px solid rgba(199,150,63,.28); border-radius:12px; padding:1.5rem 1.35rem 1.6rem; text-align:center; }
+  .step-label { color:#C7963F; font-weight:800; font-size:.75rem; letter-spacing:.22em; text-transform:uppercase; margin:0 0 .6rem; }
+  .step-title { color:#FFFFFF; font-weight:700; font-size:1rem; line-height:1.45; margin:0 0 .85rem; }
+  .step-sub { color:rgba(245,242,236,.55); font-size:.8125rem; line-height:1.6; margin:0; }
 
-  /* Guarantee card (dark variant) */
-  .gtee-card { background: rgba(199,150,63,.06); border: 1px solid rgba(199,150,63,.3); border-radius: 16px; padding: 1.75rem 2rem; }
-  .gtee-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.6rem; }
-  .gtee-list li { display: flex; gap: 0.6rem; color: #1A1917; line-height: 1.55; font-size: 0.95rem; }
-  .gtee-list li::before { content: '→'; color: #C7963F; font-weight: 700; flex-shrink: 0; }
+  .confirm-btn {
+    display:inline-flex; align-items:center; gap:10px; font-weight:700; font-size:.95rem;
+    border-radius:10px; padding:.875rem 1.5rem; text-decoration:none; line-height:1; white-space:nowrap;
+    background:#007AFF; color:#fff; box-shadow:0 8px 32px -8px rgba(0,122,255,.55);
+    transition:opacity .2s, transform .12s;
+  }
+  .confirm-btn:hover { opacity:.9; } .confirm-btn:active { transform:translateY(1px); }
 
-  /* Mobile padding */
-  @media (max-width: 767px) {
-    section { padding-top: 3.5rem !important; padding-bottom: 3.5rem !important; }
-    .gtee-card { padding: 1.5rem 1.25rem; }
-  }
+  .gold-btn { display:inline-flex; align-items:center; gap:.5rem; background:linear-gradient(180deg,#C7963F,#AB8032); color:#0D0D0D; font-weight:800; font-size:.875rem; padding:.75rem 1.3rem; border-radius:10px; text-decoration:none; border:0; cursor:pointer; }
+  .ghost-btn { display:inline-flex; align-items:center; gap:.5rem; background:transparent; color:#F5F2EC; font-weight:700; font-size:.875rem; padding:.75rem 1.3rem; border-radius:10px; text-decoration:none; border:1px solid rgba(245,242,236,.3); }
 
-  /* Video grid — YouTube-style clickable cards with title + channel */
-  .vgrid { display: grid; grid-template-columns: repeat(1, 1fr); gap: 1.25rem 0.875rem; }
-  @media (min-width: 640px) { .vgrid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem 1rem; } }
-  @media (min-width: 900px) { .vgrid { grid-template-columns: repeat(3, 1fr); gap: 1.75rem 1.125rem; } }
-  .vcard { cursor: pointer; transition: transform .18s ease; }
-  .vcard:hover { transform: translateY(-2px); }
-  .vthumb {
-    position: relative; aspect-ratio: 16 / 9;
-    border-radius: 10px; overflow: hidden;
-    background: #1A1917;
-    box-shadow: 0 4px 18px rgba(26,25,23,.10);
-    transition: box-shadow .18s ease;
-  }
-  .vcard:hover .vthumb { box-shadow: 0 8px 26px rgba(26,25,23,.18); }
-  .vthumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
-  .vthumb iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
-  .vthumb .pbtn {
-    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    pointer-events: none;
-  }
-  .vthumb .pbtn-inner {
-    width: 54px; height: 54px; border-radius: 50%;
-    background: rgba(0,0,0,.65); backdrop-filter: blur(2px);
-    display: flex; align-items: center; justify-content: center;
-    transition: background .18s ease, transform .18s ease;
-  }
-  .vcard:hover .vthumb .pbtn-inner { background: rgba(255,0,0,.85); transform: scale(1.06); }
-  .vthumb .pbtn-inner::before {
-    content: ''; display: block; width: 0; height: 0;
-    border-left: 16px solid #fff;
-    border-top: 10px solid transparent;
-    border-bottom: 10px solid transparent;
-    margin-left: 4px;
-  }
-  /* YouTube-style metadata below thumbnail */
-  .vmeta { padding: 0.625rem 0.125rem 0; }
-  .vtitle {
-    font-size: 0.9375rem; font-weight: 600; color: #1A1917;
-    line-height: 1.35; letter-spacing: -0.005em;
-    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
-    overflow: hidden; text-overflow: ellipsis;
-    margin: 0 0 0.25rem;
-  }
-  .vchan {
-    font-size: 0.8125rem; color: #606060;
-    line-height: 1.3; font-weight: 500;
-    display: flex; align-items: center; gap: 0.375rem;
-  }
-  .vchan-verified {
-    display: inline-flex; align-items: center; justify-content: center;
-    width: 14px; height: 14px; border-radius: 50%;
-    background: #606060; color: #fff; font-size: 9px; font-weight: 800;
-  }
+  /* Sequential proof player */
+  .vcard { max-width:680px; margin:0 auto; cursor:pointer; }
+  .vthumb { position:relative; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:#000; border:1px solid rgba(199,150,63,.3); }
+  .vthumb img { width:100%; height:100%; object-fit:cover; display:block; opacity:.92; }
+  .vthumb iframe { position:absolute; inset:0; width:100%; height:100%; border:0; display:block; }
+  .vthumb .pbtn { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+  .vthumb .pbtn-inner { width:58px; height:58px; border-radius:50%; background:rgba(199,150,63,.92); display:flex; align-items:center; justify-content:center; }
+  .vthumb .pbtn-inner::before { content:''; width:0; height:0; border-left:17px solid #0D0D0D; border-top:10px solid transparent; border-bottom:10px solid transparent; margin-left:4px; }
+  .vcaption { position:absolute; left:0; right:0; bottom:0; background:linear-gradient(transparent, rgba(0,0,0,.85)); padding:1.6rem .9rem .7rem; }
+  .vcaption p { margin:0; color:#fff; font-weight:800; font-size:.9375rem; }
+  .vmeta { padding:.7rem .15rem 0; text-align:left; }
+  .vtitle { color:#fff; font-weight:700; font-size:.9375rem; margin:0 0 .15rem; }
+  .vchan { color:rgba(245,242,236,.5); font-size:.8125rem; margin:0; }
 
-  /* Result-caption banner on proof thumbnails (ported from LP proof cards) */
-  .vcaption {
-    position: absolute; left: 0; right: 0; bottom: 0;
-    padding: 0.85rem 0.9rem 0.7rem;
-    background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.5) 58%, transparent 100%);
-    pointer-events: none;
-  }
-  .vcaption p {
-    margin: 0; color: #EBB84D; font-weight: 800;
-    font-size: 0.875rem; line-height: 1.1; letter-spacing: -.01em;
-    text-transform: uppercase;
-  }
-  .vcard .vtitle { -webkit-line-clamp: 1; font-weight: 700; }
+  /* Guarantee card */
+  .gtee-card { background:rgba(199,150,63,.07); border:1px solid rgba(199,150,63,.4); border-radius:16px; padding:1.75rem 2rem; }
+  .gtee-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.6rem; }
+  .gtee-list li { display:flex; gap:.6rem; color:#F5F2EC; line-height:1.55; font-size:.95rem; }
+  .gtee-list li::before { content:'→'; color:#C7963F; font-weight:700; flex-shrink:0; }
 
-  /* Logo marquee — ported from landing page */
-  .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
-  .marquee-track { display: inline-flex; gap: 40px; animation: marquee-scroll 38s linear infinite; }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
-  @keyframes marquee-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-  .logo-cell { flex: 0 0 auto; height: 62px; display: inline-flex; align-items: center; justify-content: center; padding: 0 6px; opacity: .55; transition: opacity .18s ease; }
-  .logo-cell:hover { opacity: .9; }
-  .logo-cell img { max-height: 50px; max-width: 180px; width: auto; height: auto; object-fit: contain; display: block; filter: grayscale(1) brightness(0); }
-  .logo-cell--invert img { filter: grayscale(1) brightness(0); }
-  .logo-cell--card img { filter: grayscale(1); mix-blend-mode: multiply; max-height: 56px; max-width: 188px; }
-  @media (prefers-reduced-motion: reduce) { .marquee-track { animation: none; } }
+  /* Logo band — white chips so dark logos stay readable on the dark theme */
+  .marquee { overflow:hidden; mask-image:linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image:linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
+  .marquee-track { display:inline-flex; gap:22px; animation:marquee-scroll 38s linear infinite; }
+  .marquee:hover .marquee-track { animation-play-state:paused; }
+  @keyframes marquee-scroll { from { transform:translateX(0);} to { transform:translateX(-50%);} }
+  .logo-cell { flex:0 0 auto; height:58px; display:inline-flex; align-items:center; justify-content:center; padding:8px 16px; background:#F5F2EC; border-radius:10px; }
+  .logo-cell img { max-height:40px; max-width:150px; width:auto; height:auto; object-fit:contain; display:block; filter:grayscale(1); }
+  @media (prefers-reduced-motion: reduce) { .marquee-track { animation:none; } }
+
+  @media (max-width:767px) { section { padding-top:3rem !important; padding-bottom:3rem !important; } .gtee-card { padding:1.5rem 1.25rem; } }
 </style>
 
-<!-- Iframe break-out — when GHL calendar redirects this page inside its widget iframe
-     after booking, escape to the top window so the user sees a full-page confirmation
-     and Clarity records the session. Pixel + Clarity below are gated to only fire
-     when at top level (avoids spurious double-firing during the brief iframe transition). -->
+<!-- Iframe break-out — when a booking widget redirects this page inside its iframe,
+     escape to the top window so the user sees a full-page confirmation. -->
 <script>
   try {
     if (window.top !== window.self) {
@@ -227,7 +120,7 @@
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
 
-<!-- Microsoft Clarity (heat maps + session recordings + analytics) -->
+<!-- Microsoft Clarity -->
 <script type="text/javascript">
   if (window.__TOP_LEVEL__) {
     (function(c,l,a,r,i,t,y){
@@ -241,167 +134,60 @@
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-     NAV
-══════════════════════════════════ -->
-<nav style="background:#FBFAF7;border-bottom:1px solid rgba(26,25,23,.07);padding:1rem 1.25rem;position:sticky;top:0;z-index:50;">
+<!-- NAV -->
+<nav style="background:#0D0D0D;border-bottom:1px solid rgba(245,242,236,.08);padding:1rem 1.25rem;position:sticky;top:0;z-index:50;">
   <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;">
-    <span style="font-weight:900;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#1A1917;">
+    <span style="font-weight:900;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:#F5F2EC;">
       More<span style="color:#C7963F;">JobCalls</span>
     </span>
   </div>
 </nav>
 
+<!-- PILL BAND -->
+<div class="pill-band">
+  <p>⚠&nbsp;&nbsp;Important: your call has been tentatively scheduled&nbsp;&nbsp;⚠</p>
+</div>
 
-<!-- ══════════════════════════════════
-     HERO — DYNAMIC CONFIRMATION
-══════════════════════════════════ -->
-<section style="background:#FBFAF7;padding:4.5rem 1.25rem 5rem;">
-  <div style="max-width:680px;margin:0 auto;text-align:center;">
-
-    <!-- Pulsing green check -->
-    <div class="rv" style="display:flex;justify-content:center;margin-bottom:2rem;">
-      <div class="confirm-ring">
-        <div style="width:68px;height:68px;border-radius:50%;background:#071f12;border:2px solid #00B67A;display:flex;align-items:center;justify-content:center;">
-          <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-            <path d="M6 15l7 8L24 8" stroke="#00B67A" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-        </div>
-      </div>
-    </div>
-
-    <!-- Headline -->
-    <div class="rv d1" style="text-align:center;">
-      <p id="hero-h1" class="ty-headline">
-        <b>You're booked.</b> Watch this before we talk.
-      </p>
-    </div>
-
-    <!-- ═══ ADD TO CALENDAR (v2) — hidden + zero-regression: only renders when a v2-modal booking
-         set localStorage.mjc_booked_ref. v1 bookers never set it, so this stays invisible for them.
-         Fetches the appointment time from the mjc-appointment-time worker. ═══ -->
-    <div id="add-cal" style="display:none;max-width:480px;margin:1.75rem auto 0;">
-      <div style="background:#FFFFFF;border:1px solid rgba(199,150,63,.30);border-radius:16px;padding:1.35rem 1.35rem 1.45rem;text-align:center;">
-        <p style="font-size:1rem;font-weight:800;color:#1A1917;margin:0 0 .35rem;letter-spacing:-.01em;">📅 Put the call on your calendar</p>
-        <p id="add-cal-when" style="font-size:.8125rem;color:rgba(199,150,63,.95);font-weight:700;margin:0 0 1.1rem;line-height:1.5;"></p>
-        <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;">
-          <a id="add-cal-google" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(180deg,#C7963F,#AB8032);color:#0D0D0D;font-weight:800;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;">Google Calendar</a>
-          <a id="add-cal-ics" download="strategy-session.ics" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:#1A1917;font-weight:700;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;border:1px solid rgba(26,25,23,.25);">Apple / Outlook</a>
-        </div>
-        <p style="font-size:.7rem;color:rgba(26,25,23,.35);margin:.9rem 0 0;line-height:1.5;">So it's on your calendar and you don't miss it. Your Google Meet link is also in your email &amp; text.</p>
-      </div>
-    </div>
-    <script>
-    (function(){
-      var WORKER='https://mjc-appointment-time.spencer-80c.workers.dev';
-      // ?preview=cal — internal review switch: renders the block with a sample
-      // time (tomorrow 5:00 PM CT) without needing a real booking.
-      var qs=new URLSearchParams(location.search);
-      if(qs.get('preview')==='cal'){
-        var demo=new Date(Date.now()+24*60*60*1000); demo.setUTCHours(22,0,0,0);
-        render({startUTC:demo.toISOString(), endUTC:new Date(demo.getTime()+45*60000).toISOString()});
-        return;
-      }
-      // Booking ref: URL params (?c=&cal= from /book/, survives private mode)
-      // win over localStorage (set by the LP modal + /book/). 14-day window —
-      // the worker returns the UPCOMING appointment, so reminder-link revisits
-      // before the call still get the button; past the call it 404s → hidden.
-      var ref;
-      if(qs.get('c')){ ref={contactId:qs.get('c'), calendarId:qs.get('cal')||'', t:Date.now()}; }
-      else { try{ ref=JSON.parse(localStorage.getItem('mjc_booked_ref')||'null'); }catch(e){} }
-      if(!ref || !ref.contactId || (Date.now()-(ref.t||0) > 14*24*60*60*1000)) return; // no known booking → stays hidden
-      var tries=0;
-      function attempt(){
-        tries++;
-        fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contactId:ref.contactId,calendarId:ref.calendarId})})
-          .then(function(r){return r.json();})
-          .then(function(d){ if(d&&d.found&&d.startUTC){ render(d); } else if(tries<6){ setTimeout(attempt,1300); } })
-          .catch(function(){ if(tries<6) setTimeout(attempt,1300); });
-      }
-      function render(d){
-        var start=new Date(d.startUTC), end=d.endUTC?new Date(d.endUTC):new Date(start.getTime()+45*60000);
-        var title='100 Deck Jobs in 100 Days Strategy Session';
-        var loc=d.location||'Google Meet link is in your confirmation email & text';
-        var details='Your MoreJobCalls.com strategy session with Spencer. The exact Google Meet link is in your confirmation email and text.';
-        function z(n){return(n<10?'0':'')+n;}
-        function u(dt){return dt.getUTCFullYear()+z(dt.getUTCMonth()+1)+z(dt.getUTCDate())+'T'+z(dt.getUTCHours())+z(dt.getUTCMinutes())+z(dt.getUTCSeconds())+'Z';}
-        var g='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+u(start)+'/'+u(end)+'&details='+encodeURIComponent(details)+'&location='+encodeURIComponent(loc);
-        document.getElementById('add-cal-google').href=g;
-        var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MoreJobCalls//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:'+u(start)+'-mjc@morejobcalls.com','DTSTAMP:'+u(new Date()),'DTSTART:'+u(start),'DTEND:'+u(end),'SUMMARY:'+title,'DESCRIPTION:'+details.replace(/,/g,'\\,'),'LOCATION:'+String(loc).replace(/,/g,'\\,'),'BEGIN:VALARM','TRIGGER:-PT30M','ACTION:DISPLAY','DESCRIPTION:Strategy session in 30 minutes','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
-        document.getElementById('add-cal-ics').href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
-        try{ document.getElementById('add-cal-when').textContent=start.toLocaleString('en-US',{weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}); }catch(e){}
-        document.getElementById('add-cal').style.display='block';
-      }
-      attempt();
-    })();
-    </script>
-
-    <!-- Supporting copy — points straight down to the video + text steps -->
-    <div class="rv d2" style="max-width:480px;margin:1.5rem auto 0;">
-      <p style="font-size:.9375rem;color:rgba(26,25,23,.5);line-height:1.78;font-weight:400;margin:0;">
-        Two quick steps before our call — the 2-minute video below, then a one-tap text to lock in your slot. That's it.
-      </p>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ══════════════════════════════════
-     PRE-CALL VIDEO
-══════════════════════════════════ -->
-<section style="background:#F8F7F3;padding:5.5rem 1.25rem;border-top:1px solid #E2DFDA;">
+<!-- HEADLINE + VIDEO -->
+<section style="background:#0D0D0D;padding:3.5rem 1.25rem 4rem;">
   <div style="max-width:820px;margin:0 auto;">
+    <h1 class="big-h rv">Watch the video below and complete<br>the steps to <span>confirm your call</span></h1>
+    <div style="width:120px;height:1px;background:rgba(199,150,63,.5);margin:2rem auto 2.5rem;"></div>
 
-    <div class="rv" style="text-align:center;margin-bottom:2.75rem;">
-      <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
-        <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
-        <span class="ey" style="color:rgba(199,150,63,.85);">Step 1 — Watch First</span>
-      </div>
-      <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#1A1917;line-height:1.1;letter-spacing:-.02em;margin:0 0 .75rem;">
-        Watch This <span style="color:#C7963F;">Before Our Call</span>
-      </h2>
-      <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:480px;margin:0 auto;font-weight:500;">
-        Two minutes — how the system works and the results builders like you are getting with it. So when we hop on, we skip the preamble and go straight to your market.
-      </p>
-    </div>
-
-    <!-- Unlisted YouTube embed (OBdbWCVxGws) — per Chung: video front and center; YouTube
-         hosting so watch counts are visible in Studio (the "12 views in 2 months" diagnostic). -->
     <div class="rv d1 video-wrap">
       <iframe
-        src="https://www.youtube-nocookie.com/embed/OBdbWCVxGws?rel=0&modestbranding=1"
+        src="https://www.youtube-nocookie.com/embed/YNhnO9332U4?rel=0&modestbranding=1"
         title="Watch this before our call — The Deck Jobs System"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen></iframe>
     </div>
-    <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1rem 0 0;">~2:00 · The offer, the proof, and how it works</p>
-    <div style="display:flex;justify-content:center;margin-top:1.1rem;">
-      <a href="#keep-watching" style="display:inline-flex;align-items:center;gap:.45rem;color:#1A1917;font-weight:700;font-size:.875rem;text-decoration:none;border:1px solid rgba(26,25,23,.22);border-radius:999px;padding:.65rem 1.2rem;">Watch the next video <span aria-hidden="true">↓</span></a>
-    </div>
-
+    <p style="text-align:center;font-size:.8125rem;color:rgba(245,242,236,.45);margin:1rem 0 0;">~1:50 · The offer, the proof, and how it works</p>
   </div>
 </section>
 
+<!-- 3 STEP CARDS -->
+<section style="background:#0D0D0D;padding:1rem 1.25rem 4.5rem;">
+  <div style="max-width:1000px;margin:0 auto;">
+    <div class="steps rv">
 
-<!-- ══════════════════════════════════
-     STEP 2 — LOCK IN YOUR SLOT (personalized pre-filled text)
-══════════════════════════════════ -->
-<section style="background:#FBFAF7;padding:4.5rem 1.25rem;border-top:1px solid rgba(26,25,23,.06);">
-  <div style="max-width:560px;margin:0 auto;text-align:center;">
-
-    <div class="rv">
-      <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
-        <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
-        <span class="ey" style="color:rgba(199,150,63,.85);">Step 2 — Lock In Your Slot</span>
+      <div class="step-card">
+        <p class="step-label">Step 1</p>
+        <p class="step-title">Add the call to your calendar</p>
+        <p class="step-sub">A calendar invite just hit your inbox — accept it so the call is locked on your schedule.</p>
+        <!-- Dynamic add-to-calendar (renders when the booking ref is known) -->
+        <div id="add-cal" style="display:none;margin-top:1rem;">
+          <p id="add-cal-when" style="font-size:.8125rem;color:rgba(199,150,63,.95);font-weight:700;margin:0 0 .8rem;line-height:1.5;"></p>
+          <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;">
+            <a id="add-cal-google" target="_blank" rel="noopener" class="gold-btn">Google Calendar</a>
+            <a id="add-cal-ics" download="strategy-session.ics" class="ghost-btn">Apple / Outlook</a>
+          </div>
+        </div>
       </div>
-      <h2 style="font-size:clamp(1.5rem,3.6vw,2rem);font-weight:800;color:#1A1917;line-height:1.15;letter-spacing:-.02em;margin:0 0 .75rem;">
-        Send this text and <span style="color:#C7963F;">your slot is locked</span>
-      </h2>
-      <p style="font-size:.9375rem;color:rgba(26,25,23,.5);line-height:1.75;margin:0 0 1.5rem;">
-        It's pre-written — tap, check it looks right, hit send. This is my direct line, and it's how I know you're serious about the slot.
-      </p>
-      <div style="display:flex;justify-content:center;">
+
+      <div class="step-card">
+        <p class="step-label">Step 2</p>
+        <p class="step-title">Confirm your call via text</p>
+        <p class="step-sub" style="margin-bottom:1rem;">It's pre-written — tap, check it looks right, hit send. This is my direct line. No-shows lose their slot; this locks yours.</p>
         <a id="confirm-sms" class="confirm-btn" href="sms:+15012363920?&body=Hey%20Spencer%2C%20it%27s%20%5Byour%20name%5D%20%E2%80%94%20just%20booked%20my%20call.%20Locking%20in%20my%20spot%20for%20%5Byour%20zip%5D.%20See%20you%20on%20the%20call." aria-label="Send the pre-written confirmation text">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
@@ -409,99 +195,91 @@
           Text Me To Lock It In
         </a>
       </div>
-      <p style="font-size:.75rem;color:rgba(26,25,23,.35);margin:.875rem 0 0;line-height:1.6;">
-        No-shows lose their slot. This locks yours.
-      </p>
-      <p style="font-size:.875rem;color:rgba(26,25,23,.5);line-height:1.7;margin:1.75rem 0 0;">
-        Your confirmation and reminders just went out by email and text with the exact time and Google Meet link.
-      </p>
-    </div>
 
+      <div class="step-card">
+        <p class="step-label">Step 3</p>
+        <p class="step-title">Watch the client stories below</p>
+        <p class="step-sub">Every builder down there said "too good to be true" on day one. Start with Billy — one story at a time.</p>
+        <div style="margin-top:1rem;"><a href="#keep-watching" class="gold-btn">Start watching ↓</a></div>
+      </div>
+
+    </div>
+    <p style="text-align:center;font-size:.875rem;color:rgba(245,242,236,.5);margin:2rem 0 0;line-height:1.7;">
+      Your confirmation and reminders just went out by email and text with the exact time and Google Meet link.
+    </p>
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════
-     PROOF — TRUSTED BY (logo wall)
-══════════════════════════════════ -->
-<section style="background:#FFFFFF;padding:3rem 1.25rem 3.25rem;border-top:1px solid rgba(26,25,23,.06);">
+<!-- TRUSTED BY -->
+<section style="background:#141414;padding:2.5rem 1.25rem;border-top:1px solid rgba(245,242,236,.06);border-bottom:1px solid rgba(245,242,236,.06);">
   <div style="max-width:1000px;margin:0 auto;">
-    <p style="text-align:center;font-size:.6875rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(26,25,23,.42);margin:0 0 1.5rem;">
+    <p style="text-align:center;font-size:.6875rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(245,242,236,.45);margin:0 0 1.4rem;">
       Trusted By Deck Builders Across The Country
     </p>
     <div class="marquee">
       <div class="marquee-track">
         <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
         <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
+        <div class="logo-cell"><img src="/logos/biviano.png" alt="Biviano"></div>
+        <div class="logo-cell"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
+        <div class="logo-cell"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
+        <div class="logo-cell"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
+        <div class="logo-cell"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
+        <div class="logo-cell"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
+        <div class="logo-cell"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
+        <div class="logo-cell"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
+        <div class="logo-cell"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
+        <div class="logo-cell"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
+        <div class="logo-cell"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
         <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction"></div>
-        <!-- duplicate set for seamless loop -->
         <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
         <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
+        <div class="logo-cell"><img src="/logos/biviano.png" alt="Biviano"></div>
+        <div class="logo-cell"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
+        <div class="logo-cell"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
+        <div class="logo-cell"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
+        <div class="logo-cell"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
+        <div class="logo-cell"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
+        <div class="logo-cell"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
+        <div class="logo-cell"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
+        <div class="logo-cell"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
+        <div class="logo-cell"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
+        <div class="logo-cell"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
         <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction"></div>
       </div>
     </div>
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════
-     WHILE YOU WAIT — REAL RESULTS
-══════════════════════════════════ -->
-<section id="keep-watching" style="background:#F8F7F3;padding:5.5rem 1.25rem;">
-  <div style="max-width:980px;margin:0 auto;">
-
-    <div class="rv" style="text-align:center;margin-bottom:2.75rem;">
+<!-- SEQUENTIAL PROOF PLAYER -->
+<section id="keep-watching" style="background:#0D0D0D;padding:4.5rem 1.25rem;">
+  <div style="max-width:820px;margin:0 auto;">
+    <div class="rv" style="text-align:center;margin-bottom:2.5rem;">
       <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
         <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
-        <span class="ey" style="color:rgba(199,150,63,.85);">While You Wait — Real Builders, Real ROI</span>
+        <span class="ey" style="color:rgba(199,150,63,.85);">Step 3 — Real Builders, Real ROI</span>
       </div>
-      <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#1A1917;line-height:1.1;letter-spacing:-.02em;margin:0 0 .75rem;">
-        Every one of them said <span style="color:#C7963F;">"too good to be true."</span>
-      </h2>
-      <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:540px;margin:0 auto;font-weight:500;">
+      <h2 class="big-h" style="font-size:clamp(1.35rem,3.8vw,2.1rem);">Every one of them said<br><span>"too good to be true."</span></h2>
+      <p style="font-size:.9375rem;color:rgba(245,242,236,.55);line-height:1.75;max-width:540px;margin:1rem auto 0;">
         Then the system kept delivering. One story at a time — start with Billy.
       </p>
     </div>
 
-    <!-- Sequential proof player — ONE story at a time (consumption > catalog).
-         Next-button swaps the same player; no wall of 14 tap targets. -->
-    <div class="rv d1" style="max-width:680px;margin:0 auto;">
-      <div class="vcard" id="seq-card" style="cursor:pointer;">
+    <div class="rv d1">
+      <div class="vcard" id="seq-card">
         <div class="vthumb" id="seq-thumb">
-          <img id="seq-img" src="https://i.ytimg.com/vi/TvFv_EIM-MI/hqdefault.jpg" alt="">
+          <img src="https://i.ytimg.com/vi/TvFv_EIM-MI/hqdefault.jpg" alt="">
           <span class="pbtn"><span class="pbtn-inner"></span></span>
-          <div class="vcaption"><p id="seq-caption">$1,657 spent → $300K in 17 days</p></div>
+          <div class="vcaption"><p>$1,657 spent → $300K in 17 days</p></div>
         </div>
         <div class="vmeta">
           <p class="vtitle" id="seq-title">Billy Stewart</p>
           <p class="vchan" id="seq-chan">Trinity Decks &amp; Patios · Greenville, SC</p>
         </div>
       </div>
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1.1rem;gap:1rem;">
-        <p id="seq-count" style="font-size:.8125rem;color:#7A7870;margin:0;">Story 1 of 5</p>
-        <button id="seq-next" style="display:inline-flex;align-items:center;gap:.45rem;background:#1A1917;color:#C7963F;font-weight:800;font-size:.875rem;padding:.7rem 1.25rem;border-radius:999px;border:0;cursor:pointer;">Watch the next one <span aria-hidden="true">→</span></button>
+      <div style="max-width:680px;margin:1.1rem auto 0;display:flex;align-items:center;justify-content:space-between;gap:1rem;">
+        <p id="seq-count" style="font-size:.8125rem;color:rgba(245,242,236,.45);margin:0;">Story 1 of 5</p>
+        <button id="seq-next" class="gold-btn">Watch the next one <span aria-hidden="true">→</span></button>
       </div>
     </div>
 
@@ -518,7 +296,7 @@
         var thumb = document.getElementById('seq-thumb');
         function renderPoster() {
           var st = STORIES[i];
-          thumb.innerHTML = '<img id="seq-img" src="https://i.ytimg.com/vi/' + st.vid + '/hqdefault.jpg" alt="">' +
+          thumb.innerHTML = '<img src="https://i.ytimg.com/vi/' + st.vid + '/hqdefault.jpg" alt="">' +
             '<span class="pbtn"><span class="pbtn-inner"></span></span>' +
             '<div class="vcaption"><p>' + st.cap + '</p></div>';
           document.getElementById('seq-title').textContent = st.name;
@@ -538,64 +316,90 @@
         });
       })();
     </script>
-
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════
-     GUARANTEE RESTATE
-══════════════════════════════════ -->
-<section style="background:#FBFAF7;padding:5rem 1.25rem;">
+<!-- GUARANTEE -->
+<section style="background:#141414;padding:4rem 1.25rem;border-top:1px solid rgba(245,242,236,.06);">
   <div style="max-width:680px;margin:0 auto;">
-
     <div class="rv" style="text-align:center;margin-bottom:2rem;">
       <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
         <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
         <span class="ey" style="color:rgba(199,150,63,.7);">The Guarantee — In Writing</span>
       </div>
-      <h2 style="font-size:clamp(1.5rem,3.6vw,2rem);font-weight:800;color:#1A1917;line-height:1.15;letter-spacing:-.02em;margin:0 auto;max-width:560px;">
+      <h2 style="font-size:clamp(1.4rem,3.6vw,1.9rem);font-weight:800;color:#FFFFFF;line-height:1.2;letter-spacing:-.01em;margin:0 auto;max-width:560px;">
         100 exclusive sales appointment opportunities in 100 days. <span style="color:#C7963F;">If we miss:</span>
       </h2>
     </div>
-
     <div class="rv d1 gtee-card">
       <ul class="gtee-list">
         <li><span><b style="font-weight:700;">$2,000 cash</b> in your pocket.</span></li>
         <li><span>Every dollar of your <b style="font-weight:700;">management fee refunded</b>.</span></li>
       </ul>
     </div>
-
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════
-     RESCHEDULE LINE
-══════════════════════════════════ -->
-<section style="background:#FBFAF7;padding:0 1.25rem 4rem;">
+<!-- RESCHEDULE -->
+<section style="background:#0D0D0D;padding:3rem 1.25rem;">
   <div style="max-width:680px;margin:0 auto;text-align:center;">
-    <p style="font-size:.875rem;color:rgba(26,25,23,.45);line-height:1.6;margin:0;">
-      Need to reschedule? Use the link in your confirmation email — or text <a href="sms:+15012363920" style="color:#1A1917;text-decoration:underline;">(501) 236-3920</a> and we'll move it.
+    <p style="font-size:.875rem;color:rgba(245,242,236,.45);line-height:1.6;margin:0;">
+      Need to reschedule? Use the link in your confirmation email — or text <a href="sms:+15012363920" style="color:#F5F2EC;text-decoration:underline;">(501) 236-3920</a> and we'll move it.
     </p>
   </div>
 </section>
 
-
-<!-- ══════════════════════════════════
-     FOOTER
-══════════════════════════════════ -->
-<footer style="background:#FBFAF7;border-top:1px solid rgba(26,25,23,.06);padding:3rem 1.25rem 2.5rem;">
-  <div style="max-width:860px;margin:0 auto;">
-    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid rgba(26,25,23,.06);">
-      <span style="font-weight:900;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#1A1917;">
-        More<span style="color:#C7963F;">JobCalls</span>
-      </span>
-      <p style="font-size:.8125rem;color:rgba(26,25,23,.3);margin:0;">© 2026 MoreJobCalls.com LLC · One deck builder per market.</p>
-    </div>
+<!-- FOOTER -->
+<footer style="background:#0D0D0D;border-top:1px solid rgba(245,242,236,.08);padding:2.5rem 1.25rem;">
+  <div style="max-width:860px;margin:0 auto;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;">
+    <span style="font-weight:900;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#F5F2EC;">
+      More<span style="color:#C7963F;">JobCalls</span>
+    </span>
+    <p style="font-size:.8125rem;color:rgba(245,242,236,.3);margin:0;">© 2026 MoreJobCalls.com LLC · One deck builder per market.</p>
   </div>
 </footer>
 
+<!-- Add-to-calendar: fetches the appointment time from the mjc-appointment-time worker.
+     Renders only when a booking ref exists (GHL bookings). Calendly bookings rely on
+     Calendly's own calendar invite (Step 1 copy covers both). -->
+<script>
+(function(){
+  var WORKER='https://mjc-appointment-time.spencer-80c.workers.dev';
+  var qs=new URLSearchParams(location.search);
+  if(qs.get('preview')==='cal'){
+    var demo=new Date(Date.now()+24*60*60*1000); demo.setUTCHours(22,0,0,0);
+    render({startUTC:demo.toISOString(), endUTC:new Date(demo.getTime()+45*60000).toISOString()});
+    return;
+  }
+  var ref;
+  if(qs.get('c')){ ref={contactId:qs.get('c'), calendarId:qs.get('cal')||'', t:Date.now()}; }
+  else { try{ ref=JSON.parse(localStorage.getItem('mjc_booked_ref')||'null'); }catch(e){} }
+  if(!ref || !ref.contactId || (Date.now()-(ref.t||0) > 14*24*60*60*1000)) return;
+  var tries=0;
+  function attempt(){
+    tries++;
+    fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contactId:ref.contactId,calendarId:ref.calendarId})})
+      .then(function(r){return r.json();})
+      .then(function(d){ if(d&&d.found&&d.startUTC){ render(d); } else if(tries<6){ setTimeout(attempt,1300); } })
+      .catch(function(){ if(tries<6) setTimeout(attempt,1300); });
+  }
+  function render(d){
+    var start=new Date(d.startUTC), end=d.endUTC?new Date(d.endUTC):new Date(start.getTime()+45*60000);
+    var title='100 Deck Jobs in 100 Days Strategy Session';
+    var loc=d.location||'Google Meet link is in your confirmation email & text';
+    var details='Your MoreJobCalls.com strategy session with Spencer. The exact Google Meet link is in your confirmation email and text.';
+    function z(n){return(n<10?'0':'')+n;}
+    function u(dt){return dt.getUTCFullYear()+z(dt.getUTCMonth()+1)+z(dt.getUTCDate())+'T'+z(dt.getUTCHours())+z(dt.getUTCMinutes())+z(dt.getUTCSeconds())+'Z';}
+    var g='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+u(start)+'/'+u(end)+'&details='+encodeURIComponent(details)+'&location='+encodeURIComponent(loc);
+    document.getElementById('add-cal-google').href=g;
+    var ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//MoreJobCalls//EN','CALSCALE:GREGORIAN','BEGIN:VEVENT','UID:'+u(start)+'-mjc@morejobcalls.com','DTSTAMP:'+u(new Date()),'DTSTART:'+u(start),'DTEND:'+u(end),'SUMMARY:'+title,'DESCRIPTION:'+details.replace(/,/g,'\\,'),'LOCATION:'+String(loc).replace(/,/g,'\\,'),'BEGIN:VALARM','TRIGGER:-PT30M','ACTION:DISPLAY','DESCRIPTION:Strategy session in 30 minutes','END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+    document.getElementById('add-cal-ics').href='data:text/calendar;charset=utf-8,'+encodeURIComponent(ics);
+    try{ document.getElementById('add-cal-when').textContent=start.toLocaleString('en-US',{weekday:'long',month:'long',day:'numeric',hour:'numeric',minute:'2-digit',timeZoneName:'short'}); }catch(e){}
+    document.getElementById('add-cal').style.display='block';
+  }
+  attempt();
+})();
+</script>
 
 <!-- Scroll reveal -->
 <script>
@@ -605,22 +409,14 @@
   document.querySelectorAll('.rv').forEach(function (el) { obs.observe(el); });
 </script>
 
-<!-- Personalize from sessionStorage (LP form data): headline + the pre-filled
-     confirmation text. Falls back to [your name]/[your zip] placeholders the
-     lead overtypes when storage is empty (private mode, expired session). -->
+<!-- Personalize the pre-filled confirmation text from sessionStorage (LP form data).
+     Falls back to [your name]/[your zip] placeholders the lead overtypes. -->
 <script>
 (function () {
   let data = {};
   try { data = JSON.parse(sessionStorage.getItem('dl_qualify_data') || '{}'); }
   catch (_) { data = {}; }
-
   const first = data.name ? (data.name.trim().split(/\s+/)[0] || '') : '';
-
-  const h1 = document.getElementById('hero-h1');
-  if (h1 && first) {
-    h1.innerHTML = `<b>You're booked, ${first}.</b> Watch this before we talk.`;
-  }
-
   const sms = document.getElementById('confirm-sms');
   if (sms) {
     const who = first || '[your name]';
