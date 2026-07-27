@@ -142,7 +142,7 @@
 <section style="background:#0D0D0D;padding:3.5rem 1.25rem;">
   <div style="max-width:680px;margin:0 auto;text-align:center;">
     <p class="step-label rv">Step 1 — Confirm Your Territory</p>
-    <h2 class="big-h rv" style="font-size:clamp(1.35rem,3.8vw,2.1rem);">Is this where you want<br><span>more deck jobs?</span></h2>
+    <h2 id="territory-h2" class="big-h rv" style="font-size:clamp(1.35rem,3.8vw,2.1rem);">Is this where you want<br><span>more deck jobs?</span></h2>
     <p class="rv d1" style="font-size:.9375rem;color:rgba(245,242,236,.6);line-height:1.75;max-width:480px;margin:1.1rem auto 1.6rem;">
       Before we talk, confirm the city or territory where you want us to book your 20 deck jobs. It's pre-written — tap, check it looks right, hit send. This is my direct line.
     </p>
@@ -293,6 +293,12 @@
   try { data = JSON.parse(sessionStorage.getItem('dl_qualify_data') || '{}'); }
   catch (_) { data = {}; }
   const first = data.name ? (data.name.trim().split(/\s+/)[0] || '') : '';
+  const h2 = document.getElementById('territory-h2');
+  const zipVal = (data.zip || '').toString().trim();
+  if (h2 && zipVal) {
+    h2.innerHTML = 'Is ' + zipVal + ' where you want<br><span>more deck jobs?</span>';
+  }
+
   const sms = document.getElementById('confirm-sms');
   if (sms) {
     const who = first || '[your name]';

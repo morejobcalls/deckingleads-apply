@@ -252,3 +252,7 @@ Chung's direct spec, verbatim where possible, still Imperium dark UI. Both post-
 - Ops note (manual, not automated): when the Step-1 text lands, Spencer replies in the "Perfect, thanks {name} — I'll take a look at {city} before we talk" pattern to make the flow feel 1:1.
 
 **Rollback:** `git revert` (v5.5 layout in history).
+
+### v5.6.1 — Zip-personalized Step-1 headline (2026-07-27)
+
+Both post-booking pages: Step 1 H2 becomes "Is {zip} where you want more deck jobs?" — zip injected from the application's sessionStorage (same source as the SMS prefill), falling back to the generic "Is this where you want more deck jobs?" when storage is empty.
