@@ -214,3 +214,14 @@ From Chung Tang's funnel audit (kick-off call 7/27): booked leads weren't consum
 **Held back (unchanged):** `v2–v6/index.html` still carry the other session's uncommitted first-touch-attribution work; `PROJECT-STATE.md`/PICKUPs untouched.
 
 **Rollback:** `git revert` this commit. The old grid/JS lives in git history only.
+
+### v5.4 — Unlisted-YouTube pre-call video + Calendly test for non-ICP bookings (2026-07-27)
+
+Round 2 of the Chung audit implementation, same day as v5.3.
+
+1. **Pre-call video now serves from YouTube unlisted (`OBdbWCVxGws`)** on `/confirmation/` + `/scheduled/`, replacing the v5.3 self-hosted `media/precall-proof.mp4` embed (files kept in repo). Rationale: watch counts become visible in YT Studio — Chung's "12 views in 2 months" diagnostic stays checkable — and this matches the original Ravi rule comment. A **"Watch the next video ↓"** button under the player anchors to the sequential proof player (`#keep-watching`), completing Chung's watch → text → watch-next layout.
+2. **CALENDLY TEST (non-ICP only):** sub-$500k leads now book on Calendly (`pt-20-jobs-in-100-days-video-1`, same 45-min Meet event) instead of the GHL yellow-calendar widget — Spencer's call: better booking UI, and the $25 reservation fee can be collected natively by Calendly. Implemented in BOTH booking flows (modal `buildCalUrl()` + legacy `runLoadingThenShowCalendar`) behind a **kill switch: `NON_ICP_USE_CALENDLY=false` restores the GHL calendar instantly** — no other edits needed. ICP path untouched.
+3. **Booking bridge:** on Calendly's `event_scheduled` postMessage the page beacons the lead (name/email/phone/zip) to a NEW GHL inbound webhook — workflow "Calendly Booking Bridge (tags booked) — CLAUDE DRAFT" (`a23922b4…`, trigger `HgeZ5W08aasOAxfiTIAo`) — which tags `booked` + `booked-via-calendly` so no-book nurture/AI-setter logic treats them as booked. Then redirects to `/scheduled/` (~1.2s), preserving the funnel flow. ⚠️ The bridge workflow is DRAFT — **it must be published in GHL before the tag fires**; until then Calendly bookings are invisible to GHL (known gap: leads who close the tab before the beacon are missed regardless — a server-side Calendly webhook is the belt-and-braces follow-up).
+4. Known non-blockers: Calendly bookings don't create GHL appointments, so the post-booking iMessage workflow (drafted today) won't fire for this segment until a server-side bridge creates appointments; `/scheduled/` add-to-calendar block hides itself gracefully (no GHL appointment to find).
+
+**Rollback:** flip `NON_ICP_USE_CALENDLY` (and `NON_ICP_USE_CALENDLY_L`) to `false`, or `git revert`.

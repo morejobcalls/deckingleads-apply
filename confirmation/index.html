@@ -366,30 +366,19 @@
       </p>
     </div>
 
-    <!-- Self-hosted proof video (EVG VSL) — native playback, no YouTube chrome, plays inline
-         on mobile. Poster shows Spencer mid-sentence so it reads as a person, not a thumbnail. -->
-    <div class="rv d1 video-wrap" style="position:relative;padding-bottom:0;">
-      <video id="precall-video" controls playsinline preload="metadata"
-        poster="/media/precall-proof-poster.jpg"
-        style="width:100%;display:block;border-radius:inherit;background:#000;">
-        <source src="/media/precall-proof.mp4" type="video/mp4">
-      </video>
-      <button id="precall-play" aria-label="Play the pre-call video"
-        style="position:absolute;inset:0;width:100%;height:100%;background:rgba(0,0,0,.18);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:inherit;">
-        <span style="width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 34px rgba(0,0,0,.35);">
-          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style="margin-left:4px;"><path d="M7 4.5v15l13-7.5-13-7.5z" fill="#1A1917"/></svg>
-        </span>
-      </button>
+    <!-- Unlisted YouTube embed (OBdbWCVxGws) — per Chung: video front and center; YouTube
+         hosting so watch counts are visible in Studio (the "12 views in 2 months" diagnostic). -->
+    <div class="rv d1 video-wrap">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/OBdbWCVxGws?rel=0&modestbranding=1"
+        title="Watch this before our call — The Deck Jobs System"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
     </div>
     <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1rem 0 0;">~2:00 · The offer, the proof, and how it works</p>
-    <script>
-      (function(){
-        var v=document.getElementById('precall-video'), b=document.getElementById('precall-play');
-        if(!v||!b) return;
-        b.addEventListener('click',function(){ b.style.display='none'; v.play(); });
-        v.addEventListener('play',function(){ b.style.display='none'; });
-      })();
-    </script>
+    <div style="display:flex;justify-content:center;margin-top:1.1rem;">
+      <a href="#keep-watching" style="display:inline-flex;align-items:center;gap:.45rem;color:#1A1917;font-weight:700;font-size:.875rem;text-decoration:none;border:1px solid rgba(26,25,23,.22);border-radius:999px;padding:.65rem 1.2rem;">Watch the next video <span aria-hidden="true">↓</span></a>
+    </div>
 
   </div>
 </section>
@@ -480,7 +469,7 @@
 <!-- ══════════════════════════════════
      WHILE YOU WAIT — REAL RESULTS
 ══════════════════════════════════ -->
-<section style="background:#F8F7F3;padding:5.5rem 1.25rem;">
+<section id="keep-watching" style="background:#F8F7F3;padding:5.5rem 1.25rem;">
   <div style="max-width:980px;margin:0 auto;">
 
     <div class="rv" style="text-align:center;margin-bottom:2.75rem;">

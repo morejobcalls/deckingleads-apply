@@ -1146,8 +1146,8 @@
     <!-- Inline calendar (replaces the form card after submit).
          Mobile: edge-to-edge (-mx-5 cancels the parent's px-5) so the GHL widget has full viewport width.
          sm+: re-centered with rounded corners + shadow. -->
-    <div id="calendar-wrap" class="hidden -mx-5 sm:mx-auto max-w-2xl">
-      <iframe id="inline-calendar" src="" title="Book your Deck Jobs Strategy Session" style="width: 100%; height: 820px; border: 0; display: block; background: transparent;"></iframe>
+    <div id="calendar-wrap" class="hidden -mx-5 sm:mx-auto max-w-5xl">
+      <iframe id="inline-calendar" src="" title="Book your Deck Jobs Strategy Session" scrolling="no" style="width: 100%; height: 720px; border: 0; display: block; background: transparent;"></iframe>
     </div>
 
   </div>
@@ -1364,6 +1364,26 @@
 
     setTimeout(() => {
       try {
+        // Calendly test (2026-07-27): non-ICP → Calendly (see kill switch in the modal flow block).
+        const NON_ICP_USE_CALENDLY_L = true;
+        if (!isIcp && NON_ICP_USE_CALENDLY_L) {
+          const c = new URL('https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=caa000');
+          c.searchParams.set('embed_domain', location.hostname);
+          c.searchParams.set('embed_type', 'Inline');
+          if (data.name)  c.searchParams.set('name', data.name);
+          if (data.email) c.searchParams.set('email', data.email);
+          const ifr = document.getElementById('inline-calendar');
+          if (ifr) ifr.src = c.toString();
+          ['apply-header','guarantee-callout','form-card','form-tail'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+          });
+          const hero2 = document.getElementById('post-submit-hero');
+          if (hero2) hero2.classList.remove('hidden');
+          const cw2 = document.getElementById('calendar-wrap');
+          if (cw2) cw2.classList.remove('hidden');
+          return;
+        }
         const baseUrl = isIcp ? CAL_ICP : CAL_NON_ICP;
         const url = new URL(baseUrl);
         if (data.name) {
@@ -1746,6 +1766,11 @@
   #mc-cal-wrap{margin:0 -6px;background:#fff;border-radius:14px;overflow:hidden;}
   /* Tall + inner-scrollable so the GHL "Enter Details" + Schedule button is always reachable. */
   #mc-cal{width:100%;height:74vh;min-height:540px;border:0;display:block;background:#fff;}
+  /* Calendar step only: widen the card past GHL's ~1024px breakpoint. Below it the widget
+     falls back to its stacked layout and the time-slot list never renders. The 600px survey
+     width is kept for every question step — only step 8 (the calendar) gets the wide card. */
+  #mc-card.cal-open{max-width:1080px;transition:max-width .25s cubic-bezier(.16,1,.3,1);}
+  @media(min-width:1140px){ #mc-card.cal-open #mc-cal{height:720px;min-height:700px;} }
   #mc-spin{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 0;text-align:center;}
   .mc-spinner{width:44px;height:44px;border:4px solid #ECE6DA;border-top-color:#1A1917;border-radius:50%;animation:mcSpin 1s linear infinite;margin-bottom:18px;}
   @keyframes mcSpin{to{transform:rotate(360deg)}}
@@ -1864,6 +1889,29 @@
   var CAL_ICP='https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
   var CAL_NON_ICP='https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
 
+  // ── CALENDLY TEST (2026-07-27, Chung round 1): non-ICP books on Calendly instead of the
+  // GHL widget (easier booking UI; $25 reservation collected natively by Calendly).
+  // KILL SWITCH: set NON_ICP_USE_CALENDLY=false to restore the GHL calendar — no other edits needed.
+  // Bridge: on calendly.event_scheduled we beacon the lead to a GHL inbound webhook that tags
+  // booked + booked-via-calendly (so no-book nurture/AI setter treat them as booked), then
+  // redirect to /scheduled/ like the GHL calendar did.
+  var NON_ICP_USE_CALENDLY=true;
+  var CALENDLY_NON_ICP='https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=caa000';
+  var CALENDLY_BRIDGE='https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/HgeZ5W08aasOAxfiTIAo';
+  window.addEventListener('message', function(e){
+    try{
+      if(String(e.origin).indexOf('calendly.com')===-1) return;
+      if(!e.data || e.data.event!=='calendly.event_scheduled') return;
+      var parts=((window.formData&&formData.name)||'').trim().split(/\s+/);
+      var payload={first_name:parts[0]||'',last_name:parts.slice(1).join(' '),full_name:(formData&&formData.name)||'',
+        email:(formData&&formData.email)||'',phone:(formData&&formData.phone)||'',postal_code:(formData&&formData.zip)||'',
+        booked_via:'calendly',calendly_event:(e.data.payload&&e.data.payload.event&&e.data.payload.event.uri)||''};
+      fetch(CALENDLY_BRIDGE,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true}).catch(function(){});
+      if(typeof dlTrack==='function') dlTrack('booked_calendly',10);
+      setTimeout(function(){ window.location.href='/scheduled/'; },1200);
+    }catch(err){}
+  });
+
   // ── Funnel step instrumentation → mjc-funnel-events worker (Supabase funnel_events).
   // Fire-and-forget beacons; fully wrapped so a tracking failure can never touch the form.
   // Canonical idx: 0 landed · 1 survey_open · 2 own_business · 3 name · 4 contact_info
@@ -1919,6 +1967,9 @@
     var t=overlay.querySelector('.mc-step[data-step="'+n+'"]'); if(t) t.classList.add('active');
     barFill.style.width=(PROG[n]||8)+'%';
     backBtn.classList.toggle('show', n>1 && n<8);
+    /* Step 8 is the GHL calendar — widen the card so the widget renders its
+       two-column layout. Every other step stays at the 600px survey width. */
+    if(card) card.classList.toggle('cal-open', n===8);
     if(card) card.scrollTop=0;
     setTimeout(function(){var f=t&&t.querySelector('input'); if(f) try{f.focus({preventScroll:true});}catch(e){}},60);
   }
@@ -1974,6 +2025,14 @@
   });
 
   function buildCalUrl(){
+    if(!icp && NON_ICP_USE_CALENDLY){
+      var c=new URL(CALENDLY_NON_ICP);
+      c.searchParams.set('embed_domain',location.hostname);
+      c.searchParams.set('embed_type','Inline');
+      if(formData.name)  c.searchParams.set('name',formData.name);
+      if(formData.email) c.searchParams.set('email',formData.email);
+      return c.toString();
+    }
     var u=new URL(icp?CAL_ICP:CAL_NON_ICP);
     if(formData.name){ var p=formData.name.trim().split(/\s+/); u.searchParams.set('first_name',p[0]||''); if(p.length>1) u.searchParams.set('last_name',p.slice(1).join(' '));
       // Also pass combined name so a single "Full Name" field on the GHL calendar pre-fills reliably.
