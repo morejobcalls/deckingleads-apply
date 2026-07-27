@@ -199,3 +199,18 @@ Resolved by committing **only** the 3 phone-fix lines per file: the working-tree
 `e/ f/ g/ h/` confirmed **404 on the live site** — untracked and never deployed, so they carried no exposure. They stay untracked.
 
 **Verified after deploy:** all five variants serve 2 strips + 1 `[2-9]` validator each.
+
+### v5.3 — Pre-call page overhaul, Chung audit round 1 (2026-07-27)
+
+From Chung Tang's funnel audit (kick-off call 7/27): booked leads weren't consuming the pre-call content — 12 hero-video views against ~120 bookings in two months — and the one-tap "Yes" confirm carried no commitment. Show rate is the constraint; these pages are the lever.
+
+**`/confirmation/` + `/scheduled/` (both restructured identically):**
+1. **Hero video swapped + promoted.** The placeholder mini-VSL YouTube embed (`CZkMmNpZddg`) is gone; the proof-heavy "EVG VSL On Opt In" (1:58 — offer → results wall → CTA) is now **self-hosted** at `media/precall-proof.mp4` (6.8MB 720p, poster `media/precall-proof-poster.jpg`) and plays native/inline directly under the hero. No YouTube chrome, no related-video exit ramps.
+2. **Step 2 = personalized pre-filled text.** `Text "Yes" To Confirm` → `Text Me To Lock It In`, body pre-filled as "Hey Spencer, it's {first} — just booked my call. Locking in my spot for {zip}…" with real name+zip injected from the LP's `dl_qualify_data` sessionStorage (bracketed placeholders as fallback). Same 3920 iMessage line.
+3. **Proof wall → sequential player.** The tap-to-play grid (14 cards on /confirmation/, 10 on /scheduled/) — the surface behind the 62.5% dead-click rate Clarity flagged on /scheduled/ — replaced by ONE story at a time (Billy → Brian → Biviano → Flynn → Wylie) with a "Watch the next one →" swap. Consumption over catalog, per Chung's course-page principle.
+4. **Zoom → Google Meet** in all copy (calls are Meet; the mismatch was eroding trust). Also fixed on `/yt/scheduled/` and the LP `index.html` modal sub-line — those two files carry only that one-line fix.
+5. `/scheduled/` also lost its duplicate "Step 2 — Bring These Three Things" prep section (already removed from /confirmation/ in an earlier commit).
+
+**Held back (unchanged):** `v2–v6/index.html` still carry the other session's uncommitted first-touch-attribution work; `PROJECT-STATE.md`/PICKUPs untouched.
+
+**Rollback:** `git revert` this commit. The old grid/JS lives in git history only.

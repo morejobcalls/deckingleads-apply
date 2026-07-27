@@ -242,7 +242,7 @@
           <a id="add-cal-google" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(180deg,#C7963F,#AB8032);color:#0D0D0D;font-weight:800;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;">Google Calendar</a>
           <a id="add-cal-ics" download="strategy-session.ics" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:#1A1917;font-weight:700;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;border:1px solid rgba(26,25,23,.25);">Apple / Outlook</a>
         </div>
-        <p style="font-size:.7rem;color:rgba(26,25,23,.35);margin:.9rem 0 0;line-height:1.5;">So it's on your calendar and you don't miss it. Your Zoom link is also in your email &amp; text.</p>
+        <p style="font-size:.7rem;color:rgba(26,25,23,.35);margin:.9rem 0 0;line-height:1.5;">So it's on your calendar and you don't miss it. Your Google Meet link is also in your email &amp; text.</p>
       </div>
     </div>
     <script>
@@ -275,8 +275,8 @@
       function render(d){
         var start=new Date(d.startUTC), end=d.endUTC?new Date(d.endUTC):new Date(start.getTime()+45*60000);
         var title='100 Deck Jobs in 100 Days Strategy Session';
-        var loc=d.location||'Zoom link is in your confirmation email & text';
-        var details='Your MoreJobCalls.com strategy session with Spencer. The exact Zoom link is in your confirmation email and text.';
+        var loc=d.location||'Google Meet link is in your confirmation email & text';
+        var details='Your MoreJobCalls.com strategy session with Spencer. The exact Google Meet link is in your confirmation email and text.';
         function z(n){return(n<10?'0':'')+n;}
         function u(dt){return dt.getUTCFullYear()+z(dt.getUTCMonth()+1)+z(dt.getUTCDate())+'T'+z(dt.getUTCHours())+z(dt.getUTCMinutes())+z(dt.getUTCSeconds())+'Z';}
         var g='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+u(start)+'/'+u(end)+'&details='+encodeURIComponent(details)+'&location='+encodeURIComponent(loc);
@@ -290,45 +290,13 @@
     })();
     </script>
 
-    <!-- Supporting copy + confirm button -->
-    <div class="rv d2" style="max-width:480px;margin:1.75rem auto 0;">
-      <p style="font-size:.9375rem;color:rgba(26,25,23,.5);line-height:1.78;font-weight:400;margin:0 0 1.25rem;">
-        Check your email and phone — your confirmation and reminders just went out with the exact time and Zoom link.
-      </p>
-      <p style="font-size:.9375rem;color:rgba(26,25,23,.65);line-height:1.6;font-weight:600;margin:0 0 1.25rem;">
-        To lock in your slot, tap below and hit send:
-      </p>
-      <div style="display:flex;justify-content:center;">
-        <a class="confirm-btn" href="sms:+15012363920?&body=Yes" aria-label="Send YES via text message">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
-          </svg>
-          Text "Yes" To Confirm
-        </a>
-      </div>
-      <p style="font-size:.75rem;color:rgba(26,25,23,.35);margin:0.875rem 0 0;line-height:1.6;">
-        No-shows lose their slot. A quick reply locks it in.
+    <!-- Supporting copy — points straight down to the video + text steps -->
+    <div class="rv d2" style="max-width:480px;margin:1.5rem auto 0;">
+      <p style="font-size:.9375rem;color:rgba(26,25,23,.5);line-height:1.78;font-weight:400;margin:0;">
+        Two quick steps before our call — the 2-minute video below, then a one-tap text to lock in your slot. That's it.
       </p>
     </div>
-
-    <!-- Step cards -->
-    <p class="rv d3" style="font-size:.8125rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(26,25,23,.3);margin:2.5rem auto .875rem;">Then do these two things before our call:</p>
-    <div class="rv d3" style="display:flex;flex-direction:column;gap:.875rem;max-width:460px;margin:0 auto;text-align:left;">
-      <div class="step-card">
-        <div class="step-num">1</div>
-        <div>
-          <p style="font-size:.9375rem;font-weight:700;color:#1A1917;margin:0 0 .2rem;">Watch the pre-call video below</p>
-          <p style="font-size:.8125rem;color:rgba(26,25,23,.45);margin:0;line-height:1.6;">Two minutes. So when we get on, we skip the warm-up and go straight to your numbers.</p>
-        </div>
-      </div>
-      <div class="step-card">
-        <div class="step-num">2</div>
-        <div>
-          <p style="font-size:.9375rem;font-weight:700;color:#1A1917;margin:0 0 .2rem;">Bring three things to the call</p>
-          <p style="font-size:.8125rem;color:rgba(26,25,23,.45);margin:0;line-height:1.6;">Revenue ballpark, current appointment volume, and (if you've run ads) read access to your Meta account.</p>
-        </div>
-      </div>
-    </div>
+</div>
 
   </div>
 </section>
@@ -349,78 +317,70 @@
         Watch This <span style="color:#C7963F;">Before Our Call</span>
       </h2>
       <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:480px;margin:0 auto;font-weight:500;">
-        Two minutes of context so when we hop on, we can skip the preamble and get straight to whether 100 appointments in 100 days makes sense for your market.
+        Two minutes — how the system works and the results builders like you are getting with it. So when we hop on, we skip the preamble and go straight to your market.
       </p>
     </div>
 
-    <div class="rv d1 video-wrap">
-      <!-- Replace CZkMmNpZddg with the unlisted YouTube ID once Spencer films the mini-VSL.
-           Per Ravi's pixel rule: keep on YouTube unlisted (do not self-host) so booked prospects pixel for retargeting. -->
-      <iframe
-        src="https://www.youtube-nocookie.com/embed/CZkMmNpZddg?rel=0&modestbranding=1"
-        title="What to expect on our Deck Jobs Strategy Session"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowfullscreen></iframe>
+    <!-- Self-hosted proof video (EVG VSL) — native playback, no YouTube chrome, plays inline
+         on mobile. Poster shows Spencer mid-sentence so it reads as a person, not a thumbnail. -->
+    <div class="rv d1 video-wrap" style="position:relative;padding-bottom:0;">
+      <video id="precall-video" controls playsinline preload="metadata"
+        poster="/media/precall-proof-poster.jpg"
+        style="width:100%;display:block;border-radius:inherit;background:#000;">
+        <source src="/media/precall-proof.mp4" type="video/mp4">
+      </video>
+      <button id="precall-play" aria-label="Play the pre-call video"
+        style="position:absolute;inset:0;width:100%;height:100%;background:rgba(0,0,0,.18);border:0;cursor:pointer;display:flex;align-items:center;justify-content:center;border-radius:inherit;">
+        <span style="width:76px;height:76px;border-radius:50%;background:rgba(255,255,255,.94);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 34px rgba(0,0,0,.35);">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" style="margin-left:4px;"><path d="M7 4.5v15l13-7.5-13-7.5z" fill="#1A1917"/></svg>
+        </span>
+      </button>
     </div>
-    <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1rem 0 0;">~1:45 · Watch this before we talk</p>
+    <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1rem 0 0;">~2:00 · The offer, the proof, and how it works</p>
+    <script>
+      (function(){
+        var v=document.getElementById('precall-video'), b=document.getElementById('precall-play');
+        if(!v||!b) return;
+        b.addEventListener('click',function(){ b.style.display='none'; v.play(); });
+        v.addEventListener('play',function(){ b.style.display='none'; });
+      })();
+    </script>
 
   </div>
 </section>
 
 
 <!-- ══════════════════════════════════
-     PREP CHECKLIST — THREE THINGS
+     STEP 2 — LOCK IN YOUR SLOT (personalized pre-filled text)
 ══════════════════════════════════ -->
-<section style="background:#FFFFFF;padding:5.5rem 1.25rem;">
-  <div style="max-width:680px;margin:0 auto;">
+<section style="background:#FBFAF7;padding:4.5rem 1.25rem;border-top:1px solid rgba(26,25,23,.06);">
+  <div style="max-width:560px;margin:0 auto;text-align:center;">
 
-    <div class="rv" style="text-align:center;margin-bottom:3rem;">
+    <div class="rv">
       <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
         <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
-        <span class="ey" style="color:rgba(199,150,63,.7);">Step 2 — Before We Meet</span>
+        <span class="ey" style="color:rgba(199,150,63,.85);">Step 2 — Lock In Your Slot</span>
       </div>
-      <h2 style="font-size:clamp(2rem,5vw,3rem);font-weight:800;color:#1A1917;line-height:1.08;letter-spacing:-.03em;margin:0 0 .75rem;">
-        Bring These <span style="color:#C7963F;">Three Things</span>
+      <h2 style="font-size:clamp(1.5rem,3.6vw,2rem);font-weight:800;color:#1A1917;line-height:1.15;letter-spacing:-.02em;margin:0 0 .75rem;">
+        Send this text and <span style="color:#C7963F;">your slot is locked</span>
       </h2>
-      <p style="font-size:.9375rem;color:rgba(26,25,23,.5);line-height:1.75;max-width:480px;margin:0 auto;font-weight:500;">
-        The more of this you have ready, the faster we move and the more specific your plan gets.
+      <p style="font-size:.9375rem;color:rgba(26,25,23,.5);line-height:1.75;margin:0 0 1.5rem;">
+        It's pre-written — tap, check it looks right, hit send. This is my direct line, and it's how I know you're serious about the slot.
       </p>
-    </div>
-
-    <div class="rv d1" style="background:rgba(26,25,23,.03);border:1px solid rgba(26,25,23,.09);border-radius:16px;padding:2rem 2.25rem;">
-      <ul class="prep-list">
-
-        <li>
-          <span class="icon">
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          </span>
-          <div>
-            <span><b style="font-weight:700;color:#1A1917;">Your rough monthly revenue.</b></span>
-            <p class="sub">Ballpark is fine. I need it to size the math on whether 100 appointments in 100 days makes sense for your market.</p>
-          </div>
-        </li>
-
-        <li>
-          <span class="icon">
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          </span>
-          <div>
-            <span><b style="font-weight:700;color:#1A1917;">Current appointment volume + what you've tried.</b></span>
-            <p class="sub">How many real sales appointments hit your calendar last month, and which agencies / channels you've burned on.</p>
-          </div>
-        </li>
-
-        <li>
-          <span class="icon">
-            <svg width="11" height="11" viewBox="0 0 11 11" fill="none"><path d="M2 5.5l2.5 3L9 3" stroke="#00B67A" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-          </span>
-          <div>
-            <span><b style="font-weight:700;color:#1A1917;">Read access to your Meta ad account</b> <span style="color:rgba(26,25,23,.45);">(if you've run ads).</span></span>
-            <p class="sub">I'll run the Agency Audit live on the call and save us fifteen minutes of preamble. Email it to <a href="mailto:spencer@seasonproofgrowth.com">spencer@seasonproofgrowth.com</a> before we get on.</p>
-          </div>
-        </li>
-
-      </ul>
+      <div style="display:flex;justify-content:center;">
+        <a id="confirm-sms" class="confirm-btn" href="sms:+15012363920?&body=Hey%20Spencer%2C%20it%27s%20%5Byour%20name%5D%20%E2%80%94%20just%20booked%20my%20call.%20Locking%20in%20my%20spot%20for%20%5Byour%20zip%5D.%20See%20you%20on%20the%20call." aria-label="Send the pre-written confirmation text">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          Text Me To Lock It In
+        </a>
+      </div>
+      <p style="font-size:.75rem;color:rgba(26,25,23,.35);margin:.875rem 0 0;line-height:1.6;">
+        No-shows lose their slot. This locks yours.
+      </p>
+      <p style="font-size:.875rem;color:rgba(26,25,23,.5);line-height:1.7;margin:1.75rem 0 0;">
+        Your confirmation and reminders just went out by email and text with the exact time and Google Meet link.
+      </p>
     </div>
 
   </div>
@@ -436,39 +396,66 @@
     <div class="rv" style="text-align:center;margin-bottom:2.75rem;">
       <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.875rem;">
         <span style="width:6px;height:6px;border-radius:50%;background:#C7963F;display:block;flex-shrink:0;"></span>
-        <span class="ey" style="color:rgba(199,150,63,.85);">Step 3 — While You Wait</span>
+        <span class="ey" style="color:rgba(199,150,63,.85);">While You Wait — Real Builders, Real ROI</span>
       </div>
       <h2 style="font-size:clamp(1.6rem,4vw,2.4rem);font-weight:800;color:#1A1917;line-height:1.1;letter-spacing:-.02em;margin:0 0 .75rem;">
-        Real Builders. <span style="color:#C7963F;">Real Stories.</span>
+        Every one of them said <span style="color:#C7963F;">"too good to be true."</span>
       </h2>
-      <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:520px;margin:0 auto;font-weight:500;">
-        Brian, Jake, Chip and other contractors who took the bet — plus short clips on what makes this system different. Pick any to watch.
+      <p style="font-size:.9375rem;color:#7A7870;line-height:1.75;max-width:540px;margin:0 auto;font-weight:500;">
+        Then the system kept delivering. One story at a time — start with Billy.
       </p>
     </div>
 
-    <div class="rv d1 vgrid" id="while-you-wait-grid">
-      <div class="vcard" data-vid="wDdNIx0NdKU"><div class="vthumb"><img src="https://i.ytimg.com/vi/wDdNIx0NdKU/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">50+ Home Service Appointments Per Month (Complete Marketing System)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="o3CF3EoWWk4"><div class="vthumb"><img src="https://i.ytimg.com/vi/o3CF3EoWWk4/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">Quality vs Quantity: How Contractors Get the Right Leads (Not Just More)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="4TP1sTRASoA"><div class="vthumb"><img src="https://i.ytimg.com/vi/4TP1sTRASoA/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">How I Got 60 Estimates in 6 Weeks (Deck Builder)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="NTxc9ZYN37w"><div class="vthumb"><img src="https://i.ytimg.com/vi/NTxc9ZYN37w/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">Contractors Getting Burned by Agencies: How to Spot the Red Flags</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="Xt4TVn4zP7s"><div class="vthumb"><img src="https://i.ytimg.com/vi/Xt4TVn4zP7s/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">How I Doubled My Deck Business to $1M in 4 Months</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="kFoGu0vC1G8"><div class="vthumb"><img src="https://i.ytimg.com/vi/kFoGu0vC1G8/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">New Contractor? Get Leads in 48 Hours With This Marketing Framework</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="2zTWrysgYYY"><div class="vthumb"><img src="https://i.ytimg.com/vi/2zTWrysgYYY/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">How Much Should You Pay to Get a Customer? (Most Contractors Guess Wrong)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="44fPqAocoHg"><div class="vthumb"><img src="https://i.ytimg.com/vi/44fPqAocoHg/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">You Don't Have a Lead Problem, You're Just Flying Blind (And It's Costing You Jobs)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="-q18xO92akA"><div class="vthumb"><img src="https://i.ytimg.com/vi/-q18xO92akA/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">How I Got a $500K Month on $100/Day in Ads</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
-      <div class="vcard" data-vid="CWmxOrRn7eQ"><div class="vthumb"><img src="https://i.ytimg.com/vi/CWmxOrRn7eQ/mqdefault.jpg" alt="" loading="lazy"><span class="pbtn"><span class="pbtn-inner"></span></span></div><div class="vmeta"><p class="vtitle">What's Actually Working in Contractor Marketing Right Now (Old Playbook Is Broken)</p><p class="vchan"><span class="vchan-verified">✓</span>Spencer Wright</p></div></div>
+    <!-- Sequential proof player — ONE story at a time (consumption > catalog).
+         Next-button swaps the same player; no wall of 14 tap targets. -->
+    <div class="rv d1" style="max-width:680px;margin:0 auto;">
+      <div class="vcard" id="seq-card" style="cursor:pointer;">
+        <div class="vthumb" id="seq-thumb">
+          <img id="seq-img" src="https://i.ytimg.com/vi/TvFv_EIM-MI/hqdefault.jpg" alt="">
+          <span class="pbtn"><span class="pbtn-inner"></span></span>
+          <div class="vcaption"><p id="seq-caption">$1,657 spent → $300K in 17 days</p></div>
+        </div>
+        <div class="vmeta">
+          <p class="vtitle" id="seq-title">Billy Stewart</p>
+          <p class="vchan" id="seq-chan">Trinity Decks &amp; Patios · Greenville, SC</p>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-top:1.1rem;gap:1rem;">
+        <p id="seq-count" style="font-size:.8125rem;color:#7A7870;margin:0;">Story 1 of 5</p>
+        <button id="seq-next" style="display:inline-flex;align-items:center;gap:.45rem;background:#1A1917;color:#C7963F;font-weight:800;font-size:.875rem;padding:.7rem 1.25rem;border-radius:999px;border:0;cursor:pointer;">Watch the next one <span aria-hidden="true">→</span></button>
+      </div>
     </div>
-    <p style="text-align:center;font-size:.8125rem;color:#7A7870;margin:1.25rem 0 0;">10 videos · tap any to play</p>
 
     <script>
       (function () {
-        document.querySelectorAll('#while-you-wait-grid .vcard').forEach(function (card) {
-          card.addEventListener('click', function () {
-            var vid = card.getAttribute('data-vid');
-            var thumb = card.querySelector('.vthumb');
-            if (!vid || !thumb || thumb.querySelector('iframe')) return;
-            thumb.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + vid + '?autoplay=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
-          });
+        var STORIES = [
+          { vid:'TvFv_EIM-MI', cap:'$1,657 spent → $300K in 17 days', name:'Billy Stewart', chan:'Trinity Decks & Patios · Greenville, SC' },
+          { vid:'4TP1sTRASoA', cap:'60 estimates · 25 closed · 6 weeks', name:'Brian Wallace', chan:'Bend Fence & Deck · Bend, OR' },
+          { vid:'ZT8C3xoQSLc', cap:'3 appts a week → 11 a day', name:'Mike Biviano', chan:'Biviano General · South Shore, MA' },
+          { vid:'-q18xO92akA', cap:'$500K month on $100/day ads', name:'Jason Flynn', chan:'PROdeck Construction · Northern Virginia' },
+          { vid:'YJQxX5ZQ3aI', cap:'CPL $400 → $30 in 14 days', name:'Justin Wylie', chan:'All Pro Decks & Patios · San Antonio, TX' }
+        ];
+        var i = 0;
+        var thumb = document.getElementById('seq-thumb');
+        function renderPoster() {
+          var st = STORIES[i];
+          thumb.innerHTML = '<img id="seq-img" src="https://i.ytimg.com/vi/' + st.vid + '/hqdefault.jpg" alt="">' +
+            '<span class="pbtn"><span class="pbtn-inner"></span></span>' +
+            '<div class="vcaption"><p>' + st.cap + '</p></div>';
+          document.getElementById('seq-title').textContent = st.name;
+          document.getElementById('seq-chan').textContent = st.chan;
+          document.getElementById('seq-count').textContent = 'Story ' + (i + 1) + ' of ' + STORIES.length;
+        }
+        function play() {
+          var st = STORIES[i];
+          if (thumb.querySelector('iframe')) return;
+          thumb.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + st.vid + '?autoplay=1&rel=0&modestbranding=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;aspect-ratio:16/9;border:0;display:block;"></iframe>';
+        }
+        document.getElementById('seq-card').addEventListener('click', play);
+        document.getElementById('seq-next').addEventListener('click', function (e) {
+          e.stopPropagation();
+          i = (i + 1) % STORIES.length;
+          renderPoster();
         });
       })();
     </script>
@@ -539,19 +526,28 @@
   document.querySelectorAll('.rv').forEach(function (el) { obs.observe(el); });
 </script>
 
-<!-- Personalize from sessionStorage (LP form data) -->
+<!-- Personalize from sessionStorage (LP form data): headline + the pre-filled
+     confirmation text. Falls back to [your name]/[your zip] placeholders the
+     lead overtypes when storage is empty (private mode, expired session). -->
 <script>
 (function () {
   let data = {};
   try { data = JSON.parse(sessionStorage.getItem('dl_qualify_data') || '{}'); }
   catch (_) { data = {}; }
 
+  const first = data.name ? (data.name.trim().split(/\s+/)[0] || '') : '';
+
   const h1 = document.getElementById('hero-h1');
-  if (h1 && data.name) {
-    const first = data.name.trim().split(/\s+/)[0];
-    if (first) {
-      h1.innerHTML = `<b>You're booked, ${first}.</b> Watch this before we talk.`;
-    }
+  if (h1 && first) {
+    h1.innerHTML = `<b>You're booked, ${first}.</b> Watch this before we talk.`;
+  }
+
+  const sms = document.getElementById('confirm-sms');
+  if (sms) {
+    const who = first || '[your name]';
+    const zip = (data.zip || '').toString().trim() || '[your zip]';
+    const body = `Hey Spencer, it's ${who} — just booked my call. Locking in my spot for ${zip}. See you on the call.`;
+    sms.href = 'sms:+15012363920?&body=' + encodeURIComponent(body);
   }
 })();
 </script>
