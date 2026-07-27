@@ -1070,12 +1070,58 @@
   const CAL_ICP     = 'https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
   const CAL_NON_ICP = 'https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
 
+  
+  // Calendly booked → funnel UX: stash email ref for the add-to-calendar block, redirect to /scheduled/.
+  window.addEventListener('message', function(e){
+    try{
+      if(String(e.origin).indexOf('calendly.com')===-1) return;
+      if(!e.data || e.data.event!=='calendly.event_scheduled') return;
+      try{ var d=(typeof formData!=='undefined'&&formData)||{}; if(d.email){ localStorage.setItem('mjc_booked_ref', JSON.stringify({email:d.email, calendarId:'lNcyqnixLoZa2p3S5P8I', t:Date.now()})); } }catch(err2){}
+      setTimeout(function(){ window.location.href='/scheduled/'; },1200);
+    }catch(err){}
+  });
+
   function runLoadingThenShowCalendar(isIcp, data) {
     const loadingTextEl = document.getElementById('loading-text');
     if (loadingTextEl) loadingTextEl.textContent = 'Checking your market availability…';
 
     setTimeout(() => {
       try {
+        // Segment copy (2026-07-27): non-ICP = Reserve Your Territory + $25 · ICP = One last step + offer.
+        var h1El=document.getElementById('post-submit-h1'), subEl=document.getElementById('post-submit-sub');
+        if(h1El&&subEl){
+          if(isIcp){
+            h1El.textContent='One last step — Reserve your territory and pick a time that works for you';
+            subEl.innerHTML='20+ Deck Jobs in 100 Days or You Get Paid $2,000.';
+          } else {
+            h1El.textContent='Reserve Your Territory — $25, 100% Refundable';
+            subEl.innerHTML='20+ Deck Jobs in 100 Days or You Get Paid $2,000.<br><span style="font-size:.85em;opacity:.75;">($25 reservation is fully refundable on request and refunded automatically if we\'re not a fit.)</span>';
+          }
+        }
+        // CALENDLY TEST (kill switch): non-ICP books on Calendly instead of the GHL yellow calendar.
+        const NON_ICP_USE_CALENDLY_L = true;
+        if (!isIcp && NON_ICP_USE_CALENDLY_L) {
+          const c = new URL('https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=b98700');
+          c.searchParams.set('embed_domain', location.hostname);
+          c.searchParams.set('embed_type', 'Inline');
+          if (data.name)  c.searchParams.set('name', data.name);
+          if (data.email) c.searchParams.set('email', data.email);
+          const ifr = document.getElementById('inline-calendar');
+          if (ifr) ifr.src = c.toString();
+          ['apply-header','guarantee-callout','form-card','form-tail'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+          });
+          const eyebrow2 = document.getElementById('post-submit-eyebrow');
+          if (eyebrow2) eyebrow2.textContent = data.zip ? `${data.zip} Is Open` : 'Market Open';
+          const hero2 = document.getElementById('post-submit-hero');
+          if (hero2) hero2.classList.remove('hidden');
+          const cw2 = document.getElementById('calendar-wrap');
+          if (cw2) cw2.classList.remove('hidden');
+          const ap2 = document.getElementById('apply');
+          if (ap2) ap2.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          return;
+        }
         const baseUrl = isIcp ? CAL_ICP : CAL_NON_ICP;
         const url = new URL(baseUrl);
         if (data.name) {

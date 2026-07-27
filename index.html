@@ -2096,7 +2096,7 @@
     setCalCopy();
     show(8);
     if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); }
-    else try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
+    else try{ var cal=document.getElementById('mc-cal'); if(!cal.getAttribute('src')) cal.src=buildCalUrl(); }catch(e){}
     setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },1400);
     if(submitted) return; submitted=true;
     dlTrack('submit',9,{icp:icp});

@@ -1580,8 +1580,9 @@
 
     <div class="mc-step" data-step="8">
       <div style="text-align:center;margin-bottom:14px;">
-        <h3 class="mc-q" style="margin-bottom:4px;">One last step — pick a time that works for you</h3>
-        <p class="mc-sub" style="margin-bottom:0;">Free call. We'll map out exactly what we'd build for your business.</p>
+        <h3 id="mc-cal-h1" class="mc-q" style="margin-bottom:4px;">One last step — Reserve your territory and pick a time that works for you</h3>
+        <p id="mc-cal-h2" class="mc-sub" style="margin-bottom:0;font-weight:700;">20+ Deck Jobs in 100 Days or You Get Paid $2,000.</p>
+        <p id="mc-cal-h3" class="mc-sub" style="margin-bottom:0;display:none;">($25 reservation is fully refundable on request and refunded automatically if we're not a fit.)</p>
       </div>
       <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
       <div id="mc-cal-wrap" style="display:none;"><iframe id="mc-cal" src="" title="Book your Deck Jobs Strategy Session" scrolling="yes"></iframe></div>
@@ -1612,6 +1613,18 @@
 
   var CAL_ICP='https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
   var CAL_NON_ICP='https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
+
+  // CALENDLY TEST: non-ICP books on Calendly (kill switch NON_ICP_USE_CALENDLY=false restores GHL).
+  var NON_ICP_USE_CALENDLY=true;
+  var CALENDLY_NON_ICP='https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=b98700';
+  window.addEventListener('message', function(e){
+    try{
+      if(String(e.origin).indexOf('calendly.com')===-1) return;
+      if(!e.data || e.data.event!=='calendly.event_scheduled') return;
+      try{ if(window.formData&&formData.email){ localStorage.setItem('mjc_booked_ref', JSON.stringify({email:formData.email, calendarId:'lNcyqnixLoZa2p3S5P8I', t:Date.now()})); } }catch(err2){}
+      setTimeout(function(){ window.location.href='/scheduled/'; },1200);
+    }catch(err){}
+  });
 
   function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='under_500k'||d.revenue==='500k_1m') return false; return true; }
   async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
@@ -1675,6 +1688,30 @@
     formData.zip=zip; submitAndShowCalendar();
   });
 
+  function setCalCopy(){
+    try{
+      var h1=document.getElementById('mc-cal-h1'), h2=document.getElementById('mc-cal-h2'), h3=document.getElementById('mc-cal-h3');
+      if(icp){ h1.textContent='One last step — Reserve your territory and pick a time that works for you'; h2.textContent='20+ Deck Jobs in 100 Days or You Get Paid $2,000.'; h3.style.display='none'; }
+      else { h1.textContent='Reserve Your Territory — $25, 100% Refundable'; h2.textContent='20+ Deck Jobs in 100 Days or You Get Paid $2,000.'; h3.style.display='block'; }
+    }catch(e){}
+  }
+  var calendlyScriptLoaded=false, calendlyInited=false;
+  function mountCalendly(){
+    if(calendlyInited) return;
+    var wrap=document.getElementById('mc-cal-wrap');
+    if(!wrap) return;
+    var iframe=document.getElementById('mc-cal'); if(iframe) iframe.style.display='none';
+    var u=new URL(CALENDLY_NON_ICP);
+    if(formData.name)  u.searchParams.set('name',formData.name);
+    if(formData.email) u.searchParams.set('email',formData.email);
+    var host=document.getElementById('mc-calendly');
+    if(!host){ host=document.createElement('div'); host.id='mc-calendly'; host.style.cssText='min-width:320px;height:700px;'; wrap.appendChild(host); }
+    calendlyInited=true;
+    if(window.Calendly){ window.Calendly.initInlineWidget({ url: u.toString(), parentElement: host }); return; }
+    host.className='calendly-inline-widget';
+    host.setAttribute('data-url', u.toString());
+    if(!calendlyScriptLoaded){ calendlyScriptLoaded=true; var sc=document.createElement('script'); sc.src='https://assets.calendly.com/assets/external/widget.js'; sc.async=true; document.head.appendChild(sc); }
+  }
   function buildCalUrl(){
     var u=new URL(icp?CAL_ICP:CAL_NON_ICP);
     if(formData.name){ var p=formData.name.trim().split(/\s+/); u.searchParams.set('first_name',p[0]||''); if(p.length>1) u.searchParams.set('last_name',p.slice(1).join(' '));
@@ -1685,12 +1722,16 @@
     if(formData.zip)   u.searchParams.set('zip',formData.zip);
     return u.toString();
   }
-  function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true; try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
+  function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true;
+    if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); return; }
+    try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
 
   function submitAndShowCalendar(){
     icp=isICP(formData);
+    setCalCopy();
     show(8);
-    try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
+    if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); }
+    else try{ var cal=document.getElementById('mc-cal'); if(!cal.getAttribute('src')) cal.src=buildCalUrl(); }catch(e){}
     setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },1400);
     if(submitted) return; submitted=true;
 
