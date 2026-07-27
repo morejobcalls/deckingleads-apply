@@ -168,7 +168,7 @@ Single merge of the two parallel 7/17 reworks (this session's v3 + the other ses
 - Recommended GHL SMS template: `https://apply.morejobcalls.com/book/?first_name={{contact.first_name}}&cid={{contact.id}}&icp={{contact.icp_qualified_survey}}`
 - Meta pixel PageView + Clarity on page; `noindex,nofollow`. E2E verified 2026-07-20 (headless click-through → real GHL appointment created → deleted; test contact removed).
 
-## v5.2 — Phone-input country-code bug fix (2026-07-24, STAGED — not yet pushed)
+## v5.2 — Phone-input country-code bug fix (2026-07-24 → completed 2026-07-27)
 
 **The bug (found 2026-07-24 via Anthony Cicero, who never received his SMS).**
 Every LP phone field normalized input with `value.replace(/\D/g,'').slice(0, 10)`. When a lead typed or autofilled their number **with the leading US country code** (`1 909 816 9213` = 11 digits), `.slice(0, 10)` kept the **first** ten digits and silently dropped the **last** one. The formatter then rendered the corrupted value as a plausible-looking `(190) 981-6921`, validation (`phone.length === 10`) passed, and the LP sent `'+1' + phone` → **`+11909816921`** to GHL.
@@ -189,3 +189,13 @@ Result: an undeliverable number, so **no SMS in the entire nurture/confirmation 
 **Files fixed locally but NOT shipped in this commit:** `v2/ v3/ v4/ v5/ v6/index.html` also carry an unrelated, unreviewed first-touch-attribution block from another session — shipping them would push that work live too, so they're held back. `e/ f/ g/ h/index.html` are untracked (never deployed). All are fixed on disk and will go out whenever their own work is reviewed.
 
 **Rollback:** `git revert` this commit — the change is 3 lines per form, no structural edits.
+
+### v5.2b — v2–v6 shipped (2026-07-27)
+
+The held-back variants were still **live and still buggy** — verified by fetching the deployed pages: `/v2/ /v3/ /v4/ /v5/ /v6/` each served two phone fields with zero country-code strips and zero `[2-9]` validators, three days after the root fix went out. Every other deployed page (`/ /a/ /b/ /c/ /d/ /yt/ /next/`) confirmed fixed live.
+
+Resolved by committing **only** the 3 phone-fix lines per file: the working-tree copies were reset to `HEAD`, the 3 edits re-applied to the clean files, and those committed. The first-touch-attribution block from the other session was then restored to the working tree and remains **uncommitted and unreviewed** — exactly as before, just no longer blocking a live bug fix. Verified diff before commit: 15 insertions / 15 deletions across 5 files, phone lines only, zip normalization untouched.
+
+`e/ f/ g/ h/` confirmed **404 on the live site** — untracked and never deployed, so they carried no exposure. They stay untracked.
+
+**Verified after deploy:** all five variants serve 2 strips + 1 `[2-9]` validator each.
