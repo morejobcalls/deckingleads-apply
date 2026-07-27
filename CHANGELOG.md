@@ -270,3 +270,7 @@ Step 3's add-to-calendar buttons (mjc-appointment-time worker) previously only r
 - ICP: H1 "One last step — Reserve your territory and pick a time that works for you" · H2 same offer line · NO $25 messaging.
 
 **3. Non-ICP calendar embed → Calendly's official widget.js** (Spencer's snippet): dark/gold params (`background_color=000000&text_color=b98700&primary_color=b98700`), mounted via `Calendly.initInlineWidget` with name/email prefill inside `#mc-cal-wrap` (GHL iframe hidden, not removed — kill switch still restores everything). Legacy inline flow keeps the styled URL via `CALENDLY_NON_ICP`.
+
+### v5.7.1 — FINAL pre-call VSL cut everywhere (2026-07-27)
+
+Spencer delivered the final polished proof VSL (1:58, Jeff Haring/Window Prof results slides). Now serving in every slot: native video on `/confirmation/` + `/scheduled/` (`media/precall-proof.mp4`, 7.4MB 720p + new poster), **unlisted YouTube `R9mX0UyONjI`** (SMS/nurture link use), the LIVE "1. New Lead" no-book iMessage 2 attachment, and the draft post-booking workflow attachment (both GHL media `b0e2cc1c-…`). Prior unlisted upload `YNhnO9332U4` set private.
