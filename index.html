@@ -1864,6 +1864,26 @@
   var CAL_ICP='https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
   var CAL_NON_ICP='https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
 
+  // ── Funnel step instrumentation → mjc-funnel-events worker (Supabase funnel_events).
+  // Fire-and-forget beacons; fully wrapped so a tracking failure can never touch the form.
+  // Canonical idx: 0 landed · 1 survey_open · 2 own_business · 3 name · 4 contact_info
+  //                · 5 bottleneck · 6 revenue · 7 timing · 8 zip · 9 submit
+  var DL_SID=(function(){try{var s=sessionStorage.getItem('dl_sid'); if(!s){s=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'s'+Date.now()+Math.random().toString(36).slice(2,10); sessionStorage.setItem('dl_sid',s);} return s;}catch(e){return 's'+Date.now();}})();
+  var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
+  var MC_OPT_IDX={own_business:2,bottleneck:5,revenue:6,timing:7};
+  function dlTrack(step,idx,extra){
+    try{
+      var p={sid:DL_SID,step:step,idx:idx,
+        utm_source:attribution.utm_source||'',utm_content:attribution.utm_content||'',utm_campaign:attribution.utm_campaign||'',
+        path:location.pathname,ref:attribution.referrer||''};
+      if(extra) for(var k in extra) p[k]=extra[k];
+      var body=JSON.stringify(p);
+      if(window.fetch){ fetch(DL_TRACK_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true,mode:'cors'}).catch(function(){ if(navigator.sendBeacon) navigator.sendBeacon(DL_TRACK_URL,new Blob([body],{type:'text/plain'})); }); }
+      else if(navigator.sendBeacon){ navigator.sendBeacon(DL_TRACK_URL,new Blob([body],{type:'text/plain'})); }
+    }catch(e){}
+  }
+  dlTrack('landed',0);
+
   function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='under_500k'||d.revenue==='500k_1m') return false; return true; }
   async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
 
@@ -1902,7 +1922,7 @@
     if(card) card.scrollTop=0;
     setTimeout(function(){var f=t&&t.querySelector('input'); if(f) try{f.focus({preventScroll:true});}catch(e){}},60);
   }
-  function openModal(){ overlay.classList.add('open'); document.body.classList.add('mc-lock'); if(!submitted && current<8) show(current); }
+  function openModal(){ overlay.classList.add('open'); document.body.classList.add('mc-lock'); dlTrack('survey_open',1); if(!submitted && current<8) show(current); }
   function closeModal(){ overlay.classList.remove('open'); document.body.classList.remove('mc-lock'); }
 
   closeBtn.addEventListener('click',closeModal);
@@ -1913,6 +1933,7 @@
   overlay.querySelectorAll('.mc-opt').forEach(function(btn){
     btn.addEventListener('click',function(){
       formData[btn.dataset.field]=btn.dataset.value;
+      dlTrack('q_'+btn.dataset.field, MC_OPT_IDX[btn.dataset.field]||current, {field:btn.dataset.field, value:btn.dataset.value});
       if(btn.dataset.field==='revenue') preloadCalendar(); // ICP now determinable → preload correct calendar
       if(current<TOTAL) show(current+1);
     });
@@ -1936,20 +1957,20 @@
         var name=nameEl.value.trim(), parts=name.split(/\s+/);
         var ok=parts.length>=2 && parts[0].length>=2 && parts[1].length>=1;
         nameErr.classList.toggle('show',!ok); if(!ok){nameEl.focus();return;}
-        formData.name=name; show(3);
+        formData.name=name; dlTrack('contact_name',3); show(3);
       } else if(current===3){
         var email=emailEl.value.trim(), phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
         var eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), pok=/^[2-9]\d{9}$/.test(phone);
         emailErr.classList.toggle('show',!eok); phoneErr.classList.toggle('show',!pok);
         if(!eok){emailEl.focus();return;} if(!pok){phoneEl.focus();return;}
-        formData.email=email; formData.phone='+1'+phone; firePartialLead(); show(4);
+        formData.email=email; formData.phone='+1'+phone; dlTrack('contact_info',4); firePartialLead(); show(4);
       }
     });
   });
   overlay.querySelector('[data-next-zip]').addEventListener('click',function(){
     var zip=zipEl.value.replace(/\D/g,'');
     if(zip.length!==5){ zipErr.classList.add('show'); zipEl.focus(); return; }
-    formData.zip=zip; submitAndShowCalendar();
+    formData.zip=zip; dlTrack('zip',8); submitAndShowCalendar();
   });
 
   function buildCalUrl(){
@@ -1970,6 +1991,7 @@
     try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
     setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },1400);
     if(submitted) return; submitted=true;
+    dlTrack('submit',9,{icp:icp});
 
     formData.icp=icp; formData.submitted_at=new Date().toISOString();
     var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
