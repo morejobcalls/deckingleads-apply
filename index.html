@@ -2058,25 +2058,32 @@
     }catch(e){}
   }
 
-  // Calendly official inline widget (widget.js) — Spencer's embed snippet with dark/gold styling.
+  // Calendly official inline widget (widget.js) — Spencer's embed snippet with dark styling.
+  // IMPORTANT: widget.js auto-scans .calendly-inline-widget divs on load and REQUIRES data-url
+  // (crashes without it). So: div carries class + data-url when the script will auto-init it;
+  // if the script is already loaded we call initInlineWidget on a class-less div instead.
   var calendlyScriptLoaded=false, calendlyInited=false;
   function mountCalendly(){
-    if(calendlyInited) return; 
+    if(calendlyInited) return;
     var wrap=document.getElementById('mc-cal-wrap');
     if(!wrap) return;
     var iframe=document.getElementById('mc-cal'); if(iframe) iframe.style.display='none';
+    var u=new URL(CALENDLY_NON_ICP);
+    if(formData.name)  u.searchParams.set('name',formData.name);
+    if(formData.email) u.searchParams.set('email',formData.email);
     var host=document.getElementById('mc-calendly');
-    if(!host){ host=document.createElement('div'); host.id='mc-calendly'; host.className='calendly-inline-widget'; host.style.cssText='min-width:320px;height:700px;'; wrap.appendChild(host); }
-    function init(){
-      if(calendlyInited || !window.Calendly) return;
-      calendlyInited=true;
-      window.Calendly.initInlineWidget({ url: CALENDLY_NON_ICP, parentElement: host, prefill: { name: formData.name||'', email: formData.email||'' } });
+    if(!host){ host=document.createElement('div'); host.id='mc-calendly'; host.style.cssText='min-width:320px;height:700px;'; wrap.appendChild(host); }
+    calendlyInited=true;
+    if(window.Calendly){
+      window.Calendly.initInlineWidget({ url: u.toString(), parentElement: host });
+      return;
     }
-    if(window.Calendly){ init(); return; }
+    host.className='calendly-inline-widget';
+    host.setAttribute('data-url', u.toString());
     if(!calendlyScriptLoaded){
       calendlyScriptLoaded=true;
       var sc=document.createElement('script'); sc.src='https://assets.calendly.com/assets/external/widget.js'; sc.async=true;
-      sc.onload=init; document.head.appendChild(sc);
+      document.head.appendChild(sc);
     }
   }
 
