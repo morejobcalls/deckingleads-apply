@@ -239,3 +239,16 @@ Round 3, same day. Spencer's direction: model the post-booking experience on go.
 ### v5.5.1 — Pre-filled confirmation text, Spencer's wording (2026-07-27)
 
 Both post-booking pages: pre-filled iMessage body is now *"Hey Spencer, it's {first} from [company]. Just booked a call. Looking forward to seeing how the 20 deck jobs in 100 days process could work for us here in {zip}."* First name + zip auto-fill from the application (sessionStorage); `[company]` is a deliberate overtype placeholder — the application doesn't collect company name, and typing it adds the commitment friction the confirm step is for.
+
+### v5.6 — Chung feedback round 2: 3-step simplification (2026-07-27)
+
+Chung's direct spec, verbatim where possible, still Imperium dark UI. Both post-booking pages (`/confirmation/` + `/scheduled/`):
+
+- **H1:** "COMPLETE THE 3 STEPS BELOW TO CONFIRM YOUR CALL" (Spencer chose 3 steps over Chung's 2 — Step 3 = calendar, matching Imperium's own triplet).
+- **STEP 1 — CONFIRM YOUR TERRITORY:** "Is this where you want more deck jobs?" + Chung's copy; button renamed **"Confirm My Territory With Spencer"** (same pre-filled iMessage: first name + zip auto-fill, [company] overtype). Text is now the FIRST action on the page.
+- **STEP 2 — WATCH BEFORE WE TALK:** back to the **native** video per Chung's "[ADD NATIVE VIDEO]" — self-hosted corrected cut (`media/precall-proof.mp4`, 1:49) with gold play overlay. (YouTube embed retired after ~2h; `YNhnO9332U4` stays unlisted for SMS/nurture links.)
+- **STEP 3 — PUT IT ON YOUR CALENDAR:** accept-the-invite copy + the dynamic add-to-calendar buttons when the booking ref resolves.
+- **CUT per Chung's simplification:** step-card row, trusted-by logo marquee, sequential proof player, guarantee card. Proof now lives inside the video. Footer gains the 20-jobs/refund fine-print line (v2.4 scoping path).
+- Ops note (manual, not automated): when the Step-1 text lands, Spencer replies in the "Perfect, thanks {name} — I'll take a look at {city} before we talk" pattern to make the flow feel 1:1.
+
+**Rollback:** `git revert` (v5.5 layout in history).
