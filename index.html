@@ -1898,7 +1898,7 @@
   // yellow PT calendar). This listener only handles the in-page UX: funnel event + redirect
   // to /scheduled/ like the GHL calendar did.
   var NON_ICP_USE_CALENDLY=true;
-  var CALENDLY_NON_ICP='https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=b98700';
+  var CALENDLY_NON_ICP='https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=dba400';
   window.addEventListener('message', function(e){
     try{
       if(String(e.origin).indexOf('calendly.com')===-1) return;
@@ -2097,7 +2097,7 @@
     show(8);
     if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); }
     else try{ var cal=document.getElementById('mc-cal'); if(!cal.getAttribute('src')) cal.src=buildCalUrl(); }catch(e){}
-    setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },1400);
+    setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },(calPreloaded?250:1400));
     if(submitted) return; submitted=true;
     dlTrack('submit',9,{icp:icp});
 

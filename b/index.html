@@ -1071,6 +1071,30 @@
   const CAL_NON_ICP = 'https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
 
   
+
+  // Warm the Calendly iframe while the lead types their phone (revenue is already answered
+  // in this flow, so non-ICP is known; name+email fields sit above phone and are filled).
+  var NONICP_CAL_PRELOADED=false;
+  (function(){
+    var ph=document.getElementById('phone-input');
+    if(!ph) return;
+    ph.addEventListener('input', function(){
+      if(NONICP_CAL_PRELOADED) return;
+      try{
+        if(typeof isICP==='function' && typeof formData!=='undefined' && isICP(formData)) return;
+        var nm=(document.getElementById('name-input')||{}).value||'';
+        var em=(document.getElementById('email-input')||{}).value||'';
+        var c=new URL('https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=dba400');
+        c.searchParams.set('embed_domain',location.hostname);
+        c.searchParams.set('embed_type','Inline');
+        if(nm.trim()) c.searchParams.set('name',nm.trim());
+        if(em.trim()) c.searchParams.set('email',em.trim());
+        var ifr=document.getElementById('inline-calendar');
+        if(ifr && !ifr.getAttribute('src')){ ifr.src=c.toString(); NONICP_CAL_PRELOADED=true; }
+      }catch(e){}
+    });
+  })();
+
   // Calendly booked → funnel UX: stash email ref for the add-to-calendar block, redirect to /scheduled/.
   window.addEventListener('message', function(e){
     try{
@@ -1101,13 +1125,13 @@
         // CALENDLY TEST (kill switch): non-ICP books on Calendly instead of the GHL yellow calendar.
         const NON_ICP_USE_CALENDLY_L = true;
         if (!isIcp && NON_ICP_USE_CALENDLY_L) {
-          const c = new URL('https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=b98700');
+          const c = new URL('https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=dba400');
           c.searchParams.set('embed_domain', location.hostname);
           c.searchParams.set('embed_type', 'Inline');
           if (data.name)  c.searchParams.set('name', data.name);
           if (data.email) c.searchParams.set('email', data.email);
           const ifr = document.getElementById('inline-calendar');
-          if (ifr) ifr.src = c.toString();
+          if (ifr && !NONICP_CAL_PRELOADED) ifr.src = c.toString();
           ['apply-header','guarantee-callout','form-card','form-tail'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.classList.add('hidden');
@@ -1156,7 +1180,7 @@
         console.warn('[DL v2] inline calendar swap failed, falling back to redirect:', e);
         window.location.href = isIcp ? '/qualified/' : '/scheduling/';
       }
-    }, 1500);
+    }, NONICP_CAL_PRELOADED ? 400 : 1500);
   }
 
   const emailInput = document.getElementById('email-input');
