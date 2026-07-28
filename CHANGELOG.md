@@ -295,3 +295,7 @@ Spencer caught it live: the booking step showed no calendar for non-ICP leads. R
 
 1. **Embed params per Spencer:** `background_color=000000&text_color=ffffff&primary_color=b98700` → `primary_color=dba400` (Calendly default light theme, gold accent) — all six booking pages.
 2. **The 3–5s calendar wait killed.** Two causes: a fixed 1.4–1.5s "Checking your market availability…" spinner even when the calendar was already warm, and NO preload at all on the legacy-flow pages (`/d/ /a/ /b/ /c/` collect contact info last). Now: modal pages skip the spinner (250ms) when preloaded; legacy pages **start loading Calendly while the lead types their phone number** (name/email prefilled from the fields above) and reveal in 400ms. Measured: root 366ms, /d/ 414ms from submit-click to visible calendar.
+
+### v5.11 — ICP boundary corrected: $500k–$1M is ICP (2026-07-28)
+
+Spencer's call: non-ICP = **under $500k only**. The $500k–$1M revenue answer was routing to the non-ICP path (Calendly + $25 reservation) — it now routes ICP (green GHL calendar, no $25 messaging). Fixed in every isICP definition: root (modal + legacy), /next/ (both), /d/ /a/ /b/ /c/, /yt/, and /v4/ /v5/ /v6/ (isolated from the other session's uncommitted work, v5.2b procedure). /v2/ /v3/ use the older pre-Calendly gate and can't reach the $25 page — untouched. Note: $500k–$1M leads now also fire the Meta Lead event (ICP-gated), which matches the intent — they're dream-client adjacent, not repelled.

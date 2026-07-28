@@ -1171,7 +1171,7 @@
   // $1M+ "just researching" still routes to /qualified/ — high-value capture.
   function isICP(d) {
     if (d.own_business !== 'yes') return false;
-    if (d.revenue === 'under_500k' || d.revenue === '500k_1m') return false;
+    if (d.revenue === 'under_500k') return false; // non-ICP = under $500k ONLY (2026-07-28: $500k–$1M is ICP)
     return true;
   }
 

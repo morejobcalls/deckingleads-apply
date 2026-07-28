@@ -1348,7 +1348,7 @@
 
   function isICP(d) {
     if (d.own_business !== 'yes') return false;
-    if (d.revenue === 'under_500k' || d.revenue === '500k_1m') return false;
+    if (d.revenue === 'under_500k') return false; // non-ICP = under $500k ONLY (2026-07-28: $500k–$1M is ICP)
     return true;
   }
 
@@ -1931,7 +1931,7 @@
   }
   dlTrack('landed',0);
 
-  function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='under_500k'||d.revenue==='500k_1m') return false; return true; }
+  function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='under_500k') return false; return true; }
   async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
 
   // ── Partial-lead capture (funnel v2.1) ──
