@@ -311,3 +311,7 @@ Per Spencer, modeled on the Imperium reference:
 ### v5.12.1 — Zoom → Google Meet on /next/* (2026-07-28)
 
 Spencer caught a surviving "Zoom link" line on the application. The v5.3 sweep missed the `/next/` tree: its modal contact-step sub-line + its own `/next/confirmation/` and `/next/scheduled/` pages (9 mentions total). All now say Google Meet. GHL widget forms + calendar copy re-verified clean.
+
+### v5.13 — Non-ICP booking back on the GHL yellow calendar (2026-07-28)
+
+Spencer's call: the Calendly test ends; sub-$500k books on the GHL yellow calendar again, with the $25 collected IN the GHL widget (Accept Payments). Implemented via the kill switches (`NON_ICP_USE_CALENDLY(=_L)=false` — Calendly code stays dormant for instant re-test), plus what payment-in-iframe needs: **`allow="payment"` on every booking iframe** + **`form_embed.js`** loaded (root modal + legacy, /next/, /d/ /a/ /b/ /c/). The legacy phone-typing preload now warms the correct **GHL** calendar for BOTH segments (with name/email/zip prefill — legacy collects zip before contact info, so nothing is lost) and submit never clobbers a preloaded iframe. Verified: root non-ICP → yellow widget in 368ms with Reserve-Your-Territory copy; $500k–$1M → green ICP calendar; /d/ → yellow widget, zip prefilled, 410ms.

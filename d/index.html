@@ -850,7 +850,7 @@
          Mobile: edge-to-edge (-mx-5 cancels the parent's px-5) so the GHL widget has full viewport width.
          sm+: re-centered with rounded corners + shadow. -->
     <div id="calendar-wrap" class="hidden -mx-5 sm:mx-auto max-w-2xl">
-      <iframe id="inline-calendar" src="" title="Book your Deck Jobs Strategy Session" style="width: 100%; height: 820px; border: 0; display: block; background: transparent;"></iframe>
+      <iframe id="inline-calendar" src="" title="Book your Deck Jobs Strategy Session" style="width: 100%; height: 820px; border: 0; display: block; background: transparent;" allow="payment"></iframe><script src="https://api.seasonproofgrowth.com/js/form_embed.js" type="text/javascript"></script>
     </div>
 
   </div>
@@ -1084,16 +1084,16 @@
     ph.addEventListener('input', function(){
       if(NONICP_CAL_PRELOADED) return;
       try{
-        if(typeof isICP==='function' && typeof formData!=='undefined' && isICP(formData)) return;
+        var ifr=document.getElementById('inline-calendar');
+        if(!ifr || ifr.getAttribute('src')) return;
+        var icpNow=(typeof isICP==='function' && typeof formData!=='undefined') ? isICP(formData) : false;
+        var u=new URL(icpNow ? CAL_ICP : CAL_NON_ICP);
         var nm=(document.getElementById('name-input')||{}).value||'';
         var em=(document.getElementById('email-input')||{}).value||'';
-        var c=new URL('https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=dba400');
-        c.searchParams.set('embed_domain',location.hostname);
-        c.searchParams.set('embed_type','Inline');
-        if(nm.trim()) c.searchParams.set('name',nm.trim());
-        if(em.trim()) c.searchParams.set('email',em.trim());
-        var ifr=document.getElementById('inline-calendar');
-        if(ifr && !ifr.getAttribute('src')){ ifr.src=c.toString(); NONICP_CAL_PRELOADED=true; }
+        if(nm.trim()){ var pts=nm.trim().split(/\s+/); u.searchParams.set('first_name',pts[0]||''); if(pts.length>1) u.searchParams.set('last_name',pts.slice(1).join(' ')); u.searchParams.set('name',nm.trim()); u.searchParams.set('full_name',nm.trim()); }
+        if(em.trim()) u.searchParams.set('email',em.trim());
+        if(typeof formData!=='undefined' && formData.zip) u.searchParams.set('zip',formData.zip);
+        ifr.src=u.toString(); NONICP_CAL_PRELOADED=true;
       }catch(e){}
     });
   })();
@@ -1126,7 +1126,7 @@
           }
         }
         // CALENDLY TEST (kill switch): non-ICP books on Calendly instead of the GHL yellow calendar.
-        const NON_ICP_USE_CALENDLY_L = true;
+        const NON_ICP_USE_CALENDLY_L = false; // 2026-07-28: back to GHL yellow calendar
         if (!isIcp && NON_ICP_USE_CALENDLY_L) {
           const c = new URL('https://calendly.com/spencer-deckingleads/pt-20-jobs-in-100-days-video-1?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=dba400');
           c.searchParams.set('embed_domain', location.hostname);
@@ -1161,7 +1161,7 @@
         if (data.zip)   url.searchParams.set('zip', data.zip);
 
         const iframe = document.getElementById('inline-calendar');
-        if (iframe) iframe.src = url.toString();
+        if (iframe && !iframe.getAttribute('src')) iframe.src = url.toString();
 
         ['apply-header','guarantee-callout','form-card','form-tail'].forEach(id => {
           const el = document.getElementById(id);
