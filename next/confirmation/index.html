@@ -286,7 +286,7 @@
           <a id="add-cal-google" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.4rem;background:linear-gradient(180deg,#C7963F,#AB8032);color:#0D0D0D;font-weight:800;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;">Google Calendar</a>
           <a id="add-cal-ics" download="strategy-session.ics" style="display:inline-flex;align-items:center;gap:.4rem;background:transparent;color:#F8F7F3;font-weight:700;font-size:.875rem;padding:.7rem 1.15rem;border-radius:10px;text-decoration:none;border:1px solid rgba(248,247,243,.25);">Apple / Outlook</a>
         </div>
-        <p style="font-size:.7rem;color:rgba(248,247,243,.35);margin:.9rem 0 0;line-height:1.5;">So it's on your calendar and you don't miss it. Your Zoom link is also in your email &amp; text.</p>
+        <p style="font-size:.7rem;color:rgba(248,247,243,.35);margin:.9rem 0 0;line-height:1.5;">So it's on your calendar and you don't miss it. Your Google Meet link is also in your email &amp; text.</p>
       </div>
     </div>
     <script>
@@ -305,8 +305,8 @@
       function render(d){
         var start=new Date(d.startUTC), end=d.endUTC?new Date(d.endUTC):new Date(start.getTime()+45*60000);
         var title='100 Deck Jobs in 100 Days Strategy Session';
-        var loc=d.location||'Zoom link is in your confirmation email & text';
-        var details='Your MoreJobCalls.com strategy session with Spencer. The exact Zoom link is in your confirmation email and text.';
+        var loc=d.location||'Google Meet link is in your confirmation email & text';
+        var details='Your MoreJobCalls.com strategy session with Spencer. The exact Google Meet link is in your confirmation email and text.';
         function z(n){return(n<10?'0':'')+n;}
         function u(dt){return dt.getUTCFullYear()+z(dt.getUTCMonth()+1)+z(dt.getUTCDate())+'T'+z(dt.getUTCHours())+z(dt.getUTCMinutes())+z(dt.getUTCSeconds())+'Z';}
         var g='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(title)+'&dates='+u(start)+'/'+u(end)+'&details='+encodeURIComponent(details)+'&location='+encodeURIComponent(loc);
@@ -323,7 +323,7 @@
     <!-- Supporting copy + confirm button -->
     <div class="rv d2" style="max-width:480px;margin:1.75rem auto 0;">
       <p style="font-size:.9375rem;color:rgba(248,247,243,.5);line-height:1.78;font-weight:400;margin:0 0 1.25rem;">
-        Check your email and phone — your confirmation and reminders just went out with the exact time and Zoom link.
+        Check your email and phone — your confirmation and reminders just went out with the exact time and Google Meet link.
       </p>
       <p style="font-size:.9375rem;color:rgba(248,247,243,.65);line-height:1.6;font-weight:600;margin:0 0 1.25rem;">
         To lock in your slot, tap below and hit send:

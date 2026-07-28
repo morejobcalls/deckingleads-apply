@@ -307,3 +307,7 @@ Per Spencer, modeled on the Imperium reference:
 2. **Step-1 card visual** (Imperium card-example style): a live iMessage-blue bubble PREVIEW of the pre-filled text, personalized with the lead's real name/zip by the same script that builds the sms: link — the card now *shows* the message before they tap.
 3. **Pre-call video → unlisted YouTube embed** (`R9mX0UyONjI`, already uploaded yesterday) on both pages — watch counts visible in YT Studio. Native mp4 stays in the repo as an asset.
 4. **"RECENT CLIENT CASE STUDIES" section after Step 3** — the curated one-story-at-a-time player restored (Billy → Brian → Biviano → Flynn → Wylie) with the next-button, per Chung's consumption rule (no grid).
+
+### v5.12.1 — Zoom → Google Meet on /next/* (2026-07-28)
+
+Spencer caught a surviving "Zoom link" line on the application. The v5.3 sweep missed the `/next/` tree: its modal contact-step sub-line + its own `/next/confirmation/` and `/next/scheduled/` pages (9 mentions total). All now say Google Meet. GHL widget forms + calendar copy re-verified clean.
