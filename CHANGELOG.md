@@ -299,3 +299,11 @@ Spencer caught it live: the booking step showed no calendar for non-ICP leads. R
 ### v5.11 — ICP boundary corrected: $500k–$1M is ICP (2026-07-28)
 
 Spencer's call: non-ICP = **under $500k only**. The $500k–$1M revenue answer was routing to the non-ICP path (Calendly + $25 reservation) — it now routes ICP (green GHL calendar, no $25 messaging). Fixed in every isICP definition: root (modal + legacy), /next/ (both), /d/ /a/ /b/ /c/, /yt/, and /v4/ /v5/ /v6/ (isolated from the other session's uncommitted work, v5.2b procedure). /v2/ /v3/ use the older pre-Calendly gate and can't reach the $25 page — untouched. Note: $500k–$1M leads now also fire the Meta Lead event (ICP-gated), which matches the intent — they're dream-client adjacent, not repelled.
+
+### v5.12 — Confirmation pages: DR-UI polish + YouTube embed + case studies restored (2026-07-28)
+
+Per Spencer, modeled on the Imperium reference:
+1. **Headlines re-set:** forced `<br>`s removed from the H1 and Step-1 headline (bad mobile wraps) — natural balanced wrapping (`text-wrap:balance`), hero padding tightened, wider gold hairline under the H1 and **gold divider rules between every step card** (Imperium's section-rule pattern).
+2. **Step-1 card visual** (Imperium card-example style): a live iMessage-blue bubble PREVIEW of the pre-filled text, personalized with the lead's real name/zip by the same script that builds the sms: link — the card now *shows* the message before they tap.
+3. **Pre-call video → unlisted YouTube embed** (`R9mX0UyONjI`, already uploaded yesterday) on both pages — watch counts visible in YT Studio. Native mp4 stays in the repo as an asset.
+4. **"RECENT CLIENT CASE STUDIES" section after Step 3** — the curated one-story-at-a-time player restored (Billy → Brian → Biviano → Flynn → Wylie) with the next-button, per Chung's consumption rule (no grid).
