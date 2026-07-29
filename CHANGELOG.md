@@ -315,3 +315,9 @@ Spencer caught a surviving "Zoom link" line on the application. The v5.3 sweep m
 ### v5.13 — Non-ICP booking back on the GHL yellow calendar (2026-07-28)
 
 Spencer's call: the Calendly test ends; sub-$500k books on the GHL yellow calendar again, with the $25 collected IN the GHL widget (Accept Payments). Implemented via the kill switches (`NON_ICP_USE_CALENDLY(=_L)=false` — Calendly code stays dormant for instant re-test), plus what payment-in-iframe needs: **`allow="payment"` on every booking iframe** + **`form_embed.js`** loaded (root modal + legacy, /next/, /d/ /a/ /b/ /c/). The legacy phone-typing preload now warms the correct **GHL** calendar for BOTH segments (with name/email/zip prefill — legacy collects zip before contact info, so nothing is lost) and submit never clobbers a preloaded iframe. Verified: root non-ICP → yellow widget in 368ms with Reserve-Your-Territory copy; $500k–$1M → green ICP calendar; /d/ → yellow widget, zip prefilled, 410ms.
+
+## 2026-07-29 — Pre-call proof reel live on all confirmation pages
+
+- **Swapped the "Watch Before We Talk" video** on `/confirmation/` + `/scheduled/` (was `R9mX0UyONjI`) and the mini-VSL placeholder on `/yt/scheduled/`, `/next/confirmation/`, `/next/scheduled/` (was `CZkMmNpZddg`) → **`HRYuMJmhpmY`** — the Proof-Reel VSL v2 (12 clients, 10 objection chapters, burned captions, 1.25x, 11:38, unlisted "Before Your Call: 12 Deck Builders Who Didn't Believe It Either").
+- Updated Step-2 copy + duration line on the two live pages to match (was "~2:00").
+- Source of truth: `Marketing/1. Ads/Supercuts/Proof-Reel-VSL-v2/` + `Marketing/3. Proof/0. Master Library/PICKUP-proof-reel-vsl.md`.
