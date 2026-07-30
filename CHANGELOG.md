@@ -321,3 +321,11 @@ Spencer's call: the Calendly test ends; sub-$500k books on the GHL yellow calend
 - **Swapped the "Watch Before We Talk" video** on `/confirmation/` + `/scheduled/` (was `R9mX0UyONjI`) and the mini-VSL placeholder on `/yt/scheduled/`, `/next/confirmation/`, `/next/scheduled/` (was `CZkMmNpZddg`) → **`HRYuMJmhpmY`** — the Proof-Reel VSL v2 (12 clients, 10 objection chapters, burned captions, 1.25x, 11:38, unlisted "Before Your Call: 12 Deck Builders Who Didn't Believe It Either").
 - Updated Step-2 copy + duration line on the two live pages to match (was "~2:00").
 - Source of truth: `Marketing/1. Ads/Supercuts/Proof-Reel-VSL-v2/` + `Marketing/3. Proof/0. Master Library/PICKUP-proof-reel-vsl.md`.
+
+## 2026-07-30 — Non-ICP booking step: reservation copy reframed
+
+- **`#mc-cal-h3` on step 8 of the root modal application** (`index.html`) — the line that only renders on the **non-ICP** path (`setCalCopy()` with `icp === false`; ICP still sees no $25 messaging).
+- Was: `($25 reservation is fully refundable on request and refunded automatically if we're not a fit.)`
+- Now: **"You're not buying our service today."** + line break + **"You're simply reserving your territory while Spencer reviews your application and creates a plan. Your $25 is fully refundable on request or if we're not a fit."**
+- Why: leads the moment with what the $25 *isn't* (a purchase) before the refund mechanics — removes the "am I buying something right now?" hesitation at the payment step.
+- **Scope: root `index.html` only**, per Spencer. `/a/ /b/ /c/ /d/ /next/` still carry the old parenthetical — stale variants, no ad traffic.
