@@ -329,3 +329,4 @@ Spencer's call: the Calendly test ends; sub-$500k books on the GHL yellow calend
 - Now: **"You're not buying our service today."** + line break + **"You're simply reserving your territory while Spencer reviews your application and creates a plan. Your $25 is fully refundable on request or if we're not a fit."**
 - Why: leads the moment with what the $25 *isn't* (a purchase) before the refund mechanics — removes the "am I buying something right now?" hesitation at the payment step.
 - **Scope: root `index.html` only**, per Spencer. `/a/ /b/ /c/ /d/ /next/` still carry the old parenthetical — stale variants, no ad traffic.
+- **Spacing follow-up (same day):** `#mc-cal-h3` given `margin-top:12px` (was flush against the bold offer line above it), and the `<br><br>` between the two sentences replaced with a block `<span>` at `margin-top:8px` — the two lines now read as one paragraph pair instead of two separated blocks.
