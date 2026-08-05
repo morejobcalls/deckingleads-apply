@@ -1552,6 +1552,7 @@
           fbp,
           // Capture client metadata for Meta CAPI user_data.client_user_agent.
           client_user_agent: navigator.userAgent || '',
+          timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''),
           event_time_unix: Math.floor(Date.now() / 1000),
           submitted_at: formData.submitted_at,
           source: 'deckingleads.com lp v1',
@@ -1984,7 +1985,7 @@
     if(partialSent||submitted||!PARTIAL_WEBHOOK_URL) return; partialSent=true;
     try{
       var parts=(formData.name||'').trim().split(/\s+/);
-      var payload={lead_stage:'partial',partial_step:'contact-info',
+      var payload={lead_stage:'partial',partial_step:'contact-info',timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),
         first_name:parts[0]||'',last_name:parts.slice(1).join(' '),full_name:formData.name||'',
         email:formData.email||'',phone:formData.phone||'',
         own_business:formData.own_business||'',
@@ -2156,7 +2157,8 @@
         var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,postal_code:formData.zip,
           own_business:formData.own_business,revenue:formData.revenue,timing:formData.timing,bottleneck:formData.bottleneck,icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],zip_sha256:h[4],fbp:fbp,
-          client_user_agent:navigator.userAgent||'',event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
+          client_user_agent:navigator.userAgent||'',
+          timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''),event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
           source:'deckingleads.com lp v1',variant:'v1',lp_version:'v2-ravi',channel:'ig-organic',page_url:location.href,
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',

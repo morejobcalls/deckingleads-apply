@@ -1287,6 +1287,7 @@
           zip_sha256,
           fbp,
           client_user_agent: navigator.userAgent || '',
+          timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''),
           event_time_unix: Math.floor(Date.now() / 1000),
           submitted_at: formData.submitted_at,
           source: 'deckingleads.com lp v1',

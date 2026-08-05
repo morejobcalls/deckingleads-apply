@@ -1257,6 +1257,7 @@
           fbp,
           // Capture client metadata for Meta CAPI user_data.client_user_agent.
           client_user_agent: navigator.userAgent || '',
+          timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''),
           event_time_unix: Math.floor(Date.now() / 1000),
           submitted_at: formData.submitted_at,
           source: 'deckingleads.com lp v1',
@@ -1752,7 +1753,8 @@
         var payload={first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,postal_code:formData.zip,
           own_business:formData.own_business,revenue:formData.revenue,timing:formData.timing,bottleneck:formData.bottleneck,icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],zip_sha256:h[4],fbp:fbp,
-          client_user_agent:navigator.userAgent||'',event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
+          client_user_agent:navigator.userAgent||'',
+          timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''),event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
           source:'deckingleads.com lp v1',variant:'v1',lp_version:'v2-ravi',page_url:location.href,
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
