@@ -1692,8 +1692,9 @@
   function setCalCopy(){
     try{
       var h1=document.getElementById('mc-cal-h1'), h2=document.getElementById('mc-cal-h2'), h3=document.getElementById('mc-cal-h3');
-      if(icp){ h1.textContent='One last step — Reserve your territory and pick a time that works for you'; h2.textContent='20+ Deck Jobs in 100 Days or You Get Paid $2,000.'; h3.style.display='none'; }
-      else { h1.textContent='Reserve Your Territory — $25, 100% Refundable'; h2.textContent='20+ Deck Jobs in 100 Days or You Get Paid $2,000.'; h3.style.display='block'; }
+      h1.textContent='One last step — Reserve your territory and pick a time that works for you';
+      h2.textContent='20+ Deck Jobs in 100 Days or You Get Paid $2,000.';
+      h3.style.display='none';
     }catch(e){}
   }
   var calendlyScriptLoaded=false, calendlyInited=false;
