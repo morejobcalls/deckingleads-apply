@@ -7,8 +7,8 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#000000">
-<title>20 Deck Jobs in 100 Days | MoreJobCalls.com</title>
-<meta name="description" content="20 deck jobs in 100 days — The Deck Jobs System guarantees 100 exclusive sales appointments in 100 days. Close 2 of every 10, that's your 20 jobs. Miss the 100? 100% refund + $2,000 cash. One builder per market.">
+<title>100 Sales Appointments in 100 Days Or We Write You A Check For $10,000 | MoreJobCalls.com</title>
+<meta name="description" content="100 exclusive, ready-to-buy deck sales appointments in 100 days — or we write you a check for $10,000. The Deck Jobs System books exclusive appointments with qualified homeowners in your area. One builder per market.">
 <meta name="robots" content="index, follow">
 
 <!-- ================================================================== -->
@@ -41,15 +41,15 @@
     theme: {
       extend: {
         colors: {
-          bg: '#FBFAF7',
-          surface: '#FFFFFF',
-          elevated: '#FFFFFF',
-          charcoal: '#F3EEE4',
-          border: '#E4DECF',
-          'border-strong': '#D8D0BE',
-          ink: '#1A1917',
-          'ink-muted': '#6B6A63',
-          'ink-subtle': '#8A8780',
+          bg: '#000000',
+          surface: '#0D0D0D',
+          elevated: '#141414',
+          charcoal: '#141414',
+          border: '#222222',
+          'border-strong': '#2A2A2A',
+          ink: '#F5F2EB',
+          'ink-muted': '#9CA3AF',
+          'ink-subtle': '#6B7280',
           gold: '#c7963f',
           'gold-deep': '#ab8032',
           'gold-soft': 'rgba(199, 150, 63, 0.12)',
@@ -84,8 +84,8 @@
   .gold-gradient { background-image: linear-gradient(to bottom, #c7963f 0%, #ab8032 100%); }
   .gold-gradient-hover:hover { background-image: linear-gradient(to bottom, #d4a14a 0%, #ba8f3b 100%); }
 
-  .sec-dark { background:#FBFAF7; color:#1A1917; }
-  .sec-charcoal { background:#F3EEE4; color:#1A1917; }
+  .sec-dark { background:#000000; color:#F5F2EB; }
+  .sec-charcoal { background:#141414; color:#F5F2EB; }
   .sec-paper { background:#FFFFFF; color:#171717; }
   .sec-cream { background:#F5F2EB; color:#171717; }
 
@@ -379,13 +379,13 @@
     height: auto;
     object-fit: contain;
     display: block;
-    filter: grayscale(1) brightness(0);
+    filter: grayscale(1);
   }
-  .logo-cell--invert img { filter: grayscale(1) brightness(0); }
-  /* LIGHT-bg reskin: white-bg logos multiply-blend so the white background drops out
-     against the cream page, leaving the (grayscaled) dark mark visible. */
+  .logo-cell--invert img { filter: grayscale(1) brightness(0) invert(1); }
+  /* White-bg logos: invert (white→black, dark mark→light) then screen-blend so the
+     now-black background drops out against the dark page bg, leaving only the light mark visible. */
   .logo-cell--card { background: transparent; padding: 0 6px; border-radius: 0; }
-  .logo-cell--card img { filter: grayscale(1); mix-blend-mode: multiply; max-height: 56px; max-width: 188px; }
+  .logo-cell--card img { filter: grayscale(1) invert(1); mix-blend-mode: screen; max-height: 56px; max-width: 188px; }
 </style>
 <!-- Microsoft Clarity (heat maps + session recordings + analytics) -->
 <script type="text/javascript">
@@ -422,19 +422,19 @@
     </div>
 
     <!-- H1 -->
-    <h1 class="display-lg text-[28px] leading-[1.1] sm:text-[50px] sm:leading-[1.05] mb-4 sm:mb-8 max-w-3xl mx-auto">
-      20 Deck Jobs <span class="text-gold">in 100 Days</span>
+    <h1 class="display-lg text-[26px] leading-[1.14] sm:text-[42px] sm:leading-[1.08] mb-4 sm:mb-6 max-w-3xl mx-auto" style="text-wrap:balance;">
+      100 Sales Appointments in 100 Days <span class="text-gold">Or We Write You A Check For $10,000</span>
     </h1>
 
-    <!-- Subheadline -->
-    <p class="text-sm sm:text-lg text-ink-muted max-w-xl mx-auto mb-4 sm:mb-8 leading-snug">
-      The Deck Jobs System Guarantees <span class="text-ink font-semibold">100 Exclusive Sales Appointments in 100 Days</span> With Qualified Homeowners In Your Area. You close 2 of every 10 – that's your 20 deck jobs. Miss the 100? <span class="text-ink font-semibold">100% refund + $2,000 cash paid to you.</span>
-    </p>
+    <!-- H3 — what the appointments actually are -->
+    <h3 class="display text-[18px] leading-[1.25] sm:text-[26px] mb-7 sm:mb-10 max-w-2xl mx-auto text-ink">
+      Exclusive. Ready-to-Buy. <span class="text-gold">Premium Deck Jobs.</span>
+    </h3>
 
     <!-- CTA -->
     <div class="flex justify-center">
       <a href="#apply" class="cta-btn w-full sm:w-auto inline-flex flex-col items-center justify-center gap-1 px-8 py-3.5 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-        <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get 20 Deck Jobs</span>
+        <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
         <span class="text-[13px] sm:text-sm font-medium opacity-85">Claim Your Zip Code →</span>
       </a>
     </div>
@@ -692,10 +692,10 @@
       </article>
       <div class="rv-cta-row">
         <a href="#apply" class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-3.5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-          <span class="text-base font-black tracking-wider uppercase">Get 20 Deck Jobs</span>
+          <span class="text-base font-black tracking-wider uppercase">Get More Deck Jobs</span>
           <span class="text-[13px] font-medium opacity-85">Claim Your Zip Code →</span>
         </a>
-        <p class="text-[12px] text-ink-subtle">100 appointments in 100 days — or 100% fee refund + $2,000 cash</p>
+        <p class="text-[12px] text-paper-subtle">100 sales appointments in 100 days — or you get paid $10,000</p>
       </div>
       <article class="rv-card" style="--rv-accent:#22D3EE">
         <a class="rv-video proof-thumb group" href="https://youtu.be/djsZ_YNn7wY" target="_blank" rel="noopener" aria-label="Watch: Ricardo Cervantes">
@@ -857,8 +857,8 @@
   <div class="max-w-5xl mx-auto px-5 py-16 sm:py-20">
     <div class="text-center">
       <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-3">· The Receipts</p>
-      <h2 class="display-lg text-[30px] sm:text-[44px] leading-[1.05] text-ink">Straight From Client Threads.</h2>
-      <p class="text-base text-ink-muted max-w-lg mx-auto mt-4">Texts, dashboards, and booked calendars — unedited.</p>
+      <h2 class="display-lg text-[30px] sm:text-[44px] leading-[1.05] text-paper-text">Straight From Client Threads.</h2>
+      <p class="text-base text-paper-muted max-w-lg mx-auto mt-4">Texts, dashboards, and booked calendars — unedited.</p>
     </div>
 <style>
     .imsg-phone{width:100%;max-width:340px;background:#000;border-radius:46px;padding:10px;border:1px solid #2E2C28;box-shadow:0 24px 60px -24px rgba(26,25,23,.45);}
@@ -977,24 +977,24 @@
     <div class="w-14 h-14 mx-auto rounded-full bg-elevated border border-border flex items-center justify-center mb-6">
       <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
     </div>
-    <h2 class="display-lg text-[30px] sm:text-[44px] leading-[1.05] text-ink">Two Guarantees. <span class="text-gold">Zero Risk.</span></h2>
+    <h2 class="display-lg text-[30px] sm:text-[44px] leading-[1.05] text-ink">The Guarantee. <span class="text-gold">Zero Risk.</span></h2>
     <p class="text-base text-ink-muted max-w-lg mx-auto mt-4 mb-9">
       We know you've probably been burned before. So we built the guarantee around that — not around us feeling safe.
     </p>
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left mb-9">
       <div class="rounded-xl bg-elevated border border-border p-6">
         <p class="text-[10.5px] font-bold tracking-[0.2em] uppercase text-gold mb-2">Day 100</p>
-        <p class="font-bold text-ink mb-2">Fee-Back Guarantee</p>
-        <p class="text-[13.5px] text-ink-muted leading-relaxed">100 exclusive sales appointment opportunities in 100 days. If we miss, you get a <span class="text-ink font-semibold">100% refund of your management fee.</span></p>
+        <p class="font-bold text-ink mb-2">100 Appointments — In Writing</p>
+        <p class="text-[13.5px] text-ink-muted leading-relaxed">100 exclusive sales appointment opportunities with qualified homeowners in your market. <span class="text-ink font-semibold">In your signed agreement, enforced at day 100.</span></p>
       </div>
       <div class="rounded-xl bg-elevated border border-border p-6">
-        <p class="text-[10.5px] font-bold tracking-[0.2em] uppercase text-gold mb-2">Plus</p>
-        <p class="font-bold text-ink mb-2">$2,000 Cash — To You</p>
-        <p class="text-[13.5px] text-ink-muted leading-relaxed">On top of the refund, we pay you <span class="text-ink font-semibold">$2,000 cash.</span> In writing, in your agreement, enforced at day 100.</p>
+        <p class="text-[10.5px] font-bold tracking-[0.2em] uppercase text-gold mb-2">If We Miss</p>
+        <p class="font-bold text-ink mb-2">$10,000 — Written To You</p>
+        <p class="text-[13.5px] text-ink-muted leading-relaxed">We write you a check for <span class="text-ink font-semibold">$10,000.</span> One number. No fine-print math, no partial credits, no arguing about what counts.</p>
       </div>
     </div>
     <button type="button" data-open-apply class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-      <span class="text-base font-black tracking-wider uppercase">Get 20 Deck Jobs</span>
+      <span class="text-base font-black tracking-wider uppercase">Get More Deck Jobs</span>
       <span class="text-[13px] font-medium opacity-85">Claim Your Zip Code →</span>
     </button>
   </div>
@@ -1139,7 +1139,7 @@
         Last Step <span class="text-gold">—</span> Pick A Time
       </h2>
       <p id="post-submit-sub" class="text-sm sm:text-base text-ink-muted leading-snug max-w-md mx-auto">
-        Get 100+ Sales Appointments In 100 Days
+        Get 100 Sales Appointments In 100 Days
       </p>
     </div>
 
@@ -1175,7 +1175,7 @@
 
       <p class="mb-3"><span class="text-ink-muted font-semibold">Earnings &amp; Results Disclaimer.</span> Results, testimonials, and case studies shown on this page are actual outcomes for specific clients and are not necessarily typical. Your individual results will vary based on your geographic market, business operations, sales process, follow-up speed, advertising spend, and willingness to follow the system as designed. Building a business takes sustained effort and carries risk.</p>
 
-      <p class="mb-3"><span class="text-ink-muted font-semibold">Guarantee Terms.</span> The "100 sales appointment opportunities in 100 days" guarantee referenced on this page is governed exclusively by the written Engagement Agreement signed between you and MoreJobCalls.com LLC. Marketing copy is a summary, not a contract. Any "100% refund" referenced on this page applies to fees paid directly to MoreJobCalls.com LLC (i.e., management fees); it does not include advertising spend paid to third-party platforms. Full guarantee mechanics, qualifying definitions, cooperative obligations, refund procedure, and conditions are detailed in our <a href="/terms/" class="text-gold underline underline-offset-2 hover:text-ink">Terms of Service</a>. No agreement exists between you and MoreJobCalls.com LLC until both parties sign the Engagement Agreement.</p>
+      <p class="mb-3"><span class="text-ink-muted font-semibold">Guarantee Terms.</span> The "100 sales appointment opportunities in 100 days" guarantee referenced on this page is governed exclusively by the written Engagement Agreement signed between you and MoreJobCalls.com LLC. Marketing copy is a summary, not a contract. The "$10,000" referenced on this page is the agreed remedy payable by MoreJobCalls.com LLC if the 100-appointment threshold is not met within the 100-day term. It is paid in place of — not in addition to — any management-fee refund. Advertising spend paid directly to third-party platforms is separate and is not included in, or refunded by, this remedy. Full guarantee mechanics, qualifying definitions, cooperative obligations, refund procedure, and conditions are detailed in our <a href="/terms/" class="text-gold underline underline-offset-2 hover:text-ink">Terms of Service</a>. No agreement exists between you and MoreJobCalls.com LLC until both parties sign the Engagement Agreement.</p>
 
       <p class="mb-3"><span class="text-ink-muted font-semibold">Testimonials.</span> All testimonials and case studies on this page are from real clients of MoreJobCalls.com LLC who have provided consent to be featured. Past client performance is not a representation, prediction, or guarantee of your future performance.</p>
 
@@ -1858,7 +1858,7 @@
     <div class="mc-step" data-step="8">
       <div style="text-align:center;margin-bottom:14px;">
         <h3 id="mc-cal-h1" class="mc-q" style="margin-bottom:4px;">One last step — Reserve your territory and pick a time that works for you</h3>
-        <p id="mc-cal-h2" class="mc-sub" style="margin-bottom:0;font-weight:700;">20+ Deck Jobs in 100 Days or You Get Paid $2,000.</p>
+        <p id="mc-cal-h2" class="mc-sub" style="margin-bottom:0;font-weight:700;">100 Deck Sales Appointments in 100 Days — or We Write You a Check for $10,000.</p>
         <p id="mc-cal-h3" class="mc-sub" style="margin:12px 0 0;display:none;">You're not buying our service today.<span style="display:block;margin-top:8px;">You're simply reserving your territory while Spencer reviews your application and creates a plan. Your $25 is fully refundable on request or if we're not a fit.</span></p>
       </div>
       <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
@@ -2048,7 +2048,7 @@
     try{
       var h1=document.getElementById('mc-cal-h1'), h2=document.getElementById('mc-cal-h2'), h3=document.getElementById('mc-cal-h3');
       h1.textContent='One last step — Reserve your territory and pick a time that works for you';
-      h2.textContent='20+ Deck Jobs in 100 Days or You Get Paid $2,000.';
+      h2.textContent='100 Deck Sales Appointments in 100 Days — or We Write You a Check for $10,000.';
       h3.style.display='none';
     }catch(e){}
   }
