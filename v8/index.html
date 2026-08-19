@@ -2053,6 +2053,18 @@
     formData.zip=zip; dlTrack('zip',10); submitAndShowCalendar();
   });
 
+  // Enter-to-advance (2026-08-19): Enter in any survey text input clicks that step's
+  // Next button, so the same validation + first-invalid-field focus logic runs.
+  overlay.querySelectorAll('.mc-input').forEach(function(inp){
+    inp.addEventListener('keydown',function(e){
+      if(e.key!=='Enter') return;
+      e.preventDefault();
+      var st=overlay.querySelector('.mc-step[data-step="'+current+'"]');
+      var btn=st&&st.querySelector('[data-next],[data-next-zip]');
+      if(btn) btn.click();
+    });
+  });
+
   function buildCalUrl(){
     if(!icp && NON_ICP_USE_CALENDLY){
       var c=new URL(CALENDLY_NON_ICP);
