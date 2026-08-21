@@ -1958,7 +1958,7 @@
   }
   dlTrack('landed',0);
 
-  function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='one_man_show'||d.revenue==='not_owner') return false; if(d.crew_situation==='just_me') return false; return true; }
+  function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='one_man_show'||d.revenue==='not_owner') return false; return true; } // 2026-08-21: pixel/routing gate = owner + $500K≥ (Taskman+). Crew/capacity kept as survey intel, NOT gates for now (Spencer: '$500k≥ is the main thing; add qualifiers later').
   async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
 
   // ── Partial-lead capture (funnel v2.1) ──
