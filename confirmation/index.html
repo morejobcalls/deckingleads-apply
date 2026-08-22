@@ -101,7 +101,11 @@
   window.__TOP_LEVEL__ = (function () { try { return window.top === window.self; } catch (e) { return true; } })();
 </script>
 
-<!-- Meta Pixel — fire BookedCall conversion event for booked-call optimization -->
+<!-- Meta Pixel — ICP booked-call confirmation (this page is ICP-only; non-ICP lands on /scheduled/).
+     Fires legacy BookedCall (seasoned, unchanged) + standard Schedule to BOTH pixels
+     (seasoned 839... + ICP 1832...), browser + CAPI, deduped by a shared event_id, so
+     cost-per-schedule-per-ad is reportable on each pixel. Ad sets still optimize on Lead — this is
+     an additional tracked conversion, not an optimization change. (2026-08-22) -->
 <script>
   if (window.__TOP_LEVEL__) {
     !function(f,b,e,v,n,t,s)
@@ -112,13 +116,42 @@
     t.src=v;s=b.getElementsByTagName(e)[0];
     s.parentNode.insertBefore(t,s)}(window, document,'script',
     'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '839107878270720');
+    var SEASONED='839107878270720', ICP='1832632181230934';
+    fbq('init', SEASONED);
+    fbq('init', ICP);
     fbq('track', 'PageView');
-    fbq('trackCustom', 'BookedCall');
+    fbq('trackSingleCustom', SEASONED, 'BookedCall'); // legacy custom event — seasoned only, unchanged
+
+    // Standard Schedule (ICP booked call) → both pixels, shared eventID for browser+CAPI dedupe.
+    var schedEid = (window.crypto && crypto.randomUUID) ? crypto.randomUUID() : 'sch_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
+    fbq('trackSingle', SEASONED, 'Schedule', {content_name:'Deck Jobs Strategy Session'}, {eventID: schedEid});
+    fbq('trackSingle', ICP,      'Schedule', {content_name:'Deck Jobs Strategy Session'}, {eventID: schedEid});
+
+    // CAPI mirror (relay fans out Schedule to both pixels) — match quality + attribution resilience.
+    (function(){
+      try{
+        function ck(n){var m=document.cookie.match(new RegExp('(?:^|; )'+n+'=([^;]*)')); return m?m[1]:'';}
+        function h(t){ if(!t||!(window.crypto&&crypto.subtle)) return Promise.resolve(''); return crypto.subtle.digest('SHA-256', new TextEncoder().encode(t)).then(function(b){return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join('');}); }
+        var d={}; try{ d=JSON.parse(sessionStorage.getItem('dl_qualify_data')||'{}'); }catch(e){}
+        var parts=(d.name||'').trim().split(/\s+/);
+        var phone=(d.phone||'').replace(/\D/g,''); var phoneForHash=phone.length===10?'1'+phone:phone;
+        Promise.all([h((d.email||'').toLowerCase().trim()), h(phoneForHash), h((parts[0]||'').toLowerCase()), h(parts.slice(1).join(' ').toLowerCase()), h((d.zip||'').toString().trim())]).then(function(hh){
+          fetch('https://meta-capi-relay.spencer-80c.workers.dev/', {method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true, body:JSON.stringify({customData:{
+            event_name:'Schedule', event_id:schedEid, icp:'yes',
+            page_url:location.href, event_time_unix:Math.floor(Date.now()/1000),
+            fbp:ck('_fbp'), fbc:ck('_fbc'),
+            email_sha256:hh[0], phone_sha256:hh[1], first_name_sha256:hh[2], last_name_sha256:hh[3], zip_sha256:hh[4],
+            client_user_agent:navigator.userAgent||''
+          }})}).catch(function(){});
+        });
+      }catch(e){}
+    })();
   }
 </script>
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=1832632181230934&ev=PageView&noscript=1"/></noscript>
 
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
