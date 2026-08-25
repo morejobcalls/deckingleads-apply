@@ -434,13 +434,48 @@
       Exclusive. Ready-to-Buy. <span class="text-gold">Premium Deck Jobs.</span>
     </h3>
 
-    <!-- VSL — the "how", in the hero flow, under the subheadline -->
+    <!-- VSL poster (click-to-play) — headline left, Spencer right; player loads on click (2026-08-25) -->
+    <style>
+      #hero-vsl{cursor:pointer;}
+      #hero-vsl .vslp-img{position:absolute;inset:0;background:url('/media/precall-proof-poster.jpg') 70% 22%/cover no-repeat;}
+      #hero-vsl .vslp-img::after{content:"";position:absolute;inset:0;background:
+         linear-gradient(90deg, rgba(6,6,7,.92) 0%, rgba(6,6,7,.55) 42%, rgba(6,6,7,.12) 68%, rgba(6,6,7,.35) 100%),
+         linear-gradient(180deg, rgba(6,6,7,.35), rgba(6,6,7,.45));}
+      #hero-vsl .vslp-cap{position:absolute;top:15px;left:18px;z-index:3;font-size:10px;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:#C7963F;text-shadow:0 1px 8px rgba(0,0,0,.8);}
+      #hero-vsl .vslp-hl{position:absolute;top:50%;left:7%;right:42%;transform:translateY(-50%);z-index:3;text-align:left;text-shadow:0 2px 14px rgba(0,0,0,.7);}
+      #hero-vsl .vslp-hl h4{margin:0;font-weight:900;line-height:1.12;letter-spacing:-.01em;color:#fff;font-size:clamp(1rem,3.2vw,1.55rem);}
+      #hero-vsl .vslp-hl h4 span{color:#C7963F;}
+      #hero-vsl .vslp-play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;width:72px;height:72px;border-radius:50%;background:linear-gradient(180deg,#C7963F,#AB8032);display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px -6px rgba(199,150,63,.6);transition:transform .18s ease;}
+      #hero-vsl .vslp-play::before{content:"";width:0;height:0;border-left:21px solid #0D0D0D;border-top:12px solid transparent;border-bottom:12px solid transparent;margin-left:5px;}
+      #hero-vsl .vslp-ring{position:absolute;inset:-10px;border-radius:50%;border:2px solid rgba(199,150,63,.55);animation:vslpPulse 2.4s ease-out infinite;}
+      #hero-vsl:hover .vslp-play,#hero-vsl:focus-visible .vslp-play{transform:translate(-50%,-50%) scale(1.07);}
+      #hero-vsl:focus-visible{outline:3px solid #C7963F;outline-offset:3px;}
+      #hero-vsl .vslp-dur{position:absolute;bottom:14px;right:14px;z-index:3;display:inline-flex;align-items:center;gap:6px;background:rgba(0,0,0,.6);border:1px solid rgba(255,255,255,.14);border-radius:8px;padding:5px 10px;font-size:11px;font-weight:700;color:#fff;}
+      @keyframes vslpPulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.35);opacity:0}100%{opacity:0}}
+      @media (prefers-reduced-motion: reduce){#hero-vsl .vslp-ring{animation:none;opacity:0;}}
+    </style>
     <div class="max-w-2xl mx-auto mb-4 sm:mb-5">
-      <div style="position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid rgba(199,150,63,.32);box-shadow:0 14px 60px rgba(0,0,0,.55);background:#000;">
-        <iframe src="https://www.youtube-nocookie.com/embed/HRYuMJmhpmY?rel=0&amp;modestbranding=1&amp;playsinline=1&amp;iv_load_policy=3&amp;color=white" title="How The Deck Jobs System Works" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
+      <div id="hero-vsl" data-vid="HRYuMJmhpmY" role="button" tabindex="0" aria-label="Play the video — How Deck Builders Book 100+ Appointments in 100 Days" style="position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;border:1px solid rgba(199,150,63,.32);box-shadow:0 14px 60px rgba(0,0,0,.55);background:#000;">
+        <div class="vslp-img"></div>
+        <div class="vslp-cap">The Deck Jobs System</div>
+        <div class="vslp-hl"><h4>How Deck Builders Book <span>100+ Appointments</span> in 100 Days</h4></div>
+        <div class="vslp-play"><span class="vslp-ring"></span></div>
+        <div class="vslp-dur">▶ 2 min watch</div>
       </div>
       <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mt-4">Watch This First · 2 Min</p>
     </div>
+    <script>
+      (function(){
+        var f=document.getElementById('hero-vsl'); if(!f) return;
+        function playVSL(){
+          var id=f.getAttribute('data-vid');
+          f.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?rel=0&modestbranding=1&playsinline=1&iv_load_policy=3&color=white&autoplay=1" title="How The Deck Jobs System Works" style="position:absolute;inset:0;width:100%;height:100%;border:0;" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+          f.style.cursor='default';
+        }
+        f.addEventListener('click',playVSL);
+        f.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); playVSL(); }});
+      })();
+    </script>
 
     <!-- CTA -->
     <div class="flex justify-center">
