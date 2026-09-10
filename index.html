@@ -1864,6 +1864,32 @@
   #mc-spin{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 0;text-align:center;}
   .mc-spinner{width:44px;height:44px;border:4px solid #ECE6DA;border-top-color:#1A1917;border-radius:50%;animation:mcSpin 1s linear infinite;margin-bottom:18px;}
   @keyframes mcSpin{to{transform:rotate(360deg)}}
+  /* ── Native slot picker (ICP calendar, 2026-09-09) — replaces the GHL widget iframe for ICP
+     leads. The widget renders NO time slots below ~1024px (every phone) and the ICP calendar's
+     free-slots call was 20s+; the picker pulls slots from the mjc-self-book Worker instead. ── */
+  #mcb{display:none;}
+  .mcb-state{text-align:center;font-size:14px;color:#7A7870;padding:18px 0 8px;line-height:1.6;}
+  .mcb-state a{color:#B07A1E;font-weight:700;}
+  .mcb-days{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;margin:8px -2px 6px;-webkit-overflow-scrolling:touch;}
+  .mcb-day{flex:1 0 auto;min-width:84px;border:2px solid #ECE6DA;border-radius:11px;background:#fff;padding:9px 10px;text-align:center;cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s;}
+  .mcb-day span{display:block;}
+  .mcb-dow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A7870;}
+  .mcb-date{font-size:15px;font-weight:800;color:#1A1917;}
+  .mcb-day.mcb-sel{border-color:#1A1917;background:#1A1917;}
+  .mcb-day.mcb-sel span{color:#fff;}
+  .mcb-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px;}
+  @media(max-width:400px){.mcb-slots{grid-template-columns:repeat(2,1fr);}}
+  .mcb-slot{border:2px solid #ECE6DA;border-radius:10px;background:#fff;padding:12px 6px;font-family:inherit;font-size:14px;font-weight:700;color:#1A1917;cursor:pointer;transition:border-color .15s,background .15s;}
+  .mcb-slot:hover{border-color:#C7963F;background:#FAF6EE;}
+  .mcb-slot.mcb-sel{border-color:#C7963F;background:#C7963F;}
+  .mcb-book{border-top:1px solid #ECE6DA;margin-top:16px;padding-top:16px;text-align:center;}
+  .mcb-when{font-size:14px;color:#7A7870;margin:0 0 12px;}
+  .mcb-when strong{color:#1A1917;}
+  .mcb-err{font-size:13px;font-weight:700;color:#B91C1C;margin:0 0 10px;}
+  .mcb-btn{width:100%;background:#C7963F;color:#1A1917;border:none;border-radius:9px;padding:14px 20px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 18px rgba(199,150,63,.4);transition:background .15s,transform .1s;}
+  .mcb-btn:hover:not(:disabled){background:#AB8032;transform:translateY(-1px);}
+  .mcb-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+  .mcb-tz{font-size:12px;color:#9A968D;margin:0 0 4px;text-align:center;}
   body.mc-lock{overflow:hidden;}
   @media(max-width:640px){#mc-card{padding:22px 18px 26px;border-radius:16px;}.mc-q{font-size:21px;}#mc-cal{height:80vh;min-height:520px;}}
 </style>
@@ -1949,6 +1975,29 @@
       </div>
       <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your availability…</p></div>
       <div id="mc-cal-wrap" style="display:none;"><iframe id="mc-cal" src="" title="Book your Deck Jobs Strategy Session" scrolling="yes" allow="payment"></iframe><script src="https://api.seasonproofgrowth.com/js/form_embed.js" type="text/javascript"></script></div>
+      <!-- Native slot picker (ICP leads only, 2026-09-09). Non-ICP keeps the GHL widget above
+           (its calendar collects the deposit in-widget). Slots + booking via mjc-self-book Worker. -->
+      <div id="mcb">
+        <p class="mcb-tz">45 minutes on Google Meet &middot; times shown in <span id="mcb-tz">your time zone</span></p>
+        <div id="mcb-loading" class="mcb-state">Checking open times&hellip;</div>
+        <div id="mcb-live" style="display:none;">
+          <div class="mcb-days" id="mcb-days"></div>
+          <div class="mcb-slots" id="mcb-slots"></div>
+          <div class="mcb-book" id="mcb-book" style="display:none;">
+            <p class="mcb-when">Locking in <strong id="mcb-when"></strong></p>
+            <p class="mcb-err" id="mcb-err" style="display:none;"></p>
+            <button type="button" class="mcb-btn" id="mcb-btn">Lock In My Call &rarr;</button>
+          </div>
+        </div>
+        <div id="mcb-empty" class="mcb-state" style="display:none;">
+          <p><strong>The next few days are spoken for.</strong></p>
+          <p>Text us at <a href="sms:+15012363920">(501) 236-3920</a> and we'll find you a time.</p>
+        </div>
+        <div id="mcb-error" class="mcb-state" style="display:none;">
+          <p><strong>Couldn't load the calendar.</strong></p>
+          <p><a href="#" id="mcb-retry">Try again</a> or text us at <a href="sms:+15012363920">(501) 236-3920</a>.</p>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -2171,7 +2220,102 @@
     }
   }
 
+  // ── NATIVE SLOT PICKER (ICP leads, 2026-09-09) ──────────────────────────────────────────
+  // Why: the GHL booking widget iframe renders NO time slots below ~1024px of width (every phone),
+  // and the ICP calendar's free-slots call ran 20s+ (slotInterval was 0 → one slot per second).
+  // 2026-09-08 Zach M. (ICP, iPhone/IG) submitted, stared at an empty calendar, reloaded and re-ran
+  // the whole survey (second Lead event, second webhook). Same picker + Worker as morejobcalls.com
+  // and /book/. Non-ICP stays on the widget (its calendar collects the deposit in-widget).
+  var MCB_WORKER='https://mjc-self-book.spencer-80c.workers.dev';
+  var mcbTz='America/Chicago'; try{ mcbTz=Intl.DateTimeFormat().resolvedOptions().timeZone||mcbTz; }catch(e){}
+  var mcbCache={}, mcbDays={}, mcbDay=null, mcbSlot=null;
+  function mcbState(id){ ['mcb-loading','mcb-live','mcb-empty','mcb-error'].forEach(function(x){ var el=document.getElementById(x); if(el) el.style.display=(x===id)?'':'none'; }); }
+  function mcbTime(iso){ return new Date(iso).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:mcbTz}); }
+  function mcbWhen(iso){ return new Date(iso).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',timeZone:mcbTz})+' at '+mcbTime(iso); }
+  function mcbFetch(force){
+    if(force||!mcbCache.p){
+      mcbCache.p=fetch(MCB_WORKER+'/slots?icp=yes&tz='+encodeURIComponent(mcbTz))
+        .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function(err){ delete mcbCache.p; throw err; });
+    }
+    return mcbCache.p;
+  }
+  function mcbLoad(e,force){
+    if(e) e.preventDefault();
+    var tzEl=document.getElementById('mcb-tz'); if(tzEl) tzEl.textContent=mcbTz.replace(/_/g,' ');
+    mcbState('mcb-loading');
+    var lo=document.getElementById('mcb-loading'); lo.textContent='Checking open times\u2026';
+    var slow=setTimeout(function(){ lo.textContent='Still pulling up the calendar\u2026 hang tight, this can take a few seconds.'; },4000);
+    mcbFetch(force).then(function(data){
+      clearTimeout(slow); mcbDays={};
+      Object.keys(data.days||{}).forEach(function(d){
+        // Keep clean quarter-hour marks only (guards against GHL returning per-second slots).
+        var sl=((data.days[d]||{}).slots||[]).filter(function(iso){ return /T\d\d:(00|15|30|45):00/.test(iso); });
+        if(sl.length) mcbDays[d]=sl;
+      });
+      var keys=Object.keys(mcbDays).sort();
+      if(!keys.length){ mcbState('mcb-empty'); return; }
+      if(!mcbDay||!mcbDays[mcbDay]) mcbDay=keys[0];
+      if(mcbSlot&&mcbDays[mcbDay].indexOf(mcbSlot)===-1) mcbSlot=null;
+      mcbRenderDays(); mcbRenderSlots(); mcbState('mcb-live');
+    }).catch(function(){ clearTimeout(slow); mcbState('mcb-error'); });
+  }
+  function mcbRenderDays(){
+    var row=document.getElementById('mcb-days'); row.innerHTML='';
+    Object.keys(mcbDays).sort().forEach(function(d){
+      var dt=new Date(d+'T12:00:00Z'); var b=document.createElement('button'); b.type='button';
+      b.className='mcb-day'+(d===mcbDay?' mcb-sel':'');
+      b.innerHTML='<span class="mcb-dow">'+dt.toLocaleDateString('en-US',{weekday:'short',timeZone:'UTC'})+'</span><span class="mcb-date">'+dt.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'})+'</span>';
+      b.onclick=function(){ mcbDay=d; mcbSlot=null; mcbRenderDays(); mcbRenderSlots(); };
+      row.appendChild(b);
+    });
+  }
+  function mcbRenderSlots(){
+    var grid=document.getElementById('mcb-slots'); grid.innerHTML='';
+    (mcbDays[mcbDay]||[]).forEach(function(iso){
+      var b=document.createElement('button'); b.type='button';
+      b.className='mcb-slot'+(iso===mcbSlot?' mcb-sel':''); b.textContent=mcbTime(iso);
+      b.onclick=function(){ mcbSlot=iso; mcbRenderSlots(); mcbShowBook(); };
+      grid.appendChild(b);
+    });
+    if(!mcbSlot) document.getElementById('mcb-book').style.display='none';
+  }
+  function mcbShowBook(){
+    document.getElementById('mcb-when').textContent=mcbWhen(mcbSlot);
+    document.getElementById('mcb-err').style.display='none';
+    var box=document.getElementById('mcb-book'); box.style.display='';
+    try{ box.scrollIntoView({behavior:'smooth',block:'nearest'}); }catch(e){}
+  }
+  function mcbError(msg){ var el=document.getElementById('mcb-err'); el.textContent=msg; el.style.display=''; }
+  function mcbBook(){
+    if(!mcbSlot) return;
+    var btn=document.getElementById('mcb-btn'); btn.disabled=true; btn.textContent='Locking It In\u2026';
+    var fn=formData.first_name||'', ln=formData.last_name||'';
+    if(!fn&&formData.name){ var pn=formData.name.trim().split(/\s+/); fn=pn[0]||''; ln=pn.slice(1).join(' '); }
+    // Same contact the inbound webhook created (Worker upserts by email/phone). Source echoes the
+    // LP's own so upsert never relabels it; tag marks the booking path for reporting.
+    fetch(MCB_WORKER+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      icp:'yes', startTime:mcbSlot, timezone:mcbTz, firstName:fn, lastName:ln, email:formData.email||'', phone:formData.phone||'',
+      source:'deckingleads.com lp v1', tags:['lp-native-booked'] })})
+    .then(function(r){ return r.json().then(function(b){ return {status:r.status,body:b}; }); })
+    .then(function(res){
+      if(res.status===200&&res.body&&res.body.ok){
+        btn.textContent='Booked! One sec\u2026';
+        try{ localStorage.setItem('mjc_booked_ref',JSON.stringify({contactId:res.body.contactId||'',calendarId:res.body.calendarId||'',t:Date.now()})); }catch(e){}
+        // Same page the ICP calendar redirected to (BookedCall pixel + add-to-calendar via ?c=&cal=).
+        location.href='/confirmation/?c='+encodeURIComponent(res.body.contactId||'')+'&cal='+encodeURIComponent(res.body.calendarId||'');
+        return;
+      }
+      btn.disabled=false; btn.textContent='Lock In My Call \u2192';
+      if(res.status===409){ mcbError('That time was just taken. Pick another one.'); mcbSlot=null; mcbLoad(null,true); }
+      else { mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); }
+    })
+    .catch(function(){ btn.disabled=false; btn.textContent='Lock In My Call \u2192'; mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); });
+  }
+  (function(){ var b=document.getElementById('mcb-btn'); if(b) b.addEventListener('click',mcbBook); var r=document.getElementById('mcb-retry'); if(r) r.addEventListener('click',function(e){ mcbLoad(e,true); }); })();
+
   function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true;
+    if(icp){ mcbFetch().catch(function(){}); return; }            // ICP: warm the native picker's slot fetch
     if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); return; }
     try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
 
@@ -2179,9 +2323,16 @@
     icp=isICP(formData);
     setCalCopy();
     show(6);
-    if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); }
-    else try{ var cal=document.getElementById('mc-cal'); if(!cal.getAttribute('src')) cal.src=buildCalUrl(); }catch(e){}
-    setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },(calPreloaded?250:1400));
+    if(icp){
+      // Native picker for ICP — no iframe, no spinner hand-off.
+      var sp0=document.getElementById('mc-spin'), cw0=document.getElementById('mc-cal-wrap'), nb=document.getElementById('mcb');
+      if(sp0) sp0.style.display='none'; if(cw0) cw0.style.display='none'; if(nb) nb.style.display='block';
+      mcbLoad();
+    } else {
+      if(NON_ICP_USE_CALENDLY){ mountCalendly(); }
+      else try{ var cal=document.getElementById('mc-cal'); if(!cal.getAttribute('src')) cal.src=buildCalUrl(); }catch(e){}
+      setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },(calPreloaded?250:1400));
+    }
     if(submitted) return; submitted=true;
     dlTrack('submit',7,{icp:icp});
 
@@ -2218,6 +2369,19 @@
     el.addEventListener('click',function(e){ e.preventDefault(); openModal(); });
   });
   window.__openApply=openModal; // exposed for QA
+  // QA: ?preview=cal opens the calendar step with the ICP picker (no submit/webhook/pixel/CRM write —
+  // slots are a read-only GET). ?preview=cal-nonicp shows the non-ICP widget path instead.
+  (function(){
+    try{
+      var pv=new URLSearchParams(location.search).get('preview'); if(!pv||pv.indexOf('cal')!==0) return;
+      formData.name='Preview Tester'; formData.first_name='Preview'; formData.last_name='Tester'; formData.email='preview@example.com'; formData.phone='5555555555';
+      formData.revenue=(pv==='cal-nonicp')?'0_100k':'1m_3m';
+      submitted=true; // hard stop: nothing fires
+      icp=isICP(formData); setCalCopy(); openModal(); show(6);
+      if(icp){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'), nb=document.getElementById('mcb'); if(sp) sp.style.display='none'; if(cw) cw.style.display='none'; if(nb) nb.style.display='block'; mcbLoad(); }
+      else { try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} setTimeout(function(){ var sp2=document.getElementById('mc-spin'), cw2=document.getElementById('mc-cal-wrap'); if(sp2) sp2.style.display='none'; if(cw2) cw2.style.display='block'; },1400); }
+    }catch(e){}
+  })();
 
   // ── Capture the just-booked appointment reference so the confirmation page can add-to-calendar.
   //    GHL exposes the contactId via the 'set-sticky-contacts' message and the calendarId via

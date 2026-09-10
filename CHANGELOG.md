@@ -346,3 +346,23 @@ A complete traffic-segmented clone of the root funnel for **organic Instagram** 
 **Verified locally (headless Chrome, GHL webhook + funnel-events hard-blocked so no test lead was created):** LP and confirmation render at identical scroll height (7219px / 2911px), identical section + image counts, zero JS errors, zero broken images. Full application walked end-to-end on `/ig/` → fired `IG_Lead` **and no standard `Lead`**; ICP answer loaded the correct green ICP calendar prefilled; GHL payload showed `icp=yes · channel=ig-organic · utm_source=instagram · utm_medium=organic · utm_campaign=ig-bio`. Root re-tested in the same run → still fires standard `Lead`, unchanged.
 
 **Known open items:** (1) the GHL "1. New Lead" workflow still fires the **server-side CAPI `Lead`** for IG leads — browser-side isolation alone doesn't stop it; needs an if/else on the workflow (skip the Meta CAPI webhook when `channel = ig-organic`) to be airtight. (2) Confirm in Events Manager that the "Booked Call" custom conversion rule is domain-scoped, not a bare `/confirmation` contains-match.
+
+## 2026-09-09 — Root modal step 6: native slot picker for ICP leads (SHIPPED 2026-09-10, Spencer-approved)
+
+**Trigger:** Zach McFarland (ICP, Instagram Reels, iPhone in-app browser) on 2026-09-08 submitted the survey at 17:25 CT, sat on the calendar step, re-opened the modal at 17:26, then reloaded the page and re-ran the entire survey (new session) at 17:29 before booking at 17:30. Two form submits → two browser `Lead` events with different event_ids on both pixels (the GHL workflow ran once; `allowMultiple` is off).
+
+**Root cause (two stacked defects, both pre-existing):**
+1. The ICP calendar `6Ck4IfG5SatgIkAZJ7yo` has `slotInterval = 0 hours` in GHL, so `free-slots` returns one slot per **second** (1,501 slots for a single day, ~42KB, **19–20s per request**). Non-ICP is 60 min / 1.1s. Every ICP lead — the ones we pay for — waited 20s+ for a calendar.
+2. The GHL booking widget iframe renders **no time slots** below ~1024px of width (see the 2026-09-08 homepage fix). Verified again today on the ICP calendar at 390px: month grid + timezone row, zero slots.
+
+**Change (root `index.html` only):**
+- ICP path of step 6 now renders a native day/slot picker (`#mcb`, `mcb*` JS) backed by the `mjc-self-book` Worker (`GET /slots?icp=yes`, `POST /book`) — same pattern as morejobcalls.com (2026-09-08) and `/book/`. Slot fetch is warmed the moment the revenue answer makes ICP known. Books against the same contact the inbound webhook created (Worker upserts by email/phone; `source` echoes `deckingleads.com lp v1`; tag `lp-native-booked`). Redirects to `/confirmation/?c=&cal=` (BookedCall pixel + add-to-calendar), exactly where the GHL calendar redirect landed.
+- **Non-ICP path unchanged** (GHL widget) — that calendar has `isLivePaymentMode = true` and collects the deposit in-widget; the native picker would bypass it.
+- QA hook: `?preview=cal` (ICP picker) / `?preview=cal-nonicp` (widget). Opens step 6 directly with `submitted=true` — no webhook, no pixel, no CRM write.
+- `/ig/` clone NOT touched (it already carries separate uncommitted edits).
+
+**Prereqs (both DONE 2026-09-09 before push):**
+1. `python3 ".../mjc-self-book/ops/fix_icp_calendar_slot_interval.py"` — sets slotInterval 15 min (backup + diff guard). Fixes the 20s load for the widget, `/book/`, homepage AND this picker.
+2. `npx wrangler deploy` in `Foundations/Cloudflare-Workers/mjc-self-book` — the deployed Worker predates the `source`/`tags` patch; until it ships, a native booking would relabel the contact's source to "self-book page".
+
+**Shipped 2026-09-10:** committed `index.html` + this entry ONLY. The other uncommitted files in the working tree (ig/, confirmation/ SMS business-name fix, qualified/, scheduling/, v2–v5, docs) were deliberately left out and still need their own review.
