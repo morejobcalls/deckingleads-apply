@@ -416,3 +416,5 @@ Source: Spencer × Chung call 2026-09-14 (qualify on capacity, cut the survey to
 - Root-modal twin of the same survey staged at `/v10/` (untracked, not pushed).
 
 - **2026-09-14 (later):** hero H1 "Every Single Week" gets a gold brush-stroke underline (`.ul`, inline SVG, sits behind descenders, draws in left→right, reduced-motion safe). Checked at 390 / 768 / 1280px.
+
+- **2026-09-14 (later):** answer bands changed per Spencer. Q1 now posts to NEW GHL field `WLtvqe7GcYXNjEzQqfgV` (`contact.how_many_sales_appointments_are_you_currently_running_per_week`: `0 - 5` / `5 - 10` / `10 - 20` / `20+ appointments per week`); the Jan-2026 field `29MCGE23iZPX3HfXy97p` was left untouched (different bands, likely attached to an older form). Q2 field `CGD5LHAY2V7wQz2Ap5ZD` options replaced: `5 - 10` / `10 - 20` / `20 - 50` / `50+ more per week` ("None, at capacity" removed). Eyebrow pill: "For Established Deck Building Companies".

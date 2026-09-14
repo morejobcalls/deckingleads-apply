@@ -255,7 +255,7 @@
     <img src="mjc-mark.svg" alt="" width="34" height="34">
     <span>MORE<b>JOB</b>CALLS</span>
   </a>
-  <p class="eyebrow">For Established Deck &amp; Outdoor Living Builders</p>
+  <p class="eyebrow">For Established Deck Building Companies</p>
   <h1 class="h1">We'll Book Out Your Calendar With <span class="gold">10+ Exclusive Deck Appointments</span> <span class="ul">Every Single Week</span> <span class="gold">On Autopilot</span></h1>
 
   <div class="survey-wrap">
@@ -268,15 +268,15 @@
         <div class="qs-bar"><div class="qs-bar-fill" id="qs-bar-fill"></div></div>
       </div>
 
-      <!-- Q1 · current appts/week (GHL field 29MCGE23iZPX3HfXy97p — values = its exact options) -->
+      <!-- Q1 · current appts/week (GHL field contact.how_many_sales_appointments_are_you_currently_running_per_week, created 2026-09-14) -->
       <div class="qs-step active" data-step="1">
         <p class="qs-pre">This tells us where your calendar sits today, so the plan starts from your real numbers.</p>
         <h3 class="qs-q"><span class="qs-num">Question 1 of 4:</span> 📅 How many sales appointments are you CURRENTLY running per week?</h3>
         <div class="qs-opts two">
-          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="0 - 3 appointments per week">0–3 per week</button>
-          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="4 - 7 appointments per week">4–7 per week</button>
-          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="8 - 15 appointments per week">8–15 per week</button>
-          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="16+ appointments per week">16+ per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="0 - 5 appointments per week">0–5 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="5 - 10 appointments per week">5–10 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="10 - 20 appointments per week">10–20 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="20+ appointments per week">20+ per week</button>
         </div>
       </div>
 
@@ -285,13 +285,10 @@
         <p class="qs-pre">Every appointment we book is exclusive to you, so we only book what your team can actually run.</p>
         <h3 class="qs-q"><span class="qs-num">Question 2 of 4:</span> 🚀 How many MORE appointments can you handle per week?</h3>
         <div class="qs-opts two">
-          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="1 - 3 more per week">1–3 more</button>
-          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="4 - 7 more per week">4–7 more</button>
-          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="8 - 15 more per week">8–15 more</button>
-          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="16+ more per week">16+ more</button>
-        </div>
-        <div class="qs-opts" style="margin-top:12px;">
-          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="None, at capacity">None right now, we&rsquo;re maxed out</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="5 - 10 more per week">5–10 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="10 - 20 more per week">10–20 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="20 - 50 more per week">20–50 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="50+ more per week">50+ more</button>
         </div>
       </div>
 
@@ -732,7 +729,7 @@
         // their GHL field keys (inert until the inbound-webhook sample is re-captured and mapped). crew/years/marketing sent blank.
         var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,fbc:fbc,in_app_browser:in_app,
           business_name:formData.business_name||'',years_in_business:'',crew_situation:'',marketing_spend:'',revenue:formData.revenue||'',
-          on_average_how_many_new_sales_appointments_does_your_team_get_in_a_typical_week_right_now:formData.current_appts_per_week||'',
+          how_many_sales_appointments_are_you_currently_running_per_week:formData.current_appts_per_week||'',
           how_many_more_sales_appointments_can_you_handle_per_week:formData.more_appts_per_week||'',icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],fbp:fbp,
           client_user_agent:navigator.userAgent||'',
