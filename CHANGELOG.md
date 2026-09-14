@@ -387,3 +387,17 @@ A complete traffic-segmented clone of the root funnel for **organic Instagram** 
 
 **Watch:** the next Instagram iPhone ICP leads should show as credited Leads on the ICP-optimized ad sets (P2, PX2). Revert = restore `fbq('track','Lead', …)` on both lines.
 
+
+## 2026-09-14 — `/v9/` apply.dirt2dollars.com mirror: survey-first apply page (STAGED, noindex — awaiting Spencer's review before push)
+
+**Why:** Dirt2Dollars' newer apply page (`apply.dirt2dollars.com`, Lovable/React on GHL calendars) puts the qualifying survey *inside the hero* as a glowing white card — no VSL, no CTA button to click first — then logo marquee → named/dated results → 24-video wall → TrustPilot wall. Rebuilt 1:1 for MJC to test against the root modal flow.
+
+**Page (`v9/index.html`, self-contained, no Tailwind):**
+- Hero: eyebrow pill "For Established Deck & Outdoor Living Builders" → H1 "We'll Book Out Your Calendar With **10+ Exclusive Deck Appointments** Every Single Week **On Autopilot**" (10–20/wk figure per Offer Doc §2 outcome positioning).
+- Inline survey card "See If Your Market Is Available" / "1 deck builder per market": Q1 capacity per month (NEW field `capacity_per_month`: 1_5 / 6_10 / 11_20 / 20_plus) → Q2 `crew_situation` (existing values) → Q3 `revenue` (existing values; ICP gate unchanged = ≥ $500K) → Q4 company name (text) → Q5 full name / email / phone (contact LAST, D2D order) → calendar swaps in place: ICP = native slot picker via `mjc-self-book` Worker (same as root), non-ICP = GHL widget (card widens to 1080px). Trust line under the card: 100-in-100 guaranteed · exclusive · ready-to-buy + "$10,000 check … full terms below" (Take A, LP context).
+- Then: 14-logo marquee (root's files + invert/card classes) → "Recent Results" (4 faces, "Join 100+ contractors…", 5 ⚡ name+result+company+city cards, dates only where sourced) → "What Our Clients Say" 14-video 2-col wall (click-to-play facades, youtube-nocookie; Gallegos `woPfBuocx-M` omitted — YouTube reports it unavailable) → "Unfiltered Wins" 3-col masonry of the `/wins/` screenshots (our TrustPilot-wall equivalent) → root's legal block verbatim.
+- Plumbing = root v8 rules: dual pixel init, browser Lead → seasoned pixel only + ICP only, same GHL inbound webhook + key set (`variant:'v9-d2d'`, `lp_version:'v9-d2d-apply'`, `years_in_business`/`marketing_spend` sent blank), funnel beacons (idx 2 capacity · 3 crew · 4 business_name · 5 revenue · 6 contact · 7 submit), `?test_event_code=` mode, `?preview=cal` / `?preview=cal-nonicp` QA, `mjc_booked_ref` capture for the widget path. Clarity on.
+
+**Verified locally (127.0.0.1 static server):** desktop + 480px layout, every survey step incl. validation, ICP picker pulled live slots, non-ICP widget rendered with slots, receipts masonry, footer.
+
+**Before promoting / sending traffic:** (1) `capacity_per_month` is a new webhook key — GHL ignores it until the "1. New Lead" inbound-webhook sample is re-captured and a custom field mapped; (2) Spencer to confirm the 5 result-card dates (Billy June, Chris Summer, Jacob March, Brian April 2026) and the "10+ a week" headline number; (3) flip `robots` to index only if it replaces root.
