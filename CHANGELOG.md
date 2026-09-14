@@ -366,3 +366,24 @@ A complete traffic-segmented clone of the root funnel for **organic Instagram** 
 2. `npx wrangler deploy` in `Foundations/Cloudflare-Workers/mjc-self-book` — the deployed Worker predates the `source`/`tags` patch; until it ships, a native booking would relabel the contact's source to "self-book page".
 
 **Shipped 2026-09-10:** committed `index.html` + this entry ONLY. The other uncommitted files in the working tree (ig/, confirmation/ SMS business-name fix, qualified/, scheduling/, v2–v5, docs) were deliberately left out and still need their own review.
+
+## 2026-09-12 — Meta Test Events mode + click-cookie diagnostics on root submit (SHIPPED 2026-09-14)
+
+**Why:** Zach McFarland's 9/08 ICP Lead (Instagram Reels, iPhone in-app browser) was never credited to ad set P2 3Crews, yet Meta credited his server-only `qualified_schedule` on 9/10 to the same click. Prime suspect: the browser copy of the Lead (which wins browser/server dedup) carried weak match keys inside Instagram's iOS in-app browser. Events Manager's website test can't capture a real Instagram tap on a phone, so the page itself has to run the test.
+
+**Change (root `index.html` only):**
+- `?test_event_code=TEST…` on the URL → the submit goes straight to the `meta-capi-relay` Worker tagged with that test code (shows in Events Manager → Test events, never counted). In that mode the browser `fbq` Lead, the GHL inbound webhook and the funnel `submit` beacon are all skipped, so no contact, no workflows, no real conversions.
+- Every submit payload now also carries the raw `_fbc` cookie (`fbc`) and `in_app_browser` (`instagram` / `facebook` / blank). GHL ignores unknown keys today; the relay already prefers a raw `fbc` over rebuilding one from `fbclid`.
+- `/igtest/` (new, noindex): copy of the staged root with test mode FORCED on (code TEST85495 even without the URL param), funnel beacons off and the booking Worker pointed at a dead host, so nothing on it can create a lead, contact, booking or real conversion. Purpose: Spencer opens it inside Instagram on his iPhone so Events Manager → Test events shows which match keys (Click id / Browser id) Instagram's iOS in-app browser gives the page. Verified locally: relay received QualifiedLead + TEST85495 + fbc/fbp/in_app, 0 GHL calls, 0 browser Leads, 0 funnel beacons. Deleted 2026-09-14 after Spencer's live iPhone test.
+
+## 2026-09-14 — Browser Lead → seasoned pixel only; custom 404 (SHIPPED, Spencer-approved)
+
+**Evidence (live iPhone test in Instagram's in-app browser, Events Manager Test events):** the server Lead from the phone carried email, click id, browser id, name, phone and UA, so Instagram's iOS browser keeps `_fbc`/`_fbp`. But every iPhone browser event arrived with a Meta-generated `pcm_plugin-set_…` event ID (Apple Private Click Measurement path); a desktop control had none. Zach McFarland's 9/08 ICP Lead (browser + server sharing an event_id) was never credited, while his server-only `qualified_schedule` on 9/10 was credited to the same click.
+
+**Change:**
+- `index.html`: both browser `fbq('track','Lead')` calls → `fbq('trackSingle','839107878270720','Lead', …)`. The ICP pixel (1832632181230934) now receives `Lead` only from the relay's QualifiedLead→Lead mirror. Seasoned-pixel browser/server dedup is unchanged. ICP pixel still gets browser PageView + automatic events.
+- `404.html` (new): any path with capital letters redirects once to its lowercase version (keeps the query string); otherwise a plain "page isn't here" card linking home.
+- `igtest/` removed.
+
+**Watch:** the next Instagram iPhone ICP leads should show as credited Leads on the ICP-optimized ad sets (P2, PX2). Revert = restore `fbq('track','Lead', …)` on both lines.
+

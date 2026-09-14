@@ -1557,7 +1557,9 @@
     // Non-ICP traffic must not train the conversion model.
     if (icp && typeof fbq === 'function') {
       try {
-        fbq('track', 'Lead', {
+        // Browser Lead → seasoned pixel only (2026-09-14): on iPhone the pixel routes browser events through
+        // Apple's Private Click Measurement, so the ICP pixel takes its Lead from the server (relay) only.
+        fbq('trackSingle', '839107878270720', 'Lead', {
           content_name: 'Deck Jobs Strategy Session',
           value: 0,
           currency: 'USD'
@@ -2054,6 +2056,7 @@
   var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
   var MC_OPT_IDX={years_in_business:2,crew_situation:3,marketing_spend:4,revenue:5};
   function dlTrack(step,idx,extra){
+    if(/[?&]test_event_code=/.test(location.search)) return; // Meta Test Events mode: keep test sessions out of funnel_events
     try{
       var p={sid:DL_SID,step:step,idx:idx,
         utm_source:attribution.utm_source||'',utm_content:attribution.utm_content||'',utm_campaign:attribution.utm_campaign||'',
@@ -2334,13 +2337,20 @@
       setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },(calPreloaded?250:1400));
     }
     if(submitted) return; submitted=true;
-    dlTrack('submit',7,{icp:icp});
+    // Meta Test Events mode (2026-09-12): ?test_event_code=TEST… sends the submit to the CAPI relay tagged as a
+    // test event (visible in Events Manager → Test events, never counted) and skips the browser Lead, the GHL
+    // webhook and the funnel beacon. Built to check which match keys Instagram's iPhone in-app browser exposes.
+    var TEST_CODE=(new URLSearchParams(location.search).get('test_event_code')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,20);
+    if(!TEST_CODE) dlTrack('submit',7,{icp:icp});
 
     formData.icp=icp; formData.submitted_at=new Date().toISOString();
     var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
     formData.event_id=event_id;
 
-    if(icp && typeof fbq==='function'){ try{ fbq('track','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
+    // Browser Lead → seasoned pixel ONLY (2026-09-14). The ICP pixel gets its Lead solely from the server relay: on iPhone the
+    // pixel sends browser events through Apple's Private Click Measurement, and that browser copy won dedup over the full
+    // server copy — Zach McFarland's 9/08 IG Lead went uncredited while his server-only event was credited.
+    if(icp && !TEST_CODE && typeof fbq==='function'){ try{ fbq('trackSingle','839107878270720','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
     try{ sessionStorage.setItem('dl_qualify_data',JSON.stringify(formData)); sessionStorage.setItem('dl_qualify_icp',icp?'1':'0'); }catch(e){}
 
     (async function(){
@@ -2350,7 +2360,9 @@
         var first_name=formData.first_name||'', last_name=formData.last_name||'';
         var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim())]);
         var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
-        var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,
+        var fbc=(document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/)||[])[1]||'';
+        var in_app=/Instagram/i.test(navigator.userAgent)?'instagram':(/FBAN|FBAV|FB_IAB/i.test(navigator.userAgent)?'facebook':'');
+        var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,fbc:fbc,in_app_browser:in_app,
           business_name:formData.business_name||'',years_in_business:formData.years_in_business||'',crew_situation:formData.crew_situation||'',marketing_spend:formData.marketing_spend||'',revenue:formData.revenue||'',icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],fbp:fbp,
           client_user_agent:navigator.userAgent||'',
@@ -2359,7 +2371,13 @@
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
-        await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+        if(TEST_CODE){
+          // Test mode: straight to the CAPI relay as a Meta test event (plain-text simple request, no CORS preflight).
+          var testEvent=Object.assign({},payload,{event_name:icp?'QualifiedLead':'Lead',test_event_code:TEST_CODE});
+          await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
+        } else {
+          await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+        }
       }catch(e){ console.warn('[v2-ravi] GHL webhook failed:',e); }
     })();
   }
