@@ -414,3 +414,5 @@ Source: Spencer × Chung call 2026-09-14 (qualify on capacity, cut the survey to
 - Beacons: idx 2 `q_current_appts_per_week` · 3 `q_more_appts_per_week` · 5 revenue · 6 contact · 7 submit.
 - **QA mode** `?qa=1` (and localhost): banner on the card; no PageView, funnel beacons, browser Lead, GHL webhook, or booking. Verified locally at 390px: all steps, empty-submit validation on all 5 fields, ICP native picker slots, payload keys, zero outbound writes.
 - Root-modal twin of the same survey staged at `/v10/` (untracked, not pushed).
+
+- **2026-09-14 (later):** hero H1 "Every Single Week" gets a gold brush-stroke underline (`.ul`, inline SVG, sits behind descenders, draws in left→right, reduced-motion safe). Checked at 390 / 768 / 1280px.
