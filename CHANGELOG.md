@@ -401,3 +401,16 @@ A complete traffic-segmented clone of the root funnel for **organic Instagram** 
 **Verified locally (127.0.0.1 static server):** desktop + 480px layout, every survey step incl. validation, ICP picker pulled live slots, non-ICP widget rendered with slots, receipts masonry, footer.
 
 **Before promoting / sending traffic:** (1) `capacity_per_month` is a new webhook key — GHL ignores it until the "1. New Lead" inbound-webhook sample is re-captured and a custom field mapped; (2) Spencer to confirm the 5 result-card dates (Billy June, Chris Summer, Jacob March, Brian April 2026) and the "10+ a week" headline number; (3) flip `robots` to index only if it replaces root.
+
+
+## 2026-09-14 — `/v9/` survey → 4-question capacity survey (SHIPPED to /v9/ only, noindex; Spencer asked to test it on the live URL)
+
+Source: Spencer × Chung call 2026-09-14 (qualify on capacity, cut the survey to the must-haves).
+
+- **Q1** "How many sales appointments are you CURRENTLY running per week?" → existing GHL field `29MCGE23iZPX3HfXy97p` (button values = its exact options: `0 - 3 appointments per week` … `16+ appointments per week`).
+- **Q2** "How many MORE appointments can you handle per week?" → NEW GHL field `CGD5LHAY2V7wQz2Ap5ZD` (`contact.how_many_more_sales_appointments_can_you_handle_per_week`, RADIO, created 2026-09-14): `1 - 3 more per week` · `4 - 7 more per week` · `8 - 15 more per week` · `16+ more per week` · `None, at capacity`.
+- **Q3** revenue (unchanged values, ICP gate ≥ $500K unchanged). **Q4** first / last / business name / phone / email. Crew-situation and standalone company-name steps removed. Each question carries a pre-text line + "Question X of 4".
+- Payload keys = GHL field keys; `crew_situation` now sent blank; `lp_version:'v9-d2d-capacity-4q'`. **The two new keys are inert until the "1. New Lead" inbound-webhook sample is re-captured and mapped.**
+- Beacons: idx 2 `q_current_appts_per_week` · 3 `q_more_appts_per_week` · 5 revenue · 6 contact · 7 submit.
+- **QA mode** `?qa=1` (and localhost): banner on the card; no PageView, funnel beacons, browser Lead, GHL webhook, or booking. Verified locally at 390px: all steps, empty-submit validation on all 5 fields, ICP native picker slots, payload keys, zero outbound writes.
+- Root-modal twin of the same survey staged at `/v10/` (untracked, not pushed).

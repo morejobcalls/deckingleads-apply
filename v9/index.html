@@ -15,6 +15,7 @@
 <meta property="og:description" content="Exclusive deck appointments, booked onto your calendar every week. 100 in 100 days — or we write you a check for $10,000. See if your market is still open.">
 <meta property="og:type" content="website">
 
+<script>window.MJC_QA=/[?&]qa=1(&|$)/.test(location.search)||/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);</script>
 <!-- ================================================================== -->
 <!-- META PIXEL — same dual init as root. PageView now; Lead on submit    -->
 <!-- for ICP-qualified submitters only (seasoned pixel, browser side).    -->
@@ -30,7 +31,7 @@
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '839107878270720');
   fbq('init', '1832632181230934'); // ICP pixel — browser Lead is ICP-gated + seasoned-only; ICP pixel takes Lead from the server relay
-  fbq('track', 'PageView');
+  if(!window.MJC_QA) fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1832632181230934&ev=PageView&noscript=1"/></noscript>
@@ -102,6 +103,9 @@
   .qs-q{font-size:18px;font-weight:800;text-align:center;letter-spacing:-0.02em;line-height:1.25;}
   @media(min-width:640px){.qs-q{font-size:20px;}}
   .qs-hint{margin:6px 0 0;text-align:center;font-size:13px;color:#8A8A8A;}
+  .qs-pre{margin:0 0 8px;text-align:center;font-size:14px;color:#6B6B6B;line-height:1.5;}
+  .qs-num{color:#B07A1E;}
+  .qs-qa{margin:0 0 14px;padding:8px 12px;border-radius:10px;background:#FFF4D6;color:#7A5A12;font-size:12px;font-weight:700;text-align:center;}
   .qs-opts{display:grid;gap:12px;margin-top:22px;}
   @media(min-width:640px){.qs-opts.two{grid-template-columns:1fr 1fr;}}
   .qs-opt{width:100%;text-align:left;border:1px solid #DADADA;border-radius:12px;background:#fff;padding:15px 18px;font-size:15px;font-weight:600;color:#262626;cursor:pointer;transition:border-color .15s,background .15s,transform .1s;}
@@ -253,36 +257,41 @@
       <p class="qs-sub">We only work with 1 deck builder per market — answer a few quick questions below.</p>
 
       <div class="qs-prog" id="qs-prog">
-        <div class="qs-prog-row"><span id="qs-step-label">Step 1 of 5</span><span id="qs-pct">0%</span></div>
+        <div class="qs-prog-row"><span id="qs-step-label">Step 1 of 4</span><span id="qs-pct">0%</span></div>
         <div class="qs-bar"><div class="qs-bar-fill" id="qs-bar-fill"></div></div>
       </div>
 
-      <!-- Q1 · capacity (new field: capacity_per_month) -->
+      <!-- Q1 · current appts/week (GHL field 29MCGE23iZPX3HfXy97p — values = its exact options) -->
       <div class="qs-step active" data-step="1">
-        <h3 class="qs-q">How many more deck appointments can you fit on your calendar each month?</h3>
+        <p class="qs-pre">This tells us where your calendar sits today, so the plan starts from your real numbers.</p>
+        <h3 class="qs-q"><span class="qs-num">Question 1 of 4:</span> 📅 How many sales appointments are you CURRENTLY running per week?</h3>
         <div class="qs-opts two">
-          <button class="qs-opt" type="button" data-field="capacity_per_month" data-value="1_5">1–5</button>
-          <button class="qs-opt" type="button" data-field="capacity_per_month" data-value="6_10">6–10</button>
-          <button class="qs-opt" type="button" data-field="capacity_per_month" data-value="11_20">11–20</button>
-          <button class="qs-opt" type="button" data-field="capacity_per_month" data-value="20_plus">20+</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="0 - 3 appointments per week">0–3 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="4 - 7 appointments per week">4–7 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="8 - 15 appointments per week">8–15 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="16+ appointments per week">16+ per week</button>
         </div>
       </div>
 
-      <!-- Q2 · crew situation (existing field + values) -->
+      <!-- Q2 · MORE appts/week (GHL field CGD5LHAY2V7wQz2Ap5ZD, created 2026-09-14) -->
       <div class="qs-step" data-step="2">
-        <h3 class="qs-q">Which description fits your company best?</h3>
+        <p class="qs-pre">Every appointment we book is exclusive to you, so we only book what your team can actually run.</p>
+        <h3 class="qs-q"><span class="qs-num">Question 2 of 4:</span> 🚀 How many MORE appointments can you handle per week?</h3>
         <div class="qs-opts two">
-          <button class="qs-opt" type="button" data-field="crew_situation" data-value="just_me">Just me — I'm still on the tools</button>
-          <button class="qs-opt" type="button" data-field="crew_situation" data-value="subs_on_demand">Me + subs I pull in when the work is there</button>
-          <button class="qs-opt" type="button" data-field="crew_situation" data-value="one_crew">1 full-time crew</button>
-          <button class="qs-opt" type="button" data-field="crew_situation" data-value="multi_crew">2+ full-time crews</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="1 - 3 more per week">1–3 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="4 - 7 more per week">4–7 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="8 - 15 more per week">8–15 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="16+ more per week">16+ more</button>
+        </div>
+        <div class="qs-opts" style="margin-top:12px;">
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="None, at capacity">None right now, we&rsquo;re maxed out</button>
         </div>
       </div>
 
       <!-- Q3 · revenue (existing field + values — ICP gate = ≥ $500K) -->
       <div class="qs-step" data-step="3">
-        <h3 class="qs-q">How much revenue did your business do in the last 12 months?</h3>
-        <p class="qs-hint">Rough range is fine. No wrong answers.</p>
+        <p class="qs-pre">This helps us size the plan and ad budget to your business. Rough range is fine. No wrong answers.</p>
+        <h3 class="qs-q"><span class="qs-num">Question 3 of 4:</span> 💰 How much revenue has your business generated within the past 12 months?</h3>
         <div class="qs-opts two">
           <button class="qs-opt" type="button" data-field="revenue" data-value="0_100k">$0–$100K</button>
           <button class="qs-opt" type="button" data-field="revenue" data-value="100_200k">$100K–$200K</button>
@@ -294,37 +303,33 @@
         </div>
       </div>
 
-      <!-- Q4 · company name (text) -->
+      <!-- Q4 · contact + business name (LAST) -->
       <div class="qs-step" data-step="4">
-        <h3 class="qs-q">What's the name of your company?</h3>
-        <div style="margin-top:22px;">
-          <input id="qs-biz" class="qs-input" type="text" autocomplete="organization" placeholder="e.g. Wylie Custom Decks">
-          <p id="qs-biz-err" class="qs-err">Please enter your company name.</p>
-          <button class="qs-btn" type="button" data-next="4">Continue &rarr;</button>
-        </div>
-      </div>
-
-      <!-- Q5 · contact (LAST — after 4 micro-yeses) -->
-      <div class="qs-step" data-step="5">
-        <h3 class="qs-q">We keep strategy-session spots limited. Grab yours before they fill up this week.</h3>
-        <p class="qs-hint">Where should we send your call details?</p>
+        <p class="qs-pre">We keep strategy-session spots limited. Grab yours before they fill up this week.</p>
+        <h3 class="qs-q"><span class="qs-num">Question 4 of 4:</span> ✉️ Where should we send your call details?</h3>
         <div style="margin-top:6px;">
-          <label class="qs-label" for="qs-name">Full name</label>
-          <input id="qs-name" class="qs-input" type="text" autocomplete="name" autocapitalize="words" placeholder="First and last name">
-          <p id="qs-name-err" class="qs-err">Please enter your first and last name.</p>
-          <label class="qs-label" for="qs-email">Email</label>
-          <input id="qs-email" class="qs-input" type="email" autocomplete="email" autocapitalize="none" placeholder="you@company.com">
-          <p id="qs-email-err" class="qs-err">Please enter a valid email address.</p>
+          <label class="qs-label" for="qs-first">First name</label>
+          <input id="qs-first" class="qs-input" type="text" autocomplete="given-name" autocapitalize="words" placeholder="First name">
+          <p id="qs-first-err" class="qs-err">Please enter your first name.</p>
+          <label class="qs-label" for="qs-last">Last name</label>
+          <input id="qs-last" class="qs-input" type="text" autocomplete="family-name" autocapitalize="words" placeholder="Last name">
+          <p id="qs-last-err" class="qs-err">Please enter your last name.</p>
+          <label class="qs-label" for="qs-biz">Business name</label>
+          <input id="qs-biz" class="qs-input" type="text" autocomplete="organization" placeholder="e.g. Wylie Custom Decks">
+          <p id="qs-biz-err" class="qs-err">Please enter your business name.</p>
           <label class="qs-label" for="qs-phone">Phone</label>
           <input id="qs-phone" class="qs-input" type="tel" inputmode="numeric" autocomplete="tel" maxlength="14" placeholder="(555) 555-5555">
           <p id="qs-phone-err" class="qs-err">Please enter a valid 10-digit phone number.</p>
+          <label class="qs-label" for="qs-email">Email</label>
+          <input id="qs-email" class="qs-input" type="email" autocomplete="email" autocapitalize="none" placeholder="you@company.com">
+          <p id="qs-email-err" class="qs-err">Please enter a valid email address.</p>
           <button class="qs-btn" type="button" data-next-final>Book My Call &rarr;</button>
           <p class="qs-fine">By continuing, you agree to receive SMS/text reminders about your call. Standard rates may apply. Reply STOP to opt out.</p>
         </div>
       </div>
 
-      <!-- Step 6 · calendar (in place, no page change) -->
-      <div class="qs-step" data-step="6">
+      <!-- Step 5 · calendar (in place, no page change) -->
+      <div class="qs-step" data-step="5">
         <h3 id="qs-cal-h" class="qs-q">Pick a time that works for you</h3>
         <p id="qs-cal-sub">100 Deck Sales Appointments in 100 Days — or We Write You a Check for $10,000.</p>
         <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
@@ -485,8 +490,9 @@
   var steps=card.querySelectorAll('.qs-step');
   var barFill=document.getElementById('qs-bar-fill'), stepLabel=document.getElementById('qs-step-label'), pctEl=document.getElementById('qs-pct');
   var progWrap=document.getElementById('qs-prog'), backBtn=document.getElementById('qs-back');
-  var TOTAL_Q=5, PROG={1:0,2:20,3:40,4:60,5:80,6:100};
+  var TOTAL_Q=4, PROG={1:0,2:25,3:50,4:75,5:100};
   var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
+  if(window.MJC_QA){ try{ var qa=document.createElement('p'); qa.className='qs-qa'; qa.textContent='QA mode: nothing is sent to GHL, Meta, or the calendar.'; card.insertBefore(qa, card.firstChild); }catch(e){} }
 
   // ── Attribution (same localStorage key as root so first-touch survives across variants) ──
   var attribution=(function(){
@@ -502,11 +508,12 @@
   var CAL_NON_ICP='https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
 
   // ── Funnel step instrumentation → mjc-funnel-events worker (Supabase funnel_events). Fire-and-forget.
-  // idx (v9, 2026-09-14): 0 landed · 1 survey_open (first answer) · 2 capacity · 3 crew · 4 business_name · 5 revenue · 6 contact · 7 submit
+  // idx (v9 capacity-4q, 2026-09-14): 0 landed · 1 survey_open (first answer) · 2 current_appts · 3 more_appts · 5 revenue · 6 contact · 7 submit
   var DL_SID=(function(){try{var s=sessionStorage.getItem('dl_sid'); if(!s){s=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'s'+Date.now()+Math.random().toString(36).slice(2,10); sessionStorage.setItem('dl_sid',s);} return s;}catch(e){return 's'+Date.now();}})();
   var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
-  var OPT_IDX={capacity_per_month:2,crew_situation:3,revenue:5};
+  var OPT_IDX={current_appts_per_week:2,more_appts_per_week:3,revenue:5};
   function dlTrack(step,idx,extra){
+    if(window.MJC_QA) return; // QA mode: never write funnel_events
     if(/[?&]test_event_code=/.test(location.search)) return;
     try{
       var p={sid:DL_SID,step:step,idx:idx,utm_source:attribution.utm_source||'',utm_content:attribution.utm_content||'',utm_campaign:attribution.utm_campaign||'',path:location.pathname,ref:attribution.referrer||''};
@@ -530,12 +537,12 @@
     barFill.style.width=(PROG[n]||0)+'%';
     if(n<=TOTAL_Q){ stepLabel.textContent='Step '+n+' of '+TOTAL_Q; pctEl.textContent=(PROG[n]||0)+'%'; progWrap.style.display=''; }
     else { progWrap.style.display='none'; }
-    backBtn.classList.toggle('show', n>1 && n<6);
-    card.classList.toggle('cal-open', n===6 && !icp);
+    backBtn.classList.toggle('show', n>1 && n<5);
+    card.classList.toggle('cal-open', n===5 && !icp);
     setTimeout(function(){var f=t&&t.querySelector('input'); if(f&&n>1) try{f.focus({preventScroll:true});}catch(e){}},60);
     if(n>1){ try{ var r=card.getBoundingClientRect(); if(r.top<0) card.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){} }
   }
-  backBtn.addEventListener('click',function(){ if(current>1&&current<6) show(current-1); });
+  backBtn.addEventListener('click',function(){ if(current>1&&current<5) show(current-1); });
 
   card.querySelectorAll('.qs-opt').forEach(function(btn){
     btn.addEventListener('click',function(){
@@ -547,19 +554,10 @@
     });
   });
 
-  // Q4 company name
+  // Q4 contact + business name
+  var firstEl=document.getElementById('qs-first'), firstErr=document.getElementById('qs-first-err');
+  var lastEl=document.getElementById('qs-last'), lastErr=document.getElementById('qs-last-err');
   var bizEl=document.getElementById('qs-biz'), bizErr=document.getElementById('qs-biz-err');
-  card.querySelector('[data-next="4"]').addEventListener('click',function(){
-    var biz=bizEl.value.trim(), ok=biz.length>=2;
-    bizErr.classList.toggle('show',!ok); bizEl.classList.toggle('bad',!ok);
-    if(!ok){ bizEl.focus(); return; }
-    formData.business_name=biz; markOpen();
-    dlTrack('q_business_name',4);
-    show(5);
-  });
-
-  // Q5 contact
-  var nameEl=document.getElementById('qs-name'), nameErr=document.getElementById('qs-name-err');
   var emailEl=document.getElementById('qs-email'), emailErr=document.getElementById('qs-email-err');
   var phoneEl=document.getElementById('qs-phone'), phoneErr=document.getElementById('qs-phone-err');
   phoneEl.addEventListener('input',function(){
@@ -569,17 +567,14 @@
     phoneEl.value=f;
   });
   card.querySelector('[data-next-final]').addEventListener('click',function(){
-    var name=nameEl.value.trim().replace(/\s+/g,' '), email=emailEl.value.trim();
+    var first=firstEl.value.trim(), last=lastEl.value.trim(), biz=bizEl.value.trim(), email=emailEl.value.trim();
     var phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
-    var parts=name.split(' ');
-    var nok=parts.length>=2&&parts[0].length>=2&&parts[1].length>=1;
-    var eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), pok=/^[2-9]\d{9}$/.test(phone);
-    nameErr.classList.toggle('show',!nok); nameEl.classList.toggle('bad',!nok);
-    emailErr.classList.toggle('show',!eok); emailEl.classList.toggle('bad',!eok);
-    phoneErr.classList.toggle('show',!pok); phoneEl.classList.toggle('bad',!pok);
-    if(!nok){nameEl.focus();return;} if(!eok){emailEl.focus();return;} if(!pok){phoneEl.focus();return;}
-    formData.first_name=parts[0]; formData.last_name=parts.slice(1).join(' '); formData.name=name;
-    formData.email=email; formData.phone='+1'+phone;
+    var fok=first.length>=1, lok=last.length>=1, bok=biz.length>=2, pok=/^[2-9]\d{9}$/.test(phone), eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    [[firstEl,firstErr,fok],[lastEl,lastErr,lok],[bizEl,bizErr,bok],[phoneEl,phoneErr,pok],[emailEl,emailErr,eok]].forEach(function(x){ x[1].classList.toggle('show',!x[2]); x[0].classList.toggle('bad',!x[2]); });
+    if(!fok){firstEl.focus();return;} if(!lok){lastEl.focus();return;} if(!bok){bizEl.focus();return;} if(!pok){phoneEl.focus();return;} if(!eok){emailEl.focus();return;}
+    markOpen();
+    formData.first_name=first; formData.last_name=last; formData.name=(first+' '+last).trim();
+    formData.business_name=biz; formData.email=email; formData.phone='+1'+phone;
     dlTrack('contact_info',6);
     submitAndShowCalendar();
   });
@@ -663,6 +658,7 @@
   function mcbBook(){
     if(!mcbSlot) return;
     var btn=document.getElementById('mcb-btn'); btn.disabled=true; btn.textContent='Locking It In…';
+    if(window.MJC_QA){ btn.textContent='QA mode: no booking made'; return; }
     var fn=formData.first_name||'', ln=formData.last_name||'';
     // Same contact the inbound webhook created (Worker upserts by email/phone). Source echoes the LP's own so upsert never relabels it.
     fetch(MCB_WORKER+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
@@ -689,7 +685,7 @@
     try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
 
   function showCalendarUI(){
-    show(6);
+    show(5);
     if(icp){
       var sp0=document.getElementById('mc-spin'), cw0=document.getElementById('mc-cal-wrap'), nb=document.getElementById('mcb');
       if(sp0) sp0.style.display='none'; if(cw0) cw0.style.display='none'; if(nb) nb.style.display='block';
@@ -713,7 +709,7 @@
     formData.event_id=event_id;
 
     // Browser Lead → seasoned pixel ONLY, ICP only (same rule as root, 2026-09-14). ICP pixel gets Lead from the server relay.
-    if(icp && !TEST_CODE && typeof fbq==='function'){ try{ fbq('trackSingle','839107878270720','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
+    if(icp && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('trackSingle','839107878270720','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
     try{ sessionStorage.setItem('dl_qualify_data',JSON.stringify(formData)); sessionStorage.setItem('dl_qualify_icp',icp?'1':'0'); }catch(e){}
 
     (async function(){
@@ -725,21 +721,24 @@
         var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
         var fbc=(document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/)||[])[1]||'';
         var in_app=/Instagram/i.test(navigator.userAgent)?'instagram':(/FBAN|FBAV|FB_IAB/i.test(navigator.userAgent)?'facebook':'');
-        // Same key set as root v8 (so the GHL "1. New Lead" mapping keeps working) + capacity_per_month (new key —
-        // inert in GHL until the inbound-webhook sample is re-captured and mapped).
+        // Same key set as root v8 (so the GHL "1. New Lead" mapping keeps working) + the two appointment answers, keyed to
+        // their GHL field keys (inert until the inbound-webhook sample is re-captured and mapped). crew/years/marketing sent blank.
         var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,fbc:fbc,in_app_browser:in_app,
-          business_name:formData.business_name||'',years_in_business:'',crew_situation:formData.crew_situation||'',marketing_spend:'',revenue:formData.revenue||'',
-          capacity_per_month:formData.capacity_per_month||'',icp:icp?'yes':'no',
+          business_name:formData.business_name||'',years_in_business:'',crew_situation:'',marketing_spend:'',revenue:formData.revenue||'',
+          on_average_how_many_new_sales_appointments_does_your_team_get_in_a_typical_week_right_now:formData.current_appts_per_week||'',
+          how_many_more_sales_appointments_can_you_handle_per_week:formData.more_appts_per_week||'',icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],fbp:fbp,
           client_user_agent:navigator.userAgent||'',
           timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
-          source:'deckingleads.com lp v1',variant:'v9-d2d',lp_version:'v9-d2d-apply',page_url:location.href,
+          source:'deckingleads.com lp v1',variant:'v9-d2d',lp_version:'v9-d2d-capacity-4q',page_url:location.href,
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
         if(TEST_CODE){
           var testEvent=Object.assign({},payload,{event_name:icp?'QualifiedLead':'Lead',test_event_code:TEST_CODE});
           await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
+        } else if(window.MJC_QA){
+          console.log('[v9 QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
         } else {
           await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
         }
