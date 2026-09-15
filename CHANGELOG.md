@@ -430,3 +430,5 @@ Source: Spencer × Chung call 2026-09-14 (qualify on capacity, cut the survey to
 - `/v9/` stays live (noindex) as a duplicate — **edit root from here on.**
 - Another session's UNCOMMITTED Journey Ledger hooks on the old root (`journey.js` include + mjcJourney.track calls) were saved to `journey-ledger-root-hooks-UNCOMMITTED-2026-09-14.patch` (untracked) — re-port onto the new root before shipping Journey Ledger.
 - Local QA before push (390px, `?qa=1`): logo 200, full survey → ICP native picker slots, payload keys + `lp_version`, `#apply` anchor, Guarantee section, trimmed footer, zero outbound writes, zero page errors.
+
+- **2026-09-15:** root hero gets a sub-headline under the H1: **"Or Your Money Back!"** (`.h1-sub`, Archivo 900, pop gold). Spencer chose this wording as written over the contract-matched "$10,000 check" options, knowingly: the contract/ToS/on-page Guarantee section promise 100-in-100 or a flat $10,000 paid *instead of* a refund, and the scoping fine print was removed from the footer. Revisit with counsel. `/v9/` duplicate not changed.
