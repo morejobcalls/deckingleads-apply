@@ -82,6 +82,9 @@
     background:rgba(245,185,62,.14);border:1px solid rgba(245,185,62,.55);
     box-shadow:0 0 60px rgba(245,185,62,.35), inset 0 0 22px rgba(245,185,62,.10);text-shadow:0 0 18px rgba(245,185,62,.65);}
   @media(min-width:640px){.eyebrow{font-size:14px;padding:10px 22px;}}
+  /* Phones: tighter pill so "For Established Deck Companies" stays on one line (fits ≥360px; smaller fallback below 360px). */
+  @media(max-width:639px){.eyebrow{font-size:11.5px;letter-spacing:.14em;padding:8px 16px;white-space:nowrap;}}
+  @media(max-width:359px){.eyebrow{font-size:10px;letter-spacing:.08em;padding:7px 12px;}}
   .h1{font-family:'Archivo','Inter',system-ui,sans-serif;font-size:34px;line-height:1.02;font-weight:900;letter-spacing:-0.03em;color:#fff;max-width:980px;margin:4px auto 0;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.5);}
   @media(min-width:640px){.h1{font-size:50px;}}
   @media(min-width:1024px){.h1{font-size:58px;max-width:1040px;}}
