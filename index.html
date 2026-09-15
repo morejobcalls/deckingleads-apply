@@ -776,8 +776,17 @@
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
         if(TEST_CODE){
-          var testEvent=Object.assign({},payload,{event_name:icp?'QualifiedLead':'Lead',test_event_code:TEST_CODE});
-          await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
+          // target:'icp' is REQUIRED here (2026-09-15). A test_event_code is scoped to ONE dataset —
+          // ours comes from the ICP pixel's Test events tab. Without target the relay's default path
+          // also copies the event to the seasoned pixel, which can't recognize that code and would
+          // process the copy as a real conversion. ICP-only + event_name 'Lead' is exactly what the
+          // ICP pixel receives in production (the relay mirrors QualifiedLead→Lead there).
+          // Non-ICP submissions never reach the ICP pixel in production, so test mode sends nothing
+          // for them rather than faking a Lead the live funnel would not produce.
+          if(icp){
+            var testEvent=Object.assign({},payload,{event_name:'Lead',target:'icp',test_event_code:TEST_CODE});
+            await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
+          } else { console.log('[v9 test mode] non-ICP submission — nothing sent (the test code is ICP-pixel scoped).'); }
         } else if(window.MJC_QA){
           console.log('[v9 QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
         } else {
