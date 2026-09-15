@@ -732,7 +732,10 @@
       if(sp0) sp0.style.display='none'; if(cw0) cw0.style.display='none'; if(nb) nb.style.display='block';
       mcbLoad();
     } else {
-      try{ var cal=document.getElementById('mc-cal'); if(!cal.getAttribute('src')) cal.src=buildCalUrl(); }catch(e){}
+      // Rebuild whenever the URL changed. preloadCalendar() runs at the revenue question — one step
+      // BEFORE the contact fields — so the warmed src carries no prefill; keeping it would hand the
+      // lead an empty booking form after they just typed their details (2026-09-15).
+      try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
       setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },(calPreloaded?250:1400));
     }
   }
