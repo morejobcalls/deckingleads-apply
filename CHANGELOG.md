@@ -420,3 +420,13 @@ Source: Spencer × Chung call 2026-09-14 (qualify on capacity, cut the survey to
 - **2026-09-14 (later):** answer bands changed per Spencer. Q1 now posts to NEW GHL field `WLtvqe7GcYXNjEzQqfgV` (`contact.how_many_sales_appointments_are_you_currently_running_per_week`: `0 - 5` / `5 - 10` / `10 - 20` / `20+ appointments per week`); the Jan-2026 field `29MCGE23iZPX3HfXy97p` was left untouched (different bands, likely attached to an older form). Q2 field `CGD5LHAY2V7wQz2Ap5ZD` options replaced: `5 - 10` / `10 - 20` / `20 - 50` / `50+ more per week` ("None, at capacity" removed). Eyebrow pill: "For Established Deck Building Companies".
 
 - **2026-09-14 (later):** closing **Guarantee section** added to `/v9/` as the last section before the legal footer (`#guarantee`). Copy verbatim from root `#guarantees` (check icon, "The Guarantee. Zero Risk.", Day 100 / If We Miss cards, "Get More Deck Jobs / Claim Your Zip Code" CTA), restyled in v9 tokens; CTA scrolls to the survey card (`data-scroll-survey`) instead of opening the root modal. Checked at 390 + 1280px.
+
+## 2026-09-14 — ROOT CUTOVER: apply.morejobcalls.com/ = v9 (Spencer: "make this the root apply page")
+
+- **Cutover pushed 2026-09-15T02:42:04Z.** Old root (v8: VSL poster + modal qualifier survey years/crew/marketing/revenue) frozen as tag **`funnel-v8-root-2026-09-14`**. Rollback: `git checkout funnel-v8-root-2026-09-14 -- index.html` → commit → push.
+- Root `index.html` = `v9/index.html` with 4 edits: logo → `/v9/mjc-mark.svg`; robots `index, follow`; `lp_version:'v9-root'` (variant stays `v9-d2d`); `id="apply"` on the survey wrap so old `/#apply` links land on the survey.
+- Survey = 4-question capacity survey (current appts/wk → MORE appts/wk → revenue → contact + business). GHL "1. New Lead" Create Contact maps both new answers (fields `WLtvqe7GcYXNjEzQqfgV`, `CGD5LHAY2V7wQz2Ap5ZD`, workflow v100). Years/crew/marketing-spend now arrive blank.
+- **Analytics split:** `funnel_events` rows with `path='/'` before 2026-09-15T02:42:04Z = v8 survey; after = v9 survey (idx 2 current_appts · 3 more_appts · 5 revenue · 6 contact · 7 submit).
+- `/v9/` stays live (noindex) as a duplicate — **edit root from here on.**
+- Another session's UNCOMMITTED Journey Ledger hooks on the old root (`journey.js` include + mjcJourney.track calls) were saved to `journey-ledger-root-hooks-UNCOMMITTED-2026-09-14.patch` (untracked) — re-port onto the new root before shipping Journey Ledger.
+- Local QA before push (390px, `?qa=1`): logo 200, full survey → ICP native picker slots, payload keys + `lp_version`, `#apply` anchor, Guarantee section, trimmed footer, zero outbound writes, zero page errors.
