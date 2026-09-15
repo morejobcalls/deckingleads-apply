@@ -432,3 +432,35 @@ Source: Spencer × Chung call 2026-09-14 (qualify on capacity, cut the survey to
 - Local QA before push (390px, `?qa=1`): logo 200, full survey → ICP native picker slots, payload keys + `lp_version`, `#apply` anchor, Guarantee section, trimmed footer, zero outbound writes, zero page errors.
 
 - **2026-09-15:** root hero gets a sub-headline under the H1: **"Or Your Money Back!"** (`.h1-sub`, Archivo 900, pop gold). Spencer chose this wording as written over the contract-matched "$10,000 check" options, knowingly: the contract/ToS/on-page Guarantee section promise 100-in-100 or a flat $10,000 paid *instead of* a refund, and the scoping fine print was removed from the footer. Revisit with counsel. `/v9/` duplicate not changed.
+
+---
+
+## 2026-09-15 — ICP-pixel signal recovery + v9 survey: website & service-area ZIP (SHIPPED)
+
+Four commits: `727a634`, `3f7f6d4`, `c1c01e3`, `4fadb56`. Infra changes outside this repo are listed at the bottom.
+
+### The bug that started it (the Zach McFarland class, finally root-caused)
+`1. New Lead` fires its **QualifiedLead** step (15) only AFTER a `Wait 1 min` (step 10), and `2. Booked | CHUNG V1` step 0 removes the contact from **all other workflows** the instant they book. Since v9 renders the ICP slot picker in place right after submit, ICP leads routinely book inside that minute — so step 15 never ran and **the ICP pixel never saw them**. The faster the lead, the more signal was lost.
+
+Worse: `2. Booked` step 4 gated its ICP branch on the `icp-qualified` TAG (also written after the wait), and `Meta CAPI — Schedule → ICP pixel` sits inside that branch — so fast bookers lost their **Schedule** event too.
+
+**NOT what happened to Zach McFarland** — he submitted 9/08 and booked 9/10, so he never hit the race; his event fired and simply wasn't *attributed*. As of 9/15 the race had cost zero ICP pixel events in the 7-day window; v9's in-place picker was about to start eating them.
+
+### Shipped here
+- **`727a634` — test mode routes ICP-only.** `?test_event_code=` now sends `target:'icp'` + `event_name:'Lead'`. A test code is scoped to ONE dataset; the relay's default path also copies to the seasoned pixel, which would process a foreign-coded copy as a real conversion. Non-ICP submits send nothing in test mode.
+- **`3f7f6d4` — non-ICP booking widget prefill.** `preloadCalendar()` runs at the revenue question, one step BEFORE the contact fields, so the warmed iframe src carried no prefill and `showCalendarUI()` only set `src` when empty — the lead landed on a blank booking form right after typing their details. Now rebuilt whenever the URL differs.
+- **`c1c01e3` — `/v4/`, `/v5/`, `/v6/` retired.** Unlinked but still served, and their submit fired a browser `Lead` with **zero** network calls (no webhook, no CAPI) — a Lead with no CRM record. Now query-preserving redirects to root; pages remain in git history.
+- **`4fadb56` — survey: business website replaces business name; new service-area ZIP.** Website is required but permissive (a Facebook page passes, `https://`/trailing slash stripped, explicit "I don't have one" escape). ZIP is Q3, numeric, auto-advances at 5 digits to keep the tap rhythm. Survey is now 5 steps, calendar step 6, step machinery keyed off `TOTAL_Q`. ZIP also feeds Meta's `zip_sha256` match key — both CAPI steps already forwarded it, the page just never sent it.
+  - `business_name` is sent as an **alias** of the website on purpose: the GHL mapping only knew that key. Drop the alias when you're happy with the dedicated field.
+
+### Infra shipped alongside (not in this repo)
+- **Relay `meta-capi-relay`** (`capi-worker/worker.v5-tiered-events.js`, backup `…PRE-ICP-MIRROR-2026-09-15.js.bak`): mirrors a plain `Lead` to the ICP pixel when `icp === 'yes'` (strict — a missing `icp` must never mirror), so the ICP Lead fires at step 8, before the wait. Also added **`test_event_code_icp`** so the dual-pixel path is testable with each pixel carrying its own valid code.
+- **`1. New Lead` v100 → v106:** step 8 sends `icp`; Create Contact gained Business Website + LP Version/Variant/Page URL/In-App Browser and dropped two dead v8 mappings (30 fields); Leads sheet step → 20 columns.
+- **`2. Booked | CHUNG V1` v5 → v8:** ICP gate is now `tag OR ICP-Qualified-(Survey) field`, Non-ICP is `no tag AND field != yes` (both edited together — widening only ICP would have made a fast booker match both); Booked Calls sheet step → 11 columns.
+- **Master Tracker:** Leads `R/S/T` = Business Website, Appts Now/Week, More Appts/Week. Booked Calls `J/K` = Business Website, Zip.
+
+### Verification
+Full chain proven with live test codes, no inference: LP payload carries `icp:'yes'` · GHL resolves `{{inboundWebhookRequest.icp}}` inside a webhook step (`yes`→`"yes"`, `no`→`"no"`, proved with a throwaway workflow, since deleted) · relay mirrors on `Lead`+`icp=yes` and correctly does NOT on `icp=no` or absent · both appeared in the ICP pixel Test Events feed. Backfill audited: **nothing was owed**, so nothing was fired.
+
+### Rollback
+LP: `git revert 4fadb56 3f7f6d4 727a634`. Relay: redeploy the `.bak`. Workflows: timestamped backups in `capi-worker/workflow-backups/2026-09-15/`.
