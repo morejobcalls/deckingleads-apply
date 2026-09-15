@@ -313,8 +313,22 @@
         </div>
       </div>
 
-      <!-- Q3 · revenue (existing field + values — ICP gate = ≥ $500K) -->
+      <!-- Q3 · service-area ZIP (added 2026-09-15). Single numeric input, auto-advances at 5 digits so
+           it keeps the tap rhythm of the surrounding questions. Also feeds Meta's zip match key —
+           both CAPI steps in "1. New Lead" already forward zip_sha256, the LP just never sent it. -->
       <div class="qs-step" data-step="3">
+        <p class="qs-pre">Appointments are exclusive by territory, so we check what's open in your area before the call.</p>
+        <h3 class="qs-q">What ZIP do you want more deck jobs around?</h3>
+        <div style="margin-top:6px;">
+          <label class="qs-label" for="qs-zip">ZIP code</label>
+          <input id="qs-zip" class="qs-input" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="e.g. 75201">
+          <p id="qs-zip-err" class="qs-err">Please enter a valid 5-digit ZIP code.</p>
+          <button class="qs-btn" type="button" data-next>Continue &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Q4 · revenue (existing field + values — ICP gate = ≥ $500K) -->
+      <div class="qs-step" data-step="4">
         <p class="qs-pre">This helps us size the plan and ad budget to your business. Rough range is fine. No wrong answers.</p>
         <h3 class="qs-q">How much revenue has your business generated within the past 12 months?</h3>
         <div class="qs-opts two">
@@ -328,8 +342,8 @@
         </div>
       </div>
 
-      <!-- Q4 · contact + business name (LAST) -->
-      <div class="qs-step" data-step="4">
+      <!-- Q5 · contact + business website (LAST) -->
+      <div class="qs-step" data-step="5">
         <p class="qs-pre">We keep strategy-session spots limited. Grab yours before they fill up this week.</p>
         <h3 class="qs-q">Where should we send your call details?</h3>
         <div style="margin-top:6px;">
@@ -339,9 +353,10 @@
           <label class="qs-label" for="qs-last">Last name</label>
           <input id="qs-last" class="qs-input" type="text" autocomplete="family-name" autocapitalize="words" placeholder="Last name">
           <p id="qs-last-err" class="qs-err">Please enter your last name.</p>
-          <label class="qs-label" for="qs-biz">Business name</label>
-          <input id="qs-biz" class="qs-input" type="text" autocomplete="organization" placeholder="e.g. Wylie Custom Decks">
-          <p id="qs-biz-err" class="qs-err">Please enter your business name.</p>
+          <label class="qs-label" for="qs-site">Business website</label>
+          <input id="qs-site" class="qs-input" type="text" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="url" placeholder="e.g. wyliecustomdecks.com">
+          <p id="qs-site-err" class="qs-err">Enter your website, or tap “I don’t have one”.</p>
+          <p class="qs-fine" style="margin:-2px 0 10px;">A Facebook page works too. <a href="#" id="qs-no-site">I don’t have one</a></p>
           <label class="qs-label" for="qs-phone">Phone</label>
           <input id="qs-phone" class="qs-input" type="tel" inputmode="numeric" autocomplete="tel" maxlength="14" placeholder="(555) 555-5555">
           <p id="qs-phone-err" class="qs-err">Please enter a valid 10-digit phone number.</p>
@@ -353,8 +368,8 @@
         </div>
       </div>
 
-      <!-- Step 5 · calendar (in place, no page change) -->
-      <div class="qs-step" data-step="5">
+      <!-- Step 6 · calendar (in place, no page change) -->
+      <div class="qs-step" data-step="6">
         <h3 id="qs-cal-h" class="qs-q">Pick a time that works for you</h3>
         <p id="qs-cal-sub">100 Deck Sales Appointments in 100 Days — or We Write You a Check for $10,000.</p>
         <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
@@ -531,7 +546,7 @@
   var steps=card.querySelectorAll('.qs-step');
   var barFill=document.getElementById('qs-bar-fill'), stepLabel=document.getElementById('qs-step-label'), pctEl=document.getElementById('qs-pct');
   var progWrap=document.getElementById('qs-prog'), backBtn=document.getElementById('qs-back');
-  var TOTAL_Q=4, PROG={1:0,2:25,3:50,4:75,5:100};
+  var TOTAL_Q=5, PROG={1:0,2:20,3:40,4:60,5:80,6:100}; // Q3 = service-area ZIP (added 2026-09-15)
   var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
   if(window.MJC_QA){ try{ var qa=document.createElement('p'); qa.className='qs-qa'; qa.textContent='QA mode: nothing is sent to GHL, Meta, or the calendar.'; card.insertBefore(qa, card.firstChild); }catch(e){} }
 
@@ -552,7 +567,7 @@
   // idx (v9 capacity-4q, 2026-09-14): 0 landed · 1 survey_open (first answer) · 2 current_appts · 3 more_appts · 5 revenue · 6 contact · 7 submit
   var DL_SID=(function(){try{var s=sessionStorage.getItem('dl_sid'); if(!s){s=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'s'+Date.now()+Math.random().toString(36).slice(2,10); sessionStorage.setItem('dl_sid',s);} return s;}catch(e){return 's'+Date.now();}})();
   var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
-  var OPT_IDX={current_appts_per_week:2,more_appts_per_week:3,revenue:5};
+  var OPT_IDX={current_appts_per_week:2,more_appts_per_week:3,zip:4,revenue:5};
   function dlTrack(step,idx,extra){
     if(window.MJC_QA) return; // QA mode: never write funnel_events
     if(/[?&]test_event_code=/.test(location.search)) return;
@@ -578,12 +593,12 @@
     barFill.style.width=(PROG[n]||0)+'%';
     if(n<=TOTAL_Q){ stepLabel.textContent='Step '+n+' of '+TOTAL_Q; pctEl.textContent=(PROG[n]||0)+'%'; progWrap.style.display=''; }
     else { progWrap.style.display='none'; }
-    backBtn.classList.toggle('show', n>1 && n<5);
-    card.classList.toggle('cal-open', n===5 && !icp);
+    backBtn.classList.toggle('show', n>1 && n<TOTAL_Q+1);
+    card.classList.toggle('cal-open', n===TOTAL_Q+1 && !icp);
     setTimeout(function(){var f=t&&t.querySelector('input'); if(f&&n>1) try{f.focus({preventScroll:true});}catch(e){}},60);
     if(n>1){ try{ var r=card.getBoundingClientRect(); if(r.top<0) card.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){} }
   }
-  backBtn.addEventListener('click',function(){ if(current>1&&current<5) show(current-1); });
+  backBtn.addEventListener('click',function(){ if(current>1&&current<TOTAL_Q+1) show(current-1); });
 
   card.querySelectorAll('.qs-opt').forEach(function(btn){
     btn.addEventListener('click',function(){
@@ -595,10 +610,38 @@
     });
   });
 
-  // Q4 contact + business name
+  // Q3 service-area ZIP. Auto-advances at 5 digits so it feels like the tap questions around it.
+  var zipEl=document.getElementById('qs-zip'), zipErr=document.getElementById('qs-zip-err');
+  function zipOk(){ return /^\d{5}$/.test(zipEl.value.trim()); }
+  function submitZip(){
+    var ok=zipOk();
+    zipErr.classList.toggle('show',!ok); zipEl.classList.toggle('bad',!ok);
+    if(!ok){ zipEl.focus(); return; }
+    markOpen();
+    formData.zip=zipEl.value.trim();
+    dlTrack('q_zip',OPT_IDX.zip,{field:'zip',value:formData.zip});
+    show(4);
+  }
+  zipEl.addEventListener('input',function(){
+    zipEl.value=zipEl.value.replace(/\D/g,'').slice(0,5);
+    if(zipEl.value.length===5){ zipErr.classList.remove('show'); zipEl.classList.remove('bad'); setTimeout(submitZip,180); }
+  });
+  card.querySelector('.qs-step[data-step="3"] [data-next]').addEventListener('click',submitZip);
+
+  // Q5 contact + business website
   var firstEl=document.getElementById('qs-first'), firstErr=document.getElementById('qs-first-err');
   var lastEl=document.getElementById('qs-last'), lastErr=document.getElementById('qs-last-err');
-  var bizEl=document.getElementById('qs-biz'), bizErr=document.getElementById('qs-biz-err');
+  var siteEl=document.getElementById('qs-site'), siteErr=document.getElementById('qs-site-err');
+  // Website replaced business name on 2026-09-15: the URL carries the name, the name doesn't carry
+  // the URL, and Spencer was googling every lead to find it. Deliberately permissive — plenty of
+  // $500K+ builders run on a Facebook page — so anything domain-shaped passes, plus an explicit
+  // "no website" escape rather than a validator that rejects a real lead.
+  var NO_SITE='none';
+  function siteValue(){ return siteEl.value.trim().replace(/^\s*https?:\/\//i,'').replace(/\/+$/,''); }
+  function siteIsOk(){ var v=siteValue(); return v===NO_SITE || (/\./.test(v) && !/\s/.test(v) && v.length>=4); }
+  document.getElementById('qs-no-site').addEventListener('click',function(e){
+    e.preventDefault(); siteEl.value=NO_SITE; siteErr.classList.remove('show'); siteEl.classList.remove('bad'); phoneEl.focus();
+  });
   var emailEl=document.getElementById('qs-email'), emailErr=document.getElementById('qs-email-err');
   var phoneEl=document.getElementById('qs-phone'), phoneErr=document.getElementById('qs-phone-err');
   phoneEl.addEventListener('input',function(){
@@ -608,15 +651,15 @@
     phoneEl.value=f;
   });
   card.querySelector('[data-next-final]').addEventListener('click',function(){
-    var first=firstEl.value.trim(), last=lastEl.value.trim(), biz=bizEl.value.trim(), email=emailEl.value.trim();
+    var first=firstEl.value.trim(), last=lastEl.value.trim(), site=siteValue(), email=emailEl.value.trim();
     var phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
-    var fok=first.length>=1, lok=last.length>=1, bok=biz.length>=2, pok=/^[2-9]\d{9}$/.test(phone), eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    [[firstEl,firstErr,fok],[lastEl,lastErr,lok],[bizEl,bizErr,bok],[phoneEl,phoneErr,pok],[emailEl,emailErr,eok]].forEach(function(x){ x[1].classList.toggle('show',!x[2]); x[0].classList.toggle('bad',!x[2]); });
-    if(!fok){firstEl.focus();return;} if(!lok){lastEl.focus();return;} if(!bok){bizEl.focus();return;} if(!pok){phoneEl.focus();return;} if(!eok){emailEl.focus();return;}
+    var fok=first.length>=1, lok=last.length>=1, sok=siteIsOk(), pok=/^[2-9]\d{9}$/.test(phone), eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    [[firstEl,firstErr,fok],[lastEl,lastErr,lok],[siteEl,siteErr,sok],[phoneEl,phoneErr,pok],[emailEl,emailErr,eok]].forEach(function(x){ x[1].classList.toggle('show',!x[2]); x[0].classList.toggle('bad',!x[2]); });
+    if(!fok){firstEl.focus();return;} if(!lok){lastEl.focus();return;} if(!sok){siteEl.focus();return;} if(!pok){phoneEl.focus();return;} if(!eok){emailEl.focus();return;}
     markOpen();
     formData.first_name=first; formData.last_name=last; formData.name=(first+' '+last).trim();
-    formData.business_name=biz; formData.email=email; formData.phone='+1'+phone;
-    dlTrack('contact_info',6);
+    formData.business_website=site; formData.email=email; formData.phone='+1'+phone;
+    dlTrack('contact_info',7);
     submitAndShowCalendar();
   });
   // Enter-to-advance in text inputs
@@ -726,7 +769,7 @@
     try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
 
   function showCalendarUI(){
-    show(5);
+    show(TOTAL_Q+1);
     if(icp){
       var sp0=document.getElementById('mc-spin'), cw0=document.getElementById('mc-cal-wrap'), nb=document.getElementById('mcb');
       if(sp0) sp0.style.display='none'; if(cw0) cw0.style.display='none'; if(nb) nb.style.display='block';
@@ -746,7 +789,7 @@
     if(submitted) return; submitted=true;
     // Meta Test Events mode: ?test_event_code=TEST… → CAPI relay as a test event; skips browser Lead, GHL webhook, funnel beacon.
     var TEST_CODE=(new URLSearchParams(location.search).get('test_event_code')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,20);
-    if(!TEST_CODE) dlTrack('submit',7,{icp:icp});
+    if(!TEST_CODE) dlTrack('submit',8,{icp:icp});
 
     formData.icp=icp; formData.submitted_at=new Date().toISOString();
     var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
@@ -761,14 +804,21 @@
         var email=formData.email, phone=(formData.phone||'').replace(/\D/g,'');
         var phoneForHash=phone.length===11?phone:(phone.length===10?'1'+phone:phone);
         var first_name=formData.first_name||'', last_name=formData.last_name||'';
-        var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim())]);
+        var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim()),sha256Hex((formData.zip||'').trim())]);
         var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
         var fbc=(document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/)||[])[1]||'';
         var in_app=/Instagram/i.test(navigator.userAgent)?'instagram':(/FBAN|FBAV|FB_IAB/i.test(navigator.userAgent)?'facebook':'');
         // Same key set as root v8 (so the GHL "1. New Lead" mapping keeps working) + the two appointment answers, keyed to
         // their GHL field keys (inert until the inbound-webhook sample is re-captured and mapped). crew/years/marketing sent blank.
+        // business_name carries the WEBSITE on purpose (2026-09-15). The survey now asks for the site
+        // instead of the name, but the GHL inbound-webhook mapping still only knows `business_name` —
+        // remapping needs a fresh sample capture. Sending it under both keys means the URL lands in
+        // GHL today (exactly where Spencer was pasting googled URLs anyway) and `business_website`
+        // is ready the moment the sample is re-captured. Drop the alias once that's mapped.
         var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,fbc:fbc,in_app_browser:in_app,
-          business_name:formData.business_name||'',years_in_business:'',crew_situation:'',marketing_spend:'',revenue:formData.revenue||'',
+          business_website:formData.business_website||'',business_name:formData.business_website||'',
+          zip:formData.zip||'',postal_code:formData.zip||'',zip_sha256:h[4],
+          years_in_business:'',crew_situation:'',marketing_spend:'',revenue:formData.revenue||'',
           how_many_sales_appointments_are_you_currently_running_per_week:formData.current_appts_per_week||'',
           how_many_more_sales_appointments_can_you_handle_per_week:formData.more_appts_per_week||'',icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],fbp:fbp,
