@@ -131,6 +131,7 @@
   }
 </script>
 
+<script src="/journey.js" defer></script>
 </head>
 <body>
 
@@ -394,5 +395,18 @@
 })();
 </script>
 
+<script>
+// Journey Ledger: booking landed here (2026-09-14). Once per contact per tab.
+window.addEventListener('load', function () {
+  try {
+    var q = new URLSearchParams(location.search), c = q.get('c') || '';
+    var k = 'mjc_booked_' + (c || location.pathname);
+    if (window.mjcJourney && !sessionStorage.getItem(k)) {
+      sessionStorage.setItem(k, '1');
+      mjcJourney.track('booked', { label: location.pathname.replace(/\//g, '') || 'booked', value: c ? 'contact:' + c : '', meta: { calendar: q.get('cal') || '' } });
+    }
+  } catch (e) {}
+});
+</script>
 </body>
 </html>

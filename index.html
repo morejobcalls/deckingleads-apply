@@ -277,6 +277,7 @@
 
   body.mc-lock{overflow:hidden;}
 </style>
+<script src="/journey.js" defer></script>
 </head>
 <body>
 
@@ -580,6 +581,7 @@
   var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
   var OPT_IDX={current_appts_per_week:2,more_appts_per_week:3,zip:4,revenue:5};
   function dlTrack(step,idx,extra){
+    try{ if(window.mjcJourney && step!=='submit' && step!=='landed') mjcJourney.track(step==='survey_open'?'survey_open':'survey_step',{label:step,value:(extra&&extra.value)||'',meta:{idx:idx}}); }catch(e){} // Journey Ledger (journey.js marks ?qa=1 sessions as test)
     if(window.MJC_QA) return; // QA mode: never write funnel_events
     if(/[?&]test_event_code=/.test(location.search)) return;
     try{
@@ -805,6 +807,7 @@
     formData.icp=icp; formData.submitted_at=new Date().toISOString();
     var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
     formData.event_id=event_id;
+    try{ if(window.mjcJourney) mjcJourney.track('submit',{lead_ref:event_id,label:'apply survey',value:icp?'icp':'non-icp'}); }catch(e){} // Journey Ledger
 
     // Browser Lead → seasoned pixel ONLY, ICP only (same rule as root, 2026-09-14). ICP pixel gets Lead from the server relay.
     if(icp && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('trackSingle','839107878270720','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
@@ -839,6 +842,7 @@
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
+        try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
         if(TEST_CODE){
           // target:'icp' is REQUIRED here (2026-09-15). A test_event_code is scoped to ONE dataset —
           // ours comes from the ICP pixel's Test events tab. Without target the relay's default path
