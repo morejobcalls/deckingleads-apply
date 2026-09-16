@@ -2,19 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="theme-color" content="#000000">
-<title>100 Sales Appointments In 100 Days, Guaranteed | MoreJobCalls.com</title>
-<meta name="description" content="100 exclusive sales appointment opportunities in 100 days — or 100% refund of your management fee + $2,000 cash. For deck builders doing $1M+/yr. One builder per market.">
-<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0B0B0B">
+<title>Book Out Your Calendar | The Deck Jobs System Strategy Session | MoreJobCalls.com</title>
+<meta name="description" content="Deck &amp; outdoor living builders: we book exclusive, ready-to-buy sales appointments onto your calendar every week. 100 in 100 days or we write you a check for $10,000. Check if your market is still available.">
+<!-- /yt/ (2026-09-15): ORGANIC-YOUTUBE twin of the ROOT v9 apply page. Built by scratch script build_yt_lp.py from root index.html —
+     re-run it after any root change instead of hand-editing. Design + survey identical to root; ONLY the plumbing differs:
+       · attribution: blanks stamped utm_source=youtube / utm_medium=organic / utm_campaign=yt-description, ?v=<videoId> → utm_content
+       · GHL: posts to the "1. New Lead (YT)" inbound webhook (Lead Channel = youtube, Organic tracker tab, NO Meta CAPI)
+       · pixel: seasoned pixel PageView only + custom YT_Lead (never standard Lead; ICP pixel not initialised) so organic can't train paid
+       · booking: ICP native picker → /yt/confirmation/ · non-ICP GHL widget → /yt/scheduled/ (client-side override of the shared calendar redirect)
+     noindex on purpose — it is a duplicate of root for a link that only lives in YouTube descriptions. -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="Book Out Your Calendar | MoreJobCalls.com">
+<meta property="og:description" content="Exclusive deck appointments, booked onto your calendar every week. 100 in 100 days — or we write you a check for $10,000. See if your market is still open.">
+<meta property="og:type" content="website">
 
+<script>window.MJC_QA=/[?&]qa=1(&|$)/.test(location.search)||/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);</script>
 <!-- ================================================================== -->
-<!-- META PIXEL — base code. PageView fires now, Lead fires on submit    -->
-<!-- only for ICP-qualified submitters (see submit handler below).       -->
-<!-- Replace 839107878270720 with the real Meta Pixel ID before launch.    -->
+<!-- META PIXEL — same dual init as root. PageView now; Lead on submit    -->
+<!-- for ICP-qualified submitters only (seasoned pixel, browser side).    -->
 <!-- ================================================================== -->
 <script>
   !function(f,b,e,v,n,t,s)
@@ -26,1349 +36,890 @@
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '839107878270720');
-  fbq('track', 'PageView');
+  // ORGANIC YOUTUBE: ICP pixel deliberately NOT initialised here, and this page never fires a standard Lead (see YT_Lead below).
+  if(!window.MJC_QA) fbq('track', 'PageView');
 </script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
-<!-- ================================================================== -->
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1832632181230934&ev=PageView&noscript=1"/></noscript>
+
+<!-- Microsoft Clarity (same project as root) -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "wpznuz610a");
+</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-  tailwind.config = {
-    theme: {
-      extend: {
-        colors: {
-          bg: '#000000',
-          surface: '#0D0D0D',
-          elevated: '#141414',
-          charcoal: '#141414',
-          border: '#222222',
-          'border-strong': '#2A2A2A',
-          ink: '#F5F2EB',
-          'ink-muted': '#9CA3AF',
-          'ink-subtle': '#6B7280',
-          gold: '#c7963f',
-          'gold-deep': '#ab8032',
-          'gold-soft': 'rgba(199, 150, 63, 0.12)',
-          paper: '#FFFFFF',
-          cream: '#F5F2EB',
-          'paper-text': '#171717',
-          'paper-muted': '#525252',
-          'paper-subtle': '#737373',
-          'paper-border': '#E5E5E5',
-        },
-        fontFamily: {
-          display: ['Inter', 'system-ui', 'sans-serif'],
-          sans: ['Inter', 'system-ui', 'sans-serif'],
-        },
-        boxShadow: {
-          'gold': '0 8px 32px -8px rgba(199, 150, 63, 0.35)',
-          'card': '0 8px 24px -8px rgba(0, 0, 0, 0.6)',
-          'card-light': '0 8px 24px -8px rgba(0, 0, 0, 0.08)',
-          'apply': '0 24px 60px -16px rgba(0, 0, 0, 0.18)',
-        },
-      }
-    }
-  }
-</script>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
 <style>
-  html { scroll-behavior: smooth; }
-  body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
-  .display { font-family: 'Inter', system-ui, sans-serif; letter-spacing: -0.035em; font-weight: 800; }
-  .display-lg { font-family: 'Inter', system-ui, sans-serif; letter-spacing: -0.04em; font-weight: 800; }
-  details > summary { list-style: none; }
-  details > summary::-webkit-details-marker { display: none; }
-  .gold-gradient { background-image: linear-gradient(to bottom, #c7963f 0%, #ab8032 100%); }
-  .gold-gradient-hover:hover { background-image: linear-gradient(to bottom, #d4a14a 0%, #ba8f3b 100%); }
+  :root{
+    --bg:#0B0B0B; --card:#151515; --border:#262626; --ink:#F5F2EB; --muted:#A3A09A; --subtle:#6F6C66;
+    --gold:#C7963F; --gold-deep:#AB8032; --pop:#F5B93E; --pop-deep:#D9982A; --seam:#ECEAE4; --paper:#FFFFFF; --paper-ink:#171717; --paper-muted:#6B6B6B; --paper-border:#E5E5E5;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding-left:16px;padding-right:16px;}
+  .gold{color:var(--pop);}
+  .display{font-family:'Archivo','Inter',system-ui,sans-serif;}
+  h1,h2,h3{margin:0;letter-spacing:-0.03em;}
+  .h2{font-family:'Archivo','Inter',system-ui,sans-serif;font-size:30px;font-weight:900;text-align:center;line-height:1.1;letter-spacing:-0.03em;color:#fff;}
+  @media(min-width:640px){.h2{font-size:40px;}}
 
-  .sec-dark { background:#000000; color:#F5F2EB; }
-  .sec-charcoal { background:#141414; color:#F5F2EB; }
-  .sec-paper { background:#FFFFFF; color:#171717; }
-  .sec-cream { background:#F5F2EB; color:#171717; }
+  /* ── HERO ─────────────────────────────────────────────── */
+  .hero{position:relative;text-align:center;padding:18px 16px 24px;
+    background:
+      radial-gradient(48% 22% at 50% -4%, rgba(245,185,62,.26) 0%, transparent 70%),
+      linear-gradient(to bottom, var(--bg) 0%, var(--bg) 58%, var(--seam) 100%);}
+  @media(min-width:640px){.hero{padding:26px 16px 44px;}}
+  .brand{display:flex;width:fit-content;align-items:center;gap:9px;text-decoration:none;margin:0 auto 14px;}
+  .brand img{width:42px;height:42px;border-radius:10px;}
+  .brand span{font-family:'Archivo','Inter',system-ui,sans-serif;font-weight:900;letter-spacing:.14em;font-size:15px;color:#fff;}
+  .brand span b{color:var(--pop);font-weight:900;}
+  .brand span i{font-style:normal;text-transform:lowercase;letter-spacing:.04em;color:#fff;}
+  .eyebrow{display:block;width:fit-content;margin:0 auto 14px;padding:9px 18px;border-radius:999px;font-family:'Archivo','Inter',system-ui,sans-serif;font-size:12px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:var(--pop);
+    background:rgba(245,185,62,.14);border:1px solid rgba(245,185,62,.55);
+    box-shadow:0 0 60px rgba(245,185,62,.35), inset 0 0 22px rgba(245,185,62,.10);text-shadow:0 0 18px rgba(245,185,62,.65);}
+  @media(min-width:640px){.eyebrow{font-size:14px;padding:10px 22px;}}
+  /* Phones: tighter pill so "For Established Deck Companies" stays on one line (fits ≥360px; smaller fallback below 360px). */
+  @media(max-width:639px){.eyebrow{font-size:11.5px;letter-spacing:.14em;padding:8px 16px;white-space:nowrap;}}
+  @media(max-width:359px){.eyebrow{font-size:10px;letter-spacing:.08em;padding:7px 12px;}}
+  .h1{font-family:'Archivo','Inter',system-ui,sans-serif;font-size:34px;line-height:1.02;font-weight:900;letter-spacing:-0.03em;color:#fff;max-width:980px;margin:4px auto 0;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.5);}
+  @media(min-width:640px){.h1{font-size:50px;}}
+  @media(min-width:1024px){.h1{font-size:58px;max-width:1040px;}}
+  /* Guarantee badge under the H1 (Spencer picked style #3, 2026-09-15): green check in a dark pill, white text. */
+  .h1-sub{margin:16px auto 0;}
+  @media(min-width:640px){.h1-sub{margin-top:22px;}}
+  .gb{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.45);
+    font-family:'Inter',system-ui,sans-serif;font-size:18px;line-height:1.2;font-weight:800;letter-spacing:-0.01em;color:#fff;box-shadow:0 0 30px rgba(34,197,94,.18);}
+  .gb svg{flex:0 0 auto;width:22px;height:22px;}
+  @media(min-width:640px){.gb{font-size:21px;padding:12px 22px;gap:12px;}.gb svg{width:24px;height:24px;}}
+  /* Gold brush-stroke underline under "Every Single Week": sits behind the letters (isolation + z-index:-1), draws in left→right. */
+  .ul{position:relative;display:inline-block;white-space:nowrap;isolation:isolate;padding-bottom:.12em;}
+  .ul::after{content:"";position:absolute;left:-2%;right:-2%;bottom:0;height:.3em;z-index:-1;pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23D9982A'/%3E%3Cstop offset='.5' stop-color='%23FFD37A'/%3E%3Cstop offset='1' stop-color='%23F5B93E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M2 11.5C48 5 120 3 197 4.8c2.7.1 3.3 5 .5 5.6C130 12.6 64 14.8 7 18.3c-5.4.3-7-5.6-5-6.8Z' fill='url(%23g)'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+    animation:ulDraw .75s .35s cubic-bezier(.2,.8,.2,1) both;}
+  @keyframes ulDraw{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+  @media(prefers-reduced-motion:reduce){.ul::after{animation:none;}}
 
-  .sticky-cta { transition: transform 260ms cubic-bezier(0.16, 1, 0.3, 1), opacity 220ms ease-out; }
-  .sticky-cta[aria-hidden="true"] { transform: translateY(120%); opacity: 0; pointer-events: none; }
+  /* ── SURVEY CARD ───────────────────────────────────────── */
+  .survey-wrap{margin-top:22px;}
+  @media(min-width:640px){.survey-wrap{margin-top:32px;}}
+  #qs-card{position:relative;margin:0 auto;width:100%;max-width:780px;background:#fff;color:var(--paper-ink);border-radius:28px;padding:28px 20px 24px;text-align:left;
+    box-shadow:0 0 90px rgba(245,185,62,.28), 0 30px 70px rgba(0,0,0,.5);transition:max-width .25s cubic-bezier(.16,1,.3,1);scroll-margin-top:12vh;}
+  @media(min-width:640px){#qs-card{padding:44px 48px 38px;}}
+  #qs-card.cal-open{max-width:1080px;}
+  .qs-title{font-family:'Archivo','Inter',system-ui,sans-serif;font-size:27px;font-weight:900;text-align:center;letter-spacing:-0.03em;color:#111;}
+  @media(min-width:640px){.qs-title{font-size:36px;}}
+  .qs-title .gold{color:var(--pop-deep);}
+  .qs-sub{margin:12px 0 0;text-align:center;color:#555;font-size:16px;}
+  .qs-prog{margin-top:30px;}
+  .qs-prog-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#7A7A7A;font-weight:600;}
+  .qs-bar{margin-top:8px;height:6px;width:100%;border-radius:999px;background:#EAEAEA;overflow:hidden;}
+  .qs-bar-fill{height:100%;width:0;border-radius:999px;background:var(--pop-deep);transition:width .3s ease;}
+  .qs-step{display:none;margin-top:30px;}
+  .qs-step.active{display:block;animation:qsIn .2s ease-out;}
+  @keyframes qsIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .qs-q{font-size:19px;font-weight:800;text-align:center;letter-spacing:-0.02em;line-height:1.25;color:#111;}
+  @media(min-width:640px){.qs-q{font-size:22px;}}
+  .qs-hint{margin:6px 0 0;text-align:center;font-size:13px;color:#8A8A8A;}
+  .qs-pre{margin:0 0 8px;text-align:center;font-size:14px;color:#6B6B6B;line-height:1.5;}
+  .qs-num{color:#B07A1E;}
+  .qs-qa{margin:0 0 14px;padding:8px 12px;border-radius:10px;background:#FFF4D6;color:#7A5A12;font-size:12px;font-weight:700;text-align:center;}
+  .qs-opts{display:grid;gap:14px;margin-top:26px;}
+  @media(min-width:640px){.qs-opts.two{grid-template-columns:1fr 1fr;}}
+  .qs-opt{width:100%;text-align:left;border:1.5px solid #D6D6D6;border-radius:12px;background:#fff;padding:19px 20px;font-size:16px;font-weight:600;color:#1A1A1A;cursor:pointer;transition:border-color .15s,background .15s,transform .1s;}
+  .qs-opt:hover{border-color:var(--pop-deep);background:#FFF8E8;box-shadow:0 6px 18px -10px rgba(217,152,42,.6);}
+  .qs-opt:active{transform:translateY(1px);}
+  .qs-input{width:100%;border:1px solid #DADADA;border-radius:12px;padding:15px 16px;font-size:16px;font-family:inherit;color:#171717;outline:none;background:#fff;transition:border-color .15s,box-shadow .15s;}
+  .qs-input:focus{border-color:var(--pop-deep);box-shadow:0 0 0 4px rgba(245,185,62,.22);}
+  .qs-input.bad{border-color:#DC2626;}
+  .qs-label{display:block;font-size:13px;font-weight:700;color:#444;margin:14px 0 6px;}
+  .qs-err{display:none;margin:6px 0 0;font-size:13px;font-weight:600;color:#DC2626;}
+  .qs-err.show{display:block;}
+  .qs-btn{width:100%;margin-top:18px;border:0;border-radius:999px;padding:16px 20px;font-size:16px;font-weight:900;letter-spacing:.02em;text-transform:uppercase;color:#141414;cursor:pointer;
+    background:linear-gradient(180deg,#F5B93E 0%,#D9982A 100%);box-shadow:0 10px 30px -8px rgba(245,185,62,.7);transition:transform .1s,filter .15s;}
+  .qs-btn:hover{filter:brightness(1.05);}
+  .qs-btn:active{transform:translateY(1px);}
+  .qs-btn:disabled{opacity:.6;cursor:not-allowed;}
+  .qs-fine{margin:12px 0 0;font-size:11px;color:#8A8A8A;text-align:center;line-height:1.5;}
+  .qs-back{display:none;margin:18px auto 0;background:none;border:0;color:#8A8A8A;font-size:13px;font-weight:600;cursor:pointer;padding:6px 10px;}
+  .qs-back.show{display:block;}
+  .qs-back:hover{color:#171717;}
+  .qs-trust{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 16px;margin:24px auto 0;font-size:13px;font-weight:600;color:#3A3A3A;max-width:780px;}
+  @media(min-width:640px){.qs-trust{font-size:15px;gap:10px 26px;margin-top:34px;}}
+  .qs-trust .d{color:var(--pop-deep);}
+  .qs-trust .sep{color:#B8B8B8;display:none;}
+  @media(min-width:640px){.qs-trust .sep{display:inline;}}
+  .qs-guar{margin:10px auto 0;font-size:13px;color:#5A5A5A;text-align:center;max-width:640px;}
+  .qs-guar a{color:#5A5A5A;}
 
-  /* Step transitions for inline survey */
-  .step { display: none; }
-  .step.active { display: block; animation: fadeIn 200ms ease-out; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+  /* calendar step */
+  #qs-cal-h{font-size:18px;font-weight:800;text-align:center;}
+  #qs-cal-sub{margin:6px 0 0;text-align:center;font-size:14px;font-weight:700;color:#171717;}
+  #mc-cal{width:100%;height:74vh;min-height:540px;border:0;display:block;background:#fff;border-radius:12px;margin-top:16px;}
+  @media(min-width:1140px){#qs-card.cal-open #mc-cal{height:720px;min-height:700px;}}
+  @media(max-width:640px){#mc-cal{height:80vh;min-height:520px;}}
+  #mc-spin{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 0;text-align:center;}
+  .mc-spinner{width:44px;height:44px;border:4px solid #ECE6DA;border-top-color:#1A1917;border-radius:50%;animation:mcSpin 1s linear infinite;margin-bottom:18px;}
+  @keyframes mcSpin{to{transform:rotate(360deg)}}
+  /* Native slot picker (ICP leads) — same picker + Worker as root / homepage / /book/ */
+  #mcb{display:none;margin-top:14px;}
+  .mcb-state{text-align:center;font-size:14px;color:#7A7870;padding:18px 0 8px;line-height:1.6;}
+  .mcb-state a{color:#B07A1E;font-weight:700;}
+  .mcb-days{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;margin:8px -2px 6px;-webkit-overflow-scrolling:touch;}
+  .mcb-day{flex:1 0 auto;min-width:84px;border:2px solid #ECE6DA;border-radius:11px;background:#fff;padding:9px 10px;text-align:center;cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s;}
+  .mcb-day span{display:block;}
+  .mcb-dow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A7870;}
+  .mcb-date{font-size:15px;font-weight:800;color:#1A1917;}
+  .mcb-day.mcb-sel{border-color:#1A1917;background:#1A1917;}
+  .mcb-day.mcb-sel span{color:#fff;}
+  .mcb-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px;}
+  @media(max-width:400px){.mcb-slots{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:760px){.mcb-slots{grid-template-columns:repeat(4,1fr);}}
+  .mcb-slot{border:2px solid #ECE6DA;border-radius:10px;background:#fff;padding:12px 6px;font-family:inherit;font-size:14px;font-weight:700;color:#1A1917;cursor:pointer;transition:border-color .15s,background .15s;}
+  .mcb-slot:hover{border-color:#C7963F;background:#FAF6EE;}
+  .mcb-slot.mcb-sel{border-color:#C7963F;background:#C7963F;}
+  .mcb-book{border-top:1px solid #ECE6DA;margin-top:16px;padding-top:16px;text-align:center;}
+  .mcb-when{font-size:14px;color:#7A7870;margin:0 0 12px;}
+  .mcb-when strong{color:#1A1917;}
+  .mcb-err{font-size:13px;font-weight:700;color:#B91C1C;margin:0 0 10px;}
+  .mcb-btn{width:100%;background:#C7963F;color:#1A1917;border:none;border-radius:9px;padding:14px 20px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 18px rgba(199,150,63,.4);transition:background .15s,transform .1s;}
+  .mcb-btn:hover:not(:disabled){background:#AB8032;transform:translateY(-1px);}
+  .mcb-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+  .mcb-tz{font-size:12px;color:#9A968D;margin:0 0 4px;text-align:center;}
 
-  /* Premium pulse for the eyebrow status dot */
-  @keyframes premium-pulse {
-    0%   { transform: scale(0.9);  opacity: 0.55; }
-    70%  { transform: scale(2.6);  opacity: 0; }
-    100% { transform: scale(2.6);  opacity: 0; }
-  }
-  .pulse-ring {
-    animation: premium-pulse 2.4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
-    transform-origin: center;
-    will-change: transform, opacity;
-  }
-  @keyframes premium-pulse-core {
-    0%, 100% { opacity: 1; }
-    50%      { opacity: 0.78; }
-  }
-  .pulse-core { animation: premium-pulse-core 2.4s ease-in-out infinite; }
-  @media (prefers-reduced-motion: reduce) {
-    .pulse-ring, .pulse-core { animation: none; }
-  }
+  /* ── LOGO MARQUEE ─────────────────────────────────────── */
+  .logos{border-top:1px solid rgba(38,38,38,.6);border-bottom:1px solid rgba(38,38,38,.6);background:rgba(21,21,21,.4);padding:32px 0;}
+  .logos p{margin:0 0 22px;text-align:center;font-size:11px;font-weight:800;letter-spacing:.25em;text-transform:uppercase;color:var(--subtle);}
+  .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6% 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6% 94%,transparent);}
+  .marquee-track{display:flex;align-items:center;gap:56px;width:max-content;will-change:transform;animation:logoScroll 34s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  @keyframes logoScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 28px))}}
+  .logo-cell{flex:0 0 auto;height:64px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px;opacity:.6;transition:opacity .18s;}
+  .logo-cell:hover{opacity:.95;}
+  .logo-cell img{max-height:50px;max-width:170px;width:auto;height:auto;object-fit:contain;filter:grayscale(1);}
+  .logo-cell--invert img{filter:grayscale(1) brightness(0) invert(1);}
+  .logo-cell--card img{filter:grayscale(1) invert(1);mix-blend-mode:screen;max-height:56px;max-width:180px;}
+  @media(prefers-reduced-motion:reduce){.marquee-track{animation:none;}}
 
-  /* Editorial pull-quote mark (Brian Wallace skeptic-defuse section) */
-  .pullquote-mark {
-    font-family: Georgia, 'Times New Roman', 'Cormorant Garamond', serif;
-    font-size: 96px;
-    line-height: 0.6;
-    color: #c7963f;
-    text-align: center;
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    margin-bottom: 18px;
-    user-select: none;
-    text-shadow: 0 8px 24px rgba(199, 150, 63, 0.18);
-  }
-  @media (min-width: 640px) {
-    .pullquote-mark { font-size: 128px; margin-bottom: 22px; }
-  }
+  /* ── RECENT RESULTS ───────────────────────────────────── */
+  .results{padding:56px 16px;text-align:center;max-width:900px;margin:0 auto;}
+  .faces{display:flex;justify-content:center;margin-top:32px;}
+  .faces img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--bg);margin-left:-12px;}
+  .faces img:first-child{margin-left:0;}
+  .join{margin:16px 0 0;color:var(--muted);font-size:16px;}
+  .join b{color:var(--ink);}
+  .wins{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:12px;text-align:left;}
+  .wins li{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:16px 20px;font-weight:700;font-size:16px;line-height:1.35;}
+  .wins li .z{color:var(--pop);margin-right:8px;}
+  .wins li small{display:block;margin-top:4px;font-size:13px;font-weight:500;color:var(--muted);}
 
-  /* === 100-Day Operator Track === */
-  .track { position: relative; padding: 0; margin: 0; list-style: none; }
-  .track-rail {
-    position: absolute;
-    /* top + bottom set by JS to align with first + last node centers */
-    top: 30px;
-    bottom: 30px;
-    left: 29px;
-    width: 1.5px;
-    background: rgba(199, 150, 63, 0.14);
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  @media (min-width: 640px) { .track-rail { left: 39px; } }
-  .track-rail-fill {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 0;
-    background: linear-gradient(180deg, #c7963f 0%, #ab8032 100%);
-    transition: height 700ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .track-row {
-    position: relative;
-    display: flex;
-    align-items: flex-start;
-    gap: 18px;
-    padding-bottom: 28px;
-  }
-  @media (min-width: 640px) {
-    .track-row { gap: 28px; padding-bottom: 36px; }
-  }
-  .track-row:last-child { padding-bottom: 0; }
-  .track-node {
-    position: relative;
-    z-index: 2;
-    flex-shrink: 0;
-    width: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 2px; /* aligns node center with card eyebrow visually */
-  }
-  @media (min-width: 640px) { .track-node { width: 80px; } }
-  .track-node-num {
-    width: 56px;
-    height: 56px;
-    border-radius: 999px;
-    background: #FFFFFF;
-    border: 1.5px solid rgba(199, 150, 63, 0.30);
-    color: rgba(23, 23, 23, 0.45);
-    font-weight: 700;
-    font-size: 13px;
-    letter-spacing: 0.06em;
-    font-feature-settings: "tnum" 1, "lnum" 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px -2px rgba(23, 23, 23, 0.06);
-    transition: background 500ms cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 500ms cubic-bezier(0.16, 1, 0.3, 1),
-                color 500ms cubic-bezier(0.16, 1, 0.3, 1),
-                box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1),
-                transform 500ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .track-node-tag {
-    margin-top: 10px;
-    font-size: 9.5px;
-    font-weight: 800;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: #8c8c8c;
-    text-align: center;
-    line-height: 1.15;
-    white-space: nowrap;
-    transition: color 400ms ease-out;
-  }
-  @media (min-width: 640px) { .track-node-tag { font-size: 10px; letter-spacing: 0.20em; } }
-  .track-row.is-consumed .track-node-num,
-  .track-row.is-active .track-node-num {
-    background: linear-gradient(180deg, #d4a14a 0%, #ab8032 100%);
-    border-color: #c7963f;
-    color: #FFFFFF;
-    box-shadow: 0 12px 28px -10px rgba(199, 150, 63, 0.55), inset 0 1px 0 rgba(255,255,255,0.18);
-  }
-  .track-row.is-consumed .track-node-tag,
-  .track-row.is-active .track-node-tag { color: #ab8032; }
-  .track-row.is-active .track-node-num {
-    transform: scale(1.05);
-    animation: track-node-pulse 2.4s ease-in-out infinite;
-  }
-  @keyframes track-node-pulse {
-    0%, 100% { box-shadow: 0 0 0 0 rgba(199, 150, 63, 0.40), 0 12px 28px -10px rgba(199, 150, 63, 0.55), inset 0 1px 0 rgba(255,255,255,0.18); }
-    70%      { box-shadow: 0 0 0 14px rgba(199, 150, 63, 0), 0 12px 28px -10px rgba(199, 150, 63, 0.55), inset 0 1px 0 rgba(255,255,255,0.18); }
-  }
-  .track-card {
-    position: relative;
-    flex: 1;
-    background: #FFFFFF;
-    border: 1px solid rgba(23, 23, 23, 0.06);
-    border-radius: 16px;
-    padding: 18px 20px;
-    margin-top: 0;
-    box-shadow: 0 1px 2px rgba(23, 23, 23, 0.04), 0 8px 24px -16px rgba(23, 23, 23, 0.10);
-    transition: transform 500ms cubic-bezier(0.16, 1, 0.3, 1),
-                border-color 400ms ease-out,
-                box-shadow 500ms cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  @media (min-width: 640px) { .track-card { padding: 22px 26px; } }
-  .track-card-eyebrow {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: 0.20em;
-    text-transform: uppercase;
-    color: #c7963f;
-    margin-bottom: 6px;
-  }
-  .track-card-title {
-    color: #0F0F0F;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 1.25;
-    letter-spacing: -0.01em;
-    margin: 0 0 8px 0;
-  }
-  @media (min-width: 640px) { .track-card-title { font-size: 19px; } }
-  .track-card-body {
-    color: #4a4a4a;
-    font-size: 14px;
-    line-height: 1.6;
-    margin: 0;
-  }
-  @media (min-width: 640px) { .track-card-body { font-size: 15px; } }
-  .track-row.is-active .track-card {
-    transform: translateY(-2px);
-    border-color: rgba(199, 150, 63, 0.35);
-    box-shadow: 0 1px 2px rgba(23, 23, 23, 0.04),
-                0 18px 40px -16px rgba(23, 23, 23, 0.14),
-                0 0 0 4px rgba(199, 150, 63, 0.06);
-  }
-  /* Outcome row — dark inverted card sealing the loop back to the guarantee */
-  .track-row--outcome { padding-top: 6px; }
-  .track-row--outcome .track-node-num {
-    background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
-    border-color: #c7963f;
-    color: #c7963f;
-    font-size: 14px;
-    box-shadow: 0 10px 28px -10px rgba(0, 0, 0, 0.40), inset 0 1px 0 rgba(199,150,63,0.22);
-  }
-  .track-row--outcome.is-active .track-node-num,
-  .track-row--outcome.is-consumed .track-node-num {
-    background: linear-gradient(180deg, #1a1a1a 0%, #000000 100%);
-    color: #c7963f;
-  }
-  .track-row--outcome .track-card {
-    background: linear-gradient(180deg, #111111 0%, #000000 100%);
-    border: 1px solid rgba(199, 150, 63, 0.32);
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.40),
-                0 22px 44px -18px rgba(0, 0, 0, 0.55),
-                inset 0 1px 0 rgba(199, 150, 63, 0.10);
-  }
-  .track-row--outcome .track-card-eyebrow { color: #c7963f; }
-  .track-row--outcome .track-card-title { color: #F5F2EB; font-size: 19px; }
-  @media (min-width: 640px) { .track-row--outcome .track-card-title { font-size: 22px; } }
-  .track-row--outcome .track-card-body { color: #9CA3AF; }
-  .track-row--outcome .track-card-body .gold { color: #c7963f; font-weight: 700; }
-  @media (prefers-reduced-motion: reduce) {
-    .track-rail-fill { transition: none; }
-    .track-card, .track-node-num, .track-node-tag { transition: none; }
-    .track-row.is-active .track-node-num { animation: none; transform: none; }
-  }
+  /* ── VIDEO WALL ───────────────────────────────────────── */
+  .videos{padding:0 16px 64px;max-width:1120px;margin:0 auto;}
+  .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;}
+  @media(min-width:640px){.vgrid{gap:24px;}}
+  .vcard{overflow:hidden;border-radius:16px;border:1px solid var(--border);background:var(--card);}
+  .yt{position:relative;aspect-ratio:16/9;width:100%;background:#000;border:0;padding:0;cursor:pointer;display:block;overflow:hidden;}
+  .yt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92;transition:transform .3s,opacity .2s;}
+  .yt:hover img{transform:scale(1.03);opacity:1;}
+  .yt .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:linear-gradient(180deg,#C7963F,#AB8032);box-shadow:0 10px 30px -6px rgba(199,150,63,.7);display:flex;align-items:center;justify-content:center;}
+  @media(min-width:640px){.yt .play{width:64px;height:64px;}}
+  .yt .play::before{content:"";width:0;height:0;border-left:16px solid #0D0D0D;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;}
+  .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .vt{padding:10px 12px 12px;font-size:12px;font-weight:800;line-height:1.3;letter-spacing:-0.01em;}
+  @media(min-width:640px){.vt{font-size:14px;padding:12px 16px 14px;}}
+  .vt small{display:block;margin-top:3px;font-size:11px;font-weight:500;color:var(--muted);}
+  .cta-row{margin-top:48px;text-align:center;}
+  .cta{display:inline-block;border-radius:999px;padding:18px 34px;font-size:17px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:#141414;text-decoration:none;
+    background:linear-gradient(180deg,#F5B93E 0%,#D9982A 100%);box-shadow:0 12px 34px -8px rgba(245,185,62,.7);transition:transform .1s,filter .15s;}
+  .cta:hover{filter:brightness(1.06);}
+  .cta:active{transform:translateY(1px);}
 
-  /* Proof card hover */
-  .proof-thumb .play-icon { transition: transform 200ms ease-out; }
-  .proof-thumb:hover .play-icon { transform: scale(1.08); }
+  /* ── RECEIPTS ─────────────────────────────────────────── */
+  .receipts{padding:0 16px 72px;max-width:1120px;margin:0 auto;}
+  .receipts .kicker{margin:0;text-align:center;font-size:14px;font-weight:700;font-style:italic;color:var(--pop);}
+  .receipts .h2{margin-top:8px;}
+  .masonry{column-count:1;column-gap:16px;margin-top:36px;}
+  @media(min-width:640px){.masonry{column-count:2;}}
+  @media(min-width:1024px){.masonry{column-count:3;}}
+  .masonry img{width:100%;border-radius:12px;border:1px solid var(--border);background:var(--card);margin-bottom:16px;break-inside:avoid;}
 
-  /* Video lightbox modal — plays YouTube inline so users don't leave the page */
-  body.modal-open { overflow: hidden; }
-  .video-modal {
-    position: fixed; inset: 0; z-index: 60;
-    background: rgba(0, 0, 0, 0.92);
-    display: flex; align-items: center; justify-content: center;
-    padding: 1rem;
-    opacity: 0; pointer-events: none;
-    transition: opacity 220ms ease-out;
-  }
-  .video-modal[aria-hidden="false"] { opacity: 1; pointer-events: auto; }
-  .video-modal-inner {
-    position: relative;
-    width: 100%; max-width: 960px;
-    aspect-ratio: 16 / 9;
-    background: #000;
-    border-radius: 16px;
-    overflow: hidden;
-    box-shadow: 0 32px 80px -16px rgba(0, 0, 0, 0.6);
-  }
-  .video-modal-inner iframe {
-    width: 100%; height: 100%;
-    border: 0; display: block;
-  }
-  .video-modal-close {
-    position: absolute;
-    top: -40px; right: 0;
-    background: transparent;
-    color: #fff;
-    border: 0;
-    cursor: pointer;
-    padding: 6px 8px;
-    font: 600 13px/1 'Inter', system-ui, sans-serif;
-    display: inline-flex; align-items: center; gap: 6px;
-    opacity: 0.85;
-    transition: opacity 160ms ease;
-  }
-  .video-modal-close:hover { opacity: 1; }
-  @media (max-width: 640px) {
-    .video-modal-close { top: -36px; }
-  }
+  /* ── THE GUARANTEE (closing section, mirrors root #guarantees) ── */
+  .guar{border-top:1px solid rgba(38,38,38,.6);background:linear-gradient(180deg,#101010 0%,var(--bg) 100%);}
+  .guar-in{max-width:768px;margin:0 auto;padding:64px 16px 72px;text-align:center;}
+  @media(min-width:640px){.guar-in{padding:80px 20px 88px;}}
+  .guar-icon{width:56px;height:56px;margin:0 auto 24px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(245,185,62,.18);}
+  .guar-icon svg{width:24px;height:24px;color:var(--pop);}
+  .guar .h2 .gold{color:var(--pop);}
+  .guar-lede{max-width:512px;margin:16px auto 36px;font-size:16px;color:var(--muted);}
+  .guar-grid{display:grid;grid-template-columns:1fr;gap:16px;text-align:left;margin-bottom:36px;}
+  @media(min-width:640px){.guar-grid{grid-template-columns:1fr 1fr;}}
+  .guar-card{border-radius:12px;background:var(--card);border:1px solid var(--border);padding:24px;}
+  .guar-k{margin:0 0 8px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pop);}
+  .guar-t{margin:0 0 8px;font-weight:700;font-size:16px;color:var(--ink);}
+  .guar-b{margin:0;font-size:13.5px;line-height:1.65;color:var(--muted);}
+  .guar-b strong{color:var(--ink);font-weight:600;}
+  .cta.cta-2{display:inline-flex;flex-direction:column;align-items:center;gap:2px;}
+  .cta.cta-2 small{font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;opacity:.85;}
 
-  /* Logo marquee — sized at ~70% of prior values */
-  .marquee { overflow: hidden; mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%); }
-  .marquee-track { display: inline-flex; gap: 40px; animation: marquee-scroll 38s linear infinite; }
-  .marquee:hover .marquee-track { animation-play-state: paused; }
-  @keyframes marquee-scroll {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
-  .logo-cell {
-    flex: 0 0 auto;
-    height: 62px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 6px;
-    opacity: 0.55;
-    transition: opacity 180ms ease;
-  }
-  .logo-cell:hover { opacity: 0.9; }
-  .logo-cell img {
-    max-height: 50px;
-    max-width: 180px;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-    display: block;
-    filter: grayscale(1);
-  }
-  .logo-cell--invert img { filter: grayscale(1) brightness(0) invert(1); }
-  /* White-bg logos: invert (white→black, dark mark→light) then screen-blend so the
-     now-black background drops out against the dark page bg, leaving only the light mark visible. */
-  .logo-cell--card { background: transparent; padding: 0 6px; border-radius: 0; }
-  .logo-cell--card img { filter: grayscale(1) invert(1); mix-blend-mode: screen; max-height: 56px; max-width: 188px; }
+  /* ── FOOTER ───────────────────────────────────────────── */
+  footer{border-top:1px solid rgba(38,38,38,.6);}
+  .legal{max-width:760px;margin:0 auto;padding:36px 16px;font-size:12px;line-height:1.6;color:var(--subtle);}
+  .legal .lk{font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;}
+  .legal p{margin:0 0 12px;}
+  .legal b{color:var(--muted);font-weight:600;}
+  .legal a{color:var(--gold);text-decoration:underline;text-underline-offset:2px;}
+  .legal .copy{margin-top:24px;padding-top:24px;border-top:1px solid rgba(38,38,38,.6);font-size:11px;text-align:center;}
+  .legal .copy a{color:var(--subtle);text-decoration:none;}
+  .legal .copy:first-child{margin-top:0;padding-top:0;border-top:0;}
+
+  body.mc-lock{overflow:hidden;}
 </style>
-<!-- Microsoft Clarity (heat maps + session recordings + analytics) -->
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wpznuz610a");
-</script>
-
 <script src="/journey.js" defer></script>
 </head>
-<body class="bg-bg text-ink antialiased">
+<body>
 
-<!-- TOP UTILITY BAR -->
-<header class="sec-dark border-b border-border/50 relative z-10">
-  <div class="max-w-3xl mx-auto px-5 py-3.5 flex items-center justify-between">
-    <span class="font-black text-[13px] tracking-[0.18em] uppercase text-ink">More<span class="text-gold">JobCalls</span></span>
-    <a href="#apply" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-md gold-gradient gold-gradient-hover text-black text-sm font-semibold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-      Reserve My Zip Code <span>→</span>
-    </a>
-  </div>
-</header>
+<main>
 
-<!-- HERO -->
-<section class="sec-dark relative overflow-hidden">
-  <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(199, 150, 63, 0.14) 0%, transparent 60%);"></div>
+<!-- ═══════════════════════ HERO + INLINE SURVEY ═══════════════════════ -->
+<section class="hero">
+  <a class="brand" href="https://morejobcalls.com" aria-label="MoreJobCalls.com">
+    <span>MORE<b>JOB</b>CALLS<i>.com</i></span>
+  </a>
+  <p class="eyebrow">For Deck Builders From YouTube</p>
+  <h1 class="h1">We'll Book Out Your Calendar With <span class="gold">10+ Exclusive Deck Appointments</span> <span class="ul">Every Single Week</span> <span class="gold">On Autopilot</span></h1>
+  <p class="h1-sub"><span class="gb"><svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>Or Your Money Back</span></p>
 
-  <div class="relative max-w-3xl mx-auto px-5 pt-6 pb-8 sm:pt-14 sm:pb-14 text-center">
+  <div class="survey-wrap" id="apply">
+    <div id="qs-card" role="form" aria-label="Check if your market is available">
+      <h2 class="qs-title">See If Your Market Is <span class="gold">Available</span></h2>
+      <p class="qs-sub">You've seen the results on the channel. Now see if your market is still open — we only work with 1 deck builder per market. A few quick questions below.</p>
 
-    <!-- Eyebrow -->
-    <div class="inline-flex items-center gap-2 mb-3 sm:mb-5 px-2.5 py-1 rounded-full border border-gold/40" style="background: rgba(199, 150, 63, 0.10);">
-      <span class="w-1.5 h-1.5 rounded-full bg-gold" aria-hidden="true"></span>
-      <span class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold">More Deck Jobs Guaranteed</span>
-    </div>
-
-    <!-- H1 -->
-    <h1 class="display-lg text-[28px] leading-[1.1] sm:text-[50px] sm:leading-[1.05] mb-4 sm:mb-8 max-w-3xl mx-auto">
-      Get 100+ Sales Appointments In 100 Days <span class="text-gold">Or You Get Paid In 2 Ways:</span>
-    </h1>
-
-    <!-- Subheadline -->
-    <p class="text-sm sm:text-lg text-ink-muted max-w-xl mx-auto mb-4 sm:mb-8 leading-snug">
-      100% Refund Of Your Management Fee + $2,000 Cash
-    </p>
-
-    <!-- CTA -->
-    <div class="flex justify-center">
-      <a href="#apply" class="cta-btn w-full sm:w-auto inline-flex flex-col items-center justify-center gap-1 px-8 py-3.5 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-        <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
-        <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
-      </a>
-    </div>
-    <p class="text-[12px] text-ink-subtle mt-3">100+ Contractors Served - $100M+ Jobs Sold</p>
-
-  </div>
-</section>
-
-<!-- LOGO MARQUEE -->
-<section class="sec-charcoal border-y border-border/40">
-  <div class="max-w-6xl mx-auto px-5 py-4 sm:py-5">
-    <p class="text-center text-[9px] sm:text-[11px] font-bold tracking-[0.10em] sm:tracking-[0.22em] uppercase text-ink-subtle mb-4 whitespace-nowrap">
-      Trusted By Deck Builders Across The Country
-    </p>
-    <div class="marquee">
-      <div class="marquee-track">
-        <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
-        <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
-        <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction"></div>
-        <!-- duplicate set for seamless loop -->
-        <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios"></div>
-        <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction"></div>
-        <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction"></div>
-        <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd"></div>
-        <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction"></div>
+      <div class="qs-prog" id="qs-prog">
+        <div class="qs-prog-row"><span id="qs-step-label">Step 1 of 4</span><span id="qs-pct">0%</span></div>
+        <div class="qs-bar"><div class="qs-bar-fill" id="qs-bar-fill"></div></div>
       </div>
-    </div>
-  </div>
-</section>
 
-<!-- V2 NEW: SKEPTIC-DEFUSE QUOTE — sits between marquee and proof for cold traffic -->
-<section class="sec-dark border-b border-border/40">
-  <div class="max-w-3xl mx-auto px-5 py-12 sm:py-14 text-center">
-    <div class="pullquote-mark" aria-hidden="true">&ldquo;</div>
-    <p class="display text-[22px] sm:text-[30px] leading-[1.25] mb-5 max-w-2xl mx-auto text-ink">
-      I saw your ad and I wanted to <span class="text-gold">call your bluff.</span>
-      Six weeks later, we've done more appointments than I did all of last year.
-    </p>
-    <p class="text-[12px] sm:text-[13px] tracking-[0.18em] uppercase text-ink-muted font-bold">
-      Brian Wallace · Bend Fence &amp; Deck · Bend, OR
-    </p>
-  </div>
-</section>
+      <!-- Q1 · current appts/week (GHL field contact.how_many_sales_appointments_are_you_currently_running_per_week, created 2026-09-14) -->
+      <div class="qs-step active" data-step="1">
+        <h3 class="qs-q">How many sales appointments are you CURRENTLY running per week?</h3>
+        <div class="qs-opts two">
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="0 - 5 appointments per week">0–5 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="5 - 10 appointments per week">5–10 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="10 - 20 appointments per week">10–20 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="20+ appointments per week">20+ per week</button>
+        </div>
+      </div>
 
-<!-- PROOF -->
-<section id="proof" class="sec-paper">
-  <div class="max-w-5xl mx-auto px-5 py-14 sm:py-20">
-    <div class="text-center mb-10">
-      <p class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold mb-3">· Real Results</p>
-      <h2 class="display text-[28px] sm:text-[44px] leading-[1.05] mb-3 text-paper-text">
-        Real builders. <span class="text-gold">Real ROI.</span>
-      </h2>
-      <p class="text-base text-paper-muted max-w-xl mx-auto">
-        Tap any card to watch the story. These are deck builders who said the same thing on day one — <em>"too good to be true"</em> — and changed their minds because the system kept delivering.
-      </p>
-    </div>
+      <!-- Q2 · MORE appts/week (GHL field CGD5LHAY2V7wQz2Ap5ZD, created 2026-09-14) -->
+      <div class="qs-step" data-step="2">
+        <p class="qs-pre">Every appointment we book is exclusive to you, so we only book what your team can actually run.</p>
+        <h3 class="qs-q">How many MORE appointments can you handle per week?</h3>
+        <div class="qs-opts two">
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="5 - 10 more per week">5–10 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="10 - 20 more per week">10–20 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="20 - 50 more per week">20–50 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="50+ more per week">50+ more</button>
+        </div>
+      </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
-      <article>
-        <a href="https://youtu.be/YJQxX5ZQ3aI" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/YJQxX5ZQ3aI/maxresdefault.jpg" alt="Justin Wylie — CPL $400 to $30 in 14 days" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      <!-- Q3 · service-area ZIP (added 2026-09-15). Single numeric input, auto-advances at 5 digits so
+           it keeps the tap rhythm of the surrounding questions. Also feeds Meta's zip match key —
+           both CAPI steps in "1. New Lead" already forward zip_sha256, the LP just never sent it. -->
+      <div class="qs-step" data-step="3">
+        <p class="qs-pre">Appointments are exclusive by territory, so we check what's open in your area before the call.</p>
+        <h3 class="qs-q">What ZIP do you want more deck jobs around?</h3>
+        <div style="margin-top:6px;">
+          <label class="qs-label" for="qs-zip">ZIP code</label>
+          <input id="qs-zip" class="qs-input" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="e.g. 75201">
+          <p id="qs-zip-err" class="qs-err">Please enter a valid 5-digit ZIP code.</p>
+          <button class="qs-btn" type="button" data-next>Continue &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Q4 · revenue (existing field + values — ICP gate = ≥ $500K) -->
+      <div class="qs-step" data-step="4">
+        <p class="qs-pre">This helps us size the plan and ad budget to your business. Rough range is fine. No wrong answers.</p>
+        <h3 class="qs-q">How much revenue has your business generated within the past 12 months?</h3>
+        <div class="qs-opts two">
+          <button class="qs-opt" type="button" data-field="revenue" data-value="0_100k">$0–$100K</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="100_200k">$100K–$200K</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="200_300k">$200K–$300K</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="300_500k">$300K–$500K</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="500k_1m">$500K–$1M</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="1m_3m">$1M–$3M</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="3m_plus">$3M+</button>
+        </div>
+      </div>
+
+      <!-- Q5 · contact + business website (LAST) -->
+      <div class="qs-step" data-step="5">
+        <p class="qs-pre">We keep strategy-session spots limited. Grab yours before they fill up this week.</p>
+        <h3 class="qs-q">Where should we send your call details?</h3>
+        <div style="margin-top:6px;">
+          <label class="qs-label" for="qs-first">First name</label>
+          <input id="qs-first" class="qs-input" type="text" autocomplete="given-name" autocapitalize="words" placeholder="First name">
+          <p id="qs-first-err" class="qs-err">Please enter your first name.</p>
+          <label class="qs-label" for="qs-last">Last name</label>
+          <input id="qs-last" class="qs-input" type="text" autocomplete="family-name" autocapitalize="words" placeholder="Last name">
+          <p id="qs-last-err" class="qs-err">Please enter your last name.</p>
+          <label class="qs-label" for="qs-site">Business website</label>
+          <input id="qs-site" class="qs-input" type="text" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="url" placeholder="e.g. wyliecustomdecks.com">
+          <p id="qs-site-err" class="qs-err">Enter your website, or tap “I don’t have one”.</p>
+          <p class="qs-fine" style="margin:-2px 0 10px;">A Facebook page works too. <a href="#" id="qs-no-site">I don’t have one</a></p>
+          <label class="qs-label" for="qs-phone">Phone</label>
+          <input id="qs-phone" class="qs-input" type="tel" inputmode="numeric" autocomplete="tel" maxlength="14" placeholder="(555) 555-5555">
+          <p id="qs-phone-err" class="qs-err">Please enter a valid 10-digit phone number.</p>
+          <label class="qs-label" for="qs-email">Email</label>
+          <input id="qs-email" class="qs-input" type="email" autocomplete="email" autocapitalize="none" placeholder="you@company.com">
+          <p id="qs-email-err" class="qs-err">Please enter a valid email address.</p>
+          <button class="qs-btn" type="button" data-next-final>Book My Call &rarr;</button>
+          <p class="qs-fine">By continuing, you agree to receive SMS/text reminders about your call. Standard rates may apply. Reply STOP to opt out.</p>
+        </div>
+      </div>
+
+      <!-- Step 6 · calendar (in place, no page change) -->
+      <div class="qs-step" data-step="6">
+        <h3 id="qs-cal-h" class="qs-q">Pick a time that works for you</h3>
+        <p id="qs-cal-sub">100 Deck Sales Appointments in 100 Days — or We Write You a Check for $10,000.</p>
+        <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
+        <div id="mc-cal-wrap" style="display:none;"><iframe id="mc-cal" src="" title="Book your Deck Jobs Strategy Session" scrolling="yes" allow="payment"></iframe><script src="https://api.seasonproofgrowth.com/js/form_embed.js" type="text/javascript"></script></div>
+        <!-- Native slot picker (ICP leads only). Non-ICP keeps the GHL widget above (its calendar collects the deposit in-widget). -->
+        <div id="mcb">
+          <p class="mcb-tz">45 minutes on Google Meet &middot; times shown in <span id="mcb-tz">your time zone</span></p>
+          <div id="mcb-loading" class="mcb-state">Checking open times&hellip;</div>
+          <div id="mcb-live" style="display:none;">
+            <div class="mcb-days" id="mcb-days"></div>
+            <div class="mcb-slots" id="mcb-slots"></div>
+            <div class="mcb-book" id="mcb-book" style="display:none;">
+              <p class="mcb-when">Locking in <strong id="mcb-when"></strong></p>
+              <p class="mcb-err" id="mcb-err" style="display:none;"></p>
+              <button type="button" class="mcb-btn" id="mcb-btn">Lock In My Call &rarr;</button>
             </div>
           </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">CPL $400 → $30 in 14 days</p>
+          <div id="mcb-empty" class="mcb-state" style="display:none;">
+            <p><strong>The next few days are spoken for.</strong></p>
+            <p>Text us at <a href="sms:+15012363920">(501) 236-3920</a> and we'll find you a time.</p>
           </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Justin Wylie</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">All Pro Decks &amp; Patios · San Antonio, TX</p>
+          <div id="mcb-error" class="mcb-state" style="display:none;">
+            <p><strong>Couldn't load the calendar.</strong></p>
+            <p><a href="#" id="mcb-retry">Try again</a> or text us at <a href="sms:+15012363920">(501) 236-3920</a>.</p>
+          </div>
         </div>
-      </article>
+      </div>
 
-      <article>
-        <a href="https://youtu.be/-q18xO92akA" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/-q18xO92akA/maxresdefault.jpg" alt="Jason Flynn — $500K month on $100/day in ads" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$500K month on $100/day ads</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Jason Flynn</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">PROdeck Construction · Northern Virginia</p>
-        </div>
-      </article>
-
-      <article>
-        <a href="https://youtu.be/4TP1sTRASoA" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/4TP1sTRASoA/maxresdefault.jpg" alt="Brian Wallace — 60 estimates · 25 closed · 6 weeks" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">60 estimates · 25 closed · 6 weeks</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Brian Wallace</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">Bend Fence &amp; Deck · Bend, OR</p>
-        </div>
-      </article>
-
-      <article>
-        <a href="https://youtu.be/Xt4TVn4zP7s" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/Xt4TVn4zP7s/maxresdefault.jpg" alt="Jacob Weaver — $500K last year to $1M by April 21" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$500K last year → $1M by April 21</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Jacob Weaver</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">Oasis Custom Decks · Pennsylvania</p>
-        </div>
-      </article>
-
-      <article>
-        <a href="https://youtu.be/ERQ84Dgz-Ow" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/ERQ84Dgz-Ow/maxresdefault.jpg" alt="Chip Paynter — $200K+ in new jobs in 21 days" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$200K from 4 leads · 21 days</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Chip Paynter</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">Paynter Construction · Loomis, CA</p>
-        </div>
-      </article>
-
-      <article>
-        <a href="https://youtu.be/djsZ_YNn7wY" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/djsZ_YNn7wY/maxresdefault.jpg" alt="Ricardo Cervantes — $1,000 in ads, $105K closed in week 1" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$105K closed in 7 days</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Ricardo Cervantes</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">Colorado</p>
-        </div>
-      </article>
-
-      <article>
-        <a href="https://youtu.be/kK3oXzLb4-0" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/kK3oXzLb4-0/maxresdefault.jpg" alt="Eric Engle, Mr. Patio Cover — 65 to 70 appointments per week" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">65–70 appointments per week</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Eric Engle</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">Mr. Patio Cover · Los Angeles, CA</p>
-        </div>
-      </article>
-
-      <article>
-        <a href="https://youtu.be/_djYzxfITps" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/_djYzxfITps/maxresdefault.jpg" alt="Justin Wylie — $1.2M closed in slow season (Jan–Feb)" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$1.2M closed in slow season</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Justin Wylie</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">All Pro Decks &amp; Patios · San Antonio, TX</p>
-        </div>
-      </article>
-      <article>
-        <a href="https://youtu.be/NV836FEEIcU" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/NV836FEEIcU/maxresdefault.jpg" alt="Mike Biviano — $12K in ads, $225K profit" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">$12K spent → $225K profit</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Mike Biviano</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">Biviano General · South Shore, MA</p>
-        </div>
-      </article>
-      <article>
-        <div class="relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated shadow-card-light">
-          <img src="/wins/biviano-100k.png" alt="Client text from Mike Biviano — just left the appointment, big job probably around $100,000 deck, from a single appointment MoreJobCalls booked" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-        </div>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Mike Biviano</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">Biviano General · South Shore, MA · Booked appt → ~$100K deck</p>
-        </div>
-      </article>
-      <article>
-        <a href="https://youtu.be/vxqYn1E86LA" target="_blank" rel="noopener" class="proof-thumb relative block aspect-video rounded-xl overflow-hidden border border-paper-border bg-elevated group shadow-card-light">
-          <img src="https://img.youtube.com/vi/vxqYn1E86LA/maxresdefault.jpg" alt="Mike Holst — 52 appointments in 10 days" loading="lazy" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div class="play-icon w-14 h-14 rounded-full gold-gradient flex items-center justify-center shadow-gold">
-              <svg class="w-6 h-6 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-          </div>
-          <div class="absolute inset-x-0 bottom-0 p-3 sm:p-4" style="background: linear-gradient(to top, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.55) 60%, transparent 100%);">
-            <p class="text-gold font-black text-[15px] sm:text-base leading-[1.1] tracking-tight uppercase">52 appointments in 10 days</p>
-          </div>
-        </a>
-        <div class="mt-2.5 px-1">
-          <p class="text-paper-text text-sm font-bold leading-tight">Mike Holst</p>
-          <p class="text-paper-muted text-xs leading-tight mt-0.5">Foremost Construction · Minnesota</p>
-        </div>
-      </article>
+      <button id="qs-back" class="qs-back" type="button">&#8249; Back</button>
     </div>
 
+    <div class="qs-trust" aria-label="What you get">
+      <span><span class="d">&#9670;</span> 100 Minimum On-site Appointments – Guaranteed</span><span class="sep">|</span>
+      <span><span class="d">&#9670;</span> Exclusive. Never Shared.</span><span class="sep">|</span>
+      <span><span class="d">&#9670;</span> Ready-To-Buy Homeowners</span>
+    </div>
   </div>
 </section>
 
-<!-- ============================================== -->
-<!-- APPLY SECTION (V2: moved up + simplified to 4 steps) -->
-<!-- ============================================== -->
-<section id="apply" class="sec-dark scroll-mt-4">
-  <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20">
-
-    <!-- Section header -->
-    <div id="apply-header" class="text-center mb-7">
-      <div class="inline-flex items-center gap-2 mb-3">
-        <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-        <span class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold">Apply Now</span>
-      </div>
-      <h2 class="display-lg text-[30px] sm:text-[48px] leading-[1.04] mb-4 max-w-xl mx-auto text-ink">
-        See If Your Market
-        <span class="text-gold block mt-1">Is Still Open</span>
-      </h2>
-      <p class="text-base text-ink-muted max-w-lg mx-auto">
-        60 seconds. If you qualify, you'll book your Deck Jobs Strategy Session immediately. One builder per market.
-      </p>
+<!-- ═══════════════════════ LOGO MARQUEE ═══════════════════════ -->
+<section class="logos" aria-label="Clients">
+  <p>Trusted By Deck Builders Across The Country</p>
+  <div class="marquee">
+    <div class="marquee-track">
+      <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="All Pro Decks & Patios" loading="lazy"></div>
+      <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="All Decked Out" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="Biviano" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="Bend Fence & Deck" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="JB Renovations" loading="lazy"></div>
+      <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="Morse Builders" loading="lazy"></div>
+      <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="Mr & Mrs Outdoor Living" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="Mr Patio Cover" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="Oasis Custom Decks" loading="lazy"></div>
+      <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="Paynter Construction" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="ProDeck Construction" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="TW Construction" loading="lazy"></div>
+      <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="Upgryd" loading="lazy"></div>
+      <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="Western Rockies Construction" loading="lazy"></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="logo-cell"><img src="/logos/all-pro-decks.png" alt="" loading="lazy"></div>
+      <div class="logo-cell"><img src="/logos/all-decked-out.webp" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/biviano.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/bend-fence-deck.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/jb-renovations.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--invert"><img src="/logos/morse-builders.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--invert"><img src="/logos/mr-mrs-outdoor-living.svg" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/mr-patio-cover.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/oasis-custom-decks.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--invert"><img src="/logos/paynter-construction.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/prodeck-construction.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--card"><img src="/logos/tw-construction.png" alt="" loading="lazy"></div>
+      <div class="logo-cell logo-cell--invert"><img src="/logos/upgryd.avif" alt="" loading="lazy"></div>
+      <div class="logo-cell"><img src="/logos/western-rockies-construction.png" alt="" loading="lazy"></div>
     </div>
-
-    <!-- 100 in 100 Triple Guarantee callout -->
-    <div id="guarantee-callout" class="max-w-xl mx-auto mb-7 rounded-xl bg-elevated border border-border p-5">
-      <div class="flex items-center gap-2 mb-2.5">
-        <span class="w-1.5 h-1.5 rounded-full bg-gold"></span>
-        <span class="text-[11px] font-bold tracking-[0.22em] uppercase text-gold">100 in 100 Triple Guarantee</span>
-      </div>
-      <p class="text-[13px] sm:text-sm text-ink-muted leading-relaxed">
-        100 exclusive sales appointment opportunities in 100 days. If we miss:
-        <span class="text-ink font-semibold">$2,000 cash to you, every dollar of your management fee refunded, and we keep working free until we hit it.</span>
-        In writing, in your agreement, enforced at day 100.
-      </p>
-    </div>
-
-    <!-- Form card (V2: 4 steps) -->
-    <div id="form-card" class="max-w-xl mx-auto bg-paper rounded-[28px] border border-paper-border shadow-apply p-7 sm:p-10">
-
-      <div class="flex items-start justify-between mb-7">
-        <span id="step-indicator" class="text-[11px] font-bold tracking-[0.18em] uppercase text-paper-subtle">Step 1 of 5</span>
-        <button id="form-back" class="inline-flex flex-col items-center text-[13px] font-semibold text-paper-muted hover:text-paper-text focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold rounded px-1 leading-none" aria-label="Back" style="visibility:hidden;">
-          <svg class="w-3.5 h-3.5 mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7"/></svg>
-          Back
-        </button>
-      </div>
-
-      <!-- Step 1: own a deck contracting business? -->
-      <div class="step active" data-step="1">
-        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">Do you own — or are you actively building — a deck contracting business?</h3>
-        <p class="text-sm text-paper-subtle mb-6">We'll route you to the right place either way.</p>
-        <div class="grid grid-cols-2 gap-2.5">
-          <button class="choice-btn text-center p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="own_business" data-value="yes">Yes</button>
-          <button class="choice-btn text-center p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="own_business" data-value="no">No</button>
-        </div>
-      </div>
-
-      <!-- Step 2: revenue -->
-      <div class="step" data-step="2">
-        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">What's your annual revenue?</h3>
-        <p class="text-sm text-paper-subtle mb-6">Rough range is fine. No wrong answers.</p>
-        <div class="grid grid-cols-1 gap-2.5">
-          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="under_500k">Below $500,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="500k_1m">$500,000 – $1,000,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="1m_3m">$1,000,000 – $3,000,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="3m_plus">$3,000,000+</button>
-        </div>
-      </div>
-
-      <!-- Step 3: timing -->
-      <div class="step" data-step="3">
-        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">How soon would you realistically want to begin?</h3>
-        <p class="text-sm text-paper-subtle mb-6">No wrong answers — helps us prioritize your application.</p>
-        <div class="grid grid-cols-2 gap-2.5">
-          <button class="choice-btn text-center p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="timing" data-value="asap">ASAP</button>
-          <button class="choice-btn text-center p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="timing" data-value="2_4_weeks">Next 2–4 weeks</button>
-          <button class="choice-btn text-center p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="timing" data-value="later">Later this year</button>
-          <button class="choice-btn text-center p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="timing" data-value="researching">Just researching</button>
-        </div>
-      </div>
-
-      <!-- Step 4: zip code -->
-      <div class="step" data-step="4">
-        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">What's your service area zip code?</h3>
-        <p class="text-sm text-paper-subtle mb-6">We use this to check if your market is still open. One deck builder per market.</p>
-        <input id="zip-input" type="text" autocomplete="postal-code" inputmode="numeric" placeholder="ZIP code" maxlength="5" class="w-full px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
-        <p id="zip-error" class="text-xs text-red-600 font-medium mt-2 hidden">Please enter a valid 5-digit US ZIP code.</p>
-        <div class="flex justify-end mt-7">
-          <button id="zip-next-btn" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-paper-text text-gold font-bold text-[15px] hover:bg-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-all">Next <span>→</span></button>
-        </div>
-      </div>
-
-      <!-- Step 5: combined name + email + phone + submit -->
-      <div class="step" data-step="5">
-        <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">Last step. How do we reach you?</h3>
-        <p class="text-sm text-paper-subtle mb-6">We'll send your call confirmation to the email + phone you provide.</p>
-        <input id="name-input" type="text" autocomplete="name" placeholder="First and last name" class="w-full px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper mb-3">
-        <p id="name-error" class="text-xs text-red-600 font-medium mb-3 hidden">Please enter your first and last name.</p>
-        <input id="email-input" type="email" autocomplete="email" placeholder="Email address" class="w-full px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper mb-3">
-        <p id="email-error" class="text-xs text-red-600 font-medium mb-3 hidden">Please enter a valid email address.</p>
-        <div class="flex gap-2">
-          <div class="flex-shrink-0 inline-flex items-center gap-1 px-3.5 py-4 border border-paper-border rounded-2xl bg-cream font-semibold text-[15px] text-paper-text">
-            <span>🇺🇸</span><span>+1</span>
-          </div>
-          <input id="phone-input" type="tel" autocomplete="tel" inputmode="numeric" placeholder="Phone number" maxlength="14" class="flex-1 min-w-0 px-5 py-4 text-[15px] font-semibold border border-paper-border rounded-2xl focus:border-paper-text focus:outline-none text-paper-text placeholder-paper-subtle bg-paper">
-        </div>
-        <p id="phone-error" class="text-xs text-red-600 font-medium mt-2 hidden">Please enter a valid 10-digit phone number.</p>
-        <div class="flex justify-end mt-7">
-          <button id="submit-btn" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-paper-text text-gold font-bold text-[15px] hover:bg-black focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-all">Submit Application <span>→</span></button>
-        </div>
-        <p class="text-[11px] leading-relaxed text-paper-subtle mt-5">
-          By submitting this form, you agree to be contacted by DeckingLeads / Spencer Wright via phone, text, email, or mail using automated technology, even if your number is on a state or national Do Not Call list.
-        </p>
-        <p class="text-[11px] leading-relaxed text-paper-subtle mt-2">
-          Message and data rates may apply. Message frequency varies. Reply STOP to opt out or HELP for assistance.
-        </p>
-      </div>
-
-      <!-- Loading state -->
-      <div class="step" data-step="loading">
-        <div class="py-8 text-center">
-          <div class="inline-block w-12 h-12 border-4 border-paper-border border-t-paper-text rounded-full animate-spin mb-6" aria-hidden="true"></div>
-          <p id="loading-text" class="text-lg font-bold text-paper-text">Checking your market availability…</p>
-        </div>
-      </div>
-
-    </div>
-
-    <p id="form-tail" class="text-center text-[12px] text-ink-subtle mt-6">
-      One deck builder per market. Your market may already be taken.
-    </p>
-
-    <!-- Post-submit hero (revealed with the inline calendar).
-         JS swaps eyebrow/h1/sub based on ICP vs non-ICP. -->
-    <div id="post-submit-hero" class="hidden text-center mb-7 px-2">
-      <div class="inline-flex items-center gap-2 mb-4 px-2.5 py-1 rounded-full border border-emerald-500/40" style="background: rgba(16, 185, 129, 0.10);">
-        <span class="relative flex w-2 h-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        <span id="post-submit-eyebrow" class="text-[11px] font-bold tracking-[0.18em] uppercase text-emerald-400">Market Open</span>
-      </div>
-      <h2 id="post-submit-h1" class="display text-[26px] sm:text-[40px] leading-[1.06] mb-3 max-w-xl mx-auto text-ink">
-        Last Step <span class="text-gold">—</span> Pick A Time
-      </h2>
-      <p id="post-submit-sub" class="text-sm sm:text-base text-ink-muted leading-snug max-w-md mx-auto">
-        Get 100+ Sales Appointments In 100 Days
-      </p>
-    </div>
-
-    <!-- Inline calendar (replaces the form card after submit).
-         Mobile: edge-to-edge (-mx-5 cancels the parent's px-5) so the GHL widget has full viewport width.
-         sm+: re-centered with rounded corners + shadow. -->
-    <div id="calendar-wrap" class="hidden -mx-5 sm:mx-auto max-w-2xl">
-      <iframe id="inline-calendar" src="" title="Book your Deck Jobs Strategy Session" style="width: 100%; height: 820px; border: 0; display: block; background: transparent;"></iframe>
-    </div>
-
   </div>
 </section>
 
-<!-- GHL calendar embed runtime — loaded here so it's available when calendar shows inline -->
-<script src="https://api.seasonproofgrowth.com/js/form_embed.js" type="text/javascript"></script>
+<!-- ═══════════════════════ RECENT RESULTS ═══════════════════════ -->
+<section class="results">
+  <h2 class="h2">Recent Results</h2>
+  <div class="faces" aria-hidden="true">
+    <img src="/proof-faces/billy-stewart.jpg" alt="" loading="lazy">
+    <img src="/proof-faces/brian-wallace.jpg" alt="" loading="lazy">
+    <img src="/proof-faces/justin-wylie.jpg" alt="" loading="lazy">
+    <img src="/proof-faces/jacob-weaver.jpg" alt="" loading="lazy">
+  </div>
+  <p class="join">Join <b>100+ contractors</b> who aren't worried about when the next job is coming.</p>
+  <ul class="wins">
+    <li><span class="z">&#9889;</span>Billy — $196,383 in signed contracts in his first week<small>June 2026 · Trinity Decks &amp; Patios · Greenville, SC</small></li>
+    <li><span class="z">&#9889;</span>Chris — $320K in deck jobs in his first 60 days, on $100/day<small>Summer 2026 · E&amp;C Custom Homes · Gulf Shores, AL</small></li>
+    <li><span class="z">&#9889;</span>Jacob — $480K closed in 21 days, crews booked into September<small>March 2026 · Oasis Custom Decks · Pennsylvania</small></li>
+    <li><span class="z">&#9889;</span>Brian — 25 deck jobs in 6 weeks after "calling our bluff"<small>April 2026 · Bend Fence &amp; Deck · Bend, OR</small></li>
+    <li><span class="z">&#9889;</span>Mike — from 3 appointments a week to 11 a day<small>Biviano General · South Shore, MA</small></li>
+  </ul>
+</section>
 
-<!-- FINAL CTA — scrolls back up to apply for users who read all the way through -->
-<section class="sec-dark border-t border-border/50">
-  <div class="max-w-3xl mx-auto px-5 py-14 sm:py-16 text-center">
-    <h2 class="display text-[24px] sm:text-[34px] leading-[1.1] mb-5 max-w-xl mx-auto">
-      Still reading? <span class="text-gold">Your market may already be taken.</span>
-    </h2>
-    <a href="#apply" class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 sm:py-5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-      <span class="text-base sm:text-lg font-black tracking-wider uppercase">Get More Deck Jobs</span>
-      <span class="text-[13px] sm:text-sm font-medium opacity-85">Reserve My Zip Code →</span>
-    </a>
-    <p class="text-[12px] text-ink-subtle mt-4">100+ Contractors Served - $100M+ Jobs Sold</p>
+<!-- ═══════════════════════ VIDEO WALL ═══════════════════════ -->
+<section class="videos" id="proof">
+  <h2 class="h2">What Our Clients Say</h2>
+  <div class="vgrid">
+    <div class="vcard"><button class="yt" type="button" data-id="TvFv_EIM-MI" aria-label="Play: Billy Stewart"><img src="https://i.ytimg.com/vi/TvFv_EIM-MI/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$300K+ In Deck Jobs In 17 Days On $1,657 Of Ads<small>Billy Stewart · Trinity Decks &amp; Patios</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="5kHvRM_2wYE" aria-label="Play: Chris Walters"><img src="https://i.ytimg.com/vi/5kHvRM_2wYE/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$320K In Deck Jobs In 60 Days On $100/Day<small>Chris Walters · E&amp;C Custom Homes</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="4TP1sTRASoA" aria-label="Play: Brian Wallace"><img src="https://i.ytimg.com/vi/4TP1sTRASoA/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">"I Wanted To Call Your Bluff" — 25 Deck Jobs In 6 Weeks<small>Brian Wallace · Bend Fence &amp; Deck</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="YJQxX5ZQ3aI" aria-label="Play: Justin Wylie"><img src="https://i.ytimg.com/vi/YJQxX5ZQ3aI/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$1.2M Closed In Jan &amp; Feb After 6 Agencies Failed<small>Justin Wylie · All Pro Decks &amp; Patios</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="ZT8C3xoQSLc" aria-label="Play: Mike Biviano"><img src="https://i.ytimg.com/vi/ZT8C3xoQSLc/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">From 3 Appointments A Week To 11 A Day<small>Mike Biviano · Biviano General</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="Xt4TVn4zP7s" aria-label="Play: Jacob Weaver"><img src="https://i.ytimg.com/vi/Xt4TVn4zP7s/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$480K Closed In 21 Days — Doubled To $1M In 4 Months<small>Jacob Weaver · Oasis Custom Decks</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="-q18xO92akA" aria-label="Play: Jason Flynn"><img src="https://i.ytimg.com/vi/-q18xO92akA/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">Biggest Month In 15 Years — A $500K Month On $100/Day<small>Jason Flynn · PROdeck Construction</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="djsZ_YNn7wY" aria-label="Play: Ricardo Cervantes"><img src="https://i.ytimg.com/vi/djsZ_YNn7wY/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$105K Closed In The First 7 Days On Under $1,000<small>Ricardo Cervantes · Concrete &amp; Decks</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="woPfBuocx-M" aria-label="Play: Billy Gallegos"><img src="https://i.ytimg.com/vi/woPfBuocx-M/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">"I Rolled The Dice" — $50K Signed In Month One<small>Billy Gallegos · Lone Star Home Improvement</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="03CDvt0xR5Y" aria-label="Play: Derek Lopez"><img src="https://i.ytimg.com/vi/03CDvt0xR5Y/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$46,000 In Deck Jobs In 30 Days On $1,295 Of Ads<small>Derek Lopez · Highline Outdoor Living</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="ERQ84Dgz-Ow" aria-label="Play: Chip Paynter"><img src="https://i.ytimg.com/vi/ERQ84Dgz-Ow/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$200K From 4 Appointments In 21 Days<small>Chip Paynter · Paynter Construction</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="FKa_Zsji0bE" aria-label="Play: Jason Brown"><img src="https://i.ytimg.com/vi/FKa_Zsji0bE/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">From 1 Crew To 5 In One Season — $100K In Month One<small>Jason Brown · Nailed It Construction</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="vxqYn1E86LA" aria-label="Play: Mike Holst"><img src="https://i.ytimg.com/vi/vxqYn1E86LA/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">52 Appointments In The First 10 Days On $1,500<small>Mike Holst · Foremost Construction</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="kK3oXzLb4-0" aria-label="Play: Eric Engle"><img src="https://i.ytimg.com/vi/kK3oXzLb4-0/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">65–70 Exclusive Appointments Every Week<small>Eric Engle · Mr. Patio Cover</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="HRYuMJmhpmY" aria-label="Play: 12 deck builders who didn't believe it either"><img src="https://i.ytimg.com/vi/HRYuMJmhpmY/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">12 Deck Builders Who Didn't Believe It Either<small>2-minute proof reel</small></div></div>
+  </div>
+  <div class="cta-row"><a class="cta" href="#qs-card" data-scroll-survey>Check Your Market</a></div>
+</section>
+
+<!-- ═══════════════════════ THE RECEIPTS ═══════════════════════ -->
+<section class="receipts">
+  <p class="kicker">Every screenshot below is straight from a client's text thread or dashboard. Unedited.</p>
+  <h2 class="h2">Unfiltered Wins From Our Deck Builder Clients</h2>
+  <div class="masonry">
+    <img src="/wins/win-justin-wylie-492k.png" alt="Text thread: Justin Wylie, $492K" loading="lazy">
+    <img src="/wins/win-mike-biviano-100k-deck-appt-2026-06-30.png" alt="Text thread: Mike Biviano, ~$100K deck from one appointment" loading="lazy">
+    <img src="/wins/win-ricardo-cervantes-55k.png" alt="Text thread: Ricardo Cervantes, $55K" loading="lazy">
+    <img src="/wins/biviano-100k.png" alt="Dashboard: Biviano General" loading="lazy">
+    <img src="/wins/win-jessica-matthews-booked-3-days.png" alt="Text thread: Jessica Matthews, booked in 3 days" loading="lazy">
+    <img src="/wins/chip-paynter.jpg" alt="Text thread: Chip Paynter" loading="lazy">
+    <img src="/wins/win-antonio-colon-80k-deck-2026-05-21.png" alt="Text thread: Antonio Colon, $80K deck" loading="lazy">
+    <img src="/wins/win-john-mattox-8500-job.png" alt="Text thread: John Mattox, $8,500 job" loading="lazy">
+    <img src="/wins/win-lamarhomes-12of20-roofs-from-marketing-2026-06-19.png" alt="Text thread: Lamar Homes, 12 of 20 jobs from marketing" loading="lazy">
+  </div>
+  <div class="cta-row"><a class="cta" href="#qs-card" data-scroll-survey>Get My Appointments</a></div>
+</section>
+
+<!-- ═══════════════════════ THE GUARANTEE (closing — copy verbatim from root #guarantees) ═══════════════════════ -->
+<section class="guar" id="guarantee">
+  <div class="guar-in">
+    <div class="guar-icon">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h2 class="h2">The Guarantee. <span class="gold">Zero Risk.</span></h2>
+    <p class="guar-lede">We know you've probably been burned before. So we built the guarantee around that — not around us feeling safe.</p>
+    <div class="guar-grid">
+      <div class="guar-card">
+        <p class="guar-k">Day 100</p>
+        <p class="guar-t">100 On-Site Appointments — In Writing</p>
+        <p class="guar-b">100 exclusive sales appointment opportunities with qualified homeowners in your market. <strong>In your signed agreement, enforced at day 100.</strong></p>
+      </div>
+      <div class="guar-card">
+        <p class="guar-k">If We Miss</p>
+        <p class="guar-t">$10,000 — Written To You</p>
+        <p class="guar-b">We write you a check for <strong>$10,000.</strong> One number. No fine-print math, no partial credits, no arguing about what counts.</p>
+      </div>
+    </div>
+    <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Get More Deck Jobs</span><small>Claim Your Zip Code &rarr;</small></a>
   </div>
 </section>
 
-<!-- FOOTER + LEGAL DISCLAIMERS -->
-<footer class="sec-dark border-t border-border/50 pb-28 sm:pb-10">
+</main>
 
-  <!-- Brand strip -->
-  <div class="max-w-3xl mx-auto px-5 pt-10 pb-8 text-center">
-    <p class="font-bold text-ink mb-1.5 tracking-wider">MOREJOBCALLS</p>
-    <p class="text-xs text-ink-muted leading-relaxed">One deck builder per market.</p>
+<!-- ═══════════════════════ FOOTER / LEGAL ═══════════════════════ -->
+<footer id="legal">
+  <div class="legal">
+    <p class="copy">© 2026 MoreJobCalls.com LLC. All rights reserved. · <a href="/privacy/">Privacy Policy</a> · <a href="/terms/">Terms of Service</a></p>
   </div>
-
-  <!-- Legal & disclaimers -->
-  <div class="border-t border-border/40">
-    <div class="max-w-3xl mx-auto px-5 py-9 text-[12px] leading-relaxed text-ink-subtle">
-
-      <p class="text-[10px] font-bold tracking-[0.22em] uppercase text-ink-muted mb-4">· Legal &amp; Disclaimers</p>
-
-      <p class="mb-3"><span class="text-ink-muted font-semibold">Earnings &amp; Results Disclaimer.</span> Results, testimonials, and case studies shown on this page are actual outcomes for specific clients and are not necessarily typical. Your individual results will vary based on your geographic market, business operations, sales process, follow-up speed, advertising spend, and willingness to follow the system as designed. Building a business takes sustained effort and carries risk.</p>
-
-      <p class="mb-3"><span class="text-ink-muted font-semibold">Guarantee Terms.</span> The "100 sales appointment opportunities in 100 days" guarantee referenced on this page is governed exclusively by the written Engagement Agreement signed between you and MoreJobCalls.com LLC. Marketing copy is a summary, not a contract. Full guarantee mechanics, qualifying definitions, cooperative obligations, refund procedure, and conditions are detailed in our <a href="/terms/" class="text-gold underline underline-offset-2 hover:text-ink">Terms of Service</a>. No agreement exists between you and MoreJobCalls.com LLC until both parties sign the Engagement Agreement.</p>
-
-      <p class="mb-3"><span class="text-ink-muted font-semibold">Testimonials.</span> All testimonials and case studies on this page are from real clients of MoreJobCalls.com LLC who have provided consent to be featured. Past client performance is not a representation, prediction, or guarantee of your future performance.</p>
-
-      <p class="mb-3"><span class="text-ink-muted font-semibold">No Affiliation.</span> MoreJobCalls.com LLC is not affiliated with, endorsed by, or sponsored by Meta Platforms, Inc., Google LLC, GoHighLevel, or any other third-party platform referenced on this page. All third-party trademarks are the property of their respective owners.</p>
-
-      <p class="mb-3"><span class="text-ink-muted font-semibold">Not Legal, Tax, or Financial Advice.</span> Nothing on this page constitutes legal, tax, accounting, or financial advice. Consult your own qualified advisors before making any business or financial decision.</p>
-
-      <p class="mb-3"><span class="text-ink-muted font-semibold">Communications Consent.</span> By submitting an application on this page, you agree to be contacted via phone, text, email, or mail using automated technology, even if your number is on a state or national Do Not Call list. Message and data rates may apply. Reply STOP to opt out. See our <a href="/privacy/" class="text-gold underline underline-offset-2 hover:text-ink">Privacy Policy</a> for full details.</p>
-
-      <p class="mt-6 pt-6 border-t border-border/40 text-[11px] text-ink-subtle/80 text-center">
-        © 2026 MoreJobCalls.com LLC. All rights reserved. ·
-        <a href="/privacy/" class="hover:text-ink-muted">Privacy Policy</a> ·
-        <a href="/terms/" class="hover:text-ink-muted">Terms of Service</a>
-      </p>
-
-    </div>
-  </div>
-
 </footer>
 
-<!-- VIDEO LIGHTBOX MODAL (plays proof videos inline; no leaving the page) -->
-<div id="video-modal" class="video-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Testimonial video">
-  <div class="video-modal-inner">
-    <button class="video-modal-close" aria-label="Close video">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 6l12 12M6 18L18 6"/></svg>
-      Close
-    </button>
-    <iframe id="video-modal-iframe" src="" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen></iframe>
-  </div>
-</div>
-
-<!-- STICKY BOTTOM CTA -->
-<div id="sticky-cta" aria-hidden="true" class="sticky-cta fixed bottom-0 inset-x-0 z-30 px-4 pb-4 pt-3 bg-gradient-to-t from-black via-black/95 to-transparent">
-  <a href="#apply" class="w-full inline-flex flex-col items-center justify-center gap-0.5 px-6 py-3.5 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-    <span class="text-[15px] font-black tracking-wider uppercase">Get More Deck Jobs</span>
-    <span class="text-[12px] font-medium opacity-85">Reserve My Zip Code →</span>
-  </a>
-</div>
-
-<!-- ============================================== -->
-<!-- APP LOGIC                                        -->
-<!-- ============================================== -->
 <script>
-(function () {
-  const apply = document.getElementById('apply');
-  const stepIndicator = document.getElementById('step-indicator');
-  const backBtn = document.getElementById('form-back');
-  const steps = apply.querySelectorAll('.step');
-  const stickyCta = document.getElementById('sticky-cta');
-  const totalSteps = 5; // V2: 4 questions + zip step
-  const formData = {};
-  let currentStep = 1;
+(function(){
+  var card=document.getElementById('qs-card'); if(!card) return;
+  var steps=card.querySelectorAll('.qs-step');
+  var barFill=document.getElementById('qs-bar-fill'), stepLabel=document.getElementById('qs-step-label'), pctEl=document.getElementById('qs-pct');
+  var progWrap=document.getElementById('qs-prog'), backBtn=document.getElementById('qs-back');
+  var TOTAL_Q=5, PROG={1:0,2:20,3:40,4:60,5:80,6:100}; // Q3 = service-area ZIP (added 2026-09-15)
+  var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
+  if(window.MJC_QA){ try{ var qa=document.createElement('p'); qa.className='qs-qa'; qa.textContent='QA mode: nothing is sent to GHL, Meta, or the calendar.'; card.insertBefore(qa, card.firstChild); }catch(e){} }
 
-  // Capture UTM + click IDs on first touch; persist 30 days across tabs/visits.
-  // First-touch wins: once a value is stored, later visits don't overwrite it.
-  const ATTR_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'];
-  const ATTR_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
-  const attribution = (() => {
-    let stored = {};
-    try {
-      const raw = localStorage.getItem('dl_attribution');
-      if (raw) {
-        const parsed = JSON.parse(raw);
-        if (parsed && parsed._ts && (Date.now() - parsed._ts) < ATTR_TTL_MS) stored = parsed;
-      }
-    } catch (_) {}
-    const params = new URLSearchParams(window.location.search);
-    ATTR_KEYS.forEach(k => {
-      const v = params.get(k);
-      if (v && !stored[k]) stored[k] = v; // first-touch wins
-    });
-    if (!stored.landing_url) stored.landing_url = window.location.href;
-    if (!stored.referrer) stored.referrer = document.referrer || '';
-    if (!stored._ts) stored._ts = Date.now();
-    try { localStorage.setItem('dl_attribution', JSON.stringify(stored)); } catch (_) {}
-    return stored;
+  // ── Attribution (same localStorage key as root so first-touch survives across variants) ──
+  var attribution=(function(){
+    try{var raw=localStorage.getItem('dl_attribution'); if(raw){var p=JSON.parse(raw); if(p&&p._ts) return p;}}catch(e){}
+    var out={}, params=new URLSearchParams(location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(function(k){var v=params.get(k); if(v) out[k]=v;});
+    out.landing_url=location.href; out.referrer=document.referrer||''; out._ts=Date.now();
+    try{localStorage.setItem('dl_attribution',JSON.stringify(out));}catch(e){}
+    return out;
+  })();
+  // ── /yt/ CHANNEL STAMP ── organic YouTube clicks carry no UTMs, so GHL would file these as direct/unknown.
+  // Fill BLANKS only (a real ?utm_source= or a stored first-touch wins; fbclid/gclid never touched).
+  // Every video description links ?v=<youtubeVideoId> → utm_content, so the CRM shows WHICH video produced the lead.
+  (function stampYtChannel(){
+    try{
+      var qp=new URLSearchParams(location.search), vid=(qp.get('v')||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,20), changed=false;
+      if(!attribution.utm_source){ attribution.utm_source='youtube'; attribution.utm_medium=attribution.utm_medium||'organic'; attribution.utm_campaign=attribution.utm_campaign||'yt-description'; changed=true; }
+      if(vid && !attribution.utm_content){ attribution.utm_content=vid; changed=true; }
+      attribution.yt_video=vid||attribution.yt_video||'';
+      if(changed){ try{ localStorage.setItem('dl_attribution',JSON.stringify(attribution)); }catch(e){} }
+    }catch(e){}
   })();
 
-  function goToStep(stepNum) {
-    currentStep = stepNum;
-    steps.forEach(s => s.classList.remove('active'));
-    const target = apply.querySelector(`[data-step="${stepNum}"]`);
-    if (target) target.classList.add('active');
+  var CAL_ICP='https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
+  var CAL_NON_ICP='https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
 
-    if (stepNum === 'loading') {
-      stepIndicator.textContent = 'Checking market availability…';
-      backBtn.style.visibility = 'hidden';
-      return;
+  // ── Funnel step instrumentation → mjc-funnel-events worker (Supabase funnel_events). Fire-and-forget.
+  // idx (v9 capacity-4q, 2026-09-14): 0 landed · 1 survey_open (first answer) · 2 current_appts · 3 more_appts · 5 revenue · 6 contact · 7 submit
+  var DL_SID=(function(){try{var s=sessionStorage.getItem('dl_sid'); if(!s){s=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'s'+Date.now()+Math.random().toString(36).slice(2,10); sessionStorage.setItem('dl_sid',s);} return s;}catch(e){return 's'+Date.now();}})();
+  var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
+  var OPT_IDX={current_appts_per_week:2,more_appts_per_week:3,zip:4,revenue:5};
+  function dlTrack(step,idx,extra){
+    try{ if(window.mjcJourney && step!=='submit' && step!=='landed') mjcJourney.track(step==='survey_open'?'survey_open':'survey_step',{label:step,value:(extra&&extra.value)||'',meta:{idx:idx}}); }catch(e){} // Journey Ledger (journey.js marks ?qa=1 sessions as test)
+    if(window.MJC_QA) return; // QA mode: never write funnel_events
+    if(/[?&]test_event_code=/.test(location.search)) return;
+    try{
+      var p={sid:DL_SID,step:step,idx:idx,utm_source:attribution.utm_source||'',utm_content:attribution.utm_content||'',utm_campaign:attribution.utm_campaign||'',path:location.pathname,ref:attribution.referrer||''};
+      if(extra) for(var k in extra) p[k]=extra[k];
+      var body=JSON.stringify(p);
+      if(window.fetch){ fetch(DL_TRACK_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true,mode:'cors'}).catch(function(){ if(navigator.sendBeacon) navigator.sendBeacon(DL_TRACK_URL,new Blob([body],{type:'text/plain'})); }); }
+      else if(navigator.sendBeacon){ navigator.sendBeacon(DL_TRACK_URL,new Blob([body],{type:'text/plain'})); }
+    }catch(e){}
+  }
+  dlTrack('landed',0);
+  var surveyOpened=false;
+  function markOpen(){ if(surveyOpened) return; surveyOpened=true; dlTrack('survey_open',1); }
+
+  function isICP(d){ return d.revenue==='500k_1m'||d.revenue==='1m_3m'||d.revenue==='3m_plus'; } // ICP = revenue ≥ $500K/yr (2026-08-22 rule)
+  async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
+
+  function show(n){
+    current=n;
+    steps.forEach(function(s){s.classList.remove('active');});
+    var t=card.querySelector('.qs-step[data-step="'+n+'"]'); if(t) t.classList.add('active');
+    barFill.style.width=(PROG[n]||0)+'%';
+    if(n<=TOTAL_Q){ stepLabel.textContent='Step '+n+' of '+TOTAL_Q; pctEl.textContent=(PROG[n]||0)+'%'; progWrap.style.display=''; }
+    else { progWrap.style.display='none'; }
+    backBtn.classList.toggle('show', n>1 && n<TOTAL_Q+1);
+    card.classList.toggle('cal-open', n===TOTAL_Q+1 && !icp);
+    setTimeout(function(){var f=t&&t.querySelector('input'); if(f&&n>1) try{f.focus({preventScroll:true});}catch(e){}},60);
+    if(n>1){ try{ var r=card.getBoundingClientRect(); if(r.top<0) card.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){} }
+  }
+  backBtn.addEventListener('click',function(){ if(current>1&&current<TOTAL_Q+1) show(current-1); });
+
+  card.querySelectorAll('.qs-opt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      markOpen();
+      formData[btn.dataset.field]=btn.dataset.value;
+      dlTrack('q_'+btn.dataset.field, OPT_IDX[btn.dataset.field]||current, {field:btn.dataset.field, value:btn.dataset.value});
+      if(btn.dataset.field==='revenue') preloadCalendar(); // ICP now determinable → warm the right calendar
+      if(current<TOTAL_Q) show(current+1);
+    });
+  });
+
+  // Q3 service-area ZIP. Auto-advances at 5 digits so it feels like the tap questions around it.
+  var zipEl=document.getElementById('qs-zip'), zipErr=document.getElementById('qs-zip-err');
+  function zipOk(){ return /^\d{5}$/.test(zipEl.value.trim()); }
+  function submitZip(){
+    var ok=zipOk();
+    zipErr.classList.toggle('show',!ok); zipEl.classList.toggle('bad',!ok);
+    if(!ok){ zipEl.focus(); return; }
+    markOpen();
+    formData.zip=zipEl.value.trim();
+    dlTrack('q_zip',OPT_IDX.zip,{field:'zip',value:formData.zip});
+    show(4);
+  }
+  zipEl.addEventListener('input',function(){
+    zipEl.value=zipEl.value.replace(/\D/g,'').slice(0,5);
+    if(zipEl.value.length===5){ zipErr.classList.remove('show'); zipEl.classList.remove('bad'); setTimeout(submitZip,180); }
+  });
+  card.querySelector('.qs-step[data-step="3"] [data-next]').addEventListener('click',submitZip);
+
+  // Q5 contact + business website
+  var firstEl=document.getElementById('qs-first'), firstErr=document.getElementById('qs-first-err');
+  var lastEl=document.getElementById('qs-last'), lastErr=document.getElementById('qs-last-err');
+  var siteEl=document.getElementById('qs-site'), siteErr=document.getElementById('qs-site-err');
+  // Website replaced business name on 2026-09-15: the URL carries the name, the name doesn't carry
+  // the URL, and Spencer was googling every lead to find it. Deliberately permissive — plenty of
+  // $500K+ builders run on a Facebook page — so anything domain-shaped passes, plus an explicit
+  // "no website" escape rather than a validator that rejects a real lead.
+  var NO_SITE='none';
+  function siteValue(){ return siteEl.value.trim().replace(/^\s*https?:\/\//i,'').replace(/\/+$/,''); }
+  function siteIsOk(){ var v=siteValue(); return v===NO_SITE || (/\./.test(v) && !/\s/.test(v) && v.length>=4); }
+  document.getElementById('qs-no-site').addEventListener('click',function(e){
+    e.preventDefault(); siteEl.value=NO_SITE; siteErr.classList.remove('show'); siteEl.classList.remove('bad'); phoneEl.focus();
+  });
+  var emailEl=document.getElementById('qs-email'), emailErr=document.getElementById('qs-email-err');
+  var phoneEl=document.getElementById('qs-phone'), phoneErr=document.getElementById('qs-phone-err');
+  phoneEl.addEventListener('input',function(){
+    var d=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'').slice(0,10), f=d;
+    if(d.length>=7) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+    else if(d.length>=4) f='('+d.slice(0,3)+') '+d.slice(3);
+    phoneEl.value=f;
+  });
+  card.querySelector('[data-next-final]').addEventListener('click',function(){
+    var first=firstEl.value.trim(), last=lastEl.value.trim(), site=siteValue(), email=emailEl.value.trim();
+    var phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
+    var fok=first.length>=1, lok=last.length>=1, sok=siteIsOk(), pok=/^[2-9]\d{9}$/.test(phone), eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    [[firstEl,firstErr,fok],[lastEl,lastErr,lok],[siteEl,siteErr,sok],[phoneEl,phoneErr,pok],[emailEl,emailErr,eok]].forEach(function(x){ x[1].classList.toggle('show',!x[2]); x[0].classList.toggle('bad',!x[2]); });
+    if(!fok){firstEl.focus();return;} if(!lok){lastEl.focus();return;} if(!sok){siteEl.focus();return;} if(!pok){phoneEl.focus();return;} if(!eok){emailEl.focus();return;}
+    markOpen();
+    formData.first_name=first; formData.last_name=last; formData.name=(first+' '+last).trim();
+    formData.business_website=site; formData.email=email; formData.phone='+1'+phone;
+    dlTrack('contact_info',7);
+    submitAndShowCalendar();
+  });
+  // Enter-to-advance in text inputs
+  card.querySelectorAll('.qs-input').forEach(function(inp){
+    inp.addEventListener('keydown',function(e){
+      if(e.key!=='Enter') return; e.preventDefault();
+      var st=card.querySelector('.qs-step[data-step="'+current+'"]'); var btn=st&&st.querySelector('[data-next],[data-next-final]'); if(btn) btn.click();
+    });
+  });
+
+  function buildCalUrl(){
+    var u=new URL(icp?CAL_ICP:CAL_NON_ICP);
+    if(formData.name){ var p=formData.name.trim().split(/\s+/); u.searchParams.set('first_name',p[0]||''); if(p.length>1) u.searchParams.set('last_name',p.slice(1).join(' ')); u.searchParams.set('name',formData.name); u.searchParams.set('full_name',formData.name); }
+    if(formData.email) u.searchParams.set('email',formData.email);
+    if(formData.phone) u.searchParams.set('phone',formData.phone);
+    return u.toString();
+  }
+
+  // ── NATIVE SLOT PICKER (ICP leads) — identical to root; slots + booking via mjc-self-book Worker ──
+  var MCB_WORKER='https://mjc-self-book.spencer-80c.workers.dev';
+  var mcbTz='America/Chicago'; try{ mcbTz=Intl.DateTimeFormat().resolvedOptions().timeZone||mcbTz; }catch(e){}
+  var mcbCache={}, mcbDays={}, mcbDay=null, mcbSlot=null;
+  function mcbState(id){ ['mcb-loading','mcb-live','mcb-empty','mcb-error'].forEach(function(x){ var el=document.getElementById(x); if(el) el.style.display=(x===id)?'':'none'; }); }
+  function mcbTime(iso){ return new Date(iso).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:mcbTz}); }
+  function mcbWhen(iso){ return new Date(iso).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',timeZone:mcbTz})+' at '+mcbTime(iso); }
+  function mcbFetch(force){
+    if(force||!mcbCache.p){
+      mcbCache.p=fetch(MCB_WORKER+'/slots?icp=yes&tz='+encodeURIComponent(mcbTz))
+        .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function(err){ delete mcbCache.p; throw err; });
     }
-
-    stepIndicator.textContent = `Step ${stepNum} of ${totalSteps}`;
-    backBtn.style.visibility = stepNum === 1 ? 'hidden' : 'visible';
-
-    setTimeout(() => {
-      const focusable = target.querySelector('input, button');
-      if (focusable) focusable.focus({ preventScroll: true });
-    }, 50);
+    return mcbCache.p;
   }
-
-  backBtn.addEventListener('click', () => {
-    if (currentStep > 1 && currentStep !== 'loading') goToStep(currentStep - 1);
-  });
-
-  apply.querySelectorAll('.choice-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      formData[btn.dataset.field] = btn.dataset.value;
-      if (currentStep < totalSteps) goToStep(currentStep + 1);
-    });
-  });
-
-  // Step 4: zip code
-  const zipInput = document.getElementById('zip-input');
-  const zipError = document.getElementById('zip-error');
-  const zipNextBtn = document.getElementById('zip-next-btn');
-  if (zipInput) {
-    zipInput.addEventListener('input', () => {
-      zipInput.value = zipInput.value.replace(/\D/g, '').slice(0, 5);
-      if (zipInput.value.length === 5) {
-        zipError.classList.add('hidden');
-        zipInput.classList.remove('border-red-500');
-      }
-    });
-    zipInput.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && zipInput.value.length === 5) {
-        e.preventDefault();
-        zipNextBtn.click();
-      }
+  function mcbLoad(e,force){
+    if(e) e.preventDefault();
+    var tzEl=document.getElementById('mcb-tz'); if(tzEl) tzEl.textContent=mcbTz.replace(/_/g,' ');
+    mcbState('mcb-loading');
+    var lo=document.getElementById('mcb-loading'); lo.textContent='Checking open times…';
+    var slow=setTimeout(function(){ lo.textContent='Still pulling up the calendar… hang tight, this can take a few seconds.'; },4000);
+    mcbFetch(force).then(function(data){
+      clearTimeout(slow); mcbDays={};
+      Object.keys(data.days||{}).forEach(function(d){
+        var sl=((data.days[d]||{}).slots||[]).filter(function(iso){ return /T\d\d:(00|15|30|45):00/.test(iso); });
+        if(sl.length) mcbDays[d]=sl;
+      });
+      var keys=Object.keys(mcbDays).sort();
+      if(!keys.length){ mcbState('mcb-empty'); return; }
+      if(!mcbDay||!mcbDays[mcbDay]) mcbDay=keys[0];
+      if(mcbSlot&&mcbDays[mcbDay].indexOf(mcbSlot)===-1) mcbSlot=null;
+      mcbRenderDays(); mcbRenderSlots(); mcbState('mcb-live');
+    }).catch(function(){ clearTimeout(slow); mcbState('mcb-error'); });
+  }
+  function mcbRenderDays(){
+    var row=document.getElementById('mcb-days'); row.innerHTML='';
+    Object.keys(mcbDays).sort().forEach(function(d){
+      var dt=new Date(d+'T12:00:00Z'); var b=document.createElement('button'); b.type='button';
+      b.className='mcb-day'+(d===mcbDay?' mcb-sel':'');
+      b.innerHTML='<span class="mcb-dow">'+dt.toLocaleDateString('en-US',{weekday:'short',timeZone:'UTC'})+'</span><span class="mcb-date">'+dt.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'})+'</span>';
+      b.onclick=function(){ mcbDay=d; mcbSlot=null; mcbRenderDays(); mcbRenderSlots(); };
+      row.appendChild(b);
     });
   }
-  if (zipNextBtn) {
-    zipNextBtn.addEventListener('click', () => {
-      const zip = zipInput.value.replace(/\D/g, '');
-      if (zip.length !== 5) {
-        zipError.classList.remove('hidden');
-        zipInput.classList.add('border-red-500');
-        zipInput.focus();
+  function mcbRenderSlots(){
+    var grid=document.getElementById('mcb-slots'); grid.innerHTML='';
+    (mcbDays[mcbDay]||[]).forEach(function(iso){
+      var b=document.createElement('button'); b.type='button';
+      b.className='mcb-slot'+(iso===mcbSlot?' mcb-sel':''); b.textContent=mcbTime(iso);
+      b.onclick=function(){ mcbSlot=iso; mcbRenderSlots(); mcbShowBook(); };
+      grid.appendChild(b);
+    });
+    if(!mcbSlot) document.getElementById('mcb-book').style.display='none';
+  }
+  function mcbShowBook(){
+    document.getElementById('mcb-when').textContent=mcbWhen(mcbSlot);
+    document.getElementById('mcb-err').style.display='none';
+    var box=document.getElementById('mcb-book'); box.style.display='';
+    try{ box.scrollIntoView({behavior:'smooth',block:'nearest'}); }catch(e){}
+  }
+  function mcbError(msg){ var el=document.getElementById('mcb-err'); el.textContent=msg; el.style.display=''; }
+  function mcbBook(){
+    if(!mcbSlot) return;
+    var btn=document.getElementById('mcb-btn'); btn.disabled=true; btn.textContent='Locking It In…';
+    if(window.MJC_QA){ btn.textContent='QA mode: no booking made'; return; }
+    var fn=formData.first_name||'', ln=formData.last_name||'';
+    // Same contact the inbound webhook created (Worker upserts by email/phone). Source echoes the LP's own so upsert never relabels it.
+    fetch(MCB_WORKER+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      icp:'yes', startTime:mcbSlot, timezone:mcbTz, firstName:fn, lastName:ln, email:formData.email||'', phone:formData.phone||'',
+      source:'deckingleads.com lp v1', tags:['lp-native-booked','src - youtube lp'] })})
+    .then(function(r){ return r.json().then(function(b){ return {status:r.status,body:b}; }); })
+    .then(function(res){
+      if(res.status===200&&res.body&&res.body.ok){
+        btn.textContent='Booked! One sec…';
+        try{ localStorage.setItem('mjc_booked_ref',JSON.stringify({contactId:res.body.contactId||'',calendarId:res.body.calendarId||'',t:Date.now()})); }catch(e){}
+        location.href='/yt/confirmation/?c='+encodeURIComponent(res.body.contactId||'')+'&cal='+encodeURIComponent(res.body.calendarId||'');
         return;
       }
-      formData.zip = zip;
-      goToStep(5);
-    });
+      btn.disabled=false; btn.textContent='Lock In My Call →';
+      if(res.status===409){ mcbError('That time was just taken. Pick another one.'); mcbSlot=null; mcbLoad(null,true); }
+      else { mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); }
+    })
+    .catch(function(){ btn.disabled=false; btn.textContent='Lock In My Call →'; mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); });
+  }
+  (function(){ var b=document.getElementById('mcb-btn'); if(b) b.addEventListener('click',mcbBook); var r=document.getElementById('mcb-retry'); if(r) r.addEventListener('click',function(e){ mcbLoad(e,true); }); })();
+
+  function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true;
+    if(icp){ mcbFetch().catch(function(){}); return; }
+    try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
+
+  function showCalendarUI(){
+    show(TOTAL_Q+1);
+    if(icp){
+      var sp0=document.getElementById('mc-spin'), cw0=document.getElementById('mc-cal-wrap'), nb=document.getElementById('mcb');
+      if(sp0) sp0.style.display='none'; if(cw0) cw0.style.display='none'; if(nb) nb.style.display='block';
+      mcbLoad();
+    } else {
+      // Rebuild whenever the URL changed. preloadCalendar() runs at the revenue question — one step
+      // BEFORE the contact fields — so the warmed src carries no prefill; keeping it would hand the
+      // lead an empty booking form after they just typed their details (2026-09-15).
+      try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
+      setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },(calPreloaded?250:1400));
+    }
   }
 
-  // Step 5: name + email + phone — validated together at submit
-  const nameInput = document.getElementById('name-input');
+  function submitAndShowCalendar(){
+    icp=isICP(formData);
+    showCalendarUI();
+    if(submitted) return; submitted=true;
+    // Meta Test Events mode: ?test_event_code=TEST… → CAPI relay as a test event; skips browser Lead, GHL webhook, funnel beacon.
+    var TEST_CODE=(new URLSearchParams(location.search).get('test_event_code')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,20);
+    if(!TEST_CODE) dlTrack('submit',8,{icp:icp});
 
-  const phoneInput = document.getElementById('phone-input');
-  phoneInput.addEventListener('input', () => {
-    const digits = phoneInput.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '').slice(0, 10);
-    let formatted = digits;
-    if (digits.length >= 7) formatted = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
-    else if (digits.length >= 4) formatted = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
-    phoneInput.value = formatted;
+    formData.icp=icp; formData.submitted_at=new Date().toISOString();
+    var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
+    formData.event_id=event_id;
+    try{ if(window.mjcJourney) mjcJourney.track('submit',{lead_ref:event_id,label:'apply survey',value:icp?'icp':'non-icp'}); }catch(e){} // Journey Ledger
+
+    // ORGANIC YOUTUBE: custom YT_Lead (seasoned pixel, ICP only) — NEVER the standard 'Lead' the paid campaigns optimise on.
+    // To repoint this page at PAID YouTube traffic later: swap 'trackCustom','YT_Lead' → 'track','Lead' here and YT_BookedCall → BookedCall on /yt/confirmation/.
+    if(icp && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('trackCustom','YT_Lead',{content_name:'Deck Jobs Strategy Session',channel:'yt-organic',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
+    try{ sessionStorage.setItem('dl_qualify_data',JSON.stringify(formData)); sessionStorage.setItem('dl_qualify_icp',icp?'1':'0'); }catch(e){}
+
+    (async function(){
+      try{
+        var email=formData.email, phone=(formData.phone||'').replace(/\D/g,'');
+        var phoneForHash=phone.length===11?phone:(phone.length===10?'1'+phone:phone);
+        var first_name=formData.first_name||'', last_name=formData.last_name||'';
+        var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim()),sha256Hex((formData.zip||'').trim())]);
+        var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
+        var fbc=(document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/)||[])[1]||'';
+        var in_app=/Instagram/i.test(navigator.userAgent)?'instagram':(/FBAN|FBAV|FB_IAB/i.test(navigator.userAgent)?'facebook':'');
+        // Same key set as root v8 (so the GHL "1. New Lead" mapping keeps working) + the two appointment answers, keyed to
+        // their GHL field keys (inert until the inbound-webhook sample is re-captured and mapped). crew/years/marketing sent blank.
+        // business_name carries the WEBSITE on purpose (2026-09-15). The survey now asks for the site
+        // instead of the name, but the GHL inbound-webhook mapping still only knows `business_name` —
+        // remapping needs a fresh sample capture. Sending it under both keys means the URL lands in
+        // GHL today (exactly where Spencer was pasting googled URLs anyway) and `business_website`
+        // is ready the moment the sample is re-captured. Drop the alias once that's mapped.
+        var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,fbc:fbc,in_app_browser:in_app,
+          business_website:formData.business_website||'',business_name:formData.business_website||'',
+          zip:formData.zip||'',postal_code:formData.zip||'',zip_sha256:h[4],
+          years_in_business:'',crew_situation:'',marketing_spend:'',revenue:formData.revenue||'',
+          how_many_sales_appointments_are_you_currently_running_per_week:formData.current_appts_per_week||'',
+          how_many_more_sales_appointments_can_you_handle_per_week:formData.more_appts_per_week||'',icp:icp?'yes':'no',
+          event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],fbp:fbp,
+          client_user_agent:navigator.userAgent||'',
+          timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
+          source:'deckingleads.com lp v1',variant:'v9-d2d-yt',lp_version:'v9-yt',channel:'yt-organic',yt_video:attribution.yt_video||'',page_url:location.href,
+          utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
+          utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
+          landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
+        try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
+        if(TEST_CODE){
+          // Organic YouTube leads never reach Meta CAPI (the YT workflow has no relay steps), so there is nothing to test-fire.
+          console.log('[yt test mode] organic page sends no CAPI events — nothing sent. Payload:', JSON.stringify(payload));
+        } else if(window.MJC_QA){
+          console.log('[yt QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
+        } else {
+          // "1. New Lead (YT)" inbound webhook — same key set as root so the shared Create Contact mapping works unchanged.
+          await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/OhYjuz3t2M1Q6eN7TKY8',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+        }
+      }catch(e){ console.warn('[yt] GHL webhook failed:',e); }
+    })();
+  }
+
+  // Page CTAs scroll back to the survey card.
+  document.querySelectorAll('[data-scroll-survey]').forEach(function(el){
+    el.addEventListener('click',function(e){ e.preventDefault(); card.scrollIntoView({behavior:'smooth',block:'start'}); });
   });
 
-  // ICP routing — V2 LP (4-step survey: own_business, revenue, timing, name+contact).
-  // Hard non-ICP: not a deck builder.
-  // Avatar floor: deck contractor doing $1M+/yr (Justin Wylie ICP).
-  // Anything below $1M routes to /scheduling/ — the offer doesn't pencil there
-  // and we don't want Meta optimizing for sub-floor lookalikes.
-  // $1M+ "just researching" still routes to /qualified/ — high-value capture.
-  function isICP(d) {
-    if (d.own_business !== 'yes') return false;
-    if (d.revenue === 'under_500k') return false; // non-ICP = under $500k ONLY (2026-07-28: $500k–$1M is ICP)
-    return true;
-  }
-
-  // Inline calendar swap — replaces the form card with a pre-filled GHL booking widget.
-  // ICP gets the pixeled calendar (post-book redirect to /confirmation/).
-  // Non-ICP gets the non-pixeled calendar (post-book redirect to /scheduled/).
-  const CAL_ICP     = 'https://api.seasonproofgrowth.com/widget/booking/JeZmBetIKHWnXs2H8EQC';
-  const CAL_NON_ICP = 'https://api.seasonproofgrowth.com/widget/booking/JeZmBetIKHWnXs2H8EQC';
-
-  function runLoadingThenShowCalendar(isIcp, data) {
-    const loadingTextEl = document.getElementById('loading-text');
-    if (loadingTextEl) loadingTextEl.textContent = 'Checking your market availability…';
-
-    setTimeout(() => {
-      try {
-        const baseUrl = isIcp ? CAL_ICP : CAL_NON_ICP;
-        const url = new URL(baseUrl);
-        if (data.name) {
-          const parts = data.name.trim().split(/\s+/);
-          url.searchParams.set('first_name', parts[0] || '');
-          if (parts.length > 1) url.searchParams.set('last_name', parts.slice(1).join(' '));
-        }
-        if (data.email) url.searchParams.set('email', data.email);
-        if (data.phone) url.searchParams.set('phone', data.phone);
-        if (data.zip)   url.searchParams.set('zip', data.zip);
-
-        const iframe = document.getElementById('inline-calendar');
-        if (iframe) iframe.src = url.toString();
-
-        ['apply-header','guarantee-callout','form-card','form-tail'].forEach(id => {
-          const el = document.getElementById(id);
-          if (el) el.classList.add('hidden');
-        });
-
-        // Swap in the post-submit hero (same copy for ICP and non-ICP — single offer presentation).
-        const eyebrow = document.getElementById('post-submit-eyebrow');
-        if (eyebrow) eyebrow.textContent = data.zip ? `${data.zip} Is Open` : 'Market Open';
-        const hero = document.getElementById('post-submit-hero');
-        if (hero) hero.classList.remove('hidden');
-
-        const calWrap = document.getElementById('calendar-wrap');
-        if (calWrap) calWrap.classList.remove('hidden');
-
-        const applyEl = document.getElementById('apply');
-        if (applyEl) applyEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      } catch (e) {
-        console.warn('[DL v2] inline calendar swap failed, falling back to redirect:', e);
-        window.location.href = '/yt/scheduled/';
-      }
-    }, 1500);
-  }
-
-  const emailInput = document.getElementById('email-input');
-  const nameError = document.getElementById('name-error');
-  const emailError = document.getElementById('email-error');
-  const phoneError = document.getElementById('phone-error');
-  const submitBtn = document.getElementById('submit-btn');
-
-  submitBtn.addEventListener('click', () => {
-    const name = nameInput.value.trim();
-    const email = emailInput.value.trim();
-    const phone = phoneInput.value.replace(/\D/g, '').replace(/^1(?=\d{10}$)/, '');
-
-    // Name: first + space + at least 1 char of second word
-    const nameParts = name.split(/\s+/);
-    const nameValid = nameParts.length >= 2 && nameParts[0].length >= 2 && nameParts[1].length >= 1;
-    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    const phoneValid = /^[2-9]\d{9}$/.test(phone);
-
-    if (nameError) nameError.classList.toggle('hidden', nameValid);
-    emailError.classList.toggle('hidden', emailValid);
-    phoneError.classList.toggle('hidden', phoneValid);
-    nameInput.classList.toggle('border-red-500', !nameValid);
-    emailInput.classList.toggle('border-red-500', !emailValid);
-    phoneInput.classList.toggle('border-red-500', !phoneValid);
-    if (!nameValid || !emailValid || !phoneValid) return;
-
-    formData.name = name;
-    formData.email = email;
-    formData.phone = '+1' + phone;
-    formData.submitted_at = new Date().toISOString();
-    const icp = isICP(formData);
-    formData.icp = icp;
-
-    // Generate a dedupe ID so browser Pixel + (future) GHL CAPI count as ONE Lead.
-    const event_id = (window.crypto && crypto.randomUUID)
-      ? crypto.randomUUID()
-      : 'dl_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
-    formData.event_id = event_id;
-
-    // TEMP DEBUG — open DevTools → Console BEFORE submitting to see capture.
-    console.log('[DL v2] formData at submit:', JSON.parse(JSON.stringify(formData)));
-    console.log('[DL v2] isICP check — own_business:', formData.own_business, '| revenue:', formData.revenue, '| timing:', formData.timing);
-    console.log('[DL v2] isICP result:', icp, '→ redirecting to: /yt/scheduled/');
-
-    // Fire Meta Lead — ONLY for ICP-qualified submitters.
-    // Non-ICP traffic must not train the conversion model.
-    if (icp && typeof fbq === 'function') {
-      try {
-        fbq('track', 'Lead', {
-          content_name: 'Deck Jobs Strategy Session',
-          value: 0,
-          currency: 'USD'
-        }, { eventID: event_id });
-        console.log('[DL v2] fbq Lead fired with eventID:', event_id);
-      } catch (e) { console.warn('[DL v2] fbq Lead failed:', e); }
-    }
-
-    try {
-      sessionStorage.setItem('dl_qualify_data', JSON.stringify(formData));
-      sessionStorage.setItem('dl_qualify_icp', icp ? '1' : '0');
-    } catch (_) {}
-
-    // POST to GHL inbound webhook. keepalive lets the request survive the redirect.
-    try {
-      const [first_name, ...rest] = name.split(/\s+/);
-      const last_name = rest.join(' ');
-      const ghlPayload = {
-        first_name,
-        last_name,
-        full_name: name,
-        email,
-        phone: '+1' + phone,
-        postal_code: formData.zip,
-        own_business: formData.own_business,
-        revenue: formData.revenue,
-        timing: formData.timing,
-        icp: icp ? 'yes' : 'no',
-        event_id,
-        submitted_at: formData.submitted_at,
-        source: 'deckingleads.com lp v1',
-        variant: 'v1',
-        page_url: window.location.href,
-        utm_source: attribution.utm_source || '',
-        utm_medium: attribution.utm_medium || '',
-        utm_campaign: attribution.utm_campaign || '',
-        utm_content: attribution.utm_content || '',
-        utm_term: attribution.utm_term || '',
-        fbclid: attribution.fbclid || '',
-        gclid: attribution.gclid || '',
-        landing_url: attribution.landing_url || '',
-        referrer: attribution.referrer || ''
-      };
-      fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/OhYjuz3t2M1Q6eN7TKY8', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(ghlPayload),
-        keepalive: true
-      }).catch(err => console.warn('[DL v2] GHL webhook failed:', err));
-      console.log('[DL v2] GHL webhook fired:', ghlPayload);
-    } catch (e) { console.warn('[DL v2] GHL webhook setup failed:', e); }
-
-    goToStep('loading');
-    runLoadingThenShowCalendar(icp, formData);
-  });
-
-  // Video lightbox — keep proof video plays on-page (no redirect to YouTube)
-  (function initVideoModal() {
-    const vmodal = document.getElementById('video-modal');
-    const vframe = document.getElementById('video-modal-iframe');
-    const vclose = vmodal.querySelector('.video-modal-close');
-
-    function extractYouTubeId(href) {
-      // Supports https://youtu.be/ID, https://www.youtube.com/watch?v=ID, https://www.youtube.com/embed/ID
-      try {
-        const u = new URL(href);
-        if (u.hostname.includes('youtu.be')) return u.pathname.slice(1);
-        if (u.hostname.includes('youtube.com')) {
-          if (u.pathname.startsWith('/embed/')) return u.pathname.split('/')[2];
-          return u.searchParams.get('v');
-        }
-      } catch (_) {}
-      return null;
-    }
-
-    function openVideo(id) {
-      vframe.src = `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1&playsinline=1`;
-      vmodal.setAttribute('aria-hidden', 'false');
-      document.body.classList.add('modal-open');
-    }
-    function closeVideo() {
-      vmodal.setAttribute('aria-hidden', 'true');
-      document.body.classList.remove('modal-open');
-      // Clearing src halts playback immediately
-      vframe.src = '';
-    }
-
-    document.querySelectorAll('.proof-thumb').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        const id = href ? extractYouTubeId(href) : null;
-        if (!id) {
-          // Placeholder card with href="#" — kill the hash jump, do nothing else
-          e.preventDefault();
-          return;
-        }
-        e.preventDefault();
-        openVideo(id);
-      });
-    });
-
-    vclose.addEventListener('click', closeVideo);
-    vmodal.addEventListener('click', (e) => { if (e.target === vmodal) closeVideo(); });
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && vmodal.getAttribute('aria-hidden') === 'false') closeVideo();
-    });
+  // QA: ?preview=cal → ICP native picker · ?preview=cal-nonicp → non-ICP widget. Nothing fires (no webhook/pixel/CRM write).
+  (function(){
+    try{
+      var pv=new URLSearchParams(location.search).get('preview'); if(!pv||pv.indexOf('cal')!==0) return;
+      formData.name='Preview Tester'; formData.first_name='Preview'; formData.last_name='Tester'; formData.email='preview@example.com'; formData.phone='5555555555';
+      formData.revenue=(pv==='cal-nonicp')?'0_100k':'1m_3m';
+      submitted=true; icp=isICP(formData); showCalendarUI();
+    }catch(e){}
   })();
 
-  // Sticky CTA — show after scroll past hero, hide when apply section is in view
-  const heroHeight = 600;
-  function updateStickyCta() {
-    const applyRect = apply.getBoundingClientRect();
-    const applyInView = applyRect.top < window.innerHeight && applyRect.bottom > 0;
-    const showIt = window.scrollY > heroHeight && !applyInView;
-    stickyCta.setAttribute('aria-hidden', showIt ? 'false' : 'true');
-  }
-  window.addEventListener('scroll', updateStickyCta, { passive: true });
-  window.addEventListener('resize', updateStickyCta);
-  updateStickyCta();
+  // Capture the just-booked appointment reference (non-ICP GHL widget path) so /scheduled/ can add-to-calendar.
+  (function(){
+    var contactId=null;
+    window.addEventListener('message', function(e){
+      try{
+        var d=e.data; if(!Array.isArray(d)) return;
+        if(d[0]==='set-sticky-contacts' && typeof d[2]==='string'){ var m=d[2].match(/"id":"([^"]+)"/); if(m) contactId=m[1]; }
+        else if(d[0]==='msgsndr-booking-complete' && d[1] && d[1].calendarId){
+          try{ localStorage.setItem('mjc_booked_ref', JSON.stringify({contactId:contactId, calendarId:d[1].calendarId, t:Date.now()})); }catch(_){}
+          // ── /yt/ ROUTING OVERRIDE ── the GHL calendars are SHARED with root and redirect server-side to /scheduled/ (or
+          // /confirmation/). We navigate to the /yt/ twins ourselves the instant booking completes; this listener is registered
+          // after form_embed.js so our navigation is queued last and wins. Race loss = root page (still works, only the
+          // YT_BookedCall isolation is lost for that one). Durable fix = duplicate the calendars with /yt/ redirect URLs.
+          try{ var bookedIcp=String(d[1].calendarId)==='6Ck4IfG5SatgIkAZJ7yo'; window.location.replace(bookedIcp?'/yt/confirmation/':'/yt/scheduled/'); }catch(_){}
+        }
+      }catch(_){}
+    }, false);
+  })();
 })();
 
-/* ============================================================
-   100-Day Operator Track — scroll-tied lighting + rail fill
-   ============================================================ */
-(function initOperatorTrack() {
-  const track = document.querySelector('.track');
-  if (!track) return;
-  const rows = Array.from(track.querySelectorAll('.track-row'));
-  const rail = track.querySelector('.track-rail');
-  const railFill = track.querySelector('.track-rail-fill');
-  if (!rows.length || !rail || !railFill) return;
-
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // Activate row when its node crosses the playhead band
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      const row = entry.target;
-      if (entry.isIntersecting) {
-        row.classList.add('is-active', 'is-consumed');
-      } else {
-        row.classList.remove('is-active');
-        // is-consumed sticks once seen
-      }
+// ── Video wall: thumbnail facade → YouTube iframe on click (keeps 14 embeds from loading up front).
+(function(){
+  document.querySelectorAll('.yt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var id=btn.dataset.id; if(!id) return;
+      document.querySelectorAll('.yt iframe').forEach(function(f){ var p=f.parentNode; p.innerHTML='<img src="https://i.ytimg.com/vi/'+p.dataset.id+'/hqdefault.jpg" alt=""><span class="play"></span>'; });
+      btn.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Client video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     });
-  }, { rootMargin: '-42% 0px -45% 0px', threshold: 0 });
-  rows.forEach((row) => observer.observe(row));
-
-  // Bind rail top/bottom to the actual first + last node centers — no dangling line
-  function setRailBounds() {
-    const firstNode = rows[0].querySelector('.track-node-num');
-    const lastNode = rows[rows.length - 1].querySelector('.track-node-num');
-    if (!firstNode || !lastNode) return;
-    const trackRect = track.getBoundingClientRect();
-    const firstRect = firstNode.getBoundingClientRect();
-    const lastRect = lastNode.getBoundingClientRect();
-    const top = (firstRect.top + firstRect.height / 2) - trackRect.top;
-    const bottom = trackRect.bottom - (lastRect.top + lastRect.height / 2);
-    rail.style.top = top + 'px';
-    rail.style.bottom = bottom + 'px';
-  }
-
-  // Rail fill follows the playhead through the rail span (not the whole track)
-  let ticking = false;
-  function updateRail() {
-    const railRect = rail.getBoundingClientRect();
-    const winH = window.innerHeight || document.documentElement.clientHeight;
-    const playhead = winH * 0.55;
-    let pct;
-    if (railRect.top >= playhead) {
-      pct = 0;
-    } else if (railRect.bottom <= playhead) {
-      pct = 100;
-    } else {
-      pct = ((playhead - railRect.top) / railRect.height) * 100;
-    }
-    railFill.style.height = Math.max(0, Math.min(100, pct)) + '%';
-    ticking = false;
-  }
-  function onScroll() {
-    if (!ticking) {
-      window.requestAnimationFrame(updateRail);
-      ticking = true;
-    }
-  }
-  function onResize() {
-    setRailBounds();
-    updateRail();
-  }
-
-  setRailBounds();
-
-  if (reduceMotion) {
-    railFill.style.height = '100%';
-    rows.forEach(r => r.classList.add('is-consumed'));
-  } else {
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onResize);
-    // Re-measure once fonts have settled (web font + Tailwind CDN apply async)
-    if (document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(onResize);
-    }
-    setTimeout(onResize, 250);
-    updateRail();
-  }
+  });
 })();
 </script>
-
 </body>
 </html>

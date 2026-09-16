@@ -464,3 +464,12 @@ Full chain proven with live test codes, no inference: LP payload carries `icp:'y
 
 ### Rollback
 LP: `git revert 4fadb56 3f7f6d4 727a634`. Relay: redeploy the `.bak`. Workflows: timestamped backups in `capi-worker/workflow-backups/2026-09-15/`.
+
+---
+
+## /yt/ — ORGANIC-YOUTUBE TWIN OF ROOT v9 (rebuilt 2026-09-15)
+
+- **What:** `/yt/` was the frozen v1 page posting to the "1. New Lead (YT)" webhook with a stale 27-field map. Rebuilt as a byte-for-byte design twin of the ROOT v9 capacity-survey page (built by `build_yt_lp.py` from root `index.html` — re-run it after root changes; never hand-edit). New twins `/yt/confirmation/` (custom `YT_BookedCall`) and `/yt/scheduled/` (no pixel, same as root) from HEAD `confirmation/` + `scheduled/`.
+- **Plumbing only differs:** blanks stamped `utm_source=youtube / utm_medium=organic / utm_campaign=yt-description`, `?v=<videoId>` → `utm_content` (every YouTube description now links `https://apply.morejobcalls.com/yt/?v=<its own id>`); payload `channel:'yt-organic'`, `lp_version:'v9-yt'`, `variant:'v9-d2d-yt'`; posts to inbound webhook `OhYjuz3t2M1Q6eN7TKY8` ("1. New Lead (YT)"); seasoned pixel PageView + custom `YT_Lead` (ICP only, never standard Lead; ICP pixel not initialised); ICP native picker → `/yt/confirmation/`, non-ICP widget → `/yt/scheduled/` via the same client-side redirect override `/ig/` uses. `noindex`.
+- **GHL (same day):** "1. New Lead (YT)" v7→v8 = mirror of "1. New Lead" v107 minus the 3 Meta CAPI steps, Lead Channel = youtube, tracker row → Organic tab, tag `src - youtube lp`. "2. Booked | CHUNG V1" v9→v10: META/YouTube split now also keys on contact Lead Channel (YouTube bookings on the shared calendars skip the CAPI Schedule). Scripts + BEFORE backups: `capi-worker/workflow-backups/2026-09-15/yt_channel_wiring.py`.
+- **YouTube:** 110/116 descriptions rewritten via the Data API — old `deckingleads.com/yt-growth-call` / `apply.deckingleads.com` / bare `apply.morejobcalls.com/yt` links → the per-video `/yt/?v=` link, every "Produced by Scaling With Systems" block removed, public videos with no link got one up top. 6 unlisted/private pre-call videos untouched.
