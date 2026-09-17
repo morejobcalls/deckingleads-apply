@@ -153,6 +153,9 @@
   .qs-trust .d{color:var(--pop-deep);}
   .qs-trust .sep{color:#B8B8B8;display:none;}
   @media(min-width:640px){.qs-trust .sep{display:inline;}}
+  /* 4 items (Premium Deck Projects added 2026-09-17): stacked on phones, 2x2 under the card on tablet/desktop — no dangling separators */
+  @media(max-width:639px){.qs-trust{flex-direction:column;gap:6px;}}
+  @media(min-width:640px){.qs-trust{display:grid;grid-template-columns:auto auto;justify-content:center;gap:10px 36px;}.qs-trust .sep{display:none;}}
   .qs-guar{margin:10px auto 0;font-size:13px;color:#5A5A5A;text-align:center;max-width:640px;}
   .qs-guar a{color:#5A5A5A;}
 
@@ -416,7 +419,8 @@
     <div class="qs-trust" aria-label="What you get">
       <span><span class="d">&#9670;</span> 100 Minimum On-site Appointments – Guaranteed</span><span class="sep">|</span>
       <span><span class="d">&#9670;</span> Exclusive. Never Shared.</span><span class="sep">|</span>
-      <span><span class="d">&#9670;</span> Ready-To-Buy Homeowners</span>
+      <span><span class="d">&#9670;</span> Ready-To-Buy Homeowners</span><span class="sep">|</span>
+      <span><span class="d">&#9670;</span> Premium Deck Projects</span>
     </div>
   </div>
 </section>
