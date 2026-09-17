@@ -117,6 +117,6 @@ ROOT `/confirmation/` + `/scheduled/` (the pages the GHL redirect lands on — t
 
 ## HOW TO RESUME
 1. Read this file. Read `CHANGELOG.md`.
-2. `cd` to `Marketing/4. Website/Landing Pages/v1-launch-page`; `node serve.mjs` → preview `http://localhost:3000/next/index.html` (open the modal via the CTA or `window.__openApply()` in console).
+2. `cd` to `Marketing/Website/Landing Pages/v1-launch-page`; `node serve.mjs` → preview `http://localhost:3000/next/index.html` (open the modal via the CTA or `window.__openApply()` in console).
 3. Decide with Spencer: push `/next/` preview live (so he can test the modal + real calendar), or continue Stage 2 → Stage 3.
 4. Screenshot previews with the puppeteer pattern used this session (deviceScaleFactor 2; run the script from inside `v1-launch-page/` so it resolves puppeteer).

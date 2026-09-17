@@ -369,11 +369,7 @@
   if (sms) {
     const who = first || '[your name]';
     const zip = (data.zip || '').toString().trim() || '[your zip]';
-    // business_name is captured at survey step 3 and rides along in dl_qualify_data.
-    // Before 2026-08-24 this was a hardcoded literal, so leads were sending Spencer
-    // "it's Tim from [company]" verbatim. Falls back to the placeholder if missing.
-    const biz = (data.business_name || '').toString().trim() || '[company]';
-    const body = `Hey Spencer, it's ${who} from ${biz}. Just booked a call. Looking forward to seeing how the 20 deck jobs in 100 days process could work for us here in ${zip}.`;
+    const body = `Hey Spencer, it's ${who} from [company]. Just booked a call. Looking forward to seeing how the 20 deck jobs in 100 days process could work for us here in ${zip}.`;
     sms.href = 'sms:+15012363920?&body=' + encodeURIComponent(body);
     var pv = document.getElementById('sms-preview-text');
     if (pv) pv.textContent = body;
