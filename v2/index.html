@@ -780,6 +780,31 @@
   const formData = {};
   let currentStep = 1;
 
+  // Capture UTM + click IDs on first touch; persist 30 days across tabs/visits.
+  // First-touch wins: once a value is stored, later visits don't overwrite it.
+  const ATTR_KEYS = ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'];
+  const ATTR_TTL_MS = 30 * 24 * 60 * 60 * 1000; // 30 days
+  const attribution = (() => {
+    let stored = {};
+    try {
+      const raw = localStorage.getItem('dl_attribution');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        if (parsed && parsed._ts && (Date.now() - parsed._ts) < ATTR_TTL_MS) stored = parsed;
+      }
+    } catch (_) {}
+    const params = new URLSearchParams(window.location.search);
+    ATTR_KEYS.forEach(k => {
+      const v = params.get(k);
+      if (v && !stored[k]) stored[k] = v; // first-touch wins
+    });
+    if (!stored.landing_url) stored.landing_url = window.location.href;
+    if (!stored.referrer) stored.referrer = document.referrer || '';
+    if (!stored._ts) stored._ts = Date.now();
+    try { localStorage.setItem('dl_attribution', JSON.stringify(stored)); } catch (_) {}
+    return stored;
+  })();
+
   function goToStep(stepNum) {
     currentStep = stepNum;
     steps.forEach(s => s.classList.remove('active'));
@@ -890,6 +915,45 @@
       sessionStorage.setItem('dl_qualify_data', JSON.stringify(formData));
       sessionStorage.setItem('dl_qualify_icp', icp ? '1' : '0');
     } catch (_) {}
+
+    // POST to GHL inbound webhook. keepalive lets the request survive the redirect.
+    try {
+      const [first_name, ...rest] = name.split(/\s+/);
+      const last_name = rest.join(' ');
+      const ghlPayload = {
+        first_name,
+        last_name,
+        full_name: name,
+        email,
+        phone: '+1' + phone,
+        postal_code: formData.zip,
+        own_business: formData.own_business,
+        revenue: formData.revenue,
+        timing: formData.timing,
+        icp: icp ? 'yes' : 'no',
+        event_id,
+        submitted_at: formData.submitted_at,
+        source: 'deckingleads.com lp v2',
+        variant: 'v2',
+        page_url: window.location.href,
+        utm_source: attribution.utm_source || '',
+        utm_medium: attribution.utm_medium || '',
+        utm_campaign: attribution.utm_campaign || '',
+        utm_content: attribution.utm_content || '',
+        utm_term: attribution.utm_term || '',
+        fbclid: attribution.fbclid || '',
+        gclid: attribution.gclid || '',
+        landing_url: attribution.landing_url || '',
+        referrer: attribution.referrer || ''
+      };
+      fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(ghlPayload),
+        keepalive: true
+      }).catch(err => console.warn('[DL v2] GHL webhook failed:', err));
+      console.log('[DL v2] GHL webhook fired:', ghlPayload);
+    } catch (e) { console.warn('[DL v2] GHL webhook setup failed:', e); }
 
     goToStep('loading');
     // Absolute paths — v2 lives at /v2/ but terminal pages are at root /qualified/ and /scheduling/

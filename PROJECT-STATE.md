@@ -46,7 +46,7 @@
 
 1. **Replace `YOUR_PIXEL_ID` in 5 files** — simplest run:
    ```bash
-   cd "/Volumes/T7/SPG/1. MARKETING/Website/Landing Pages/v1-launch-page"
+   cd "/Volumes/T7/SPG/1. MARKETING/4. Website/Landing Pages/v1-launch-page"
    grep -rl YOUR_PIXEL_ID . | xargs sed -i '' 's/YOUR_PIXEL_ID/<real-id>/g'
    git add -A && git commit -m "Wire real Meta Pixel ID" && git push
    ```
@@ -101,7 +101,7 @@ GitHub repo: **https://github.com/morejobcalls/deckingleads-apply** (public, own
 
 ## Local file structure
 
-Working directory: `/Volumes/T7/SPG/1. MARKETING/Website/Landing Pages/v1-launch-page/`
+Working directory: `/Volumes/T7/SPG/1. MARKETING/4. Website/Landing Pages/v1-launch-page/`
 
 ```
 v1-launch-page/
@@ -260,8 +260,8 @@ If a fresh session needs to write copy on this project, read these first:
 - `/Volumes/T7/SPG/3. FULFILLMENT/Operations/SOPs/voice-guide.md` — Spencer's voice (direct, anti-BS, contractor-friendly, no excessive em dashes — they look AI-generated)
 - `/Volumes/T7/SPG/3. FULFILLMENT/Operations/SOPs/dream-client-avatar.md` — Justin Wylie (the dream client). Avatar's #1 reflex on cold offers: "this sounds too good to be true." V3's whole long-form lead is built around defusing that exact phrase.
 - `/Volumes/T7/SPG/3. FULFILLMENT/Operations/SOPs/business-context.md` — full SPG / DeckingLeads context, offer stack, customer journey
-- `/Volumes/T7/SPG/1. MARKETING/Meta Ads/Strategy/Master Offer Doc/Master_Offer_Doc_SPG_v2.md` — canonical offer doc (the "Kevlar thread"). Any LP copy should not contradict this.
-- `/Volumes/T7/SPG/1. MARKETING/Proof/0. Master Library/Master Testimonial Library.md` — every named-client soundbite organized by objection. Any new proof card's stat overlay should match this library.
+- `/Volumes/T7/SPG/1. MARKETING/0. Strategy/Master Offer Doc/Master_Offer_Doc_SPG_v2.md` — canonical offer doc (the "Kevlar thread"). Any LP copy should not contradict this.
+- `/Volumes/T7/SPG/1. MARKETING/3. Proof/0. Master Library/Master Testimonial Library.md` — every named-client soundbite organized by objection. Any new proof card's stat overlay should match this library.
 
 ---
 

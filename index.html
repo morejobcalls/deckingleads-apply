@@ -558,7 +558,7 @@
   var steps=card.querySelectorAll('.qs-step');
   var barFill=document.getElementById('qs-bar-fill'), stepLabel=document.getElementById('qs-step-label'), pctEl=document.getElementById('qs-pct');
   var progWrap=document.getElementById('qs-prog'), backBtn=document.getElementById('qs-back');
-  var TOTAL_Q=5, PROG={1:0,2:20,3:60,4:80,5:98,6:100}; // Q3 = service-area ZIP (added 2026-09-15). Front-loaded progress + no "Step X of Y" label (Spencer 2026-09-17); booking step = 100%
+  var TOTAL_Q=5, PROG={1:0,2:60,3:80,4:90,5:98,6:100}; // Q3 = service-area ZIP (added 2026-09-15). Front-loaded progress + no "Step X of Y" label (Spencer 2026-09-17); booking step = 100%
   var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
   if(window.MJC_QA){ try{ var qa=document.createElement('p'); qa.className='qs-qa'; qa.textContent='QA mode: nothing is sent to GHL, Meta, or the calendar.'; card.insertBefore(qa, card.firstChild); }catch(e){} }
 

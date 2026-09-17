@@ -1063,10 +1063,12 @@
         <h3 class="text-2xl sm:text-[28px] font-extrabold leading-[1.15] mb-2 text-paper-text" style="letter-spacing: -0.02em;">What's your annual revenue?</h3>
         <p class="text-sm text-paper-subtle mb-6">Rough range is fine. No wrong answers.</p>
         <div class="grid grid-cols-1 gap-2.5">
-          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="under_500k">Below $500,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="500k_1m">$500,000 – $1,000,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="1m_3m">$1,000,000 – $3,000,000</button>
-          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="3m_plus">$3,000,000+</button>
+          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="one_man_show">One Man Show ($0 – $500K/yr)</button>
+          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="taskman">The Taskman ($500K – $1M/yr)</button>
+          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="keyman">The Keyman ($1M – $2.5M/yr)</button>
+          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="manager">The Manager ($2.5M – $5M/yr)</button>
+          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="executive">The Executive ($5M+/yr)</button>
+          <button class="choice-btn text-left p-4 rounded-xl border border-paper-border hover:border-paper-text focus-visible:border-paper-text focus-visible:outline-none font-semibold text-[15px] text-paper-text transition-colors" data-field="revenue" data-value="not_owner">I don’t own a deck building company</button>
         </div>
       </div>
 
@@ -1371,7 +1373,7 @@
 
   function isICP(d) {
     if (d.own_business !== 'yes') return false;
-    if (d.revenue === 'under_500k') return false; // non-ICP = under $500k ONLY (2026-07-28: $500k–$1M is ICP)
+    if (d.revenue === 'one_man_show' || d.revenue === 'not_owner') return false; // non-ICP = under $500K stage or not an owner (stage values, 2026-08-19; $500K–$1M Taskman is ICP per 2026-07-28)
     return true;
   }
 
@@ -1746,7 +1748,7 @@
      Self-contained: namespaced #mc-* IDs + own IIFE. Opens from any
      a[href="#apply"] / [data-open-apply] CTA. Ports v1 logic verbatim
      (isICP, both calendars, Meta Lead+dedupe, GHL webhook w/ hashed PII)
-     and adds: contact-early order, bottleneck step, progress bar,
+     and adds: contact-early order, weekly-job-capacity step (was bottleneck, swapped 2026-08-18), progress bar,
      calendar preload after revenue. v1 funnel untouched (this is /next/).
 ════════════════════════════════════════════════════════════ -->
 <style>
@@ -1798,7 +1800,7 @@
   #mc-cal{width:100%;height:74vh;min-height:540px;border:0;display:block;background:#fff;}
   /* Calendar step only: widen the card past GHL's ~1024px breakpoint. Below it the widget
      falls back to its stacked layout and the time-slot list never renders. The 600px survey
-     width is kept for every question step — only step 8 (the calendar) gets the wide card. */
+     width is kept for every question step — only step 10 (the calendar) gets the wide card. */
   #mc-card.cal-open{max-width:1080px;transition:max-width .25s cubic-bezier(.16,1,.3,1);}
   @media(min-width:1140px){ #mc-card.cal-open #mc-cal{height:720px;min-height:700px;} }
   #mc-spin{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 0;text-align:center;}
@@ -1826,6 +1828,14 @@
     </div>
 
     <div class="mc-step" data-step="2">
+      <h3 class="mc-q">What&rsquo;s the name of your business?</h3>
+      <p class="mc-sub">We take a look at your company and your market before the call.</p>
+      <input id="mc-bizname" class="mc-input" type="text" autocomplete="organization" placeholder="Business name">
+      <p id="mc-bizname-err" class="mc-err">Please enter your business name.</p>
+      <div class="mc-next-row"><button class="mc-next" type="button" data-next>Next &#8594;</button></div>
+    </div>
+
+    <div class="mc-step" data-step="3">
       <h3 class="mc-q">What's your full name?</h3>
       <p class="mc-sub">First and last name.</p>
       <input id="mc-name" class="mc-input" type="text" autocomplete="name" placeholder="First and last name">
@@ -1833,7 +1843,7 @@
       <div class="mc-next-row"><button class="mc-next" type="button" data-next>Next &#8594;</button></div>
     </div>
 
-    <div class="mc-step" data-step="3">
+    <div class="mc-step" data-step="4">
       <h3 class="mc-q">Where should we send the call details?</h3>
       <p class="mc-sub">You'll get a text with the Google Meet link and a reminder before the call.</p>
       <input id="mc-email" class="mc-input" type="email" autocomplete="email" placeholder="Email address">
@@ -1847,25 +1857,38 @@
       <div class="mc-next-row"><button class="mc-next" type="button" data-next>Next &#8594;</button></div>
     </div>
 
-    <div class="mc-step" data-step="4">
-      <h3 class="mc-q">What's the biggest thing holding your business back right now?</h3>
-      <p class="mc-sub">Be honest — it helps us diagnose the right fix on the call.</p>
-      <button class="mc-opt" data-field="bottleneck" data-value="not_enough_appts">Not enough qualified appointments<span class="mc-optsub">I close when I'm in front of them</span></button>
-      <button class="mc-opt" data-field="bottleneck" data-value="feast_famine">Feast or famine — my lead flow is unpredictable</button>
-      <button class="mc-opt" data-field="bottleneck" data-value="referral_ceiling">Too reliant on referrals &amp; word-of-mouth</button>
-      <button class="mc-opt" data-field="bottleneck" data-value="not_sure">Not sure — I just want more good jobs</button>
-    </div>
-
     <div class="mc-step" data-step="5">
-      <h3 class="mc-q">What's your annual revenue?</h3>
-      <p class="mc-sub">Rough range is fine. No wrong answers.</p>
-      <button class="mc-opt" data-field="revenue" data-value="under_500k">Below $500,000</button>
-      <button class="mc-opt" data-field="revenue" data-value="500k_1m">$500,000 – $1,000,000</button>
-      <button class="mc-opt" data-field="revenue" data-value="1m_3m">$1,000,000 – $3,000,000</button>
-      <button class="mc-opt" data-field="revenue" data-value="3m_plus">$3,000,000+</button>
+      <h3 class="mc-q">What’s your crew situation right now?</h3>
+      <p class="mc-sub">Be straight with us — it changes the plan we build for you.</p>
+      <button class="mc-opt" data-field="crew_situation" data-value="just_me">Just me — I’m on the tools</button>
+      <button class="mc-opt" data-field="crew_situation" data-value="subs_on_demand">Me + subs I can pull in when the work is there</button>
+      <button class="mc-opt" data-field="crew_situation" data-value="one_crew">1 full-time crew</button>
+      <button class="mc-opt" data-field="crew_situation" data-value="multi_crew">2+ full-time crews</button>
     </div>
 
     <div class="mc-step" data-step="6">
+      <h3 class="mc-q">If the appointments were there, how many MORE deck jobs could you take on each week?</h3>
+      <p class="mc-sub">Be honest — we match appointment volume to your real capacity.</p>
+      <div class="mc-grid2">
+        <button class="mc-opt" data-field="weekly_job_capacity" data-value="1">1 Deck Job Per Week</button>
+        <button class="mc-opt" data-field="weekly_job_capacity" data-value="2">2 Deck Jobs Per Week</button>
+        <button class="mc-opt" data-field="weekly_job_capacity" data-value="3">3 Deck Jobs Per Week</button>
+        <button class="mc-opt" data-field="weekly_job_capacity" data-value="4_plus">4+ Deck Jobs Per Week</button>
+      </div>
+    </div>
+
+    <div class="mc-step" data-step="7">
+      <h3 class="mc-q">What stage is your business at?</h3>
+      <p class="mc-sub">Rough range is fine. No wrong answers.</p>
+      <button class="mc-opt" data-field="revenue" data-value="one_man_show">One Man Show<span class="mc-optsub">$0 – $500K/yr</span></button>
+      <button class="mc-opt" data-field="revenue" data-value="taskman">The Taskman<span class="mc-optsub">$500K – $1M/yr</span></button>
+      <button class="mc-opt" data-field="revenue" data-value="keyman">The Keyman<span class="mc-optsub">$1M – $2.5M/yr</span></button>
+      <button class="mc-opt" data-field="revenue" data-value="manager">The Manager<span class="mc-optsub">$2.5M – $5M/yr</span></button>
+      <button class="mc-opt" data-field="revenue" data-value="executive">The Executive<span class="mc-optsub">$5M+/yr</span></button>
+      <button class="mc-opt" data-field="revenue" data-value="not_owner">I don’t own a deck building company</button>
+    </div>
+
+    <div class="mc-step" data-step="8">
       <h3 class="mc-q">How soon would you realistically want to begin?</h3>
       <p class="mc-sub">No wrong answers — helps us prioritize your application.</p>
       <div class="mc-grid2">
@@ -1876,7 +1899,7 @@
       </div>
     </div>
 
-    <div class="mc-step" data-step="7">
+    <div class="mc-step" data-step="9">
       <h3 class="mc-q">What's your service-area ZIP code?</h3>
       <p class="mc-sub">We use this to check if your market is still open. One deck builder per market.</p>
       <input id="mc-zip" class="mc-input" type="text" inputmode="numeric" autocomplete="postal-code" placeholder="ZIP code" maxlength="5">
@@ -1884,7 +1907,7 @@
       <div class="mc-next-row"><button class="mc-next" type="button" data-next-zip>Next &#8594;</button></div>
     </div>
 
-    <div class="mc-step" data-step="8">
+    <div class="mc-step" data-step="10">
       <div style="text-align:center;margin-bottom:14px;">
         <h3 id="mc-cal-h1" class="mc-q" style="margin-bottom:4px;">One last step — Reserve your territory and pick a time that works for you</h3>
         <p id="mc-cal-h2" class="mc-sub" style="margin-bottom:0;font-weight:700;">20+ Deck Jobs in 100 Days or You Get Paid $2,000.</p>
@@ -1905,7 +1928,7 @@
   var backBtn=document.getElementById('mc-back');
   var closeBtn=document.getElementById('mc-close');
   var steps=overlay.querySelectorAll('.mc-step');
-  var TOTAL=8, PROG={1:8,2:40,3:65,4:75,5:82,6:90,7:96,8:100};
+  var TOTAL=10, PROG={1:8,2:26,3:42,4:56,5:64,6:72,7:79,8:86,9:93,10:100};
   var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
 
   var attribution=(function(){
@@ -1942,7 +1965,7 @@
     try{
       if(String(e.origin).indexOf('calendly.com')===-1) return;
       if(!e.data || e.data.event!=='calendly.event_scheduled') return;
-      if(typeof dlTrack==='function') dlTrack('booked_calendly',10);
+      if(typeof dlTrack==='function') dlTrack('booked_calendly',12);
       // Stash an email-based booking ref so the /scheduled/ add-to-calendar block can
       // resolve the mirrored GHL appointment (Calendly path has no GHL contactId).
       try{ if(window.formData&&formData.email){ localStorage.setItem('mjc_booked_ref', JSON.stringify({email:formData.email, calendarId:'lNcyqnixLoZa2p3S5P8I', t:Date.now()})); } }catch(err2){}
@@ -1952,11 +1975,11 @@
 
   // ── Funnel step instrumentation → mjc-funnel-events worker (Supabase funnel_events).
   // Fire-and-forget beacons; fully wrapped so a tracking failure can never touch the form.
-  // Canonical idx: 0 landed · 1 survey_open · 2 own_business · 3 name · 4 contact_info
-  //                · 5 bottleneck · 6 revenue · 7 timing · 8 zip · 9 submit
+  // Canonical idx (v3 survey, 2026-08-19): 0 landed · 1 survey_open · 2 own_business · 3 business_name · 4 name
+  //                · 5 contact_info · 6 crew_situation · 7 weekly_job_capacity · 8 revenue(stage) · 9 timing · 10 zip · 11 submit
   var DL_SID=(function(){try{var s=sessionStorage.getItem('dl_sid'); if(!s){s=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'s'+Date.now()+Math.random().toString(36).slice(2,10); sessionStorage.setItem('dl_sid',s);} return s;}catch(e){return 's'+Date.now();}})();
   var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
-  var MC_OPT_IDX={own_business:2,bottleneck:5,revenue:6,timing:7};
+  var MC_OPT_IDX={own_business:2,crew_situation:6,weekly_job_capacity:7,revenue:8,timing:9};
   function dlTrack(step,idx,extra){
     try{
       var p={sid:DL_SID,step:step,idx:idx,
@@ -1970,7 +1993,7 @@
   }
   dlTrack('landed',0);
 
-  function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='under_500k') return false; return true; }
+  function isICP(d){ if(d.own_business!=='yes') return false; if(d.revenue==='one_man_show'||d.revenue==='not_owner') return false; return true; } // 2026-08-21: pixel/routing gate = owner + $500K≥ (Taskman+). Crew/capacity kept as survey intel, NOT gates for now (Spencer: '$500k≥ is the main thing; add qualifiers later').
   async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
 
   // ── Partial-lead capture (funnel v2.1) ──
@@ -1989,7 +2012,7 @@
       var payload={lead_stage:'partial',partial_step:'contact-info',timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),
         first_name:parts[0]||'',last_name:parts.slice(1).join(' '),full_name:formData.name||'',
         email:formData.email||'',phone:formData.phone||'',
-        own_business:formData.own_business||'',
+        own_business:formData.own_business||'',business_name:formData.business_name||'',
         submitted_at:new Date().toISOString(),
         source:'deckingleads.com lp v1',variant:'v1',lp_version:'v2-ravi',channel:'ig-organic',page_url:location.href,
         utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
@@ -2004,14 +2027,14 @@
     steps.forEach(function(s){s.classList.remove('active');});
     var t=overlay.querySelector('.mc-step[data-step="'+n+'"]'); if(t) t.classList.add('active');
     barFill.style.width=(PROG[n]||8)+'%';
-    backBtn.classList.toggle('show', n>1 && n<8);
-    /* Step 8 is the GHL calendar — widen the card so the widget renders its
+    backBtn.classList.toggle('show', n>1 && n<10);
+    /* Step 10 is the GHL calendar — widen the card so the widget renders its
        two-column layout. Every other step stays at the 600px survey width. */
-    if(card) card.classList.toggle('cal-open', n===8);
+    if(card) card.classList.toggle('cal-open', n===10);
     if(card) card.scrollTop=0;
     setTimeout(function(){var f=t&&t.querySelector('input'); if(f) try{f.focus({preventScroll:true});}catch(e){}},60);
   }
-  function openModal(){ overlay.classList.add('open'); document.body.classList.add('mc-lock'); dlTrack('survey_open',1); if(!submitted && current<8) show(current); }
+  function openModal(){ overlay.classList.add('open'); document.body.classList.add('mc-lock'); dlTrack('survey_open',1); if(!submitted && current<10) show(current); }
   function closeModal(){ overlay.classList.remove('open'); document.body.classList.remove('mc-lock'); }
 
   closeBtn.addEventListener('click',closeModal);
@@ -2028,6 +2051,7 @@
     });
   });
 
+  var bizEl=document.getElementById('mc-bizname'), bizErr=document.getElementById('mc-bizname-err');
   var nameEl=document.getElementById('mc-name'), nameErr=document.getElementById('mc-name-err');
   var emailEl=document.getElementById('mc-email'), emailErr=document.getElementById('mc-email-err');
   var phoneEl=document.getElementById('mc-phone'), phoneErr=document.getElementById('mc-phone-err');
@@ -2043,23 +2067,40 @@
   overlay.querySelectorAll('[data-next]').forEach(function(b){
     b.addEventListener('click',function(){
       if(current===2){
+        var biz=bizEl.value.trim();
+        var bok=biz.length>=2;
+        bizErr.classList.toggle('show',!bok); if(!bok){bizEl.focus();return;}
+        formData.business_name=biz; dlTrack('business_name',3); show(3);
+      } else if(current===3){
         var name=nameEl.value.trim(), parts=name.split(/\s+/);
         var ok=parts.length>=2 && parts[0].length>=2 && parts[1].length>=1;
         nameErr.classList.toggle('show',!ok); if(!ok){nameEl.focus();return;}
-        formData.name=name; dlTrack('contact_name',3); show(3);
-      } else if(current===3){
+        formData.name=name; dlTrack('contact_name',4); show(4);
+      } else if(current===4){
         var email=emailEl.value.trim(), phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
         var eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), pok=/^[2-9]\d{9}$/.test(phone);
         emailErr.classList.toggle('show',!eok); phoneErr.classList.toggle('show',!pok);
         if(!eok){emailEl.focus();return;} if(!pok){phoneEl.focus();return;}
-        formData.email=email; formData.phone='+1'+phone; dlTrack('contact_info',4); firePartialLead(); show(4);
+        formData.email=email; formData.phone='+1'+phone; dlTrack('contact_info',5); firePartialLead(); show(5);
       }
     });
   });
   overlay.querySelector('[data-next-zip]').addEventListener('click',function(){
     var zip=zipEl.value.replace(/\D/g,'');
     if(zip.length!==5){ zipErr.classList.add('show'); zipEl.focus(); return; }
-    formData.zip=zip; dlTrack('zip',8); submitAndShowCalendar();
+    formData.zip=zip; dlTrack('zip',10); submitAndShowCalendar();
+  });
+
+  // Enter-to-advance (2026-08-19): Enter in any survey text input clicks that step's
+  // Next button, so the same validation + first-invalid-field focus logic runs.
+  overlay.querySelectorAll('.mc-input').forEach(function(inp){
+    inp.addEventListener('keydown',function(e){
+      if(e.key!=='Enter') return;
+      e.preventDefault();
+      var st=overlay.querySelector('.mc-step[data-step="'+current+'"]');
+      var btn=st&&st.querySelector('[data-next],[data-next-zip]');
+      if(btn) btn.click();
+    });
   });
 
   function buildCalUrl(){
@@ -2127,12 +2168,12 @@
   function submitAndShowCalendar(){
     icp=isICP(formData);
     setCalCopy();
-    show(8);
+    show(10);
     if(!icp && NON_ICP_USE_CALENDLY){ mountCalendly(); }
     else try{ var cal=document.getElementById('mc-cal'); if(!cal.getAttribute('src')) cal.src=buildCalUrl(); }catch(e){}
     setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },(calPreloaded?250:1400));
     if(submitted) return; submitted=true;
-    dlTrack('submit',9,{icp:icp});
+    dlTrack('submit',11,{icp:icp});
 
     formData.icp=icp; formData.submitted_at=new Date().toISOString();
     var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
@@ -2150,7 +2191,7 @@
         var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim()),sha256Hex((formData.zip||'').toString().trim())]);
         var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
         var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,postal_code:formData.zip,
-          own_business:formData.own_business,revenue:formData.revenue,timing:formData.timing,bottleneck:formData.bottleneck,icp:icp?'yes':'no',
+          business_name:formData.business_name||'',own_business:formData.own_business,revenue:formData.revenue,timing:formData.timing,crew_situation:formData.crew_situation,weekly_job_capacity:formData.weekly_job_capacity,icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],zip_sha256:h[4],fbp:fbp,
           client_user_agent:navigator.userAgent||'',
           timezone: (Intl.DateTimeFormat().resolvedOptions().timeZone || ''),event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
