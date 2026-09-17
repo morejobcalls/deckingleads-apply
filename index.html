@@ -221,6 +221,15 @@
   .wins li small{display:block;margin-top:4px;font-size:13px;font-weight:500;color:var(--muted);}
 
   /* ── VIDEO WALL ───────────────────────────────────────── */
+  /* ── PROOF REEL (featured) ── */
+  .reel{padding:56px 16px 8px;max-width:960px;margin:0 auto;text-align:center;}
+  .reel-kicker{margin:0 0 10px;font-size:13px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--pop);}
+  .reel-sub{margin:14px auto 0;max-width:620px;font-size:16px;color:var(--muted);}
+  @media(min-width:640px){.reel{padding-top:72px;}.reel-sub{font-size:18px;}}
+  .reel-frame{margin-top:28px;border-radius:18px;overflow:hidden;border:2px solid var(--gold);box-shadow:0 24px 70px -20px rgba(245,185,62,.45);}
+  .reel-frame .yt .play{width:76px;height:76px;}
+  @media(min-width:640px){.reel-frame .yt .play{width:96px;height:96px;}.reel-frame .yt .play::before{border-left-width:24px;border-top-width:15px;border-bottom-width:15px;margin-left:6px;}}
+  .reel .cta-row{margin-top:32px;}
   .videos{padding:0 16px 64px;max-width:1120px;margin:0 auto;}
   .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;}
   @media(min-width:640px){.vgrid{gap:24px;}}
@@ -463,6 +472,17 @@
   </div>
 </section>
 
+<!-- ═══════════════════════ PROOF REEL (featured — its own section, not in the video wall) ═══════════════════════ -->
+<section class="reel" id="reel">
+  <p class="reel-kicker">Watch This First &middot; 2 Minutes</p>
+  <h2 class="h2">12 Deck Builders Who Didn't Believe It Either</h2>
+  <p class="reel-sub">Every one of them had been burned by an agency before. Here's what happened next, in their own words.</p>
+  <div class="reel-frame">
+    <button class="yt" type="button" data-id="HRYuMJmhpmY" data-reel aria-label="Play: 12 deck builders who didn't believe it either"><img src="https://i.ytimg.com/vi/HRYuMJmhpmY/maxresdefault.jpg" alt="" loading="lazy"><span class="play"></span></button>
+  </div>
+  <div class="cta-row"><a class="cta" href="#qs-card" data-scroll-survey>Check Your Market</a></div>
+</section>
+
 <!-- ═══════════════════════ RECENT RESULTS ═══════════════════════ -->
 <section class="results">
   <h2 class="h2">Recent Results</h2>
@@ -500,7 +520,6 @@
     <div class="vcard"><button class="yt" type="button" data-id="FKa_Zsji0bE" aria-label="Play: Jason Brown"><img src="https://i.ytimg.com/vi/FKa_Zsji0bE/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">From 1 Crew To 5 In One Season — $100K In Month One<small>Jason Brown · Nailed It Construction</small></div></div>
     <div class="vcard"><button class="yt" type="button" data-id="vxqYn1E86LA" aria-label="Play: Mike Holst"><img src="https://i.ytimg.com/vi/vxqYn1E86LA/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">52 Appointments In The First 10 Days On $1,500<small>Mike Holst · Foremost Construction</small></div></div>
     <div class="vcard"><button class="yt" type="button" data-id="kK3oXzLb4-0" aria-label="Play: Eric Engle"><img src="https://i.ytimg.com/vi/kK3oXzLb4-0/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">65–70 Exclusive Appointments Every Week<small>Eric Engle · Mr. Patio Cover</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="HRYuMJmhpmY" aria-label="Play: 12 deck builders who didn't believe it either"><img src="https://i.ytimg.com/vi/HRYuMJmhpmY/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">12 Deck Builders Who Didn't Believe It Either<small>2-minute proof reel</small></div></div>
   </div>
   <div class="cta-row"><a class="cta" href="#qs-card" data-scroll-survey>Check Your Market</a></div>
 </section>
@@ -900,7 +919,8 @@
   document.querySelectorAll('.yt').forEach(function(btn){
     btn.addEventListener('click',function(){
       var id=btn.dataset.id; if(!id) return;
-      document.querySelectorAll('.yt iframe').forEach(function(f){ var p=f.parentNode; p.innerHTML='<img src="https://i.ytimg.com/vi/'+p.dataset.id+'/hqdefault.jpg" alt=""><span class="play"></span>'; });
+      document.querySelectorAll('.yt iframe').forEach(function(f){ var p=f.parentNode; p.innerHTML='<img src="https://i.ytimg.com/vi/'+p.dataset.id+'/'+(p.hasAttribute('data-reel')?'maxresdefault':'hqdefault')+'.jpg" alt=""><span class="play"></span>'; });
+      if(btn.hasAttribute('data-reel')){ try{ if(!window.MJC_QA && window.clarity) clarity('event','proof_reel_play'); }catch(e){} }
       btn.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Client video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     });
   });
