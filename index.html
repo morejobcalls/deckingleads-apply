@@ -298,8 +298,7 @@
       <p class="qs-sub">We only work with 1 deck builder per market — answer a few quick questions below.</p>
 
       <div class="qs-prog" id="qs-prog">
-        <div class="qs-prog-row"><span id="qs-step-label"></span><span id="qs-pct">0%</span></div>
-        <div class="qs-bar"><div class="qs-bar-fill" id="qs-bar-fill"></div></div>
+                <div class="qs-bar"><div class="qs-bar-fill" id="qs-bar-fill"></div></div>
       </div>
 
       <!-- Q1 · current appts/week (GHL field contact.how_many_sales_appointments_are_you_currently_running_per_week, created 2026-09-14) -->
@@ -556,7 +555,7 @@
 (function(){
   var card=document.getElementById('qs-card'); if(!card) return;
   var steps=card.querySelectorAll('.qs-step');
-  var barFill=document.getElementById('qs-bar-fill'), stepLabel=document.getElementById('qs-step-label'), pctEl=document.getElementById('qs-pct');
+  var barFill=document.getElementById('qs-bar-fill'), stepLabel=document.getElementById('qs-step-label'), pctEl=null;
   var progWrap=document.getElementById('qs-prog'), backBtn=document.getElementById('qs-back');
   var TOTAL_Q=5, PROG={1:0,2:60,3:80,4:90,5:98,6:100}; // Q3 = service-area ZIP (added 2026-09-15). Front-loaded progress + no "Step X of Y" label (Spencer 2026-09-17); booking step = 100%
   var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
@@ -604,7 +603,7 @@
     steps.forEach(function(s){s.classList.remove('active');});
     var t=card.querySelector('.qs-step[data-step="'+n+'"]'); if(t) t.classList.add('active');
     barFill.style.width=(PROG[n]||0)+'%';
-    pctEl.textContent=(PROG[n]||0)+'%'; progWrap.style.display='';
+    progWrap.style.display='';
     backBtn.classList.toggle('show', n>1 && n<TOTAL_Q+1);
     card.classList.toggle('cal-open', n===TOTAL_Q+1 && !icp);
     setTimeout(function(){var f=t&&t.querySelector('input'); if(f&&n>1) try{f.focus({preventScroll:true});}catch(e){}},60);
