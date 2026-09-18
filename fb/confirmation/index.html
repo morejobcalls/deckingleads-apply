@@ -10,7 +10,6 @@
 <title>You're Booked · Strategy Session</title>
 <meta name="description" content="Your Strategy Session is tentatively scheduled. Watch the video and complete the steps to confirm your call.">
 <meta name="robots" content="noindex, nofollow">
-<!-- /yt/scheduled/ : twin of /scheduled/ for ORGANIC YOUTUBE non-ICP bookings (no pixel, by design — same as root). Built by build_organic_lps.py. -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -102,7 +101,27 @@
   window.__TOP_LEVEL__ = (function () { try { return window.top === window.self; } catch (e) { return true; } })();
 </script>
 
-<!-- No Meta pixel on this page by design (non-ICP path is excluded from optimization). -->
+<!-- /fb/confirmation/ : twin of /confirmation/ for ORGANIC FACEBOOK bookings. Fires custom FB_BookedCall, never
+     BookedCall/Schedule, and the URL does not contain 'apply.morejobcalls.com/confirmation' so the Meta custom conversion stays paid-only.
+     Built by build_organic_lps.py from HEAD:confirmation/index.html — re-run after root changes. -->
+<script>
+  if (window.__TOP_LEVEL__) {
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '839107878270720');
+    fbq('track', 'PageView');
+    fbq('trackCustom', 'FB_BookedCall', {channel: 'fb-organic'});
+  }
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
+
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
   if (window.__TOP_LEVEL__) {

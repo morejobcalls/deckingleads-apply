@@ -9,13 +9,13 @@
 <meta name="theme-color" content="#0B0B0B">
 <title>Book Out Your Calendar | Strategy Session | MoreJobCalls.com</title>
 <meta name="description" content="Contractors: we book exclusive, ready-to-buy sales appointments onto your calendar every week. 30 minimum on-site appointments, guaranteed — or your money back. Check if your market is still available.">
-<!-- /yt/ : ORGANIC-YOUTUBE twin of the ROOT v9 apply page (link lives in YouTube descriptions). Built by
+<!-- /fb/ : ORGANIC-FACEBOOK twin of the ROOT v9 apply page (link lives in Facebook page posts). Built by
      build_organic_lps.py from root index.html — re-run it after any root change instead of hand-editing. Design + survey identical
      to root; copy is contractor-general with the organic guarantee; ONLY the plumbing differs per channel:
-       · attribution: blanks stamped utm_source=youtube / utm_medium=organic / utm_campaign=yt-description, ?v=<ref> → utm_content
-       · GHL: posts to the "1. New Lead (Organic)" inbound webhook with lead_channel=youtube (Organic tracker tab, NO Meta CAPI)
-       · pixel: seasoned pixel PageView only + custom YT_Lead (never standard Lead; ICP pixel not initialised) so organic can't train paid
-       · booking: ICP native picker → /yt/confirmation/ · non-ICP GHL widget → /yt/scheduled/ (client-side override of the shared calendar redirect)
+       · attribution: blanks stamped utm_source=facebook / utm_medium=organic / utm_campaign=fb-page, ?p=<ref> → utm_content
+       · GHL: posts to the "1. New Lead (Organic)" inbound webhook with lead_channel=facebook (Organic tracker tab, NO Meta CAPI)
+       · pixel: seasoned pixel PageView only + custom FB_Lead (never standard Lead; ICP pixel not initialised) so organic can't train paid
+       · booking: ICP native picker → /fb/confirmation/ · non-ICP GHL widget → /fb/scheduled/ (client-side override of the shared calendar redirect)
      noindex on purpose — it is a duplicate of root. -->
 <meta name="robots" content="noindex, nofollow">
 <meta property="og:title" content="Book Out Your Calendar | MoreJobCalls.com">
@@ -37,7 +37,7 @@
   s.parentNode.insertBefore(t,s)}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '839107878270720');
-  // ORGANIC YOUTUBE: ICP pixel deliberately NOT initialised here, and this page never fires a standard Lead (see YT_Lead below).
+  // ORGANIC FACEBOOK: ICP pixel deliberately NOT initialised here, and this page never fires a standard Lead (see FB_Lead below).
   if(!window.MJC_QA) fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
@@ -315,7 +315,7 @@
   <div class="survey-wrap" id="apply">
     <div id="qs-card" role="form" aria-label="Check if your market is available">
       <h2 class="qs-title">See If Your Market Is <span class="gold">Available</span></h2>
-      <p class="qs-sub">You've seen the results on the channel. Now see if your market is still open — we only work with 1 contractor per trade, per market. A few quick questions below.</p>
+      <p class="qs-sub">You've seen the results on Facebook. Now see if your market is still open — we only work with 1 contractor per trade, per market. A few quick questions below.</p>
 
       <div class="qs-prog" id="qs-prog">
                 <div class="qs-bar"><div class="qs-bar-fill" id="qs-bar-fill"></div></div>
@@ -601,15 +601,14 @@
     try{localStorage.setItem('dl_attribution',JSON.stringify(out));}catch(e){}
     return out;
   })();
-  // ── /yt/ CHANNEL STAMP ── organic YouTube clicks carry no UTMs, so GHL would file these as direct/unknown.
+  // ── /fb/ CHANNEL STAMP ── organic Facebook clicks carry no UTMs, so GHL would file these as direct/unknown.
   // Fill BLANKS only (a real ?utm_source= or a stored first-touch wins; fbclid/gclid never touched).
-  // Links carry ?v=<ref> → utm_content, so the CRM shows WHICH video produced the lead.
+  // Links carry ?p=<ref> → utm_content, so the CRM shows WHICH post produced the lead.
   (function stampChannel(){
     try{
-      var qp=new URLSearchParams(location.search), ref=(qp.get('v')||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,20), changed=false;
-      if(!attribution.utm_source){ attribution.utm_source='youtube'; attribution.utm_medium=attribution.utm_medium||'organic'; attribution.utm_campaign=attribution.utm_campaign||'yt-description'; changed=true; }
+      var qp=new URLSearchParams(location.search), ref=(qp.get('p')||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,40), changed=false;
+      if(!attribution.utm_source){ attribution.utm_source='facebook'; attribution.utm_medium=attribution.utm_medium||'organic'; attribution.utm_campaign=attribution.utm_campaign||'fb-page'; changed=true; }
       if(ref && !attribution.utm_content){ attribution.utm_content=ref; changed=true; }
-      attribution.yt_video=ref||attribution.yt_video||'';
       if(changed){ try{ localStorage.setItem('dl_attribution',JSON.stringify(attribution)); }catch(e){} }
     }catch(e){}
   })();
@@ -801,13 +800,13 @@
     // Same contact the inbound webhook created (Worker upserts by email/phone). Source echoes the LP's own so upsert never relabels it.
     fetch(MCB_WORKER+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
       icp:'yes', startTime:mcbSlot, timezone:mcbTz, firstName:fn, lastName:ln, email:formData.email||'', phone:formData.phone||'',
-      source:'deckingleads.com lp v1', tags:['lp-native-booked','src - youtube lp'] })})
+      source:'deckingleads.com lp v1', tags:['lp-native-booked','src - facebook lp'] })})
     .then(function(r){ return r.json().then(function(b){ return {status:r.status,body:b}; }); })
     .then(function(res){
       if(res.status===200&&res.body&&res.body.ok){
         btn.textContent='Booked! One sec…';
         try{ localStorage.setItem('mjc_booked_ref',JSON.stringify({contactId:res.body.contactId||'',calendarId:res.body.calendarId||'',t:Date.now()})); }catch(e){}
-        location.href='/yt/confirmation/?c='+encodeURIComponent(res.body.contactId||'')+'&cal='+encodeURIComponent(res.body.calendarId||'');
+        location.href='/fb/confirmation/?c='+encodeURIComponent(res.body.contactId||'')+'&cal='+encodeURIComponent(res.body.calendarId||'');
         return;
       }
       btn.disabled=false; btn.textContent='Lock In My Call →';
@@ -850,8 +849,8 @@
     formData.event_id=event_id;
     try{ if(window.mjcJourney) mjcJourney.track('submit',{lead_ref:event_id,label:'apply survey',value:icp?'icp':'non-icp'}); }catch(e){} // Journey Ledger
 
-    // ORGANIC YOUTUBE: custom YT_Lead (seasoned pixel, ICP only) — NEVER the standard 'Lead' the paid campaigns optimise on.
-    if(icp && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('trackCustom','YT_Lead',{content_name:'Strategy Session (YouTube)',channel:'yt-organic',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
+    // ORGANIC FACEBOOK: custom FB_Lead (seasoned pixel, ICP only) — NEVER the standard 'Lead' the paid campaigns optimise on.
+    if(icp && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('trackCustom','FB_Lead',{content_name:'Strategy Session (Facebook)',channel:'fb-organic',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
     try{ sessionStorage.setItem('dl_qualify_data',JSON.stringify(formData)); sessionStorage.setItem('dl_qualify_icp',icp?'1':'0'); }catch(e){}
 
     (async function(){
@@ -879,21 +878,21 @@
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],fbp:fbp,
           client_user_agent:navigator.userAgent||'',
           timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
-          source:'deckingleads.com lp v1',variant:'v9-d2d-yt',lp_version:'v9-yt',channel:'yt-organic',lead_channel:'youtube',channel_label:'YouTube',src_tag:'src - youtube lp',yt_video:attribution.yt_video||'',page_url:location.href,
+          source:'deckingleads.com lp v1',variant:'v9-d2d-fb',lp_version:'v9-fb',channel:'fb-organic',lead_channel:'facebook',channel_label:'Facebook',src_tag:'src - facebook lp',page_url:location.href,
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
         try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
         if(TEST_CODE){
           // Organic leads never reach Meta CAPI (the organic workflow has no relay steps), so there is nothing to test-fire.
-          console.log('[yt test mode] organic page sends no CAPI events — nothing sent. Payload:', JSON.stringify(payload));
+          console.log('[fb test mode] organic page sends no CAPI events — nothing sent. Payload:', JSON.stringify(payload));
         } else if(window.MJC_QA){
-          console.log('[yt QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
+          console.log('[fb QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
         } else {
           // "1. New Lead (Organic)" inbound webhook — same key set as root (+ lead_channel/channel_label/src_tag) so the shared Create Contact map works unchanged.
           await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/OhYjuz3t2M1Q6eN7TKY8',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
         }
-      }catch(e){ console.warn('[yt] GHL webhook failed:',e); }
+      }catch(e){ console.warn('[fb] GHL webhook failed:',e); }
     })();
   }
 
@@ -921,11 +920,11 @@
         if(d[0]==='set-sticky-contacts' && typeof d[2]==='string'){ var m=d[2].match(/"id":"([^"]+)"/); if(m) contactId=m[1]; }
         else if(d[0]==='msgsndr-booking-complete' && d[1] && d[1].calendarId){
           try{ localStorage.setItem('mjc_booked_ref', JSON.stringify({contactId:contactId, calendarId:d[1].calendarId, t:Date.now()})); }catch(_){}
-          // ── /yt/ ROUTING OVERRIDE ── the GHL calendars are SHARED with root and redirect server-side to /scheduled/ (or
-          // /confirmation/). We navigate to the /yt/ twins ourselves the instant booking completes; this listener is registered
+          // ── /fb/ ROUTING OVERRIDE ── the GHL calendars are SHARED with root and redirect server-side to /scheduled/ (or
+          // /confirmation/). We navigate to the /fb/ twins ourselves the instant booking completes; this listener is registered
           // after form_embed.js so our navigation is queued last and wins. Race loss = root page (still works, only the
-          // YT_BookedCall isolation is lost for that one).
-          try{ var bookedIcp=String(d[1].calendarId)==='6Ck4IfG5SatgIkAZJ7yo'; window.location.replace(bookedIcp?'/yt/confirmation/':'/yt/scheduled/'); }catch(_){}
+          // FB_BookedCall isolation is lost for that one).
+          try{ var bookedIcp=String(d[1].calendarId)==='6Ck4IfG5SatgIkAZJ7yo'; window.location.replace(bookedIcp?'/fb/confirmation/':'/fb/scheduled/'); }catch(_){}
         }
       }catch(_){}
     }, false);
