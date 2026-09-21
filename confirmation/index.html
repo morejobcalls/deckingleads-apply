@@ -340,12 +340,13 @@
     tries++;
     fetch(WORKER,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contactId:ref.contactId||'',email:ref.email||'',calendarId:ref.calendarId})})
       .then(function(r){return r.json();})
-      .then(function(d){ if(d&&d.found&&d.startUTC){ render(d); } else if(tries<9){ setTimeout(attempt,1500); } })
+      .then(function(d){ if(d&&d.contact&&window.mjcPrefill){ window.mjcPrefill(d.contact); }
+                         if(d&&d.found&&d.startUTC){ render(d); } else if(tries<9){ setTimeout(attempt,1500); } })
       .catch(function(){ if(tries<9) setTimeout(attempt,1500); });
   }
   function render(d){
     var start=new Date(d.startUTC), end=d.endUTC?new Date(d.endUTC):new Date(start.getTime()+45*60000);
-    var title='100 Deck Jobs in 100 Days Strategy Session';
+    var title='100 Deck Appointments in 100 Days Strategy Session';
     var loc=d.location||'Google Meet link is in your confirmation email & text';
     var details='Your MoreJobCalls.com strategy session with Spencer. The exact Google Meet link is in your confirmation email and text.';
     function z(n){return(n<10?'0':'')+n;}
@@ -369,29 +370,46 @@
   document.querySelectorAll('.rv').forEach(function (el) { obs.observe(el); });
 </script>
 
-<!-- Personalize the pre-filled confirmation text from sessionStorage (LP form data).
-     Falls back to [your name]/[your zip] placeholders the lead overtypes. -->
+<!-- Step 1 pre-fill. Primary source is sessionStorage (dl_qualify_data), which
+     only exists when the survey ran on THIS origin. Homepage bookings cross from
+     morejobcalls.com to apply.morejobcalls.com, so that storage is gone and the
+     lead was shown raw [your name]/[company]/[your zip] (Chung, 2026-09-18).
+     The appointment-time worker now returns the contact and calls mjcPrefill
+     again with it, so every booking path personalises. -->
 <script>
 (function () {
-  let data = {};
-  try { data = JSON.parse(sessionStorage.getItem('dl_qualify_data') || '{}'); }
-  catch (_) { data = {}; }
-  const first = data.name ? (data.name.trim().split(/\s+/)[0] || '') : '';
-  const h2 = document.getElementById('territory-h2');
-  const zipVal = (data.zip || '').toString().trim();
-  if (h2 && zipVal) {
-    h2.innerHTML = 'Is ' + zipVal + ' where you want <span>more deck jobs?</span>';
-  }
+  var state = { first: '', biz: '', zip: '' };
 
-  const sms = document.getElementById('confirm-sms');
-  if (sms) {
-    const who = first || '[your name]';
-    const zip = (data.zip || '').toString().trim() || '[your zip]';
-    const body = `Hey Spencer, it's ${who} from [company]. Just booked a call. Looking forward to seeing how the 20 deck jobs in 100 days process could work for us here in ${zip}.`;
+  function apply(src) {
+    if (src) {
+      var name = (src.firstName || src.name || '').toString().trim();
+      if (name && !state.first) state.first = name.split(/\s+/)[0] || '';
+      var biz = (src.company || src.business_name || '').toString().trim();
+      if (biz && !state.biz) state.biz = biz;
+      var zip = (src.zip || '').toString().trim();
+      if (zip && !state.zip) state.zip = zip;
+    }
+
+    var h2 = document.getElementById('territory-h2');
+    if (h2 && state.zip) {
+      h2.innerHTML = 'Is ' + state.zip + ' where you want <span>more deck jobs?</span>';
+    }
+
+    var sms = document.getElementById('confirm-sms');
+    if (!sms) return;
+    var body = "Hey Spencer, it's " + (state.first || '[your name]') + ' from ' +
+      (state.biz || '[company]') + '. Just booked a call. Looking forward to seeing how ' +
+      'the 20 deck jobs in 100 days process could work for us here in ' +
+      (state.zip || '[your zip]') + '.';
     sms.href = 'sms:+15012363920?&body=' + encodeURIComponent(body);
     var pv = document.getElementById('sms-preview-text');
     if (pv) pv.textContent = body;
   }
+  window.mjcPrefill = apply;
+
+  var data = {};
+  try { data = JSON.parse(sessionStorage.getItem('dl_qualify_data') || '{}'); } catch (_) {}
+  apply(data);
 })();
 </script>
 
