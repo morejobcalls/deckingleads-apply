@@ -20,7 +20,7 @@
    - Includes a `crypto.randomUUID()` `eventID` per submission for future CAPI dedupe
    - `event_id` is also stashed in `formData` + sessionStorage, ready to be passed server-side
 3. **Removed duplicate `Lead` fire from `/qualified/`** (was double-counting)
-4. **Tightened ICP gate** across all four LPs to match the Justin Wylie avatar:
+4. **Tightened ICP gate** across all four LPs to match the Justin W. avatar:
    ```js
    function isICP(d) {
      if (d.own_business !== 'yes') return false;
@@ -88,7 +88,7 @@ The funnel converts a Meta ad click → applicant qualifying form → routed boo
 | URL | Page | Status |
 |---|---|---|
 | `https://apply.deckingleads.com/` | **V1** (baseline) | Live |
-| `https://apply.deckingleads.com/v2/` | **V2** (CRO refinements: form moved up, 4-step survey, Brian Wallace pull-quote, full legal footer) | Live · `noindex` |
+| `https://apply.deckingleads.com/v2/` | **V2** (CRO refinements: form moved up, 4-step survey, Brian W. pull-quote, full legal footer) | Live · `noindex` |
 | `https://apply.deckingleads.com/v3/` | **V3** (V1 + Version B long-form story lead inserted between marquee and proof) | Live · `noindex` |
 | `https://apply.deckingleads.com/qualified/` | ICP terminal page (Meta Pixel fires here) | Live · `noindex` |
 | `https://apply.deckingleads.com/scheduling/` | Non-ICP terminal page (no pixel by design) | Live · `noindex` |
@@ -138,7 +138,7 @@ V3 changes only **one variable** vs V1 (the long-form lead) so any A/B/C delta i
 |---|---|---|---|
 | Hero (eyebrow / H1 / triple-guarantee numbered list / button) | same | same | same |
 | Logo marquee | same | same (logo paths absolute) | same (logo paths absolute) |
-| Skeptic-defuse content between marquee and proof | none | one-paragraph Brian Wallace pull-quote | full Version B long-form lead (~365 words, 8-section direct-response structure, gold-bordered "too good to be true" callout) |
+| Skeptic-defuse content between marquee and proof | none | one-paragraph Brian W. pull-quote | full Version B long-form lead (~365 words, 8-section direct-response structure, gold-bordered "too good to be true" callout) |
 | Apply form position | bottom of page (after FAQ) | between proof and guarantee | bottom of page (same as V1) |
 | Apply form steps | 6 (own-business / pain / revenue / timing / name / contact) | **4** (pain step + separate name step removed) | 6 (same as V1) |
 | Final CTA after FAQ | none (apply IS the bottom) | "Still reading?" callout that scrolls back to apply | none (same as V1) |
@@ -180,16 +180,16 @@ V1 uses 6 fields (own_business, pain, revenue, timing, name, contact). V2 uses 4
 Every wired proof card opens in an on-page lightbox modal — no redirect to YouTube. ESC, click-outside, and a Close button all close the modal and stop playback (`iframe.src = ''`).
 
 ### Wired proof cards (10 total)
-1. **Justin Wylie** · All Pro Decks · `youtu.be/YJQxX5ZQ3aI` · "CPL $400 → $30 in 14 days"
-2. **Brian Wallace** · Bend Fence & Deck · `youtu.be/4TP1sTRASoA` · "60 estimates · 25 closed · 6 weeks"
-3. **Jacob Weaver** · `youtu.be/Xt4TVn4zP7s` · "$500K last year → $1M by April 21"
-4. **Chip Paynter** · Paynter Construction · `youtu.be/ERQ84Dgz-Ow` · "$200K from 4 leads · 21 days"
-5. **Ricardo Cervantes** · Colorado · `youtu.be/djsZ_YNn7wY` · "$105K closed in 7 days"
-6. **Eric Engle** · Mr. Patio Cover · `youtu.be/kK3oXzLb4-0` · "65–70 appointments per week"
-7. **Justin Wylie #2** · `youtu.be/_djYzxfITps` · "$1.2M closed in slow season"
-8. **Mike Biviano** · Biviano General · `youtu.be/NV836FEEIcU` · "$12K spent → $225K profit"
-9. **Mike Holst** · Foremost Construction · `youtu.be/vxqYn1E86LA` · "52 appointments in 10 days"
-10. **Jason Flynn** · PROdeck Construction · `youtu.be/thmY9E9PYqY` · "$100K/mo → $500K/mo in 90 days"
+1. **Justin W.** · Deck builder · `youtu.be/YJQxX5ZQ3aI` · "CPL $400 → $30 in 14 days"
+2. **Brian W.** · Fence & deck company · `youtu.be/4TP1sTRASoA` · "60 estimates · 25 closed · 6 weeks"
+3. **Jacob W.** · `youtu.be/Xt4TVn4zP7s` · "$500K last year → $1M by April 21"
+4. **Chip P.** · Deck builder · `youtu.be/ERQ84Dgz-Ow` · "$200K from 4 leads · 21 days"
+5. **Ricardo C.** · Colorado · `youtu.be/djsZ_YNn7wY` · "$105K closed in 7 days"
+6. **Eric E.** · Patio cover company · `youtu.be/kK3oXzLb4-0` · "65–70 appointments per week"
+7. **Justin W. #2** · `youtu.be/_djYzxfITps` · "$1.2M closed in slow season"
+8. **Mike B.** · General contractor · `youtu.be/NV836FEEIcU` · "$12K spent → $225K profit"
+9. **Mike H.** · Deck builder · `youtu.be/vxqYn1E86LA` · "52 appointments in 10 days"
+10. **Jason F.** · Deck builder · `youtu.be/thmY9E9PYqY` · "$100K/mo → $500K/mo in 90 days"
 
 ### Logo marquee
 `/logos/` folder contains 28 wordmarks/PNGs/SVGs. CSS `.logo-cell--invert` flips dark logos to white via `filter: brightness(0) invert(1)`. `.logo-cell--card` wraps logos with white backgrounds in a soft cream pill so they look intentional. Marquee sized at 70% of original (height 62px, gap 40px). Trust label `whitespace-nowrap` so it never breaks to two lines on mobile.
@@ -230,7 +230,7 @@ V3 inserts a charcoal section (the long-form lead) between marquee and proof, th
 
 ### On the shelf
 
-- Hero testimonial video clip — there's a placeholder image position; Brian Wallace clip never embedded. Low priority since the proof grid does the work.
+- Hero testimonial video clip — there's a placeholder image position; Brian W. clip never embedded. Low priority since the proof grid does the work.
 - Booking confirmation post-booking page (with mini-VSL script Spencer drafted earlier at `2026-04-24-booking-confirmation-mini-vsl.md`). Not part of the LP itself; lives in GHL.
 - SMS sequence — the script lives in `2026-04-24-v1-launch-funnel-copy.md`. Wire-in lives in GHL automations, not in this codebase.
 
@@ -239,7 +239,7 @@ V3 inserts a charcoal section (the long-form lead) between marquee and proof, th
 ## Recent decisions worth preserving
 
 - **Spencer's preferred LP version:** V2.
-- **Eric Engle = Mr. Patio Cover.** Same person; Eric is owner, Mr. Patio Cover is brand. One card, not two.
+- **Eric E. = Patio cover company.** Same person; Eric is owner, Patio cover company is brand. One card, not two.
 - **Hero ends at the button.** No trust micro-line below the button (decision dated 2026-04-27). Trust marquee is the first thing below the fold by design.
 - **Numbered triple guarantee in hero:** "1. We literally pay you $2K / 2. Refund every penny / 3. Work for free until the 100th" with gold numerals + white items. (Originally rendered as a paragraph with scattered bolding — Spencer rejected; numbered list has cleaner rhythm.)
 - **H1:** "More Deck Jobs / Guaranteed." (no period after "Jobs," line break via `<span class="block">`, "Guaranteed." in gold).
@@ -258,7 +258,7 @@ V3 inserts a charcoal section (the long-form lead) between marquee and proof, th
 If a fresh session needs to write copy on this project, read these first:
 
 - `/Volumes/T7/SPG/3. FULFILLMENT/Operations/SOPs/voice-guide.md` — Spencer's voice (direct, anti-BS, contractor-friendly, no excessive em dashes — they look AI-generated)
-- `/Volumes/T7/SPG/3. FULFILLMENT/Operations/SOPs/dream-client-avatar.md` — Justin Wylie (the dream client). Avatar's #1 reflex on cold offers: "this sounds too good to be true." V3's whole long-form lead is built around defusing that exact phrase.
+- `/Volumes/T7/SPG/3. FULFILLMENT/Operations/SOPs/dream-client-avatar.md` — Justin W. (the dream client). Avatar's #1 reflex on cold offers: "this sounds too good to be true." V3's whole long-form lead is built around defusing that exact phrase.
 - `/Volumes/T7/SPG/3. FULFILLMENT/Operations/SOPs/business-context.md` — full SPG / DeckingLeads context, offer stack, customer journey
 - `/Volumes/T7/SPG/1. MARKETING/Meta Ads/Strategy/Master Offer Doc/Master_Offer_Doc_SPG_v2.md` — canonical offer doc (the "Kevlar thread"). Any LP copy should not contradict this.
 - `/Volumes/T7/SPG/1. MARKETING/Proof/0. Master Library/Master Testimonial Library.md` — every named-client soundbite organized by objection. Any new proof card's stat overlay should match this library.

@@ -60,7 +60,7 @@ File: **`/next/index.html`**. Changes made to the clone:
 - **How it was done (token flip, not markup surgery):** in the tailwind config (~line 43) the dark-theme tokens were remapped to light: `bg→#FBFAF7, surface/elevated→#FFF, charcoal→#F3EEE4, border→#E4DECF, ink→#1A1917, ink-muted→#6B6A63, ink-subtle→#8A8780` (paper-* + gold untouched). And the CSS section classes: `.sec-dark{background:#FBFAF7;color:#1A1917} .sec-charcoal{background:#F3EEE4;color:#1A1917}`. This flipped the whole page since text utilities (`text-ink`, etc.) now resolve dark.
 - **Logo marquee fix (~line 382):** dark-bg filters swapped for light — `.logo-cell img{filter:grayscale(1) brightness(0)}`, `.logo-cell--invert img{filter:grayscale(1) brightness(0)}`, `.logo-cell--card img{filter:grayscale(1);mix-blend-mode:multiply}` (drops white logo backgrounds on cream).
 - The modal (Stage 1) uses its own hardcoded light colors, so it was unaffected. Proof section was already light.
-- Minor cosmetic-only remnants (acceptable): the Biviano `--card` logo shows a faint box (white×cream multiply); footer copyright line is light-gray fine print.
+- Minor cosmetic-only remnants (acceptable): the Mike B. `--card` logo shows a faint box (white×cream multiply); footer copyright line is light-gray fine print.
 
 ## ⏳ STAGE 3 — TODO (confirmation pages + THE time fix)
 - `/next/confirmation/` (ICP) and `/next/scheduled/` (non-ICP): add the **add-to-calendar** block at the top (Ravi's 84% lever).
@@ -71,7 +71,7 @@ File: **`/next/index.html`**. Changes made to the clone:
 ## OTHER OPEN LOOPS FROM THIS SESSION (not this funnel)
 - **Command-Hub skill** (deferred, spec'd): `Foundations/Coaching Calls/_planned-command-hub-skill.md` — new skill on top of /second-brain, coaching/consulting only, build in a focused session.
 - **Coaching-call action items** (Ravi 6/29 + Tyler 6/30) live in `Foundations/Coaching Calls/by-coach/{Ravi,Tyler}.md` + `SECOND-BRAIN.md`: add-to-calendar (this funnel), tighten booking window to 3 days, rename meeting title, static + montage ads, weekly proof KPI, post numbers in SWS Slack (closer search).
-- **Biviano ~$100K proof card** — DONE this session, live on morejobcalls.com homepage + apply LP + yt LP + confirmation grid.
+- **Mike B. ~$100K proof card** — DONE this session, live on morejobcalls.com homepage + apply LP + yt LP + confirmation grid.
 
 ## ✅ LIVE VALIDATION (2026-07-03)
 `/next/` pushed live (commit `d413a39`, noindex). Drove the modal through all 8 steps on the real domain via browser automation — **GHL calendar renders correctly** (45-min widget, contact pre-filled, timezone auto-detected, open days). Confirms the local blank calendar was only a localhost artifact. Stages 1+2 verified working end-to-end live.
