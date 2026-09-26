@@ -17,7 +17,7 @@ A custom static site (HTML + Tailwind CDN) on GitHub Pages. Structure:
 - **Landing page** (`/index.html`) — hero + VSL + proof sections + guarantee, with a **GHL booking calendar embedded as an iframe on the same page as the application** (no redirect to a separate GHL calendar page).
 - **YouTube-traffic variant** (`/yt/`).
 - **Post-booking pages:** `/scheduled/` (non-ICP) and the ICP variant — reached via a GHL redirect after booking. These show "you're booked," a Text-Yes-to-confirm SMS CTA, a pre-call video, and proof.
-- Proof cards, logo wall, and the Biviano ~$100K win card (added 2026-06-30).
+- Proof cards, logo wall, and the Mike B. ~$100K win card (added 2026-06-30).
 
 ### Known limitation driving the v2 rebuild
 The booked appointment's **date/time is NOT passed to the post-booking page** — the redirect lands on a clean URL (`https://apply.morejobcalls.com/scheduled/`) with no query params. Root cause: the calendar is an **iframe embedded on the same page as the application**, rather than a native booking step that redirects with appointment parameters. This blocks Ravi's single biggest show-rate lever — the **"add to calendar" embed on the confirmation page (took his show rate to 84%)** — because the page can't know the time to put on the calendar.
@@ -141,10 +141,10 @@ Contacts created during the test stay tagged `partial-optin` so they can be filt
 - Root: description now mirrors the 20-jobs hero (was "Or you get paid in 2 ways"). /yt/: description still referenced the RETIRED third prong ("paid three ways") — now canonical two-prong with mgmt-fee scoping inline (meta tags have no fine-print surface).
 - **v2.3.2 (2026-07-11):** root `<title>` → `20 Deck Jobs in 100 Days | MoreJobCalls.com` (congruent with hero; framing-only — no "Guaranteed" on the jobs number, condition lives on-page). /yt/ title unchanged (appointments-led hero).
 
-## v3.0 — Ravi-style proof flow + Billy Stewart live threads (2026-07-17)
+## v3.0 — Ravi-style proof flow + Billy S. live threads (2026-07-17)
 
-- Replaced the flat proof grid with a 4-section flow: **proof cards** (10 case studies in Spencer's order: Stewart, Wallace, Wylie, Biviano, Flynn, Weaver, Cervantes, Gallegos, Engle card-only, Paynter) → **video wall** (order preserved; added Billy Gallegos 7/16 video `woPfBuocx-M`; Flynn overlay now "$500K month on $3K in ads") → **The Receipts** → **"Two Guarantees. Zero Risk."**
-- The Receipts: two live-scroll iMessage phone recreations — Billy Stewart week-1 thread (playable video bubble → "$191,300.86" → forehead-kiss line, verbatim) and the group thread with rep "Tim G." ($151K week, $96K day) — plus the Biviano ~$100K card. Assets in `/wins/billy-thread/`; originals archived in `Marketing/3. Proof/Billy Stewart (Trinity)/wins/2026-06_191k-text-thread/`. Billy approved publishing 2026-07-17.
+- Replaced the flat proof grid with a 4-section flow: **proof cards** (10 case studies in Spencer's order: Billy S., Brian W., Justin W., Mike B., Jason F., Jacob W., Ricardo C., Billy G., Eric E. card-only, Chip P.) → **video wall** (order preserved; added Billy G. 7/16 video `woPfBuocx-M`; Jason F. overlay now "$500K month on $3K in ads") → **The Receipts** → **"Two Guarantees. Zero Risk."**
+- The Receipts: two live-scroll iMessage phone recreations — Billy S. week-1 thread (playable video bubble → "$191,300.86" → forehead-kiss line, verbatim) and the group thread with rep "Tim G." ($151K week, $96K day) — plus the Mike B. ~$100K card. Assets in `/wins/billy-thread/`; originals archived in `Marketing/3. Proof/Billy S./wins/2026-06_191k-text-thread/`. Billy approved publishing 2026-07-17.
 - Guarantee section mirrors Ravi's "Two Guarantees. Zero Risk." pattern — refund prong then $2K prong, remedies anchored to the 100 appointments; footer fine print (Offer Doc v2.4) unchanged.
 - A parallel session's uncommitted 7/17 index.html rework is preserved untracked at `index-other-session-backup-2026-07-17.html`.
 
@@ -152,9 +152,9 @@ Contacts created during the test stay tagged `partial-optin` so they can be filt
 
 Single merge of the two parallel 7/17 reworks (this session's v3 + the other session's v4 backup), reviewed and confirmed by Spencer.
 
-- **#proof cards = v4's richer design** (dark cards, accent top-bars, face avatars from `/proof-faces/`, hook-quote video thumbnails, Watch-the-call + /learn/ case-study links), **reordered to Spencer's canonical sequence**: Stewart, Wallace, Wylie, Biviano, Flynn, Weaver → CTA row → Cervantes, Gallegos, Engle, Paynter, + extras Brown, Holst.
-- **Stat lines rewritten per Spencer (transformation always explicit with units):** "$1,657 Ad Spend → $300K+ Jobs" · "25 Deck Jobs in 6 Weeks" · "$400 → $30 Appointments" · "Appointments: 3/Wk → 11/Day" · "$80K/Mo → $500K/Mo" (Flynn baseline per Spencer 7/17) · "$500K/Yr → $500K/Mo" (Weaver) · "$105K Closed · First 7 Days" · "$50K Signed · Month One" · "$4M/Yr → $8M/Yr" (Engle updated stats: CAC cut to a third, 75 appts/wk, ~20 jobs/wk, $50M goal) · "$200K From 4 Appointments" · "$1,600 Ad Spend → $100K Jobs" · "52 Appointments · First 10 Days". "Leads" labels replaced with appointments language (client verbatim quotes untouched).
-- **#receipts = Billy Stewart live iMessage phones (v3) + v4's 7-screenshot masonry.** "Want to see more?"/"Browse all client wins" box REMOVED per Spencer — masonry flows straight into #guarantees. Lamar Homes + Antonio Colon receipts confirmed cleared by Spencer 7/17.
+- **#proof cards = v4's richer design** (dark cards, accent top-bars, face avatars from `/proof-faces/`, hook-quote video thumbnails, Watch-the-call + /learn/ case-study links), **reordered to Spencer's canonical sequence**: Billy S., Brian W., Justin W., Mike B., Jason F., Jacob W. → CTA row → Ricardo C., Billy G., Eric E., Chip P., + extras Jason B., Holst.
+- **Stat lines rewritten per Spencer (transformation always explicit with units):** "$1,657 Ad Spend → $300K+ Jobs" · "25 Deck Jobs in 6 Weeks" · "$400 → $30 Appointments" · "Appointments: 3/Wk → 11/Day" · "$80K/Mo → $500K/Mo" (Jason F. baseline per Spencer 7/17) · "$500K/Yr → $500K/Mo" (Jacob W.) · "$105K Closed · First 7 Days" · "$50K Signed · Month One" · "$4M/Yr → $8M/Yr" (Eric E. updated stats: CAC cut to a third, 75 appts/wk, ~20 jobs/wk, $50M goal) · "$200K From 4 Appointments" · "$1,600 Ad Spend → $100K Jobs" · "52 Appointments · First 10 Days". "Leads" labels replaced with appointments language (client verbatim quotes untouched).
+- **#receipts = Billy S. live iMessage phones (v3) + v4's 7-screenshot masonry.** "Want to see more?"/"Browse all client wins" box REMOVED per Spencer — masonry flows straight into #guarantees. Roofing-client + Antonio C. receipts confirmed cleared by Spencer 7/17.
 - **#guarantees = v4's "Two Guarantees. Zero Risk."** section unchanged (fee-scoped, compliant).
 - New tracked assets: `proof-faces/*.jpg` + `SOURCES.md`, `wins/win-*.png` (7), `RAVI-CARD-BRAND-GUIDELINE.md` (measured Ravi design system — source of truth for card design + future wins.html port).
 - Follow-up parked: morejobcalls.com wins page cards need the same personality treatment (other repo).
@@ -207,7 +207,7 @@ From Chung Tang's funnel audit (kick-off call 7/27): booked leads weren't consum
 **`/confirmation/` + `/scheduled/` (both restructured identically):**
 1. **Hero video swapped + promoted.** The placeholder mini-VSL YouTube embed (`CZkMmNpZddg`) is gone; the proof-heavy "EVG VSL On Opt In" (1:58 — offer → results wall → CTA) is now **self-hosted** at `media/precall-proof.mp4` (6.8MB 720p, poster `media/precall-proof-poster.jpg`) and plays native/inline directly under the hero. No YouTube chrome, no related-video exit ramps.
 2. **Step 2 = personalized pre-filled text.** `Text "Yes" To Confirm` → `Text Me To Lock It In`, body pre-filled as "Hey Spencer, it's {first} — just booked my call. Locking in my spot for {zip}…" with real name+zip injected from the LP's `dl_qualify_data` sessionStorage (bracketed placeholders as fallback). Same 3920 iMessage line.
-3. **Proof wall → sequential player.** The tap-to-play grid (14 cards on /confirmation/, 10 on /scheduled/) — the surface behind the 62.5% dead-click rate Clarity flagged on /scheduled/ — replaced by ONE story at a time (Billy → Brian → Biviano → Flynn → Wylie) with a "Watch the next one →" swap. Consumption over catalog, per Chung's course-page principle.
+3. **Proof wall → sequential player.** The tap-to-play grid (14 cards on /confirmation/, 10 on /scheduled/) — the surface behind the 62.5% dead-click rate Clarity flagged on /scheduled/ — replaced by ONE story at a time (Billy → Brian → Mike B. → Jason F. → Justin W.) with a "Watch the next one →" swap. Consumption over catalog, per Chung's course-page principle.
 4. **Zoom → Google Meet** in all copy (calls are Meet; the mismatch was eroding trust). Also fixed on `/yt/scheduled/` and the LP `index.html` modal sub-line — those two files carry only that one-line fix.
 5. `/scheduled/` also lost its duplicate "Step 2 — Bring These Three Things" prep section (already removed from /confirmation/ in an earlier commit).
 
@@ -273,7 +273,7 @@ Step 3's add-to-calendar buttons (mjc-appointment-time worker) previously only r
 
 ### v5.7.1 — FINAL pre-call VSL cut everywhere (2026-07-27)
 
-Spencer delivered the final polished proof VSL (1:58, Jeff Haring/Window Prof results slides). Now serving in every slot: native video on `/confirmation/` + `/scheduled/` (`media/precall-proof.mp4`, 7.4MB 720p + new poster), **unlisted YouTube `R9mX0UyONjI`** (SMS/nurture link use), the LIVE "1. New Lead" no-book iMessage 2 attachment, and the draft post-booking workflow attachment (both GHL media `b0e2cc1c-…`). Prior unlisted upload `YNhnO9332U4` set private.
+Spencer delivered the final polished proof VSL (1:58, Jeff H./window-company results slides). Now serving in every slot: native video on `/confirmation/` + `/scheduled/` (`media/precall-proof.mp4`, 7.4MB 720p + new poster), **unlisted YouTube `R9mX0UyONjI`** (SMS/nurture link use), the LIVE "1. New Lead" no-book iMessage 2 attachment, and the draft post-booking workflow attachment (both GHL media `b0e2cc1c-…`). Prior unlisted upload `YNhnO9332U4` set private.
 
 ### v5.8 — Imperium step cards + all-white text + white Calendly text (2026-07-27)
 
@@ -306,7 +306,7 @@ Per Spencer, modeled on the Imperium reference:
 1. **Headlines re-set:** forced `<br>`s removed from the H1 and Step-1 headline (bad mobile wraps) — natural balanced wrapping (`text-wrap:balance`), hero padding tightened, wider gold hairline under the H1 and **gold divider rules between every step card** (Imperium's section-rule pattern).
 2. **Step-1 card visual** (Imperium card-example style): a live iMessage-blue bubble PREVIEW of the pre-filled text, personalized with the lead's real name/zip by the same script that builds the sms: link — the card now *shows* the message before they tap.
 3. **Pre-call video → unlisted YouTube embed** (`R9mX0UyONjI`, already uploaded yesterday) on both pages — watch counts visible in YT Studio. Native mp4 stays in the repo as an asset.
-4. **"RECENT CLIENT CASE STUDIES" section after Step 3** — the curated one-story-at-a-time player restored (Billy → Brian → Biviano → Flynn → Wylie) with the next-button, per Chung's consumption rule (no grid).
+4. **"RECENT CLIENT CASE STUDIES" section after Step 3** — the curated one-story-at-a-time player restored (Billy → Brian → Mike B. → Jason F. → Justin W.) with the next-button, per Chung's consumption rule (no grid).
 
 ### v5.12.1 — Zoom → Google Meet on /next/* (2026-07-28)
 
@@ -395,7 +395,7 @@ A complete traffic-segmented clone of the root funnel for **organic Instagram** 
 **Page (`v9/index.html`, self-contained, no Tailwind):**
 - Hero: eyebrow pill "For Established Deck & Outdoor Living Builders" → H1 "We'll Book Out Your Calendar With **10+ Exclusive Deck Appointments** Every Single Week **On Autopilot**" (10–20/wk figure per Offer Doc §2 outcome positioning).
 - Inline survey card "See If Your Market Is Available" / "1 deck builder per market": Q1 capacity per month (NEW field `capacity_per_month`: 1_5 / 6_10 / 11_20 / 20_plus) → Q2 `crew_situation` (existing values) → Q3 `revenue` (existing values; ICP gate unchanged = ≥ $500K) → Q4 company name (text) → Q5 full name / email / phone (contact LAST, D2D order) → calendar swaps in place: ICP = native slot picker via `mjc-self-book` Worker (same as root), non-ICP = GHL widget (card widens to 1080px). Trust line under the card: 100-in-100 guaranteed · exclusive · ready-to-buy + "$10,000 check … full terms below" (Take A, LP context).
-- Then: 14-logo marquee (root's files + invert/card classes) → "Recent Results" (4 faces, "Join 100+ contractors…", 5 ⚡ name+result+company+city cards, dates only where sourced) → "What Our Clients Say" 14-video 2-col wall (click-to-play facades, youtube-nocookie; Gallegos `woPfBuocx-M` added 2026-09-14 PM once Spencer confirmed it's live — 15 videos) → "Unfiltered Wins" 3-col masonry of the `/wins/` screenshots (our TrustPilot-wall equivalent) → root's legal block verbatim.
+- Then: 14-logo marquee (root's files + invert/card classes) → "Recent Results" (4 faces, "Join 100+ contractors…", 5 ⚡ name+result+company+city cards, dates only where sourced) → "What Our Clients Say" 14-video 2-col wall (click-to-play facades, youtube-nocookie; Billy G. `woPfBuocx-M` added 2026-09-14 PM once Spencer confirmed it's live — 15 videos) → "Unfiltered Wins" 3-col masonry of the `/wins/` screenshots (our TrustPilot-wall equivalent) → root's legal block verbatim.
 - Plumbing = root v8 rules: dual pixel init, browser Lead → seasoned pixel only + ICP only, same GHL inbound webhook + key set (`variant:'v9-d2d'`, `lp_version:'v9-d2d-apply'`, `years_in_business`/`marketing_spend` sent blank), funnel beacons (idx 2 capacity · 3 crew · 4 business_name · 5 revenue · 6 contact · 7 submit), `?test_event_code=` mode, `?preview=cal` / `?preview=cal-nonicp` QA, `mjc_booked_ref` capture for the widget path. Clarity on.
 
 **Verified locally (127.0.0.1 static server):** desktop + 480px layout, every survey step incl. validation, ICP picker pulled live slots, non-ICP widget rendered with slots, receipts masonry, footer.

@@ -56,10 +56,10 @@
 ```html
 <article class="rv-card" style="--accent:#0EA5E9">
   <div class="rv-head">
-    <img class="rv-avatar" src="/proof-faces/billy-stewart.jpg" alt="Billy Stewart">
+    <img class="rv-avatar" src="/proof-faces/billy-s.jpg" alt="Billy S.">
     <div>
-      <p class="rv-name">Billy Stewart</p>
-      <p class="rv-niche">Trinity Decks · Deck Builder</p>
+      <p class="rv-name">Billy S.</p>
+      <p class="rv-niche">Deck &amp; Patio Builder · Greenville, SC</p>
     </div>
   </div>
   <p class="rv-stat">$1,657 → $300K+</p>
