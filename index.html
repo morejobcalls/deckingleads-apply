@@ -16,6 +16,25 @@
 <meta property="og:type" content="website">
 
 <script>window.MJC_QA=/[?&]qa=1(&|$)/.test(location.search)||/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);</script>
+<script>
+// Guarantee test (MJC_Launch_W1, Spencer 2026-09-27): $10K check vs TRIPLE (fee refund + $2,000 + free work until 100).
+// Only campaign traffic is in the test (g / ad param, or utm_campaign MJC_Launch*). Everyone else keeps the $10K page.
+// No g in the URL → 50/50, sticky per visitor. The arm is written back into the URL so page_url/landing_url carry it to GHL.
+(function(){
+  var p=new URLSearchParams(location.search), g=(p.get('g')||'').toLowerCase(), stored='';
+  if(g==='2k'||g==='trp') g='triple'; if(g!=='10k'&&g!=='triple') g='';
+  var inTest=!!g||p.has('ad')||/^MJC_Launch/i.test(p.get('utm_campaign')||'');
+  try{ stored=localStorage.getItem('mjc_g')||''; }catch(e){}
+  if(stored!=='10k'&&stored!=='triple') stored='';
+  if(!g&&stored) g=stored, inTest=true;            // returning test visitor keeps their arm
+  if(!g&&inTest) g=Math.random()<0.5?'10k':'triple';
+  if(inTest){
+    try{ localStorage.setItem('mjc_g',g); }catch(e){}
+    if(p.get('g')!==g){ p.set('g',g); try{ history.replaceState(null,'',location.pathname+'?'+p.toString()+location.hash); }catch(e){} }
+  }
+  window.MJC_G=g||'10k'; window.MJC_G_TEST=inTest; window.MJC_AD=(p.get('ad')||'').toUpperCase(); window.MJC_STATE=(p.get('state')||'').toUpperCase();
+})();
+</script>
 <!-- ================================================================== -->
 <!-- META PIXEL — same dual init as root. PageView now; Lead on submit    -->
 <!-- for ICP-qualified submitters only (seasoned pixel, browser side).    -->
@@ -88,6 +107,15 @@
   .h1{font-family:'Archivo','Inter',system-ui,sans-serif;font-size:32px;line-height:1.02;font-weight:900;letter-spacing:-0.03em;color:#fff;max-width:980px;margin:4px auto 0;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.5);}
   @media(min-width:640px){.h1{font-size:44px;}}
   @media(min-width:1024px){.h1{font-size:58px;max-width:1120px;}}
+  .h1.h1-ad{font-size:27px;line-height:1.08;}
+  @media(min-width:640px){.h1.h1-ad{font-size:40px;}}
+  @media(min-width:1024px){.h1.h1-ad{font-size:52px;}}
+  .h1-lede{max-width:640px;margin:14px auto 0;font-size:16px;line-height:1.45;font-weight:600;color:rgba(255,255,255,.86);text-wrap:balance;}
+  @media(min-width:640px){.h1-lede{font-size:19px;}}
+  .guar-list{margin:8px 0 0;padding-left:18px;font-size:13.5px;line-height:1.65;color:var(--muted);}
+  .guar-list li{margin:2px 0;} .guar-list strong{color:var(--ink);font-weight:600;}
+  .guar-terms{max-width:640px;margin:-14px auto 30px;text-align:left;font-size:12.5px;line-height:1.6;color:var(--muted);}
+  .guar-terms a{color:inherit;text-decoration:underline;}
   .h1-key{display:block;text-wrap:balance;} /* keeps "10+ …Appointments" together on its own line(s) */
   /* Guarantee badge under the H1 (Spencer picked style #3, 2026-09-15): green check in a dark pill, white text. */
   .h1-sub{margin:16px auto 0;}
@@ -434,6 +462,37 @@
   </div>
 </section>
 
+
+<script>
+// Ad → hero scent match (MJC_Launch_W1). Headline = the ad headline word for word. Built from launch/ads-v2.json.
+(function(){
+  var HEROES={"R1-10K": {"h": "100 On-Site Deck Appointments in 100 Days, or We Write You a $10,000 Check", "s": "Every marketing agency says they guarantee results. Ours is signed."}, "R2-10K": {"h": "What Happens If We Miss Your Appointment Guarantee (It’s In Writing)", "s": "We write you a $10,000 check. It’s in the contract."}, "R3-10K": {"h": "The $10,000 Check We’re Contractually Required to Write If We Miss", "s": "100 on-site deck appointments in 100 days, or $10,000."}, "R1-TRP": {"h": "100 On-Site Deck Appointments in 100 Days, or Your Fee Back + $2,000 + We Work Free", "s": "Every marketing agency says they guarantee results. Ours is signed."}, "R2-TRP": {"h": "What Happens If We Miss Your Appointment Guarantee (It’s In Writing)", "s": "100% of your management fee back. $2,000 paid to you. And we keep working free until we hit it."}, "R3-TRP": {"h": "Why This Marketing Agency Writes Deck Builders a $2,000 Check Instead of Saying Sorry", "s": "Plus 100% of your management fee back, plus free work until it’s delivered."}, "T1": {"h": "Deck Builders Are Quitting Shared Leads for Pre-Qualified On-Site Appointments", "s": "Four contractors, one homeowner, one race to the bottom. Here’s the alternative."}, "T2": {"h": "ChatGPT Started Recommending One Contractor Marketing Agency. Two Builders Hired It.", "s": "What AI search means for how homeowners find you too."}, "T3": {"h": "The Deck Builders Who Book Spring in October (And Why It Works)", "s": "The slow season is when the pipeline gets built."}, "T4": {"h": "Deck Ads Stopped Working This Year? Facebook Changed the Rules.", "s": "What changed, and the fix most deck builders miss."}, "T5": {"h": "Why Top Deck Builders Stopped Saying “Free Estimates” in Their Ads", "s": "Every competitor offers free estimates. Here’s what books better."}, "T7": {"h": "Lead Sites Sell One Homeowner to 4 Builders. This Model Books It for One.", "s": "Every appointment we book is exclusive to you. Never shared."}, "T9": {"h": "The Deck Builders Who 2X’d Revenue Did One Thing First", "s": "A closer, then more ad spend. In that order."}, "P5": {"h": "15+ Deck Builders Went On Camera About Their Appointment Calendars", "s": "Real deck and outdoor living contractors, on camera."}, "P6": {"h": "The Deck Job System That Puts Builders in Front of Premium Homeowners", "s": "$10M+ in ad spend managed. $100M+ in client-booked jobs. 100+ contractor accounts since 2024."}, "S3": {"h": "Inside the System That Turns Homeowner Clicks Into On-Site Deck Appointments", "s": "Every stage, screenshotted."}, "P2": {"h": "Pittsburgh-Area Deck Builder Stops Chasing Leads. Now He Just Shows Up.", "s": "[#] on-site appointments in [#] days."}, "S2": {"h": "Our Data Shows the Month Deck Inquiries Get Cheapest", "s": "Most builders turn ads off at the worst possible time."}}, STATES={"OR": "Oregon", "CA": "California", "TX": "Texas", "IL": "Illinois", "SC": "South Carolina", "NC": "North Carolina"};
+  var G=window.MJC_G, ad=window.MJC_AD, st=window.MJC_STATE, h=null;
+  if(/^S1(-|$)/.test(ad)){ var nm=STATES[st]||STATES[(ad.split('-')[1]||'')]; if(nm) h={h:nm+' Deck Builders: See If Your Market Is Still Available',s:"Every appointment we book is exclusive to you. We confirm your market is open on the call."}; }
+  else if(HEROES[ad]) h=HEROES[ad];
+  var h1=document.querySelector('.hero .h1');
+  if(h&&h1){
+    h1.classList.add('h1-ad');
+    h1.innerHTML=h.h.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/(100 On-Site Deck Appointments in 100 Days|\$10,000|\$2,000|See If Your Market Is Still Available|Pre-Qualified On-Site Appointments)/,'<span class="gold">$1</span>').replace(/On-Site/g,'On\u2011Site');
+    if(/^R\d/.test(ad)){ var gbw=document.querySelector('.hero .h1-sub'); if(gbw) gbw.style.display='none'; }
+    var lede=document.createElement('p'); lede.className='h1-lede'; lede.textContent=h.s; h1.parentNode.insertBefore(lede,h1.nextSibling);
+  }
+  if(!window.MJC_G_TEST) return;
+  var badge=document.querySelector('.hero .h1-sub .gb'), cal=document.getElementById('qs-cal-sub');
+  var TRIPLE=G==='triple';
+  if(badge) badge.lastChild.textContent=TRIPLE?'Or Your Fee Back + $2,000 + We Work Free':'Or We Write You a $10,000 Check';
+  if(cal&&TRIPLE) cal.textContent='100 Deck Sales Appointments in 100 Days, or Your Fee Back + $2,000 + We Work Free Until We Hit It.';
+  document.addEventListener('DOMContentLoaded',function(){
+    var t2=document.getElementById('guar2-t'), b2=document.getElementById('guar2-b'), terms=document.getElementById('guar-terms'), scope=document.getElementById('guar-scope');
+    if(TRIPLE){
+      if(t2) t2.textContent='All Three — Written To You';
+      if(b2) b2.innerHTML='<strong>1.</strong> 100% of your management fee back. <strong>2.</strong> We pay you <strong>$2,000.</strong> <strong>3.</strong> We keep working free until you hit 100. The only company we know of that stacks all three.';
+      if(scope) scope.textContent='The refund covers the management fees you paid us. Ad spend goes from your card straight to Meta, so it is never ours to refund.';
+    }
+    if(terms) terms.hidden=false;
+  });
+})();
+</script>
 <!-- ═══════════════════════ LOGO MARQUEE ═══════════════════════ -->
 <section class="logos" aria-label="Clients">
   <p>Trusted By Deck Builders Across The Country</p>
@@ -526,9 +585,20 @@
       </div>
       <div class="guar-card">
         <p class="guar-k">If We Miss</p>
-        <p class="guar-t">$10,000 — Written To You</p>
-        <p class="guar-b">We write you a check for <strong>$10,000.</strong> One number. No fine-print math, no partial credits, no arguing about what counts.</p>
+        <p class="guar-t" id="guar2-t">$10,000 — Written To You</p>
+        <p class="guar-b" id="guar2-b">We write you a check for <strong>$10,000.</strong> One number. No fine-print math, no partial credits, no arguing about what counts.</p>
       </div>
+    </div>
+    <div class="guar-terms" id="guar-terms" hidden>
+      <p style="margin:0 0 6px;"><strong>What we ask of you (so the guarantee holds):</strong></p>
+      <ul class="guar-list">
+        <li>Respond to new appointment requests within 24 hours.</li>
+        <li>Show up to your onboarding, strategy, and review meetings.</li>
+        <li>Keep us connected to your ad account and pages, and don’t change the campaigns we run.</li>
+        <li>Let us run the full deck job system: the ads, pages, and follow-up we’ve tested.</li>
+      </ul>
+      <p style="margin:8px 0 0;" id="guar-scope"></p>
+      <p style="margin:8px 0 0;"><a href="/terms/" target="_blank" rel="noopener">Full terms</a></p>
     </div>
     <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Get More Deck Jobs</span><small>Claim Your Zip Code &rarr;</small></a>
   </div>
@@ -831,7 +901,8 @@
           source:'deckingleads.com lp v1',variant:'v9-d2d',lp_version:'v9-root',page_url:location.href,
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
-          landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
+          landing_url:attribution.landing_url||'',referrer:attribution.referrer||'',
+          guarantee:window.MJC_G_TEST?window.MJC_G:'',guarantee_test:window.MJC_G_TEST?'MJC_Launch_W1':'',ad_hero:window.MJC_AD||'',ad_state:window.MJC_STATE||''};
         try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
         if(TEST_CODE){
           // target:'icp' is REQUIRED here (2026-09-15). A test_event_code is scoped to ONE dataset —
