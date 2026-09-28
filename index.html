@@ -27,9 +27,10 @@
   try{ stored=localStorage.getItem('mjc_g')||''; }catch(e){}
   if(stored!=='10k'&&stored!=='triple') stored='';
   if(!g&&stored) g=stored, inTest=true;            // returning test visitor keeps their arm
-  if(!g&&inTest) g=Math.random()<0.5?'10k':'triple';
-  var FORCE_ARM='triple'; // Spencer 2026-09-28: run triple only for now. Set to '' to restore the 50/50 test.
-  if(inTest&&FORCE_ARM) g=FORCE_ARM;
+  // Spencer 2026-09-28: the ad's own guarantee wins (g=10k / g=triple ads). Ads with no guarantee in them
+  // default to TRIPLE instead of a 50/50 split; a returning visitor keeps whatever arm they already saw.
+  var DEFAULT_ARM='triple'; // set to '' to restore the 50/50 split for no-g ads
+  if(!g&&inTest) g=DEFAULT_ARM||(Math.random()<0.5?'10k':'triple');
   if(inTest){
     try{ localStorage.setItem('mjc_g',g); }catch(e){}
     if(p.get('g')!==g){ p.set('g',g); try{ history.replaceState(null,'',location.pathname+'?'+p.toString()+location.hash); }catch(e){} }
