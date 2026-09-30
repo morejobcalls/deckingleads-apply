@@ -168,6 +168,18 @@
       value: contactRef ? 'contact:' + contactRef : '', meta: { touch_n: count, new_session: newSession }
     });
   }
+  // ── Meta ad click, last 7 days (2026-09-30) ─────────────────────────────────
+  // Spencer's rule: Meta only hears about a lead if we can show they clicked one of our Meta ads in the 7 days
+  // before applying (the ad sets' click window). Every paid Meta landing (re)writes mjc_mad; the cookie itself
+  // expires after 7 days and is shared by morejobcalls.com + apply. The pages send it as meta_ad, and the CAPI
+  // relay drops anything without meta_ad=yes.
+  var META_AD_WINDOW = 7 * 24 * 3600;
+  if (cls.channel === 'meta-fb' || cls.channel === 'meta-ig') setCookie('mjc_mad', Date.now() + '|' + (touch.ad_id || touch.content || touch.campaign || '').slice(0, 60), META_AD_WINDOW);
+  function metaAdClickAt() {
+    var t = parseInt((getCookie('mjc_mad') || '').split('|')[0], 10);
+    return t && Date.now() - t <= META_AD_WINDOW * 1000 ? t : 0;
+  }
+
   // Page views inherit the current touch's channel (from the shared cookie) unless this load IS a new touch.
   track('page_view', { referrer_host: refHost, channel: isNewTouch ? cls.channel : (((getCookie('mjc_lt') || '').split('|')[0]) || (internalRef ? 'internal' : cls.channel)) });
 
@@ -289,6 +301,7 @@
     vid: vid,
     sid: sessId,
     track: track,
+    metaAdClick: function () { return !!metaAdClickAt(); },
     // Extra keys for lead-form payloads, mapped onto the GHL contact in the "1. New Lead" workflows (Phase 2).
     leadFields: function () {
       var ft = getCookie('mjc_ft') || '';
@@ -300,7 +313,9 @@
         journey_last_touch: readable(getCookie('mjc_lt')),
         journey_touch_count: parseInt(getCookie('mjc_tc') || '0', 10) || 0,
         journey_days_to_lead: days,
-        journey_timeline: 'https://mjc-journey.spencer-80c.workers.dev/t/' + vid
+        journey_timeline: 'https://mjc-journey.spencer-80c.workers.dev/t/' + vid,
+        meta_ad: metaAdClickAt() ? 'yes' : 'no',
+        meta_ad_at: metaAdClickAt() ? new Date(metaAdClickAt()).toISOString() : ''
       };
     }
   };

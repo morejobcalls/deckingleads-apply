@@ -636,6 +636,15 @@
     return out;
   })();
 
+  // ── Meta gate (Spencer 2026-09-30): Meta only hears about this lead if they clicked one of our Meta ads in the
+  // 7 days before applying. journey.js keeps that as a 7-day cookie. If journey.js didn't load, fall back to THIS
+  // page load's own URL only — never the stored first touch above, which never expires.
+  function metaAdClick(){
+    try{ if(window.mjcJourney&&mjcJourney.metaAdClick) return mjcJourney.metaAdClick(); }catch(e){}
+    var q=new URLSearchParams(location.search), med=(q.get('utm_medium')||'').toLowerCase(), src=(q.get('utm_source')||'').toLowerCase();
+    return /paid/.test(med)&&(/^(fb|ig|facebook|instagram|meta)$/.test(src)||!!q.get('fbclid'));
+  }
+
   var CAL_ICP='https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
   var CAL_NON_ICP='https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
 
@@ -873,7 +882,10 @@
     try{ if(window.mjcJourney) mjcJourney.track('submit',{lead_ref:event_id,label:'apply survey',value:icp?'icp':'non-icp'}); }catch(e){} // Journey Ledger
 
     // Browser Lead → seasoned pixel ONLY, ICP only (same rule as root, 2026-09-14). ICP pixel gets Lead from the server relay.
-    if(icp && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('trackSingle','839107878270720','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
+    // …and only after a Meta ad click in the last 7 days (2026-09-30). The confirmation page reads dl_meta_ad.
+    var metaAd=metaAdClick();
+    try{ sessionStorage.setItem('dl_meta_ad',metaAd?'1':'0'); }catch(e){}
+    if(icp && metaAd && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('trackSingle','839107878270720','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
     try{ sessionStorage.setItem('dl_qualify_data',JSON.stringify(formData)); sessionStorage.setItem('dl_qualify_icp',icp?'1':'0'); }catch(e){}
 
     (async function(){
@@ -907,6 +919,7 @@
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||'',
           guarantee:window.MJC_G_TEST?window.MJC_G:'',guarantee_test:window.MJC_G_TEST?'MJC_Launch_W1':'',ad_hero:window.MJC_AD||'',ad_state:window.MJC_STATE||''};
         try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
+        payload.meta_ad=metaAd?'yes':'no'; // after leadFields so the page's own answer (with the URL fallback) wins
         if(TEST_CODE){
           // target:'icp' is REQUIRED here (2026-09-15). A test_event_code is scoped to ONE dataset —
           // ours comes from the ICP pixel's Test events tab. Without target the relay's default path

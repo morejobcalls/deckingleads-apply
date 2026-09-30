@@ -101,9 +101,17 @@
   window.__TOP_LEVEL__ = (function () { try { return window.top === window.self; } catch (e) { return true; } })();
 </script>
 
-<!-- Meta Pixel — fire BookedCall conversion event for booked-call optimization -->
+<!-- Meta Pixel — fire BookedCall conversion event for booked-call optimization.
+     2026-09-30: ONLY for people who clicked one of our Meta ads in the last 7 days (apply page sets dl_meta_ad;
+     journey.js keeps the mjc_mad cookie). Everyone else gets no pixel here at all: the "Booked Call" custom
+     conversion counts PageViews of this URL, so even a PageView would report an organic booking to Meta. -->
 <script>
-  if (window.__TOP_LEVEL__) {
+  window.__META_AD__ = (function () {
+    try { var s = sessionStorage.getItem('dl_meta_ad'); if (s === '1') return true; } catch (e) {}
+    var m = document.cookie.match(/(?:^|;\s*)mjc_mad=([^;]*)/), t = m ? parseInt(decodeURIComponent(m[1]).split('|')[0], 10) : 0;
+    return !!t && Date.now() - t <= 7 * 24 * 3600 * 1000;
+  })();
+  if (window.__TOP_LEVEL__ && window.__META_AD__) {
     !function(f,b,e,v,n,t,s)
     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -117,8 +125,6 @@
     fbq('trackCustom', 'BookedCall');
   }
 </script>
-<noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
 
 <!-- Microsoft Clarity -->
 <script type="text/javascript">
