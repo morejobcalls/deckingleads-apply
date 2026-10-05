@@ -8,17 +8,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0B0B0B">
 <title>Book Out Your Calendar | The Deck Jobs System Strategy Session | MoreJobCalls.com</title>
-<meta name="description" content="Deck &amp; outdoor living builders: we book exclusive, ready-to-buy sales appointments onto your calendar every week. 100 in 100 days or we write you a check for $10,000. Check if your market is still available.">
+<meta name="description" content="Deck &amp; outdoor living builders: we book exclusive, ready-to-buy sales appointments onto your calendar every week. 100 in 100 days, or a 100% refund of your management fee + $2,000 + we work free until we hit it. Check if your market is still available.">
 <!-- v9 (2026-09-14): apply.dirt2dollars.com mirror — inline survey-first apply page. noindex until Spencer promotes it. -->
 <meta name="robots" content="index, follow">
 <meta property="og:title" content="Book Out Your Calendar | MoreJobCalls.com">
-<meta property="og:description" content="Exclusive deck appointments, booked onto your calendar every week. 100 in 100 days — or we write you a check for $10,000. See if your market is still open.">
+<meta property="og:description" content="Exclusive deck appointments, booked onto your calendar every week. 100 in 100 days, or a 100% fee refund + $2,000 + we work free until we hit it. See if your market is still open.">
 <meta property="og:type" content="website">
 
 <script>window.MJC_QA=/[?&]qa=1(&|$)/.test(location.search)||/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);</script>
 <script>
-// Guarantee test (MJC_Launch_W1, Spencer 2026-09-27): $10K check vs TRIPLE (fee refund + $2,000 + free work until 100).
-// Only campaign traffic is in the test (g / ad param, or utm_campaign MJC_Launch*). Everyone else keeps the $10K page.
+// Guarantee (Spencer 2026-10-02): TRIPLE (fee refund + $2,000 + free work until 100) for EVERY visitor.
+// Exception (Spencer 2026-10-05, option a): the three R*-10K Meta ads keep running, so traffic carrying g=10k or ad=R#-10K
+// still lands on the $10K version, keeping ad and page congruent. The 9/28 $10K-vs-triple test is over.
 // No g in the URL → 50/50, sticky per visitor. The arm is written back into the URL so page_url/landing_url carry it to GHL.
 (function(){
   var p=new URLSearchParams(location.search), g=(p.get('g')||'').toLowerCase(), stored='';
@@ -26,7 +27,9 @@
   var inTest=!!g||p.has('ad')||/^MJC_Launch/i.test(p.get('utm_campaign')||'');
   try{ stored=localStorage.getItem('mjc_g')||''; }catch(e){}
   if(stored!=='10k'&&stored!=='triple') stored='';
-  if(!g&&stored) g=stored, inTest=true;            // returning test visitor keeps their arm
+  if(/^R\d-10K$/i.test(p.get('ad')||'')) g='10k';  // the three $10K ads always get the $10K page
+  if(!g&&stored==='10k') stored='';               // no sticky $10K: only a $10K ad link shows it
+  if(!g&&stored) g=stored, inTest=true;            // returning campaign visitor keeps their arm
   // Spencer 2026-09-28: the ad's own guarantee wins (g=10k / g=triple ads). Ads with no guarantee in them
   // default to TRIPLE instead of a 50/50 split; a returning visitor keeps whatever arm they already saw.
   var DEFAULT_ARM='triple'; // set to '' to restore the 50/50 split for no-g ads
@@ -35,7 +38,7 @@
     try{ localStorage.setItem('mjc_g',g); }catch(e){}
     if(p.get('g')!==g){ p.set('g',g); try{ history.replaceState(null,'',location.pathname+'?'+p.toString()+location.hash); }catch(e){} }
   }
-  window.MJC_G=g||'10k'; window.MJC_G_TEST=inTest; window.MJC_AD=(p.get('ad')||'').toUpperCase(); window.MJC_STATE=(p.get('state')||'').toUpperCase();
+  window.MJC_G=g||'triple'; window.MJC_G_TEST=true; window.MJC_AD=(p.get('ad')||'').toUpperCase(); window.MJC_STATE=(p.get('state')||'').toUpperCase();
 })();
 </script>
 <!-- ================================================================== -->
@@ -426,7 +429,7 @@
       <!-- Step 6 · calendar (in place, no page change) -->
       <div class="qs-step" data-step="6">
         <h3 id="qs-cal-h" class="qs-q">Pick a time that works for you</h3>
-        <p id="qs-cal-sub">100 Deck Sales Appointments in 100 Days — or We Write You a Check for $10,000.</p>
+        <p id="qs-cal-sub">100 Deck Sales Appointments in 100 Days, or a 100% Refund + $2,000 + We Work Free Until We Hit It.</p>
         <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
         <div id="mc-cal-wrap" style="display:none;"><iframe id="mc-cal" src="" title="Book your Deck Jobs Strategy Session" scrolling="yes" allow="payment"></iframe><script src="https://api.seasonproofgrowth.com/js/form_embed.js" type="text/javascript"></script></div>
         <!-- Native slot picker (ICP leads only). Non-ICP keeps the GHL widget above (its calendar collects the deposit in-widget). -->
@@ -483,14 +486,14 @@
   if(!window.MJC_G_TEST) return;
   var badge=document.querySelector('.hero .h1-sub .gb'), cal=document.getElementById('qs-cal-sub');
   var TRIPLE=G==='triple';
-  if(badge) badge.lastChild.textContent=(h&&!/^R\d/.test(ad)?'100 pre-qualified on-site appointments in 100 days. ':'')+(TRIPLE?'Or a 100% refund + $2,000 + we work free.':'Or we write you a $10,000 check.');
-  if(cal&&TRIPLE) cal.textContent='100 Deck Sales Appointments in 100 Days, or a 100% Refund + $2,000 + We Work Free Until We Hit It.';
+  if(badge) badge.lastChild.textContent=(!/^R\d/.test(ad)?'100 pre-qualified on-site appointments in 100 days. ':'')+(TRIPLE?'Or a 100% refund + $2,000 + we work free.':'Or we write you a $10,000 check.');
+  if(cal&&!TRIPLE) cal.textContent='100 Deck Sales Appointments in 100 Days, or We Write You a Check for $10,000.';
   document.addEventListener('DOMContentLoaded',function(){
     var t2=document.getElementById('guar2-t'), b2=document.getElementById('guar2-b'), terms=document.getElementById('guar-terms'), scope=document.getElementById('guar-scope');
-    if(TRIPLE){
-      if(t2) t2.textContent='All Three — Written To You';
-      if(b2) b2.innerHTML='<strong>1.</strong> A 100% refund of your management fee. <strong>2.</strong> We pay you <strong>$2,000.</strong> <strong>3.</strong> We keep working free until you hit 100. The only company we know of that stacks all three.';
-      if(scope) scope.textContent='The refund covers the management fees you paid us. Ad spend goes from your card straight to Meta, so it is never ours to refund.';
+    if(!TRIPLE){
+      if(t2) t2.textContent='$10,000, Written To You';
+      if(b2) b2.innerHTML='We write you a check for <strong>$10,000.</strong> One number. No fine-print math, no partial credits, no arguing about what counts.';
+      if(scope) scope.textContent='';
     }
     if(terms) terms.hidden=false;
   });
@@ -588,8 +591,8 @@
       </div>
       <div class="guar-card">
         <p class="guar-k">If We Miss</p>
-        <p class="guar-t" id="guar2-t">$10,000 — Written To You</p>
-        <p class="guar-b" id="guar2-b">We write you a check for <strong>$10,000.</strong> One number. No fine-print math, no partial credits, no arguing about what counts.</p>
+        <p class="guar-t" id="guar2-t">All Three — Written To You</p>
+        <p class="guar-b" id="guar2-b"><strong>1.</strong> A 100% refund of your management fee. <strong>2.</strong> We pay you <strong>$2,000.</strong> <strong>3.</strong> We keep working free until you hit 100. The only company we know of that stacks all three.</p>
       </div>
     </div>
     <div class="guar-terms" id="guar-terms" hidden>
@@ -600,7 +603,7 @@
         <li>Keep us connected to your ad account and pages, and don’t change the campaigns we run.</li>
         <li>Let us run the full deck job system: the ads, pages, and follow-up we’ve tested.</li>
       </ul>
-      <p style="margin:8px 0 0;" id="guar-scope"></p>
+      <p style="margin:8px 0 0;" id="guar-scope">The refund covers the management fees you paid us. Ad spend goes from your card straight to Meta, so it is never ours to refund.</p>
       <p style="margin:8px 0 0;"><a href="/terms/" target="_blank" rel="noopener">Full terms</a></p>
     </div>
     <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Get More Deck Jobs</span><small>Claim Your Zip Code &rarr;</small></a>
