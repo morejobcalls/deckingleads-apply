@@ -486,3 +486,12 @@ LP: `git revert 4fadb56 3f7f6d4 727a634`. Relay: redeploy the `.bak`. Workflows:
   - Payload adds `lead_channel`, `channel_label`, `src_tag`. All three post to webhook `OhYjuz3t2M1Q6eN7TKY8`, none fires standard Lead / CAPI.
 - **GHL:** "1. New Lead (YT)" v8 → **"1. New Lead (Organic)" v9**: Lead Channel, source tag, tracker label + page URL, setter SMS, Basecamp ping and journey label now read from the payload. "2. Booked | CHUNG V1" v10 → v11: META branch excludes Lead Channel instagram/facebook, and the organic branch (renamed "Organic (YT/IG/FB)") includes them, so IG/FB bookings never fire the paid CAPI Schedule. Lead Channel dropdown gained `facebook`. Script: `organic_channel_wiring.py` (`--rollback` restores both).
 - **Tests:** `test_organic_lps.mjs` (Puppeteer; intercepts the webhook + Meta pixel, sends nothing) per channel covers ICP + non-ICP survey, payload, UTMs, the custom pixel event with no standard Lead, no ICP-pixel/CAPI hits, booking-complete redirects, and the confirmation pixel. It ran against the local build on the real domain before push and against live after push.
+
+---
+
+## journey.js minified (2026-10-06)
+
+- `journey.js` is now the minified build (21 KB to 12 KB). The readable source is `journey.src.js`.
+- To change the tracker: edit `journey.src.js`, then run `npx esbuild journey.src.js --minify --legal-comments=inline --outfile=journey.js` and commit both files.
+- Why: an SEO crawl flagged the unminified file on every page of morejobcalls.com (it loads sitewide).
+- Checked in a browser before shipping: same `window.mjcJourney` API, same cookies, same events sent (page view, scroll 50/90, CTA click).
