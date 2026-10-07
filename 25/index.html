@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#0B0B0B">
+<title>No Long-Term Contracts | 25 Estimates in 25 Days | MoreJobCalls.com</title>
+<meta name="description" content="Deck &amp; outdoor living builders: month to month, 7 days to launch. 25 estimates in 25 days, or a minimum of $50,000 in booked jobs. Miss it and we work for free forever until we do.">
+<!-- /25/ : "NO LONG-TERM CONTRACTS" 25-in-25 PAID Meta landing page. Twin of ROOT index.html, built by
+     build_25_lp.py (capi-worker/workflow-backups/2026-10-06/) — re-run it after any root change instead of hand-editing.
+     Offer: 25 estimates in 25 days, or a minimum of $50,000 in booked jobs. Month to month. 7 days to launch.
+     Miss it and we work for free forever until we do. (Ad: 2026-10-06 No Long-Term Contracts SHOOT DOC.)
+     Design, survey and plumbing are ROOT's: standard browser Lead (ICP + 7-day Meta-click gate), CAPI test path,
+     ROOT "1. New Lead" webhook, shared /confirmation/ + /scheduled/. Only the attribution defaults and ids differ:
+       · blanks stamped utm_source=facebook / utm_medium=paid / utm_campaign=25-in-25, ?ad=<ref> -> utm_content
+       · payload lp_version=v9-25, variant=v9-25-estimates, offer=25-in-25, guarantee=25in25-free-forever
+     Root's guarantee A/B arm + ad->hero HEROES scripts are deliberately NOT ported (they inject the old offer).
+     ** noindex ON PURPOSE: this offer is in NO paperwork yet. Live ToS 3.2 and the Quarterly contract 3(c) still
+        say 100 sales appointment opportunities in 100 days with the triple risk reversal. Do not send traffic and
+        do not link this page until the ToS + contract are amended and attorney-reviewed. ** -->
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="No Long-Term Contracts &middot; 25 Estimates in 25 Days | MoreJobCalls.com">
+<meta property="og:description" content="Month to month. 7 days to launch. 25 estimates in 25 days, or a minimum of $50,000 in booked jobs. If we miss it, we work for free forever until we do.">
+<meta property="og:type" content="website">
+
+<script>window.MJC_QA=/[?&]qa=1(&|$)/.test(location.search)||/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);</script>
+<script>
+// /25/ (2026-10-06): ONE fixed offer, so root's guarantee A/B arm (g=10k vs g=triple, MJC_Launch_W1) is NOT ported.
+// Only the globals the payload still reads are defined here.
+(function(){
+  var p=new URLSearchParams(location.search);
+  window.MJC_G='25in25'; window.MJC_G_TEST=false;
+  window.MJC_AD=(p.get('ad')||'').toUpperCase(); window.MJC_STATE=(p.get('state')||'').toUpperCase();
+})();
+</script>
+<!-- ================================================================== -->
+<!-- META PIXEL — same dual init as root. PageView now; Lead on submit    -->
+<!-- for ICP-qualified submitters only (seasoned pixel, browser side).    -->
+<!-- ================================================================== -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '839107878270720');
+  fbq('init', '1832632181230934'); // ICP pixel — browser Lead is ICP-gated + seasoned-only; ICP pixel takes Lead from the server relay
+  if(!window.MJC_QA) fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1832632181230934&ev=PageView&noscript=1"/></noscript>
+
+<!-- Microsoft Clarity (same project as root) -->
+<script type="text/javascript">
+  (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+  })(window, document, "clarity", "script", "wpznuz610a");
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0B0B0B; --card:#151515; --border:#262626; --ink:#F5F2EB; --muted:#A3A09A; --subtle:#6F6C66;
+    --gold:#C7963F; --gold-deep:#AB8032; --pop:#F5B93E; --pop-deep:#D9982A; --seam:#ECEAE4; --paper:#FFFFFF; --paper-ink:#171717; --paper-muted:#6B6B6B; --paper-border:#E5E5E5;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;line-height:1.5;}
+  img{max-width:100%;display:block;}
+  a{color:inherit;}
+  button{font-family:inherit;}
+  .wrap{max-width:1120px;margin:0 auto;padding-left:16px;padding-right:16px;}
+  .gold{color:var(--pop);}
+  .display{font-family:'Archivo','Inter',system-ui,sans-serif;}
+  h1,h2,h3{margin:0;letter-spacing:-0.03em;}
+  .h2{font-family:'Archivo','Inter',system-ui,sans-serif;font-size:30px;font-weight:900;text-align:center;line-height:1.1;letter-spacing:-0.03em;color:#fff;}
+  @media(min-width:640px){.h2{font-size:40px;}}
+
+  /* ── HERO ─────────────────────────────────────────────── */
+  .hero{position:relative;text-align:center;padding:18px 16px 24px;
+    background:
+      radial-gradient(48% 22% at 50% -4%, rgba(245,185,62,.26) 0%, transparent 70%),
+      linear-gradient(to bottom, var(--bg) 0%, var(--bg) 58%, var(--seam) 100%);}
+  @media(min-width:640px){.hero{padding:26px 16px 44px;}}
+  .brand{display:flex;width:fit-content;align-items:center;gap:9px;text-decoration:none;margin:0 auto 14px;}
+  .brand img{width:42px;height:42px;border-radius:10px;}
+  .brand span{font-family:'Archivo','Inter',system-ui,sans-serif;font-weight:900;letter-spacing:.14em;font-size:15px;color:#fff;}
+  .brand span b{color:var(--pop);font-weight:900;}
+  .brand span i{font-style:normal;text-transform:lowercase;letter-spacing:.04em;color:#fff;}
+  .eyebrow{display:block;width:fit-content;margin:0 auto 14px;padding:9px 18px;border-radius:999px;font-family:'Archivo','Inter',system-ui,sans-serif;font-size:12px;font-weight:900;letter-spacing:.22em;text-transform:uppercase;color:var(--pop);
+    background:rgba(245,185,62,.14);border:1px solid rgba(245,185,62,.55);
+    box-shadow:0 0 60px rgba(245,185,62,.35), inset 0 0 22px rgba(245,185,62,.10);text-shadow:0 0 18px rgba(245,185,62,.65);}
+  @media(min-width:640px){.eyebrow{font-size:14px;padding:10px 22px;}}
+  /* Phones: tighter pill so "For Established Deck Companies" stays on one line (fits ≥360px; smaller fallback below 360px). */
+  @media(max-width:639px){.eyebrow{font-size:11.5px;letter-spacing:.14em;padding:8px 16px;white-space:nowrap;}}
+  @media(max-width:359px){.eyebrow{font-size:10px;letter-spacing:.08em;padding:7px 12px;}}
+  .h1{font-family:'Archivo','Inter',system-ui,sans-serif;font-size:32px;line-height:1.02;font-weight:900;letter-spacing:-0.03em;color:#fff;max-width:980px;margin:4px auto 0;text-wrap:balance;text-shadow:0 2px 24px rgba(0,0,0,.5);}
+  @media(min-width:640px){.h1{font-size:44px;}}
+  @media(min-width:1024px){.h1{font-size:58px;max-width:1120px;}}
+  .h1.h1-ad{font-size:27px;line-height:1.08;}
+  @media(min-width:640px){.h1.h1-ad{font-size:40px;}}
+  @media(min-width:1024px){.h1.h1-ad{font-size:52px;}}
+  .h1-lede{max-width:640px;margin:14px auto 0;font-size:16px;line-height:1.45;font-weight:600;color:rgba(255,255,255,.86);text-wrap:balance;}
+  @media(min-width:640px){.h1-lede{font-size:19px;}}
+  .guar-list{margin:8px 0 0;padding-left:18px;font-size:13.5px;line-height:1.65;color:var(--muted);}
+  .guar-list li{margin:2px 0;} .guar-list strong{color:var(--ink);font-weight:600;}
+  .guar-terms{max-width:640px;margin:-14px auto 30px;text-align:left;font-size:12.5px;line-height:1.6;color:var(--muted);}
+  .guar-terms a{color:inherit;text-decoration:underline;}
+  .h1-key{display:block;text-wrap:balance;} /* keeps "10+ …Appointments" together on its own line(s) */
+  /* Guarantee badge under the H1 (Spencer picked style #3, 2026-09-15): green check in a dark pill, white text. */
+  .h1-sub{margin:16px auto 0;}
+  @media(min-width:640px){.h1-sub{margin-top:22px;}}
+  .gb{display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:rgba(34,197,94,.10);border:1px solid rgba(34,197,94,.45);
+    font-family:'Inter',system-ui,sans-serif;font-size:18px;line-height:1.2;font-weight:800;letter-spacing:-0.01em;color:#fff;box-shadow:0 0 30px rgba(34,197,94,.18);}
+  .gb svg{flex:0 0 auto;width:22px;height:22px;}
+  @media(min-width:640px){.gb{font-size:21px;padding:12px 22px;gap:12px;}.gb svg{width:24px;height:24px;}}
+  /* Gold brush-stroke underline under "Every Single Week": sits behind the letters (isolation + z-index:-1), draws in left→right. */
+  .ul{position:relative;display:inline-block;white-space:nowrap;isolation:isolate;padding-bottom:.12em;}
+  .ul::after{content:"";position:absolute;left:-2%;right:-2%;bottom:0;height:.3em;z-index:-1;pointer-events:none;
+    background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 20' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' x2='1'%3E%3Cstop offset='0' stop-color='%23D9982A'/%3E%3Cstop offset='.5' stop-color='%23FFD37A'/%3E%3Cstop offset='1' stop-color='%23F5B93E'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M2 11.5C48 5 120 3 197 4.8c2.7.1 3.3 5 .5 5.6C130 12.6 64 14.8 7 18.3c-5.4.3-7-5.6-5-6.8Z' fill='url(%23g)'/%3E%3C/svg%3E") no-repeat center/100% 100%;
+    animation:ulDraw .75s .35s cubic-bezier(.2,.8,.2,1) both;}
+  @keyframes ulDraw{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+  @media(prefers-reduced-motion:reduce){.ul::after{animation:none;}}
+
+  /* ── SURVEY CARD ───────────────────────────────────────── */
+  .survey-wrap{margin-top:22px;}
+  @media(min-width:640px){.survey-wrap{margin-top:32px;}}
+  #qs-card{position:relative;margin:0 auto;width:100%;max-width:780px;background:#fff;color:var(--paper-ink);border-radius:28px;padding:28px 20px 24px;text-align:left;
+    box-shadow:0 0 90px rgba(245,185,62,.28), 0 30px 70px rgba(0,0,0,.5);transition:max-width .25s cubic-bezier(.16,1,.3,1);scroll-margin-top:12vh;}
+  @media(min-width:640px){#qs-card{padding:44px 48px 38px;}}
+  #qs-card.cal-open{max-width:1080px;}
+  .qs-title{font-family:'Archivo','Inter',system-ui,sans-serif;font-size:27px;font-weight:900;text-align:center;letter-spacing:-0.03em;color:#111;}
+  @media(min-width:640px){.qs-title{font-size:36px;}}
+  .qs-title .gold{color:var(--pop-deep);}
+  .qs-sub{margin:12px 0 0;text-align:center;color:#555;font-size:16px;}
+  .qs-prog{margin-top:30px;}
+  .qs-prog-row{display:flex;align-items:center;justify-content:space-between;font-size:13px;color:#7A7A7A;font-weight:600;}
+  .qs-bar{margin-top:8px;height:6px;width:100%;border-radius:999px;background:#EAEAEA;overflow:hidden;}
+  .qs-bar-fill{height:100%;width:0;border-radius:999px;background:var(--pop-deep);transition:width .3s ease;}
+  .qs-step{display:none;margin-top:30px;}
+  .qs-step.active{display:block;animation:qsIn .2s ease-out;}
+  @keyframes qsIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  .qs-q{font-size:19px;font-weight:800;text-align:center;letter-spacing:-0.02em;line-height:1.25;color:#111;}
+  @media(min-width:640px){.qs-q{font-size:22px;}}
+  .qs-hint{margin:6px 0 0;text-align:center;font-size:13px;color:#8A8A8A;}
+  .qs-pre{margin:0 0 8px;text-align:center;font-size:14px;color:#6B6B6B;line-height:1.5;}
+  .qs-num{color:#B07A1E;}
+  .qs-qa{margin:0 0 14px;padding:8px 12px;border-radius:10px;background:#FFF4D6;color:#7A5A12;font-size:12px;font-weight:700;text-align:center;}
+  .qs-opts{display:grid;gap:14px;margin-top:26px;}
+  @media(min-width:640px){.qs-opts.two{grid-template-columns:1fr 1fr;}}
+  .qs-opt{width:100%;text-align:left;border:1.5px solid #D6D6D6;border-radius:12px;background:#fff;padding:19px 20px;font-size:16px;font-weight:600;color:#1A1A1A;cursor:pointer;transition:border-color .15s,background .15s,transform .1s;}
+  .qs-opt:hover{border-color:var(--pop-deep);background:#FFF8E8;box-shadow:0 6px 18px -10px rgba(217,152,42,.6);}
+  .qs-opt:active{transform:translateY(1px);}
+  .qs-input{width:100%;border:1px solid #DADADA;border-radius:12px;padding:15px 16px;font-size:16px;font-family:inherit;color:#171717;outline:none;background:#fff;transition:border-color .15s,box-shadow .15s;}
+  .qs-input:focus{border-color:var(--pop-deep);box-shadow:0 0 0 4px rgba(245,185,62,.22);}
+  .qs-input.bad{border-color:#DC2626;}
+  .qs-label{display:block;font-size:13px;font-weight:700;color:#444;margin:14px 0 6px;}
+  .qs-err{display:none;margin:6px 0 0;font-size:13px;font-weight:600;color:#DC2626;}
+  .qs-err.show{display:block;}
+  .qs-btn{width:100%;margin-top:18px;border:0;border-radius:999px;padding:16px 20px;font-size:16px;font-weight:900;letter-spacing:.02em;text-transform:uppercase;color:#141414;cursor:pointer;
+    background:linear-gradient(180deg,#F5B93E 0%,#D9982A 100%);box-shadow:0 10px 30px -8px rgba(245,185,62,.7);transition:transform .1s,filter .15s;}
+  .qs-btn:hover{filter:brightness(1.05);}
+  .qs-btn:active{transform:translateY(1px);}
+  .qs-btn:disabled{opacity:.6;cursor:not-allowed;}
+  .qs-fine{margin:12px 0 0;font-size:11px;color:#8A8A8A;text-align:center;line-height:1.5;}
+  .qs-back{display:none;margin:18px auto 0;background:none;border:0;color:#8A8A8A;font-size:13px;font-weight:600;cursor:pointer;padding:6px 10px;}
+  .qs-back.show{display:block;}
+  .qs-back:hover{color:#171717;}
+  .qs-trust{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 16px;margin:24px auto 0;font-size:13px;font-weight:600;color:#3A3A3A;max-width:780px;}
+  @media(min-width:640px){.qs-trust{font-size:15px;gap:10px 26px;margin-top:34px;}}
+  .qs-trust .d{color:var(--pop-deep);}
+  .qs-trust .sep{color:#B8B8B8;display:none;}
+  @media(min-width:640px){.qs-trust .sep{display:inline;}}
+  /* 4 items (Premium Deck Projects added 2026-09-17): stacked on phones, 2x2 under the card on tablet/desktop — no dangling separators */
+  @media(max-width:639px){.qs-trust{flex-direction:column;gap:6px;}}
+  @media(min-width:640px){.qs-trust{display:grid;grid-template-columns:auto auto;justify-content:center;gap:10px 36px;}.qs-trust .sep{display:none;}}
+  .qs-guar{margin:10px auto 0;font-size:13px;color:#5A5A5A;text-align:center;max-width:640px;}
+  .qs-guar a{color:#5A5A5A;}
+
+  /* calendar step */
+  #qs-cal-h{font-size:18px;font-weight:800;text-align:center;}
+  #qs-cal-sub{margin:6px 0 0;text-align:center;font-size:14px;font-weight:700;color:#171717;}
+  #mc-cal{width:100%;height:74vh;min-height:540px;border:0;display:block;background:#fff;border-radius:12px;margin-top:16px;}
+  @media(min-width:1140px){#qs-card.cal-open #mc-cal{height:720px;min-height:700px;}}
+  @media(max-width:640px){#mc-cal{height:80vh;min-height:520px;}}
+  #mc-spin{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:44px 0;text-align:center;}
+  .mc-spinner{width:44px;height:44px;border:4px solid #ECE6DA;border-top-color:#1A1917;border-radius:50%;animation:mcSpin 1s linear infinite;margin-bottom:18px;}
+  @keyframes mcSpin{to{transform:rotate(360deg)}}
+  /* Native slot picker (ICP leads) — same picker + Worker as root / homepage / /book/ */
+  #mcb{display:none;margin-top:14px;}
+  .mcb-state{text-align:center;font-size:14px;color:#7A7870;padding:18px 0 8px;line-height:1.6;}
+  .mcb-state a{color:#B07A1E;font-weight:700;}
+  .mcb-days{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;margin:8px -2px 6px;-webkit-overflow-scrolling:touch;}
+  .mcb-day{flex:1 0 auto;min-width:84px;border:2px solid #ECE6DA;border-radius:11px;background:#fff;padding:9px 10px;text-align:center;cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s;}
+  .mcb-day span{display:block;}
+  .mcb-dow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A7870;}
+  .mcb-date{font-size:15px;font-weight:800;color:#1A1917;}
+  .mcb-day.mcb-sel{border-color:#1A1917;background:#1A1917;}
+  .mcb-day.mcb-sel span{color:#fff;}
+  .mcb-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px;}
+  @media(max-width:400px){.mcb-slots{grid-template-columns:repeat(2,1fr);}}
+  @media(min-width:760px){.mcb-slots{grid-template-columns:repeat(4,1fr);}}
+  .mcb-slot{border:2px solid #ECE6DA;border-radius:10px;background:#fff;padding:12px 6px;font-family:inherit;font-size:14px;font-weight:700;color:#1A1917;cursor:pointer;transition:border-color .15s,background .15s;}
+  .mcb-slot:hover{border-color:#C7963F;background:#FAF6EE;}
+  .mcb-slot.mcb-sel{border-color:#C7963F;background:#C7963F;}
+  .mcb-book{border-top:1px solid #ECE6DA;margin-top:16px;padding-top:16px;text-align:center;}
+  .mcb-when{font-size:14px;color:#7A7870;margin:0 0 12px;}
+  .mcb-when strong{color:#1A1917;}
+  .mcb-err{font-size:13px;font-weight:700;color:#B91C1C;margin:0 0 10px;}
+  .mcb-btn{width:100%;background:#C7963F;color:#1A1917;border:none;border-radius:9px;padding:14px 20px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 18px rgba(199,150,63,.4);transition:background .15s,transform .1s;}
+  .mcb-btn:hover:not(:disabled){background:#AB8032;transform:translateY(-1px);}
+  .mcb-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
+  .mcb-tz{font-size:12px;color:#9A968D;margin:0 0 4px;text-align:center;}
+
+  /* ── LOGO MARQUEE ─────────────────────────────────────── */
+  .logos{border-top:1px solid rgba(38,38,38,.6);border-bottom:1px solid rgba(38,38,38,.6);background:rgba(21,21,21,.4);padding:32px 0;}
+  .logos p{margin:0 0 22px;text-align:center;font-size:11px;font-weight:800;letter-spacing:.25em;text-transform:uppercase;color:var(--subtle);}
+  .marquee{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6% 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6% 94%,transparent);}
+  .marquee-track{display:flex;align-items:center;gap:56px;width:max-content;will-change:transform;animation:logoScroll 34s linear infinite;}
+  .marquee:hover .marquee-track{animation-play-state:paused;}
+  @keyframes logoScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 28px))}}
+  .logo-cell{flex:0 0 auto;height:64px;display:inline-flex;align-items:center;justify-content:center;padding:0 6px;opacity:.6;transition:opacity .18s;}
+  .logo-cell:hover{opacity:.95;}
+  .logo-cell img{max-height:50px;max-width:170px;width:auto;height:auto;object-fit:contain;filter:grayscale(1);}
+  .logo-cell--invert img{filter:grayscale(1) brightness(0) invert(1);}
+  .logo-cell--card img{filter:grayscale(1) invert(1);mix-blend-mode:screen;max-height:56px;max-width:180px;}
+  @media(prefers-reduced-motion:reduce){.marquee-track{animation:none;}}
+
+  /* ── RECENT RESULTS ───────────────────────────────────── */
+  .results{padding:56px 16px;text-align:center;max-width:900px;margin:0 auto;}
+  .faces{display:flex;justify-content:center;margin-top:32px;}
+  .faces img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--bg);margin-left:-12px;}
+  .faces img:first-child{margin-left:0;}
+  .join{margin:16px 0 0;color:var(--muted);font-size:16px;}
+  .join b{color:var(--ink);}
+  .wins{list-style:none;margin:28px 0 0;padding:0;display:grid;gap:12px;text-align:left;}
+  .wins li{border:1px solid var(--border);background:var(--card);border-radius:12px;padding:16px 20px;font-weight:700;font-size:16px;line-height:1.35;}
+  .wins li .z{color:var(--pop);margin-right:8px;}
+  .wins li small{display:block;margin-top:4px;font-size:13px;font-weight:500;color:var(--muted);}
+
+  /* ── VIDEO WALL ───────────────────────────────────────── */
+  /* ── PROOF REEL (featured) ── */
+  .reel{padding:56px 16px 8px;max-width:960px;margin:0 auto;text-align:center;}
+  .reel-kicker{margin:0 0 10px;font-size:13px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;color:var(--pop);}
+  .reel-sub{margin:14px auto 0;max-width:620px;font-size:16px;color:var(--muted);}
+  @media(min-width:640px){.reel{padding-top:72px;}.reel-sub{font-size:18px;}}
+  .reel-frame{margin-top:28px;border-radius:18px;overflow:hidden;border:2px solid var(--gold);box-shadow:0 24px 70px -20px rgba(245,185,62,.45);}
+  .reel-frame .yt .play{width:76px;height:76px;}
+  @media(min-width:640px){.reel-frame .yt .play{width:96px;height:96px;}.reel-frame .yt .play::before{border-left-width:24px;border-top-width:15px;border-bottom-width:15px;margin-left:6px;}}
+  .reel .cta-row{margin-top:32px;}
+  .videos{padding:0 16px 64px;max-width:1120px;margin:0 auto;}
+  .vgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:36px;}
+  @media(min-width:640px){.vgrid{gap:24px;}}
+  .vcard{overflow:hidden;border-radius:16px;border:1px solid var(--border);background:var(--card);}
+  .yt{position:relative;aspect-ratio:16/9;width:100%;background:#000;border:0;padding:0;cursor:pointer;display:block;overflow:hidden;}
+  .yt img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.92;transition:transform .3s,opacity .2s;}
+  .yt:hover img{transform:scale(1.03);opacity:1;}
+  .yt .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:52px;height:52px;border-radius:50%;background:linear-gradient(180deg,#C7963F,#AB8032);box-shadow:0 10px 30px -6px rgba(199,150,63,.7);display:flex;align-items:center;justify-content:center;}
+  @media(min-width:640px){.yt .play{width:64px;height:64px;}}
+  .yt .play::before{content:"";width:0;height:0;border-left:16px solid #0D0D0D;border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px;}
+  .yt iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .vt{padding:10px 12px 12px;font-size:12px;font-weight:800;line-height:1.3;letter-spacing:-0.01em;}
+  @media(min-width:640px){.vt{font-size:14px;padding:12px 16px 14px;}}
+  .vt small{display:block;margin-top:3px;font-size:11px;font-weight:500;color:var(--muted);}
+  .cta-row{margin-top:48px;text-align:center;}
+  .cta{display:inline-block;border-radius:999px;padding:18px 34px;font-size:17px;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:#141414;text-decoration:none;
+    background:linear-gradient(180deg,#F5B93E 0%,#D9982A 100%);box-shadow:0 12px 34px -8px rgba(245,185,62,.7);transition:transform .1s,filter .15s;}
+  .cta:hover{filter:brightness(1.06);}
+  .cta:active{transform:translateY(1px);}
+
+  /* ── RECEIPTS ─────────────────────────────────────────── */
+  .receipts{padding:0 16px 72px;max-width:1120px;margin:0 auto;}
+  .receipts .kicker{margin:0;text-align:center;font-size:14px;font-weight:700;font-style:italic;color:var(--pop);}
+  .receipts .h2{margin-top:8px;}
+  .masonry{column-count:1;column-gap:16px;margin-top:36px;}
+  @media(min-width:640px){.masonry{column-count:2;}}
+  @media(min-width:1024px){.masonry{column-count:3;}}
+  .masonry img{width:100%;border-radius:12px;border:1px solid var(--border);background:var(--card);margin-bottom:16px;break-inside:avoid;}
+
+  /* ── THE GUARANTEE (closing section, mirrors root #guarantees) ── */
+  .guar{border-top:1px solid rgba(38,38,38,.6);background:linear-gradient(180deg,#101010 0%,var(--bg) 100%);}
+  .guar-in{max-width:768px;margin:0 auto;padding:64px 16px 72px;text-align:center;}
+  @media(min-width:640px){.guar-in{padding:80px 20px 88px;}}
+  .guar-icon{width:56px;height:56px;margin:0 auto 24px;border-radius:50%;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;box-shadow:0 0 40px rgba(245,185,62,.18);}
+  .guar-icon svg{width:24px;height:24px;color:var(--pop);}
+  .guar .h2 .gold{color:var(--pop);}
+  .guar-lede{max-width:512px;margin:16px auto 36px;font-size:16px;color:var(--muted);}
+  .guar-grid{display:grid;grid-template-columns:1fr;gap:16px;text-align:left;margin-bottom:36px;}
+  @media(min-width:640px){.guar-grid{grid-template-columns:1fr 1fr;}}
+  .guar-card{border-radius:12px;background:var(--card);border:1px solid var(--border);padding:24px;}
+  .guar-k{margin:0 0 8px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--pop);}
+  .guar-t{margin:0 0 8px;font-weight:700;font-size:16px;color:var(--ink);}
+  .guar-b{margin:0;font-size:13.5px;line-height:1.65;color:var(--muted);}
+  .guar-b strong{color:var(--ink);font-weight:600;}
+  .cta.cta-2{display:inline-flex;flex-direction:column;align-items:center;gap:2px;}
+  .cta.cta-2 small{font-size:13px;font-weight:600;letter-spacing:0;text-transform:none;opacity:.85;}
+
+  /* ── FOOTER ───────────────────────────────────────────── */
+  footer{border-top:1px solid rgba(38,38,38,.6);}
+  .legal{max-width:760px;margin:0 auto;padding:36px 16px;font-size:12px;line-height:1.6;color:var(--subtle);}
+  .legal .lk{font-size:10px;font-weight:800;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 16px;}
+  .legal p{margin:0 0 12px;}
+  .legal b{color:var(--muted);font-weight:600;}
+  .legal a{color:var(--gold);text-decoration:underline;text-underline-offset:2px;}
+  .legal .copy{margin-top:24px;padding-top:24px;border-top:1px solid rgba(38,38,38,.6);font-size:11px;text-align:center;}
+  .legal .copy a{color:var(--subtle);text-decoration:none;}
+  .legal .copy:first-child{margin-top:0;padding-top:0;border-top:0;}
+
+  body.mc-lock{overflow:hidden;}
+
+  /* ── /25/ HERO PROOF REEL (replaces the inline survey card, Spencer 2026-10-06) ── */
+  .hero-proof{max-width:760px;margin:0 auto;text-align:center;}
+  .hero-proof .h2{font-size:23px;}
+  @media(min-width:640px){.hero-proof .h2{font-size:31px;}}
+  .hero-proof .reel-sub{font-size:15px;margin-top:10px;}
+  @media(min-width:640px){.hero-proof .reel-sub{font-size:17px;}}
+  .hero-proof .reel-frame{margin-top:18px;}
+  .hero-proof .cta-row{margin-top:20px;}
+  @media(min-width:640px){.hero-proof .reel-frame{margin-top:22px;}.hero-proof .cta-row{margin-top:26px;}}
+  /* Narrow the reel on wide screens so the CTA under it stays near the fold instead of
+     being pushed a screen and a half down by a 760px-wide 16:9 frame. */
+  @media(min-width:900px){.hero-proof{max-width:620px;}}
+
+  /* ── /25/ SURVEY MODAL (mechanics from the v8 root #mc-overlay, tag funnel-v8-root-2026-09-14) ── */
+  #qs-overlay{position:fixed;inset:0;z-index:10000;display:none;align-items:flex-start;justify-content:center;
+    background:rgba(0,0,0,.94);padding:22px 14px 36px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+  #qs-overlay.open{display:flex;}
+  #qs-modal{position:relative;width:100%;max-width:1080px;margin:auto;animation:qsIn .3s cubic-bezier(.16,1,.3,1);}
+  @keyframes qsIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  #qs-modal #qs-card{margin:0 auto;padding-top:54px;}
+  @media(min-width:640px){#qs-modal #qs-card{padding-top:58px;}}
+  #qs-close{position:absolute;top:13px;right:13px;width:38px;height:38px;border:none;border-radius:50%;
+    background:#F0ECE4;color:#6B655C;font-size:16px;line-height:1;cursor:pointer;display:none;
+    align-items:center;justify-content:center;z-index:3;font-family:inherit;}
+  #qs-close:hover{background:#E6E0D5;}
+  #qs-overlay.open #qs-close{display:flex;}
+</style>
+<script src="/journey.js" defer></script>
+</head>
+<body>
+
+<main>
+
+<!-- ═══════════════════════ HERO + INLINE SURVEY ═══════════════════════ -->
+<section class="hero">
+  <a class="brand" href="https://morejobcalls.com" aria-label="MoreJobCalls.com">
+    <span>MORE<b>JOB</b>CALLS<i>.com</i></span>
+  </a>
+  <p class="eyebrow">For Established Deck Companies</p>
+  <h1 class="h1"><span class="gold h1-key">25 Estimates In 25 Days</span> Or A Minimum Of <span class="gold">$50,000 In Booked Jobs</span></h1>
+  <p class="h1-lede">Month to month. No long-term contract. Seven days to launch.</p>
+  <p class="h1-sub"><span class="gb"><svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>If We Miss It, We Work For Free Forever Until We Do</span></p>
+
+  <div class="survey-wrap" id="apply">
+    <!-- /25/ HERO PROOF (Spencer 2026-10-06): the 12-builders reel takes the slot the inline survey used to
+         hold. The survey itself moved into #qs-overlay and opens on the CTA below. The reel's original
+         standalone section further down the page is REMOVED so the same video never plays twice in one scroll.
+         The H2 title over the video was dropped 2026-10-07 (Spencer): the custom thumbnail carries that message.
+         data-thumb keeps our own thumbnail when the facade is rebuilt after another video is played. -->
+    <div class="hero-proof">
+      <div class="reel-frame">
+        <button class="yt" type="button" data-id="HRYuMJmhpmY" data-reel data-thumb="/25/thumb-b.jpg" aria-label="Play: 12 deck builders who didn't believe it either"><img src="/25/thumb-b.jpg" alt="Three deck builders on the recorded call" loading="eager"><span class="play"></span></button>
+      </div>
+      <div class="cta-row"><a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Start My 25 Days</span><small>Check if your zip is open &rarr;</small></a></div>
+    </div>
+
+    <div class="qs-trust" aria-label="What you get">
+      <span><span class="d">&#9670;</span> Month To Month. No Long-Term Contract.</span><span class="sep">|</span>
+      <span><span class="d">&#9670;</span> Exclusive. Never Shared.</span><span class="sep">|</span>
+      <span><span class="d">&#9670;</span> Ready-To-Buy Homeowners</span><span class="sep">|</span>
+      <span><span class="d">&#9670;</span> 7 Days To Launch</span>
+    </div>
+  </div>
+</section>
+
+
+
+<!-- ═══════════════════════ NO LONG-TERM CONTRACTS (the /25/ spine — the ad's whole angle) ═══════════════════════ -->
+<section class="guar" id="no-contract">
+  <div class="guar-in">
+    <h2 class="h2">Anything Longer Than A Month Is A <span class="gold">Long-Term Contract</span></h2>
+    <p class="guar-lede">We talked to a deck builder last week who signed a three year deal. He is not happy with what he is getting, and he cannot get out of it.</p>
+    <div class="guar-grid">
+      <div class="guar-card">
+        <p class="guar-k">Their Pitch</p>
+        <p class="guar-t">&ldquo;If you're serious about growing, you've gotta commit.&rdquo;</p>
+        <p class="guar-b">So ask them this: of course I'm serious, but <strong>what happens if you don't get results?</strong> Watch how fast that room gets quiet. Because if the results don't come, you're still paying.</p>
+      </div>
+      <div class="guar-card">
+        <p class="guar-k">How We Do It</p>
+        <p class="guar-t">Month To Month. 7 Days To Launch.</p>
+        <p class="guar-b">You wouldn't get married before the first date. So why commit a year of your money before you've seen it work? <strong>We prove it first. You decide again every month.</strong></p>
+      </div>
+    </div>
+    <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>See If Your Market Is Open</span><small>Month To Month &rarr;</small></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════ LOGO MARQUEE ═══════════════════════ -->
+<section class="logos" aria-label="Clients">
+  <p>Trusted By Deck Builders Across The Country</p>
+  <p class="logos-line" style="margin:0 auto;padding:0 16px;max-width:760px;text-align:center;font-size:15px;font-weight:600;letter-spacing:normal;text-transform:none;line-height:1.5;opacity:.85;">Deck builders, fence companies, patio cover and roofing contractors, from Oregon to Massachusetts.</p>
+</section>
+
+<!-- ═══════════════════════ RECENT RESULTS ═══════════════════════ -->
+<section class="results">
+  <h2 class="h2">Recent Results</h2>
+  <div class="faces" aria-hidden="true">
+    <img src="/proof-faces/billy-s.jpg" alt="" loading="lazy">
+    <img src="/proof-faces/brian-w.jpg" alt="" loading="lazy">
+    <img src="/proof-faces/justin-w.jpg" alt="" loading="lazy">
+    <img src="/proof-faces/jacob-w.jpg" alt="" loading="lazy">
+  </div>
+  <p class="join">Join <b>100+ contractors</b> who aren't worried about when the next job is coming.</p>
+  <ul class="wins">
+    <li><span class="z">&#9889;</span>Billy — $196,383 in signed contracts in his first week<small>June 2026 · Deck &amp; patio builder · Greenville, SC</small></li>
+    <li><span class="z">&#9889;</span>Chris — $320K in deck jobs in his first 60 days, on $100/day<small>Summer 2026 · Custom deck &amp; home builder · Gulf Shores, AL</small></li>
+    <li><span class="z">&#9889;</span>Jacob — $480K closed in 21 days, crews booked into September<small>March 2026 · Deck builder · Pennsylvania</small></li>
+    <li><span class="z">&#9889;</span>Brian — 25 deck jobs in 6 weeks after "calling our bluff"<small>April 2026 · Fence &amp; deck company · Bend, OR</small></li>
+    <li><span class="z">&#9889;</span>Mike — from 3 appointments a week to 11 a day<small>General contractor · South Shore, MA</small></li>
+  </ul>
+</section>
+
+<!-- ═══════════════════════ VIDEO WALL ═══════════════════════ -->
+<section class="videos" id="proof">
+  <h2 class="h2">What Our Clients Say</h2>
+  <div class="vgrid">
+    <div class="vcard"><button class="yt" type="button" data-id="TvFv_EIM-MI" aria-label="Play: Billy S."><img src="https://i.ytimg.com/vi/TvFv_EIM-MI/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$300K+ In Deck Jobs In 17 Days On $1,657 Of Ads<small>Billy S. · Deck &amp; Patio Builder</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="5kHvRM_2wYE" aria-label="Play: Chris W."><img src="https://i.ytimg.com/vi/5kHvRM_2wYE/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$320K In Deck Jobs In 60 Days On $100/Day<small>Chris W. · Custom Deck &amp; Home Builder</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="4TP1sTRASoA" aria-label="Play: Brian W."><img src="https://i.ytimg.com/vi/4TP1sTRASoA/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">"I Wanted To Call Your Bluff" — 25 Deck Jobs In 6 Weeks<small>Brian W. · Fence &amp; Deck Company</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="YJQxX5ZQ3aI" aria-label="Play: Justin W."><img src="https://i.ytimg.com/vi/YJQxX5ZQ3aI/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$1.2M Closed In Jan &amp; Feb After 6 Agencies Failed<small>Justin W. · Deck &amp; Patio Builder</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="ZT8C3xoQSLc" aria-label="Play: Mike B."><img src="https://i.ytimg.com/vi/ZT8C3xoQSLc/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">From 3 Appointments A Week To 11 A Day<small>Mike B. · General Contractor</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="Xt4TVn4zP7s" aria-label="Play: Jacob W."><img src="https://i.ytimg.com/vi/Xt4TVn4zP7s/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$480K Closed In 21 Days — Doubled To $1M In 4 Months<small>Jacob W. · Deck Builder</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="-q18xO92akA" aria-label="Play: Jason F."><img src="https://i.ytimg.com/vi/-q18xO92akA/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">Biggest Month In 15 Years — A $500K Month On $100/Day<small>Jason F. · Deck Builder</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="djsZ_YNn7wY" aria-label="Play: Ricardo C."><img src="https://i.ytimg.com/vi/djsZ_YNn7wY/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$105K Closed In The First 7 Days On Under $1,000<small>Ricardo C. · Concrete &amp; Deck Contractor</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="woPfBuocx-M" aria-label="Play: Billy G."><img src="https://i.ytimg.com/vi/woPfBuocx-M/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">"I Rolled The Dice" — $50K Signed In Month One<small>Billy G. · Home Improvement Contractor</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="03CDvt0xR5Y" aria-label="Play: Derek L."><img src="https://i.ytimg.com/vi/03CDvt0xR5Y/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$46,000 In Deck Jobs In 30 Days On $1,295 Of Ads<small>Derek L. · Outdoor Living Contractor</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="ERQ84Dgz-Ow" aria-label="Play: Chip P."><img src="https://i.ytimg.com/vi/ERQ84Dgz-Ow/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">$200K From 4 Appointments In 21 Days<small>Chip P. · Deck Builder</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="FKa_Zsji0bE" aria-label="Play: Jason B."><img src="https://i.ytimg.com/vi/FKa_Zsji0bE/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">From 1 Crew To 5 In One Season — $100K In Month One<small>Jason B. · Deck Builder</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="vxqYn1E86LA" aria-label="Play: Mike H."><img src="https://i.ytimg.com/vi/vxqYn1E86LA/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">52 Appointments In The First 10 Days On $1,500<small>Mike H. · Deck Builder</small></div></div>
+    <div class="vcard"><button class="yt" type="button" data-id="kK3oXzLb4-0" aria-label="Play: Eric E."><img src="https://i.ytimg.com/vi/kK3oXzLb4-0/hqdefault.jpg" alt="" loading="lazy"><span class="play"></span></button><div class="vt">65–70 Exclusive Appointments Every Week<small>Eric E. · Patio Cover Company</small></div></div>
+  </div>
+  <div class="cta-row"><a class="cta" href="#qs-card" data-scroll-survey>Check Your Market</a></div>
+</section>
+
+<!-- ═══════════════════════ THE RECEIPTS ═══════════════════════ -->
+<section class="receipts">
+  <p class="kicker">Every screenshot below is straight from a client's text thread or dashboard. Unedited.</p>
+  <h2 class="h2">Unfiltered Wins From Our Deck Builder Clients</h2>
+  <div class="masonry">
+    <img src="/wins/win-justin-w-492k.png" alt="Text thread: Justin W., $492K" loading="lazy">
+    <img src="/wins/win-mike-b-100k-deck-appt-2026-06-30.png" alt="Text thread: Mike B., ~$100K deck from one appointment" loading="lazy">
+    <img src="/wins/win-ricardo-c-55k.png" alt="Text thread: Ricardo C., $55K" loading="lazy">
+    <img src="/wins/mike-b-100k.png" alt="Dashboard: Mike B., general contractor" loading="lazy">
+    <img src="/wins/win-jessica-m-booked-3-days.png" alt="Text thread: Jessica M., booked in 3 days" loading="lazy">
+    <img src="/wins/chip-p.jpg" alt="Text thread: Chip P." loading="lazy">
+    <img src="/wins/win-antonio-c-80k-deck-2026-05-21.png" alt="Text thread: Antonio C., $80K deck" loading="lazy">
+    <img src="/wins/win-john-m-8500-job.png" alt="Text thread: John M., $8,500 job" loading="lazy">
+    <img src="/wins/win-roofer-12of20-roofs-from-marketing-2026-06-19.png" alt="Text thread: roofing contractor, 12 of 20 jobs from marketing" loading="lazy">
+  </div>
+  <div class="cta-row"><a class="cta" href="#qs-card" data-scroll-survey>Get My Appointments</a></div>
+</section>
+
+<!-- ═══════════════════════ WHAT YOU GET ON THIS CALL (the ad's spoken CTA promise) ═══════════════════════ -->
+<section class="guar" id="on-the-call">
+  <div class="guar-in">
+    <h2 class="h2">What You Get On <span class="gold">This Call</span></h2>
+    <p class="guar-lede">No pitch deck, no three-call runaround. One 45 minute call and you leave knowing everything you need to decide.</p>
+    <div class="guar-grid">
+      <div class="guar-card">
+        <p class="guar-k">01</p>
+        <p class="guar-t">Our Pricing</p>
+        <p class="guar-b">A flat monthly fee, never per appointment. <strong>You get the number on the call</strong>, not after three follow-ups and a proposal.</p>
+      </div>
+      <div class="guar-card">
+        <p class="guar-k">02</p>
+        <p class="guar-t">How The System Works</p>
+        <p class="guar-b">The ads, the pages, the follow-up, the booking. Every stage on screen, so you know exactly what we do with your money.</p>
+      </div>
+      <div class="guar-card" style="grid-column:1/-1;">
+        <p class="guar-k">03</p>
+        <p class="guar-t">Builders You Can Call</p>
+        <p class="guar-b">Phone numbers for deck builders running this right now. <strong>Call them and ask whatever you want.</strong> We are not on the call.</p>
+      </div>
+    </div>
+    <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Book The Call</span><small>45 Minutes &rarr;</small></a>
+  </div>
+</section>
+
+<!-- ═══════════════════════ THE GUARANTEE (closing — copy verbatim from root #guarantees) ═══════════════════════ -->
+<section class="guar" id="guarantee">
+  <div class="guar-in">
+    <div class="guar-icon">
+      <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h2 class="h2">The Guarantee. <span class="gold">Zero Risk.</span></h2>
+    <p class="guar-lede">We know you've probably been burned before. So we built the guarantee around that — not around us feeling safe.</p>
+    <div class="guar-grid">
+      <div class="guar-card">
+        <p class="guar-k">Day 25</p>
+        <p class="guar-t">25 Estimates In 25 Days</p>
+        <p class="guar-b">25 exclusive on-site estimate opportunities with ready-to-buy homeowners in your market, or a minimum of <strong>$50,000 in booked jobs.</strong> Month to month, so you are never locked in.</p>
+      </div>
+      <div class="guar-card">
+        <p class="guar-k">If We Miss</p>
+        <p class="guar-t" id="guar2-t">We Work For Free Forever Until We Do</p>
+        <p class="guar-b" id="guar2-b">No new fee. No renegotiation. No &ldquo;well, the market changed.&rdquo; We keep running your ads, your pages and your follow-up at our own cost until you get there.</p>
+      </div>
+    </div>
+    <div class="guar-terms" id="guar-terms">
+      <p style="margin:0 0 6px;"><strong>What we ask of you (so the guarantee holds):</strong></p>
+      <ul class="guar-list">
+        <li>Respond to new estimate requests within 24 hours.</li>
+        <li>Show up to your onboarding, strategy, and review meetings.</li>
+        <li>Keep us connected to your ad account and pages, and don’t change the campaigns we run.</li>
+        <li>Let us run the full deck job system: the ads, pages, and follow-up we’ve tested.</li>
+      </ul>
+      <p style="margin:8px 0 0;" id="guar-scope">There is no long-term contract to get out of. You pay month to month, and ad spend goes from your card straight to Meta, so it is never ours to hold.</p>
+      <p style="margin:8px 0 0;"><a href="/25/terms/" target="_blank" rel="noopener">Full terms</a></p>
+    </div>
+    <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Get More Deck Jobs</span><small>Claim Your Zip Code &rarr;</small></a>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ /25/ SURVEY MODAL — the ROOT v9 survey card, lifted verbatim out of the hero. Opened by every page CTA. ═══ -->
+<div id="qs-overlay" role="dialog" aria-modal="true" aria-hidden="true" aria-label="See if your market is available">
+  <div id="qs-modal">
+    <div id="qs-card" role="form" aria-label="Check if your market is available">
+      <button id="qs-close" type="button" aria-label="Close">&#10005;</button>
+      <h2 class="qs-title">See If Your Market Is <span class="gold">Available</span></h2>
+      <p class="qs-sub">Month to month, and we only work with 1 deck builder per market. Answer a few quick questions below.</p>
+
+      <div class="qs-prog" id="qs-prog">
+                <div class="qs-bar"><div class="qs-bar-fill" id="qs-bar-fill"></div></div>
+      </div>
+
+      <!-- Q1 · current appts/week (GHL field contact.how_many_sales_appointments_are_you_currently_running_per_week, created 2026-09-14) -->
+      <div class="qs-step active" data-step="1">
+        <h3 class="qs-q">How many sales appointments are you CURRENTLY running per week?</h3>
+        <div class="qs-opts two">
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="0 - 5 appointments per week">0–5 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="5 - 10 appointments per week">5–10 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="10 - 20 appointments per week">10–20 per week</button>
+          <button class="qs-opt" type="button" data-field="current_appts_per_week" data-value="20+ appointments per week">20+ per week</button>
+        </div>
+      </div>
+
+      <!-- Q2 · MORE appts/week (GHL field CGD5LHAY2V7wQz2Ap5ZD, created 2026-09-14) -->
+      <div class="qs-step" data-step="2">
+        <p class="qs-pre">Every appointment we book is exclusive to you, so we only book what your team can actually run.</p>
+        <h3 class="qs-q">How many MORE appointments can you handle per week?</h3>
+        <div class="qs-opts two">
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="5 - 10 more per week">5–10 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="10 - 20 more per week">10–20 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="20 - 50 more per week">20–50 more</button>
+          <button class="qs-opt" type="button" data-field="more_appts_per_week" data-value="50+ more per week">50+ more</button>
+        </div>
+      </div>
+
+      <!-- Q3 · service-area ZIP (added 2026-09-15). Single numeric input, auto-advances at 5 digits so
+           it keeps the tap rhythm of the surrounding questions. Also feeds Meta's zip match key —
+           both CAPI steps in "1. New Lead" already forward zip_sha256, the LP just never sent it. -->
+      <div class="qs-step" data-step="3">
+        <p class="qs-pre">Appointments are exclusive by territory, so we check what's open in your area before the call.</p>
+        <h3 class="qs-q">What ZIP do you want more deck jobs around?</h3>
+        <div style="margin-top:6px;">
+          <label class="qs-label" for="qs-zip">ZIP code</label>
+          <input id="qs-zip" class="qs-input" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="5" placeholder="e.g. 75201">
+          <p id="qs-zip-err" class="qs-err">Please enter a valid 5-digit ZIP code.</p>
+          <button class="qs-btn" type="button" data-next>Continue &rarr;</button>
+        </div>
+      </div>
+
+      <!-- Q4 · revenue (existing field + values — ICP gate = ≥ $500K) -->
+      <div class="qs-step" data-step="4">
+        <p class="qs-pre">This helps us size the plan and ad budget to your business. Rough range is fine. No wrong answers.</p>
+        <h3 class="qs-q">How much revenue has your business generated within the past 12 months?</h3>
+        <div class="qs-opts two">
+          <button class="qs-opt" type="button" data-field="revenue" data-value="0_100k">$0–$100K</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="100_200k">$100K–$200K</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="200_300k">$200K–$300K</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="300_500k">$300K–$500K</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="500k_1m">$500K–$1M</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="1m_3m">$1M–$3M</button>
+          <button class="qs-opt" type="button" data-field="revenue" data-value="3m_plus">$3M+</button>
+        </div>
+      </div>
+
+      <!-- Q5 · contact + business website (LAST) -->
+      <div class="qs-step" data-step="5">
+        <p class="qs-pre">We keep strategy-session spots limited. Grab yours before they fill up this week.</p>
+        <h3 class="qs-q">Where should we send your call details?</h3>
+        <div style="margin-top:6px;">
+          <label class="qs-label" for="qs-first">First name</label>
+          <input id="qs-first" class="qs-input" type="text" autocomplete="given-name" autocapitalize="words" placeholder="First name">
+          <p id="qs-first-err" class="qs-err">Please enter your first name.</p>
+          <label class="qs-label" for="qs-last">Last name</label>
+          <input id="qs-last" class="qs-input" type="text" autocomplete="family-name" autocapitalize="words" placeholder="Last name">
+          <p id="qs-last-err" class="qs-err">Please enter your last name.</p>
+          <label class="qs-label" for="qs-site">Business website</label>
+          <input id="qs-site" class="qs-input" type="text" inputmode="url" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="url" placeholder="e.g. yourcompany.com">
+          <p id="qs-site-err" class="qs-err">Enter your website, or tap “I don’t have one”.</p>
+          <p class="qs-fine" style="margin:-2px 0 10px;">A Facebook page works too. <a href="#" id="qs-no-site">I don’t have one</a></p>
+          <label class="qs-label" for="qs-phone">Phone</label>
+          <input id="qs-phone" class="qs-input" type="tel" inputmode="numeric" autocomplete="tel" maxlength="14" placeholder="(555) 555-5555">
+          <p id="qs-phone-err" class="qs-err">Please enter a valid 10-digit phone number.</p>
+          <label class="qs-label" for="qs-email">Email</label>
+          <input id="qs-email" class="qs-input" type="email" autocomplete="email" autocapitalize="none" placeholder="you@company.com">
+          <p id="qs-email-err" class="qs-err">Please enter a valid email address.</p>
+          <button class="qs-btn" type="button" data-next-final>Book My Call &rarr;</button>
+          <p class="qs-fine">By continuing, you agree to receive SMS/text reminders about your call. Standard rates may apply. Reply STOP to opt out.</p>
+        </div>
+      </div>
+
+      <!-- Step 6 · calendar (in place, no page change) -->
+      <div class="qs-step" data-step="6">
+        <h3 id="qs-cal-h" class="qs-q">Pick a time that works for you</h3>
+        <p id="qs-cal-sub">25 Estimates in 25 Days, or a Minimum of $50,000 in Booked Jobs. Month to Month.</p>
+        <div id="mc-spin"><div class="mc-spinner"></div><p style="font-weight:700;color:#1A1917;margin:0;">Checking your market availability…</p></div>
+        <div id="mc-cal-wrap" style="display:none;"><iframe id="mc-cal" src="" title="Book your 25-in-25 Strategy Session" scrolling="yes" allow="payment"></iframe><script src="https://api.seasonproofgrowth.com/js/form_embed.js" type="text/javascript"></script></div>
+        <!-- Native slot picker (ICP leads only). Non-ICP keeps the GHL widget above (its calendar collects the deposit in-widget). -->
+        <div id="mcb">
+          <p class="mcb-tz">45 minutes on Google Meet &middot; times shown in <span id="mcb-tz">your time zone</span></p>
+          <div id="mcb-loading" class="mcb-state">Checking open times&hellip;</div>
+          <div id="mcb-live" style="display:none;">
+            <div class="mcb-days" id="mcb-days"></div>
+            <div class="mcb-slots" id="mcb-slots"></div>
+            <div class="mcb-book" id="mcb-book" style="display:none;">
+              <p class="mcb-when">Locking in <strong id="mcb-when"></strong></p>
+              <p class="mcb-err" id="mcb-err" style="display:none;"></p>
+              <button type="button" class="mcb-btn" id="mcb-btn">Lock In My Call &rarr;</button>
+            </div>
+          </div>
+          <div id="mcb-empty" class="mcb-state" style="display:none;">
+            <p><strong>The next few days are spoken for.</strong></p>
+            <p>Text us at <a href="sms:+15012363920">(501) 236-3920</a> and we'll find you a time.</p>
+          </div>
+          <div id="mcb-error" class="mcb-state" style="display:none;">
+            <p><strong>Couldn't load the calendar.</strong></p>
+            <p><a href="#" id="mcb-retry">Try again</a> or text us at <a href="sms:+15012363920">(501) 236-3920</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <button id="qs-back" class="qs-back" type="button">&#8249; Back</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ FOOTER / LEGAL ═══════════════════════ -->
+<footer id="legal">
+  <div class="legal">
+    <p class="copy">© 2026 MoreJobCalls.com LLC. All rights reserved. · <a href="/privacy/">Privacy Policy</a> · <a href="/25/terms/">Terms of Service</a></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var card=document.getElementById('qs-card'); if(!card) return;
+  var steps=card.querySelectorAll('.qs-step');
+  var barFill=document.getElementById('qs-bar-fill'), stepLabel=document.getElementById('qs-step-label'), pctEl=null;
+  var progWrap=document.getElementById('qs-prog'), backBtn=document.getElementById('qs-back');
+  var TOTAL_Q=5, PROG={1:0,2:60,3:80,4:90,5:98,6:100}; // Q3 = service-area ZIP (added 2026-09-15). Front-loaded progress + no "Step X of Y" label (Spencer 2026-09-17); booking step = 100%
+  var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
+  if(window.MJC_QA){ try{ var qa=document.createElement('p'); qa.className='qs-qa'; qa.textContent='QA mode: nothing is sent to GHL, Meta, or the calendar.'; card.insertBefore(qa, card.firstChild); }catch(e){} }
+
+  // ── Attribution (same localStorage key as root so first-touch survives across variants) ──
+  var attribution=(function(){
+    try{var raw=localStorage.getItem('dl_attribution'); if(raw){var p=JSON.parse(raw); if(p&&p._ts) return p;}}catch(e){}
+    var out={}, params=new URLSearchParams(location.search);
+    ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid','gclid'].forEach(function(k){var v=params.get(k); if(v) out[k]=v;});
+    out.landing_url=location.href; out.referrer=document.referrer||''; out._ts=Date.now();
+    try{localStorage.setItem('dl_attribution',JSON.stringify(out));}catch(e){}
+    return out;
+  })();
+  // ── /25/ PAID STAMP ── this page is a PAID Meta ad destination. Fill BLANKS only, so a real ?utm_source=
+  // (or a stored first-touch) always wins; fbclid/gclid are never touched.
+  // Links can carry ?ad=<ref> → utm_content so the CRM shows WHICH creative produced the lead.
+  (function stampPaid(){
+    try{
+      var qp=new URLSearchParams(location.search), ref=(qp.get('ad')||'').replace(/[^A-Za-z0-9_-]/g,'').slice(0,40), changed=false;
+      if(!attribution.utm_source){ attribution.utm_source='facebook'; attribution.utm_medium=attribution.utm_medium||'paid'; attribution.utm_campaign=attribution.utm_campaign||'25-in-25'; changed=true; }
+      if(ref && !attribution.utm_content){ attribution.utm_content=ref; changed=true; }
+      if(changed){ try{ localStorage.setItem('dl_attribution',JSON.stringify(attribution)); }catch(e){} }
+    }catch(e){}
+  })();
+
+  // ── Meta gate (Spencer 2026-09-30): Meta only hears about this lead if they clicked one of our Meta ads in the
+  // 7 days before applying. journey.js keeps that as a 7-day cookie. If journey.js didn't load, fall back to THIS
+  // page load's own URL only — never the stored first touch above, which never expires.
+  function metaAdClick(){
+    try{ if(window.mjcJourney&&mjcJourney.metaAdClick) return mjcJourney.metaAdClick(); }catch(e){}
+    var q=new URLSearchParams(location.search), med=(q.get('utm_medium')||'').toLowerCase(), src=(q.get('utm_source')||'').toLowerCase();
+    return /paid/.test(med)&&(/^(fb|ig|facebook|instagram|meta)$/.test(src)||!!q.get('fbclid'));
+  }
+
+  var CAL_ICP='https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo';
+  var CAL_NON_ICP='https://api.seasonproofgrowth.com/widget/booking/lNcyqnixLoZa2p3S5P8I';
+
+  // ── Funnel step instrumentation → mjc-funnel-events worker (Supabase funnel_events). Fire-and-forget.
+  // idx (v9 capacity-4q, 2026-09-14): 0 landed · 1 survey_open (first answer) · 2 current_appts · 3 more_appts · 5 revenue · 6 contact · 7 submit
+  var DL_SID=(function(){try{var s=sessionStorage.getItem('dl_sid'); if(!s){s=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'s'+Date.now()+Math.random().toString(36).slice(2,10); sessionStorage.setItem('dl_sid',s);} return s;}catch(e){return 's'+Date.now();}})();
+  var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
+  var OPT_IDX={current_appts_per_week:2,more_appts_per_week:3,zip:4,revenue:5};
+  function dlTrack(step,idx,extra){
+    try{ if(window.mjcJourney && step!=='submit' && step!=='landed') mjcJourney.track(step==='survey_open'?'survey_open':'survey_step',{label:step,value:(extra&&extra.value)||'',meta:{idx:idx}}); }catch(e){} // Journey Ledger (journey.js marks ?qa=1 sessions as test)
+    if(window.MJC_QA) return; // QA mode: never write funnel_events
+    if(/[?&]test_event_code=/.test(location.search)) return;
+    try{
+      var p={sid:DL_SID,step:step,idx:idx,utm_source:attribution.utm_source||'',utm_content:attribution.utm_content||'',utm_campaign:attribution.utm_campaign||'',path:location.pathname,ref:attribution.referrer||''};
+      if(extra) for(var k in extra) p[k]=extra[k];
+      var body=JSON.stringify(p);
+      if(window.fetch){ fetch(DL_TRACK_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body:body,keepalive:true,mode:'cors'}).catch(function(){ if(navigator.sendBeacon) navigator.sendBeacon(DL_TRACK_URL,new Blob([body],{type:'text/plain'})); }); }
+      else if(navigator.sendBeacon){ navigator.sendBeacon(DL_TRACK_URL,new Blob([body],{type:'text/plain'})); }
+    }catch(e){}
+  }
+  dlTrack('landed',0);
+  var surveyOpened=false;
+  function markOpen(){ if(surveyOpened) return; surveyOpened=true; dlTrack('survey_open',1); }
+
+  function isICP(d){ return d.revenue==='500k_1m'||d.revenue==='1m_3m'||d.revenue==='3m_plus'; } // ICP = revenue ≥ $500K/yr (2026-08-22 rule)
+  async function sha256Hex(t){ if(!t) return ''; var b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(t)); return Array.from(new Uint8Array(b)).map(function(x){return x.toString(16).padStart(2,'0');}).join(''); }
+
+  function show(n){
+    current=n;
+    steps.forEach(function(s){s.classList.remove('active');});
+    var t=card.querySelector('.qs-step[data-step="'+n+'"]'); if(t) t.classList.add('active');
+    barFill.style.width=(PROG[n]||0)+'%';
+    progWrap.style.display='';
+    backBtn.classList.toggle('show', n>1 && n<TOTAL_Q+1);
+    card.classList.toggle('cal-open', n===TOTAL_Q+1 && !icp);
+    setTimeout(function(){var f=t&&t.querySelector('input'); if(f&&n>1) try{f.focus({preventScroll:true});}catch(e){}},60);
+    if(n>1){ try{ var r=card.getBoundingClientRect(); if(r.top<0) card.scrollIntoView({behavior:'smooth',block:'start'}); }catch(e){} }
+  }
+  backBtn.addEventListener('click',function(){ if(current>1&&current<TOTAL_Q+1) show(current-1); });
+
+  card.querySelectorAll('.qs-opt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      markOpen();
+      formData[btn.dataset.field]=btn.dataset.value;
+      dlTrack('q_'+btn.dataset.field, OPT_IDX[btn.dataset.field]||current, {field:btn.dataset.field, value:btn.dataset.value});
+      if(btn.dataset.field==='revenue') preloadCalendar(); // ICP now determinable → warm the right calendar
+      if(current<TOTAL_Q) show(current+1);
+    });
+  });
+
+  // Q3 service-area ZIP. Auto-advances at 5 digits so it feels like the tap questions around it.
+  var zipEl=document.getElementById('qs-zip'), zipErr=document.getElementById('qs-zip-err');
+  function zipOk(){ return /^\d{5}$/.test(zipEl.value.trim()); }
+  function submitZip(){
+    var ok=zipOk();
+    zipErr.classList.toggle('show',!ok); zipEl.classList.toggle('bad',!ok);
+    if(!ok){ zipEl.focus(); return; }
+    markOpen();
+    formData.zip=zipEl.value.trim();
+    dlTrack('q_zip',OPT_IDX.zip,{field:'zip',value:formData.zip});
+    show(4);
+  }
+  zipEl.addEventListener('input',function(){
+    zipEl.value=zipEl.value.replace(/\D/g,'').slice(0,5);
+    if(zipEl.value.length===5){ zipErr.classList.remove('show'); zipEl.classList.remove('bad'); setTimeout(submitZip,180); }
+  });
+  card.querySelector('.qs-step[data-step="3"] [data-next]').addEventListener('click',submitZip);
+
+  // Q5 contact + business website
+  var firstEl=document.getElementById('qs-first'), firstErr=document.getElementById('qs-first-err');
+  var lastEl=document.getElementById('qs-last'), lastErr=document.getElementById('qs-last-err');
+  var siteEl=document.getElementById('qs-site'), siteErr=document.getElementById('qs-site-err');
+  // Website replaced business name on 2026-09-15: the URL carries the name, the name doesn't carry
+  // the URL, and Spencer was googling every lead to find it. Deliberately permissive — plenty of
+  // $500K+ builders run on a Facebook page — so anything domain-shaped passes, plus an explicit
+  // "no website" escape rather than a validator that rejects a real lead.
+  var NO_SITE='none';
+  function siteValue(){ return siteEl.value.trim().replace(/^\s*https?:\/\//i,'').replace(/\/+$/,''); }
+  function siteIsOk(){ var v=siteValue(); return v===NO_SITE || (/\./.test(v) && !/\s/.test(v) && v.length>=4); }
+  document.getElementById('qs-no-site').addEventListener('click',function(e){
+    e.preventDefault(); siteEl.value=NO_SITE; siteErr.classList.remove('show'); siteEl.classList.remove('bad'); phoneEl.focus();
+  });
+  var emailEl=document.getElementById('qs-email'), emailErr=document.getElementById('qs-email-err');
+  var phoneEl=document.getElementById('qs-phone'), phoneErr=document.getElementById('qs-phone-err');
+  phoneEl.addEventListener('input',function(){
+    var d=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'').slice(0,10), f=d;
+    if(d.length>=7) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
+    else if(d.length>=4) f='('+d.slice(0,3)+') '+d.slice(3);
+    phoneEl.value=f;
+  });
+  card.querySelector('[data-next-final]').addEventListener('click',function(){
+    var first=firstEl.value.trim(), last=lastEl.value.trim(), site=siteValue(), email=emailEl.value.trim();
+    var phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,'');
+    var fok=first.length>=1, lok=last.length>=1, sok=siteIsOk(), pok=/^[2-9]\d{9}$/.test(phone), eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    [[firstEl,firstErr,fok],[lastEl,lastErr,lok],[siteEl,siteErr,sok],[phoneEl,phoneErr,pok],[emailEl,emailErr,eok]].forEach(function(x){ x[1].classList.toggle('show',!x[2]); x[0].classList.toggle('bad',!x[2]); });
+    if(!fok){firstEl.focus();return;} if(!lok){lastEl.focus();return;} if(!sok){siteEl.focus();return;} if(!pok){phoneEl.focus();return;} if(!eok){emailEl.focus();return;}
+    markOpen();
+    formData.first_name=first; formData.last_name=last; formData.name=(first+' '+last).trim();
+    formData.business_website=site; formData.email=email; formData.phone='+1'+phone;
+    dlTrack('contact_info',7);
+    submitAndShowCalendar();
+  });
+  // Enter-to-advance in text inputs
+  card.querySelectorAll('.qs-input').forEach(function(inp){
+    inp.addEventListener('keydown',function(e){
+      if(e.key!=='Enter') return; e.preventDefault();
+      var st=card.querySelector('.qs-step[data-step="'+current+'"]'); var btn=st&&st.querySelector('[data-next],[data-next-final]'); if(btn) btn.click();
+    });
+  });
+
+  function buildCalUrl(){
+    var u=new URL(icp?CAL_ICP:CAL_NON_ICP);
+    if(formData.name){ var p=formData.name.trim().split(/\s+/); u.searchParams.set('first_name',p[0]||''); if(p.length>1) u.searchParams.set('last_name',p.slice(1).join(' ')); u.searchParams.set('name',formData.name); u.searchParams.set('full_name',formData.name); }
+    if(formData.email) u.searchParams.set('email',formData.email);
+    if(formData.phone) u.searchParams.set('phone',formData.phone);
+    return u.toString();
+  }
+
+  // ── NATIVE SLOT PICKER (ICP leads) — identical to root; slots + booking via mjc-self-book Worker ──
+  var MCB_WORKER='https://mjc-self-book.spencer-80c.workers.dev';
+  var mcbTz='America/Chicago'; try{ mcbTz=Intl.DateTimeFormat().resolvedOptions().timeZone||mcbTz; }catch(e){}
+  var mcbCache={}, mcbDays={}, mcbDay=null, mcbSlot=null;
+  function mcbState(id){ ['mcb-loading','mcb-live','mcb-empty','mcb-error'].forEach(function(x){ var el=document.getElementById(x); if(el) el.style.display=(x===id)?'':'none'; }); }
+  function mcbTime(iso){ return new Date(iso).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:mcbTz}); }
+  function mcbWhen(iso){ return new Date(iso).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',timeZone:mcbTz})+' at '+mcbTime(iso); }
+  function mcbFetch(force){
+    if(force||!mcbCache.p){
+      mcbCache.p=fetch(MCB_WORKER+'/slots?icp=yes&tz='+encodeURIComponent(mcbTz))
+        .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+        .catch(function(err){ delete mcbCache.p; throw err; });
+    }
+    return mcbCache.p;
+  }
+  function mcbLoad(e,force){
+    if(e) e.preventDefault();
+    var tzEl=document.getElementById('mcb-tz'); if(tzEl) tzEl.textContent=mcbTz.replace(/_/g,' ');
+    mcbState('mcb-loading');
+    var lo=document.getElementById('mcb-loading'); lo.textContent='Checking open times…';
+    var slow=setTimeout(function(){ lo.textContent='Still pulling up the calendar… hang tight, this can take a few seconds.'; },4000);
+    mcbFetch(force).then(function(data){
+      clearTimeout(slow); mcbDays={};
+      Object.keys(data.days||{}).forEach(function(d){
+        var sl=((data.days[d]||{}).slots||[]).filter(function(iso){ return /T\d\d:(00|15|30|45):00/.test(iso); });
+        if(sl.length) mcbDays[d]=sl;
+      });
+      var keys=Object.keys(mcbDays).sort();
+      if(!keys.length){ mcbState('mcb-empty'); return; }
+      if(!mcbDay||!mcbDays[mcbDay]) mcbDay=keys[0];
+      if(mcbSlot&&mcbDays[mcbDay].indexOf(mcbSlot)===-1) mcbSlot=null;
+      mcbRenderDays(); mcbRenderSlots(); mcbState('mcb-live');
+    }).catch(function(){ clearTimeout(slow); mcbState('mcb-error'); });
+  }
+  function mcbRenderDays(){
+    var row=document.getElementById('mcb-days'); row.innerHTML='';
+    Object.keys(mcbDays).sort().forEach(function(d){
+      var dt=new Date(d+'T12:00:00Z'); var b=document.createElement('button'); b.type='button';
+      b.className='mcb-day'+(d===mcbDay?' mcb-sel':'');
+      b.innerHTML='<span class="mcb-dow">'+dt.toLocaleDateString('en-US',{weekday:'short',timeZone:'UTC'})+'</span><span class="mcb-date">'+dt.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'})+'</span>';
+      b.onclick=function(){ mcbDay=d; mcbSlot=null; mcbRenderDays(); mcbRenderSlots(); };
+      row.appendChild(b);
+    });
+  }
+  function mcbRenderSlots(){
+    var grid=document.getElementById('mcb-slots'); grid.innerHTML='';
+    (mcbDays[mcbDay]||[]).forEach(function(iso){
+      var b=document.createElement('button'); b.type='button';
+      b.className='mcb-slot'+(iso===mcbSlot?' mcb-sel':''); b.textContent=mcbTime(iso);
+      b.onclick=function(){ mcbSlot=iso; mcbRenderSlots(); mcbShowBook(); };
+      grid.appendChild(b);
+    });
+    if(!mcbSlot) document.getElementById('mcb-book').style.display='none';
+  }
+  function mcbShowBook(){
+    document.getElementById('mcb-when').textContent=mcbWhen(mcbSlot);
+    document.getElementById('mcb-err').style.display='none';
+    var box=document.getElementById('mcb-book'); box.style.display='';
+    try{ box.scrollIntoView({behavior:'smooth',block:'nearest'}); }catch(e){}
+  }
+  function mcbError(msg){ var el=document.getElementById('mcb-err'); el.textContent=msg; el.style.display=''; }
+  function mcbBook(){
+    if(!mcbSlot) return;
+    var btn=document.getElementById('mcb-btn'); btn.disabled=true; btn.textContent='Locking It In…';
+    if(window.MJC_QA){ btn.textContent='QA mode: no booking made'; return; }
+    var fn=formData.first_name||'', ln=formData.last_name||'';
+    // Same contact the inbound webhook created (Worker upserts by email/phone). Source echoes the LP's own so upsert never relabels it.
+    fetch(MCB_WORKER+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      icp:'yes', startTime:mcbSlot, timezone:mcbTz, firstName:fn, lastName:ln, email:formData.email||'', phone:formData.phone||'',
+      source:'deckingleads.com lp v1', tags:['lp-native-booked','src - 25 lp'] })})
+    .then(function(r){ return r.json().then(function(b){ return {status:r.status,body:b}; }); })
+    .then(function(res){
+      if(res.status===200&&res.body&&res.body.ok){
+        btn.textContent='Booked! One sec…';
+        try{ localStorage.setItem('mjc_booked_ref',JSON.stringify({contactId:res.body.contactId||'',calendarId:res.body.calendarId||'',t:Date.now()})); }catch(e){}
+        location.href='/confirmation/?c='+encodeURIComponent(res.body.contactId||'')+'&cal='+encodeURIComponent(res.body.calendarId||'');
+        return;
+      }
+      btn.disabled=false; btn.textContent='Lock In My Call →';
+      if(res.status===409){ mcbError('That time was just taken. Pick another one.'); mcbSlot=null; mcbLoad(null,true); }
+      else { mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); }
+    })
+    .catch(function(){ btn.disabled=false; btn.textContent='Lock In My Call →'; mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); });
+  }
+  (function(){ var b=document.getElementById('mcb-btn'); if(b) b.addEventListener('click',mcbBook); var r=document.getElementById('mcb-retry'); if(r) r.addEventListener('click',function(e){ mcbLoad(e,true); }); })();
+
+  function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true;
+    if(icp){ mcbFetch().catch(function(){}); return; }
+    try{ document.getElementById('mc-cal').src=buildCalUrl(); }catch(e){} }
+
+  function showCalendarUI(){
+    show(TOTAL_Q+1);
+    if(icp){
+      var sp0=document.getElementById('mc-spin'), cw0=document.getElementById('mc-cal-wrap'), nb=document.getElementById('mcb');
+      if(sp0) sp0.style.display='none'; if(cw0) cw0.style.display='none'; if(nb) nb.style.display='block';
+      mcbLoad();
+    } else {
+      // Rebuild whenever the URL changed. preloadCalendar() runs at the revenue question — one step
+      // BEFORE the contact fields — so the warmed src carries no prefill; keeping it would hand the
+      // lead an empty booking form after they just typed their details (2026-09-15).
+      try{ var cal=document.getElementById('mc-cal'), want=buildCalUrl(); if(cal.getAttribute('src')!==want) cal.src=want; }catch(e){}
+      setTimeout(function(){ var sp=document.getElementById('mc-spin'), cw=document.getElementById('mc-cal-wrap'); if(sp) sp.style.display='none'; if(cw) cw.style.display='block'; },(calPreloaded?250:1400));
+    }
+  }
+
+  function submitAndShowCalendar(){
+    icp=isICP(formData);
+    showCalendarUI();
+    if(submitted) return; submitted=true;
+    // Meta Test Events mode: ?test_event_code=TEST… → CAPI relay as a test event; skips browser Lead, GHL webhook, funnel beacon.
+    var TEST_CODE=(new URLSearchParams(location.search).get('test_event_code')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,20);
+    if(!TEST_CODE) dlTrack('submit',8,{icp:icp});
+
+    formData.icp=icp; formData.submitted_at=new Date().toISOString();
+    var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
+    formData.event_id=event_id;
+    try{ if(window.mjcJourney) mjcJourney.track('submit',{lead_ref:event_id,label:'apply survey',value:icp?'icp':'non-icp'}); }catch(e){} // Journey Ledger
+
+    // Browser Lead → seasoned pixel ONLY, ICP only (same rule as root, 2026-09-14). ICP pixel gets Lead from the server relay.
+    // …and only after a Meta ad click in the last 7 days (2026-09-30). The confirmation page reads dl_meta_ad.
+    var metaAd=metaAdClick();
+    try{ sessionStorage.setItem('dl_meta_ad',metaAd?'1':'0'); }catch(e){}
+    if(icp && metaAd && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('trackSingle','839107878270720','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
+    try{ sessionStorage.setItem('dl_qualify_data',JSON.stringify(formData)); sessionStorage.setItem('dl_qualify_icp',icp?'1':'0'); }catch(e){}
+
+    (async function(){
+      try{
+        var email=formData.email, phone=(formData.phone||'').replace(/\D/g,'');
+        var phoneForHash=phone.length===11?phone:(phone.length===10?'1'+phone:phone);
+        var first_name=formData.first_name||'', last_name=formData.last_name||'';
+        var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim()),sha256Hex((formData.zip||'').trim())]);
+        var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
+        var fbc=(document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/)||[])[1]||'';
+        var in_app=/Instagram/i.test(navigator.userAgent)?'instagram':(/FBAN|FBAV|FB_IAB/i.test(navigator.userAgent)?'facebook':'');
+        // Same key set as root v8 (so the GHL "1. New Lead" mapping keeps working) + the two appointment answers, keyed to
+        // their GHL field keys (inert until the inbound-webhook sample is re-captured and mapped). crew/years/marketing sent blank.
+        // business_name carries the WEBSITE on purpose (2026-09-15). The survey now asks for the site
+        // instead of the name, but the GHL inbound-webhook mapping still only knows `business_name` —
+        // remapping needs a fresh sample capture. Sending it under both keys means the URL lands in
+        // GHL today (exactly where Spencer was pasting googled URLs anyway) and `business_website`
+        // is ready the moment the sample is re-captured. Drop the alias once that's mapped.
+        var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,fbc:fbc,in_app_browser:in_app,
+          business_website:formData.business_website||'',business_name:formData.business_website||'',
+          zip:formData.zip||'',postal_code:formData.zip||'',zip_sha256:h[4],
+          years_in_business:'',crew_situation:'',marketing_spend:'',revenue:formData.revenue||'',
+          how_many_sales_appointments_are_you_currently_running_per_week:formData.current_appts_per_week||'',
+          how_many_more_sales_appointments_can_you_handle_per_week:formData.more_appts_per_week||'',icp:icp?'yes':'no',
+          event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],fbp:fbp,
+          client_user_agent:navigator.userAgent||'',
+          timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),event_time_unix:Math.floor(Date.now()/1000),submitted_at:formData.submitted_at,
+          source:'deckingleads.com lp v1',variant:'v9-25-estimates',lp_version:'v9-25',offer:'25-in-25',page_url:location.href,
+          utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
+          utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
+          landing_url:attribution.landing_url||'',referrer:attribution.referrer||'',
+          guarantee:'25in25-free-forever',guarantee_test:'',ad_hero:window.MJC_AD||'',ad_state:window.MJC_STATE||''};
+        try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
+        payload.meta_ad=metaAd?'yes':'no'; // after leadFields so the page's own answer (with the URL fallback) wins
+        if(TEST_CODE){
+          // target:'icp' is REQUIRED here (2026-09-15). A test_event_code is scoped to ONE dataset —
+          // ours comes from the ICP pixel's Test events tab. Without target the relay's default path
+          // also copies the event to the seasoned pixel, which can't recognize that code and would
+          // process the copy as a real conversion. ICP-only + event_name 'Lead' is exactly what the
+          // ICP pixel receives in production (the relay mirrors QualifiedLead→Lead there).
+          // Non-ICP submissions never reach the ICP pixel in production, so test mode sends nothing
+          // for them rather than faking a Lead the live funnel would not produce.
+          if(icp){
+            var testEvent=Object.assign({},payload,{event_name:'Lead',target:'icp',test_event_code:TEST_CODE});
+            await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
+          } else { console.log('[v9 test mode] non-ICP submission — nothing sent (the test code is ICP-pixel scoped).'); }
+        } else if(window.MJC_QA){
+          console.log('[25 QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
+        } else {
+          await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+        }
+      }catch(e){ console.warn('[25] GHL webhook failed:',e); }
+    })();
+  }
+
+  // ── /25/ SURVEY MODAL ── the hero holds the proof reel now, so every CTA OPENS the survey instead of
+  // scrolling to it. Open/close/backdrop/Escape/scroll-lock are the v8 root's #mc-overlay mechanics
+  // (tag funnel-v8-root-2026-09-14); the focus trap + focus restore are new. The survey itself — every
+  // question, field key, ICP gate and the calendar step — is untouched; only its container changed.
+  var overlay=document.getElementById('qs-overlay'), closeBtn=document.getElementById('qs-close'), lastFocus=null;
+  function modalIsOpen(){ return !!overlay && overlay.classList.contains('open'); }
+  function focusables(){
+    if(!overlay) return [];
+    return [].slice.call(overlay.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select,textarea,iframe,[tabindex]:not([tabindex="-1"])'))
+             .filter(function(el){ return el.offsetParent!==null || el.tagName==='IFRAME'; });
+  }
+  function openModal(){
+    if(!overlay) return;
+    lastFocus=document.activeElement;
+    overlay.classList.add('open'); overlay.setAttribute('aria-hidden','false');
+    document.body.classList.add('mc-lock');          // root already ships body.mc-lock{overflow:hidden}
+    markOpen();                                       // funnel_events survey_open, same step it fired before
+    if(!submitted && current<=TOTAL_Q) show(current);
+    overlay.scrollTop=0;
+    setTimeout(function(){ var f=focusables()[0]; if(f) try{ f.focus({preventScroll:true}); }catch(e){} },80);
+  }
+  function closeModal(){
+    if(!overlay) return;
+    overlay.classList.remove('open'); overlay.setAttribute('aria-hidden','true');
+    document.body.classList.remove('mc-lock');
+    if(lastFocus) try{ lastFocus.focus({preventScroll:true}); }catch(e){}
+  }
+  if(closeBtn) closeBtn.addEventListener('click', closeModal);
+  if(overlay) overlay.addEventListener('click', function(e){ if(e.target===overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){
+    if(!modalIsOpen()) return;
+    if(e.key==='Escape'){ closeModal(); return; }
+    if(e.key!=='Tab') return;
+    var f=focusables(); if(!f.length) return;
+    var first=f[0], last=f[f.length-1];
+    if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+    else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+  });
+  document.querySelectorAll('[data-scroll-survey], a[href="#apply"]').forEach(function(el){
+    el.addEventListener('click',function(e){ e.preventDefault(); openModal(); });
+  });
+  window.__openApply=openModal; window.__closeApply=closeModal; // QA hooks
+
+  // QA: ?preview=cal → ICP native picker · ?preview=cal-nonicp → non-ICP widget. Nothing fires (no webhook/pixel/CRM write).
+  (function(){
+    try{
+      var pv=new URLSearchParams(location.search).get('preview'); if(!pv||pv.indexOf('cal')!==0) return;
+      formData.name='Preview Tester'; formData.first_name='Preview'; formData.last_name='Tester'; formData.email='preview@example.com'; formData.phone='5555555555';
+      formData.revenue=(pv==='cal-nonicp')?'0_100k':'1m_3m';
+      submitted=true; icp=isICP(formData); showCalendarUI(); openModal();
+    }catch(e){}
+  })();
+
+  // Capture the just-booked appointment reference (non-ICP GHL widget path) so /scheduled/ can add-to-calendar.
+  (function(){
+    var contactId=null;
+    window.addEventListener('message', function(e){
+      try{
+        var d=e.data; if(!Array.isArray(d)) return;
+        if(d[0]==='set-sticky-contacts' && typeof d[2]==='string'){ var m=d[2].match(/"id":"([^"]+)"/); if(m) contactId=m[1]; }
+        else if(d[0]==='msgsndr-booking-complete' && d[1] && d[1].calendarId){ try{ localStorage.setItem('mjc_booked_ref', JSON.stringify({contactId:contactId, calendarId:d[1].calendarId, t:Date.now()})); }catch(_){} }
+      }catch(_){}
+    }, false);
+  })();
+})();
+
+// ── Video wall: thumbnail facade → YouTube iframe on click (keeps 14 embeds from loading up front).
+(function(){
+  document.querySelectorAll('.yt').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var id=btn.dataset.id; if(!id) return;
+      document.querySelectorAll('.yt iframe').forEach(function(f){ var p=f.parentNode; p.innerHTML='<img src="'+(p.dataset.thumb||('https://i.ytimg.com/vi/'+p.dataset.id+'/'+(p.hasAttribute('data-reel')?'maxresdefault':'hqdefault')+'.jpg'))+'" alt=""><span class="play"></span>'; });
+      if(btn.hasAttribute('data-reel')){ try{ if(!window.MJC_QA && window.clarity) clarity('event','proof_reel_play'); }catch(e){} }
+      btn.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Client video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
+    });
+  });
+})();
+</script>
+</body>
+</html>
