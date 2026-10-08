@@ -495,3 +495,17 @@ LP: `git revert 4fadb56 3f7f6d4 727a634`. Relay: redeploy the `.bak`. Workflows:
 - To change the tracker: edit `journey.src.js`, then run `npx esbuild journey.src.js --minify --legal-comments=inline --outfile=journey.js` and commit both files.
 - Why: an SEO crawl flagged the unminified file on every page of morejobcalls.com (it loads sitewide).
 - Checked in a browser before shipping: same `window.mjcJourney` API, same cookies, same events sent (page view, scroll 50/90, CTA click).
+
+---
+
+## 2026-10-07 — Root apply page load-speed pass (SHIPPED)
+
+- **Why:** Spencer's goal: apply.morejobcalls.com as fast as possible. Lighthouse mobile on the live page before: perf 90, FCP 2.1 s, LCP 2.2 s (the H1), TBT 300 ms. The only render-blocking resource was the Google Fonts stylesheet (~0.9 s on the critical path); Meta pixel + Clarity ate ~180 ms of main thread during first paint; GHL's `form_embed.js` was a parser-blocking `<script>` in the body.
+- **Fonts:** self-hosted in `/fonts/` (`archivo-900.woff2` 13 KB static, `inter-latin-var.woff2` 48 KB variable — the same latin files Google Fonts served), inline `@font-face` with `font-display:swap`, both `<link rel=preload>`. Google Fonts link + the two preconnects removed. Renders pixel-identical (checked mobile hero before vs after).
+- **Meta pixel:** stub is unchanged and synchronous (`init` x2 + `PageView` still queue immediately); `fbevents.js` is injected at the window `load` event instead of at parse. Verified both pixel IDs initialise after the deferred load. CAPI untouched.
+- **Clarity:** stub now, tag after `load` + `requestIdleCallback`. `clarity('event', …)` calls still queue.
+- **GHL calendar embed:** `form_embed.js` no longer sits in `#mc-cal-wrap`; `loadGhlEmbed()` injects it on the non-ICP path (revenue-step preload + calendar step). ICP leads (native picker) never load it. Both survey paths walked in QA mode.
+- **Images:** 9 win screenshots → WebP in `/wins/` (2.2 MB of PNG → 198 KB; PNGs kept for other pages) with intrinsic width/height so the lazy masonry never shifts layout; 15 YouTube thumbnails now served same-origin as 16:9 WebP from `/yt-thumbs/<id>.webp` (no i.ytimg.com connection; bfcache rebuild in the video-wall script updated to match). Dead logo-marquee CSS removed.
+- **Local Lighthouse (same machine, before → after):** FCP 1.9 → 1.1 s, Speed Index 1.9 → 1.1 s, TBT 150 → 30 ms, CLS 0.117 → 0, render-blocking 864 ms → 0.
+- **Not changed:** copy, layout, guarantee logic, webhook payloads, journey.js. `/yt/`, `/ig/`, `/fb/`, `/25/` still use Google Fonts + i.ytimg + inline form_embed (same fixes apply; rebuild scripts for the organic twins read root).
+- **Rollback:** `git revert <this commit>` (fonts/, yt-thumbs/, wins/*.webp are additive; index.html is the only edited file).
