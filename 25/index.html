@@ -392,7 +392,11 @@
   .hero-vid{display:block;position:relative;width:100%;max-width:520px;margin:0 auto 10px;
     border-radius:14px;overflow:hidden;border:1px solid rgba(199,150,63,.30);
     box-shadow:0 18px 50px rgba(0,0,0,.45);background:#0B0B0B;cursor:pointer;}
-  .hero-vid img{display:block;width:100%;height:auto;}
+  .hero-vid{aspect-ratio:16/9;}
+  .hero-vid img,.hero-vid iframe{position:absolute;inset:0;width:100%;height:100%;display:block;border:0;}
+  /* While a video plays, its poster furniture gets out of the way. */
+  .is-playing{cursor:default;}
+  .is-playing .hero-vid-badge,.is-playing .play-icon,.is-playing .rv-quote{display:none;}
   .hero-vid-cap{font-size:12.5px;line-height:1.4;color:#8A8578;margin:0 auto 16px;max-width:430px;}
   @media (max-width:640px){
     .hero-vid{max-width:100%;margin-bottom:9px;}
@@ -490,12 +494,15 @@
     <!-- Hero proof video. POSTER ONLY — the anchor carries .proof-thumb, so R4's existing video
          lightbox preventDefault()s it and plays in-page. No YouTube iframe, script or cookie
          loads above the fold; the embed is created only once someone actually clicks.
-         The play badge sits at 36% height on purpose: dead-centre would land it on the quote. -->
-    <a class="hero-vid proof-thumb group" href="https://youtu.be/HRYuMJmhpmY"
+         The play badge sits at 36% height on purpose: dead-centre would land it on the quote.
+         Deliberately NOT .proof-thumb: that class is what hands a thumbnail to the page's
+         lightbox. Spencer wants this one to play where it sits, so it keeps its own handler
+         and swaps the poster for the player inside this same frame. -->
+    <a class="hero-vid group" href="https://youtu.be/HRYuMJmhpmY" data-vid="HRYuMJmhpmY"
        aria-label="Play: 12 deck builders on an unedited call recording, 11 minutes 38 seconds">
       <img src="/25/hero-proof.webp" width="1120" height="630" loading="eager" decoding="async"
            alt="Three deck builders on an unedited call recording, captioned: It sounds too good to be true, that&rsquo;s why we&rsquo;re all skeptical.">
-      <div class="absolute left-1/2 top-[36%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+      <div class="hero-vid-badge absolute left-1/2 top-[36%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
         <div class="play-icon w-14 h-14 sm:w-16 sm:h-16 rounded-full gold-gradient flex items-center justify-center shadow-gold">
           <svg class="w-6 h-6 sm:w-7 sm:h-7 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
         </div>
@@ -614,7 +621,11 @@
   .hero-vid{display:block;position:relative;width:100%;max-width:520px;margin:0 auto 10px;
     border-radius:14px;overflow:hidden;border:1px solid rgba(199,150,63,.30);
     box-shadow:0 18px 50px rgba(0,0,0,.45);background:#0B0B0B;cursor:pointer;}
-  .hero-vid img{display:block;width:100%;height:auto;}
+  .hero-vid{aspect-ratio:16/9;}
+  .hero-vid img,.hero-vid iframe{position:absolute;inset:0;width:100%;height:100%;display:block;border:0;}
+  /* While a video plays, its poster furniture gets out of the way. */
+  .is-playing{cursor:default;}
+  .is-playing .hero-vid-badge,.is-playing .play-icon,.is-playing .rv-quote{display:none;}
   .hero-vid-cap{font-size:12.5px;line-height:1.4;color:#8A8578;margin:0 auto 16px;max-width:430px;}
   @media (max-width:640px){
     .hero-vid{max-width:100%;margin-bottom:9px;}
@@ -1580,7 +1591,38 @@
     runLoadingThenShowCalendar(icp, formData);
   });
 
-  // Video lightbox — keep proof video plays on-page (no redirect to YouTube)
+  // Every proof video plays in its own frame — no lightbox, no YouTube tab.
+  (function initInlineVideos(){
+    function ytId(href){
+      try{
+        var u=new URL(href, location.href);
+        if(u.hostname.indexOf('youtu.be')>-1) return u.pathname.slice(1);
+        if(u.hostname.indexOf('youtube.com')>-1)
+          return u.pathname.indexOf('/embed/')===0 ? u.pathname.split('/')[2] : u.searchParams.get('v');
+      }catch(err){}
+      return null;
+    }
+    document.querySelectorAll('.hero-vid, .proof-thumb').forEach(function(a){
+      a.addEventListener('click',function(e){
+        e.preventDefault();                       // placeholder cards use href="#": this alone kills the hash jump
+        if(a.classList.contains('is-playing')) return;
+        var id=a.dataset.vid || ytId(a.getAttribute('href')||'');
+        if(!id) return;
+        var f=document.createElement('iframe');
+        f.src='https://www.youtube.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+        f.title='MoreJobCalls client recording';
+        f.allow='autoplay; encrypted-media; fullscreen; picture-in-picture';
+        f.setAttribute('allowfullscreen','');
+        f.style.cssText='position:absolute;inset:0;width:100%;height:100%;border:0;display:block;';
+        var img=a.querySelector('img'); if(img) img.remove();
+        a.appendChild(f);
+        a.classList.add('is-playing');
+        try{ if(window.dlTrack) dlTrack('video_play',0,{video_id:id}); }catch(err){}
+      });
+    });
+  })();
+
+  // Video lightbox — kept for its markup only; nothing binds to it any more.
   (function initVideoModal() {
     const vmodal = document.getElementById('video-modal');
     const vframe = document.getElementById('video-modal-iframe');
@@ -1611,19 +1653,8 @@
       vframe.src = '';
     }
 
-    document.querySelectorAll('.proof-thumb').forEach(link => {
-      link.addEventListener('click', (e) => {
-        const href = link.getAttribute('href');
-        const id = href ? extractYouTubeId(href) : null;
-        if (!id) {
-          // Placeholder card with href="#" — kill the hash jump, do nothing else
-          e.preventDefault();
-          return;
-        }
-        e.preventDefault();
-        openVideo(id);
-      });
-    });
+    // Unbound 2026-10-08: initInlineVideos above owns every .proof-thumb click now.
+    void openVideo;
 
     vclose.addEventListener('click', closeVideo);
     vmodal.addEventListener('click', (e) => { if (e.target === vmodal) closeVideo(); });
@@ -1837,7 +1868,11 @@
   .hero-vid{display:block;position:relative;width:100%;max-width:520px;margin:0 auto 10px;
     border-radius:14px;overflow:hidden;border:1px solid rgba(199,150,63,.30);
     box-shadow:0 18px 50px rgba(0,0,0,.45);background:#0B0B0B;cursor:pointer;}
-  .hero-vid img{display:block;width:100%;height:auto;}
+  .hero-vid{aspect-ratio:16/9;}
+  .hero-vid img,.hero-vid iframe{position:absolute;inset:0;width:100%;height:100%;display:block;border:0;}
+  /* While a video plays, its poster furniture gets out of the way. */
+  .is-playing{cursor:default;}
+  .is-playing .hero-vid-badge,.is-playing .play-icon,.is-playing .rv-quote{display:none;}
   .hero-vid-cap{font-size:12.5px;line-height:1.4;color:#8A8578;margin:0 auto 16px;max-width:430px;}
   @media (max-width:640px){
     .hero-vid{max-width:100%;margin-bottom:9px;}
