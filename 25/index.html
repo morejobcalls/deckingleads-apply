@@ -388,36 +388,6 @@
   .logo-cell--card { background: transparent; padding: 0 6px; border-radius: 0; }
   .logo-cell--card img { filter: grayscale(1); mix-blend-mode: multiply; max-height: 56px; max-width: 188px; }
 
-/* v8 modal rules, appended so they win over R4's */
-.mc-step{display:none;}
-.mc-step.active{display:block;animation:mcFade .22s ease-out;}
-.mc-q{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.18;color:#1A1917;margin:0 0 6px;}
-.mc-sub{font-size:14px;color:#7A7870;margin:0 0 22px;line-height:1.5;}
-.mc-opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid #E2DBCE;border-radius:12px;
-    padding:16px 18px;font-size:15px;font-weight:600;color:#1A1917;cursor:pointer;margin-bottom:11px;
-    transition:border-color .15s,background .15s,box-shadow .15s,transform .05s;font-family:inherit;}
-.mc-opt:hover{border-color:#C7963F;background:#FFFBF3;box-shadow:0 2px 10px rgba(199,150,63,.12);}
-.mc-opt:active{transform:translateY(1px);}
-.mc-opt .mc-optsub{display:block;font-weight:500;font-size:12.5px;color:#8A8780;margin-top:3px;}
-.mc-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.mc-grid2 .mc-opt{margin-bottom:0;text-align:center;}
-.mc-input{width:100%;padding:15px 17px;font-size:15px;font-weight:600;color:#1A1917;background:#fff;
-    border:1px solid #E2DBCE;border-radius:12px;font-family:inherit;margin-bottom:12px;}
-.mc-input:focus{outline:none;border-color:#1A1917;}
-.mc-input::placeholder{color:#A8A49B;font-weight:500;}
-.mc-err{font-size:12.5px;color:#DC2626;font-weight:600;margin:-6px 0 12px;display:none;}
-.mc-err.show{display:block;}
-.mc-phone-row{display:flex;gap:8px;align-items:stretch;}
-.mc-flag{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:0 14px;height:52px;background:#F3EEE4;border:1px solid #E2DBCE;border-radius:12px;font-weight:600;font-size:15px;color:#1A1917;}
-.mc-next{display:inline-flex;align-items:center;gap:6px;margin-left:auto;background:none;color:#1A1917;
-    border:none;padding:10px 4px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
-.mc-next:hover{color:#AB8032;}
-.mc-next-row{display:flex;margin-top:10px;}
-.mc-fine{font-size:11px;color:#9A968D;line-height:1.5;margin:14px 0 0;}
-.mc-spinner{width:44px;height:44px;border:4px solid #ECE6DA;border-top-color:#1A1917;border-radius:50%;animation:mcSpin 1s linear infinite;margin-bottom:18px;}
-.mc-lock{overflow:hidden;}
-.mc-q{font-size:21px;}
-
   /* ── /25/ : Real builders card grid (R4) + What You Get On This Call ── */
   .rv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px;text-align:left;}
   @media (max-width:1180px){.rv-grid{grid-template-columns:repeat(3,1fr);}}
@@ -519,6 +489,34 @@
   </div>
 </section>
 
+<section id="guarantees" class="sec-charcoal">
+  <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20 text-center">
+    <div class="w-14 h-14 mx-auto rounded-full bg-elevated border border-border flex items-center justify-center mb-6">
+      <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <h2 class="display-lg text-[30px] sm:text-[44px] leading-[1.05] text-ink">The Guarantee. <span class="text-gold">Zero Risk.</span></h2>
+    <p class="text-base text-ink-muted max-w-lg mx-auto mt-4 mb-9">
+      We know you've probably been burned before. So we built the guarantee around that — not around us feeling safe.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left mb-9">
+      <div class="rounded-xl bg-elevated border border-border p-6">
+        <p class="text-[10.5px] font-bold tracking-[0.2em] uppercase text-gold mb-2">Day 25</p>
+        <p class="font-bold text-ink mb-2">25 Estimates In 25 Days</p>
+        <p class="text-[13.5px] text-ink-muted leading-relaxed">25 exclusive on-site estimate opportunities with ready-to-buy homeowners in your market, or a minimum of <span class="text-ink font-semibold">$50,000 in booked jobs.</span> Seven days to launch. Month to month, so you are never locked in.</p>
+      </div>
+      <div class="rounded-xl bg-elevated border border-border p-6">
+        <p class="text-[10.5px] font-bold tracking-[0.2em] uppercase text-gold mb-2">If We Miss</p>
+        <p class="font-bold text-ink mb-2">100% Free + We Cover Ad Spend</p>
+        <p class="text-[13.5px] text-ink-muted leading-relaxed"><span class="text-ink font-semibold">1.</span> You pay us nothing more — no new fee, no renegotiation. <span class="text-ink font-semibold">2.</span> We pick up your ad spend too, from the day we miss until your 25th estimate lands. Your first 25 days of spend stays yours, the same as any other month.</p>
+      </div>
+    </div>
+    <button type="button" data-open-apply class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
+      <span class="text-base font-black tracking-wider uppercase">Get My 25 Estimates</span>
+      <span class="text-[13px] font-medium opacity-85">Check If Your Zip Is Open →</span>
+    </button>
+  </div>
+</section>
+
 <!-- RECENT RESULTS -->
 <section id="recent" class="sec-dark border-b border-border/40">
   <div class="max-w-3xl mx-auto px-5 py-12 sm:py-16 text-center">
@@ -585,36 +583,6 @@
   @media (max-width:600px){ .rcpt-cols{ columns:1; } }
   .rcpt-cols img { width:100%; border-radius:12px; border:1px solid #E4DECF; margin-bottom:18px;
     display:block; box-shadow:0 2px 10px rgba(26,25,23,.06); break-inside:avoid; }
-
-/* v8 modal rules, appended so they win over R4's */
-.mc-step{display:none;}
-.mc-step.active{display:block;animation:mcFade .22s ease-out;}
-.mc-q{font-size:24px;font-weight:800;letter-spacing:-.02em;line-height:1.18;color:#1A1917;margin:0 0 6px;}
-.mc-sub{font-size:14px;color:#7A7870;margin:0 0 22px;line-height:1.5;}
-.mc-opt{display:block;width:100%;text-align:left;background:#fff;border:1px solid #E2DBCE;border-radius:12px;
-    padding:16px 18px;font-size:15px;font-weight:600;color:#1A1917;cursor:pointer;margin-bottom:11px;
-    transition:border-color .15s,background .15s,box-shadow .15s,transform .05s;font-family:inherit;}
-.mc-opt:hover{border-color:#C7963F;background:#FFFBF3;box-shadow:0 2px 10px rgba(199,150,63,.12);}
-.mc-opt:active{transform:translateY(1px);}
-.mc-opt .mc-optsub{display:block;font-weight:500;font-size:12.5px;color:#8A8780;margin-top:3px;}
-.mc-grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
-.mc-grid2 .mc-opt{margin-bottom:0;text-align:center;}
-.mc-input{width:100%;padding:15px 17px;font-size:15px;font-weight:600;color:#1A1917;background:#fff;
-    border:1px solid #E2DBCE;border-radius:12px;font-family:inherit;margin-bottom:12px;}
-.mc-input:focus{outline:none;border-color:#1A1917;}
-.mc-input::placeholder{color:#A8A49B;font-weight:500;}
-.mc-err{font-size:12.5px;color:#DC2626;font-weight:600;margin:-6px 0 12px;display:none;}
-.mc-err.show{display:block;}
-.mc-phone-row{display:flex;gap:8px;align-items:stretch;}
-.mc-flag{flex-shrink:0;display:flex;align-items:center;gap:5px;padding:0 14px;height:52px;background:#F3EEE4;border:1px solid #E2DBCE;border-radius:12px;font-weight:600;font-size:15px;color:#1A1917;}
-.mc-next{display:inline-flex;align-items:center;gap:6px;margin-left:auto;background:none;color:#1A1917;
-    border:none;padding:10px 4px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;}
-.mc-next:hover{color:#AB8032;}
-.mc-next-row{display:flex;margin-top:10px;}
-.mc-fine{font-size:11px;color:#9A968D;line-height:1.5;margin:14px 0 0;}
-.mc-spinner{width:44px;height:44px;border:4px solid #ECE6DA;border-top-color:#1A1917;border-radius:50%;animation:mcSpin 1s linear infinite;margin-bottom:18px;}
-.mc-lock{overflow:hidden;}
-.mc-q{font-size:21px;}
 
   /* ── /25/ : Real builders card grid (R4) + What You Get On This Call ── */
   .rv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px;text-align:left;}
@@ -1034,34 +1002,6 @@
         <span class="text-[13px] font-medium opacity-85">45 Minutes &rarr;</span>
       </a>
     </div>
-  </div>
-</section>
-
-<section id="guarantees" class="sec-charcoal">
-  <div class="max-w-3xl mx-auto px-5 py-16 sm:py-20 text-center">
-    <div class="w-14 h-14 mx-auto rounded-full bg-elevated border border-border flex items-center justify-center mb-6">
-      <svg class="w-6 h-6 text-gold" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-    </div>
-    <h2 class="display-lg text-[30px] sm:text-[44px] leading-[1.05] text-ink">The Guarantee. <span class="text-gold">Zero Risk.</span></h2>
-    <p class="text-base text-ink-muted max-w-lg mx-auto mt-4 mb-9">
-      We know you've probably been burned before. So we built the guarantee around that — not around us feeling safe.
-    </p>
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-left mb-9">
-      <div class="rounded-xl bg-elevated border border-border p-6">
-        <p class="text-[10.5px] font-bold tracking-[0.2em] uppercase text-gold mb-2">Day 25</p>
-        <p class="font-bold text-ink mb-2">25 Estimates In 25 Days</p>
-        <p class="text-[13.5px] text-ink-muted leading-relaxed">25 exclusive on-site estimate opportunities with ready-to-buy homeowners in your market, or a minimum of <span class="text-ink font-semibold">$50,000 in booked jobs.</span> Seven days to launch. Month to month, so you are never locked in.</p>
-      </div>
-      <div class="rounded-xl bg-elevated border border-border p-6">
-        <p class="text-[10.5px] font-bold tracking-[0.2em] uppercase text-gold mb-2">If We Miss</p>
-        <p class="font-bold text-ink mb-2">100% Free + We Cover Ad Spend</p>
-        <p class="text-[13.5px] text-ink-muted leading-relaxed"><span class="text-ink font-semibold">1.</span> You pay us nothing more — no new fee, no renegotiation. <span class="text-ink font-semibold">2.</span> We pick up your ad spend too, from the day we miss until your 25th estimate lands. Your first 25 days of spend stays yours, the same as any other month.</p>
-      </div>
-    </div>
-    <button type="button" data-open-apply class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-4 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-gold/40 active:translate-y-[1px] transition-transform">
-      <span class="text-base font-black tracking-wider uppercase">Get My 25 Estimates</span>
-      <span class="text-[13px] font-medium opacity-85">Check If Your Zip Is Open →</span>
-    </button>
   </div>
 </section>
 
