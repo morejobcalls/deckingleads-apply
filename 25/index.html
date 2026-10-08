@@ -41,6 +41,8 @@
 <!-- for ICP-qualified submitters only (seasoned pixel, browser side).    -->
 <!-- ================================================================== -->
 <script>
+  // Perf (2026-10-07): same stub as Meta's snippet, but fbevents.js is injected after window load (or right away if
+  // the page is already loaded). init/PageView below queue immediately and replay in order once the script lands.
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -48,7 +50,6 @@
   n.queue=[];function go(){t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}
-  // Perf (2026-10-07): fbevents.js is injected after load → one frame → macrotask so the first paint is committed first; init/PageView queue now and replay in order.
   function later(){var done=false;function fire(){if(done)return;done=true;setTimeout(go,0);}
   try{var po=new PerformanceObserver(function(){try{po.disconnect();}catch(e){}fire();});po.observe({type:'paint',buffered:true});}catch(e){fire();return;}
   setTimeout(fire,1500);}  // waits for the first paint entry (or 1.5s max) so the pixel never lands in the first-paint path
@@ -63,6 +64,7 @@
 
 <!-- Microsoft Clarity (same project as root) -->
 <script type="text/javascript">
+  // Perf (2026-10-07): Clarity stub now, tag after window load + idle so recording JS stays off the first-paint path.
   (function(c,l,a,r,i,t,y){
     c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
     function go(){t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
@@ -71,11 +73,11 @@
     function afterPaint(){var done=false;function fire(){if(done)return;done=true;idle();}
       try{var po=new PerformanceObserver(function(){try{po.disconnect();}catch(e){}fire();});po.observe({type:'paint',buffered:true});}catch(e){fire();return;}
       setTimeout(fire,1500);}  // first paint (or 1.5s max) → idle → tag: never inside the first-paint path
-    if(l.readyState==='complete') afterPaint(); else c.addEventListener('load',afterPaint); // Perf (2026-10-07): recording JS stays off the first-paint path
+    if(l.readyState==='complete') afterPaint(); else c.addEventListener('load',afterPaint);
   })(window, document, "clarity", "script", "wpznuz610a");
 </script>
 
-<!-- Perf (2026-10-07): fonts self-hosted (latin woff2, the same files Google Fonts served) so no stylesheet render-blocks and no third-party font handshakes. -->
+<!-- Perf (2026-10-07): fonts self-hosted (latin variable woff2, the same files Google Fonts served) so no stylesheet render-blocks and no third-party font handshakes. -->
 <link rel="preload" href="/fonts/archivo-900.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preconnect" href="https://connect.facebook.net" crossorigin>
@@ -252,11 +254,11 @@
   .logo-cell--card img{filter:grayscale(1) invert(1);mix-blend-mode:screen;max-height:56px;max-width:180px;}
 
   /* ── RECENT RESULTS ───────────────────────────────────── */
-  /* Perf (2026-10-07): below-the-fold sections skip layout/paint until near the viewport. */
+  /* Perf (2026-10-07): below-the-fold sections skip layout/paint until near the viewport; the big first layout was ~60% of time-to-first-paint. */
   .logos,.reel,.results,.videos,.receipts,.guar{content-visibility:auto;}
   .logos{contain-intrinsic-size:auto 190px;} .reel{contain-intrinsic-size:auto 570px;} .results{contain-intrinsic-size:auto 880px;} .videos{contain-intrinsic-size:auto 1680px;} .receipts{contain-intrinsic-size:auto 6570px;} .guar{contain-intrinsic-size:auto 1230px;}
   @media(min-width:1024px){.reel{contain-intrinsic-size:auto 870px;} .results{contain-intrinsic-size:auto 750px;} .videos{contain-intrinsic-size:auto 2930px;} .receipts{contain-intrinsic-size:auto 2600px;} .guar{contain-intrinsic-size:auto 920px;}}
-  .cv-off .logos,.cv-off .reel,.cv-off .results,.cv-off .videos,.cv-off .receipts,.cv-off .guar{content-visibility:visible;} /* deep links render everything so the anchor lands exactly */
+  .cv-off .logos,.cv-off .reel,.cv-off .results,.cv-off .videos,.cv-off .receipts,.cv-off .guar{content-visibility:visible;} /* deep links (#guarantee, #proof, #reel) render everything so the anchor lands exactly */
   .results{padding:56px 16px;text-align:center;max-width:900px;margin:0 auto;}
   .faces{display:flex;justify-content:center;margin-top:32px;}
   .faces img{width:56px;height:56px;border-radius:50%;object-fit:cover;border:2px solid var(--bg);margin-left:-12px;}
@@ -351,6 +353,17 @@
      being pushed a screen and a half down by a 760px-wide 16:9 frame. */
   @media(min-width:900px){.hero-proof{max-width:620px;}}
 
+  /* ── /25/ HERO: two-prong subline, social proof, inline Q1 (Spencer 2026-10-07) ── */
+  .h1-prongs{font-weight:800;font-size:19px;letter-spacing:-.01em;color:#F5B93E;margin-top:10px;}
+  @media(min-width:640px){.h1-prongs{font-size:25px;}}
+  .h1-prongs .plus{opacity:.55;margin:0 2px;font-weight:700;}
+  .hero-proofline{margin-top:11px;font-size:12.5px;letter-spacing:.04em;text-transform:uppercase;
+    color:rgba(248,247,243,.52);}
+  .hero-q1{max-width:560px;margin:26px auto 0;text-align:center;}
+  .hero-q1-h{font-size:15px;font-weight:700;color:#F8F7F3;margin:0 0 12px;line-height:1.3;}
+  @media(min-width:640px){.hero-q1-h{font-size:17px;}}
+  .hero-q1 .qs-opts{text-align:left;}
+
   /* ── /25/ SURVEY MODAL (mechanics from the v8 root #mc-overlay, tag funnel-v8-root-2026-09-14) ── */
   #qs-overlay{position:fixed;inset:0;z-index:10000;display:none;align-items:flex-start;justify-content:center;
     background:rgba(0,0,0,.94);padding:22px 14px 36px;overflow-y:auto;-webkit-overflow-scrolling:touch;}
@@ -383,9 +396,9 @@
     <span>MORE<b>JOB</b>CALLS<i>.com</i></span>
   </a>
   <p class="eyebrow">For Established Deck Companies</p>
-  <h1 class="h1"><span class="gold h1-key">25 Estimates In 25 Days</span> Or A Minimum Of <span class="gold">$50,000 In Booked Jobs</span></h1>
-  <p class="h1-lede">Month to month. No long-term contract. Seven days to launch.</p>
-  <p class="h1-sub"><span class="gb"><svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>If We Miss It, We Work For Free Forever Until We Do</span></p>
+  <h1 class="h1"><span class="gold h1-key">25 Estimates In 25 Days</span> Or You Get Paid In <span class="gold">2 Ways:</span></h1>
+  <p class="h1-lede h1-prongs">100% Free <span class="plus">+</span> We Cover Ad Spend</p>
+  <p class="h1-sub"><span class="gb"><svg viewBox="0 0 24 24" fill="none" stroke="#22C55E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 13l4 4L19 7"/></svg>From the day we miss until your 25th estimate lands</span></p>
 
   <div class="survey-wrap" id="apply">
     <!-- /25/ HERO PROOF (Spencer 2026-10-06): the 12-builders reel takes the slot the inline survey used to
@@ -394,48 +407,111 @@
          The H2 title over the video was dropped 2026-10-07 (Spencer): the custom thumbnail carries that message.
          data-thumb keeps our own thumbnail when the facade is rebuilt after another video is played. -->
     <div class="hero-proof">
+      <p class="reel-kicker">Watch This First &middot; 2 Minutes</p>
+      <p class="reel-sub">Every one of them had been burned by an agency before.</p>
       <div class="reel-frame">
-        <button class="yt" type="button" data-id="HRYuMJmhpmY" data-reel data-thumb="/25/thumb-d.webp" aria-label="Play: 12 deck builders who didn't believe it either"><img src="/25/thumb-d.webp" width="960" height="540" alt="Three deck builders on the recorded call" loading="eager" fetchpriority="high" decoding="async"><span class="play"></span></button>
+        <button class="yt" type="button" data-id="HRYuMJmhpmY" data-reel data-thumb="/25/thumb-d.jpg" aria-label="Play: 12 deck builders who didn't believe it either"><img src="/25/thumb-d.jpg" alt="Three deck builders on the recorded call" loading="eager"><span class="play"></span></button>
       </div>
       <div class="cta-row"><a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Get My 25 Estimates</span><small>Check if your zip is open &rarr;</small></a></div>
+      <p class="hero-proofline">100+ Contractors Served &middot; $100M+ In Booked Jobs</p>
+      <div class="hero-q1">
+        <p class="hero-q1-h">How many sales appointments are you CURRENTLY running per week?</p>
+        <div class="qs-opts two">
+          <button class="qs-opt" type="button" data-hero-q1 data-field="current_appts_per_week" data-value="0 - 5 appointments per week">0&ndash;5 per week</button>
+          <button class="qs-opt" type="button" data-hero-q1 data-field="current_appts_per_week" data-value="5 - 10 appointments per week">5&ndash;10 per week</button>
+          <button class="qs-opt" type="button" data-hero-q1 data-field="current_appts_per_week" data-value="10 - 20 appointments per week">10&ndash;20 per week</button>
+          <button class="qs-opt" type="button" data-hero-q1 data-field="current_appts_per_week" data-value="20+ appointments per week">20+ per week</button>
+        </div>
+      </div>
     </div>
 
-    <div class="qs-trust" aria-label="What you get">
-      <span><span class="d">&#9670;</span> Month To Month. No Long-Term Contract.</span><span class="sep">|</span>
-      <span><span class="d">&#9670;</span> Exclusive. Never Shared.</span><span class="sep">|</span>
-      <span><span class="d">&#9670;</span> Ready-To-Buy Homeowners</span><span class="sep">|</span>
-      <span><span class="d">&#9670;</span> 7 Days To Launch</span>
-    </div>
   </div>
 </section>
 
 
 
-<!-- ═══════════════════════ NO LONG-TERM CONTRACTS (the /25/ spine — the ad's whole angle) ═══════════════════════ -->
-<section class="guar" id="no-contract">
+<!-- ═══════════════════════ REAL BUILDERS. REAL ROI. (R4 card grid) ═══════════════════════ -->
+<section class="guar" id="real-builders">
   <div class="guar-in">
-    <h2 class="h2">Anything Longer Than A Month Is A <span class="gold">Long-Term Contract</span></h2>
-    <p class="guar-lede">We talked to a deck builder last week who signed a three year deal. He is not happy with what he is getting, and he cannot get out of it.</p>
-    <div class="guar-grid">
-      <div class="guar-card">
-        <p class="guar-k">Their Pitch</p>
-        <p class="guar-t">&ldquo;If you're serious about growing, you've gotta commit.&rdquo;</p>
-        <p class="guar-b">So ask them this: of course I'm serious, but <strong>what happens if you don't get results?</strong> Watch how fast that room gets quiet. Because if the results don't come, you're still paying.</p>
-      </div>
-      <div class="guar-card">
-        <p class="guar-k">How We Do It</p>
-        <p class="guar-t">Month To Month. 7 Days To Launch.</p>
-        <p class="guar-b">You wouldn't get married before the first date. So why commit a year of your money before you've seen it work? <strong>We prove it first. You decide again every month.</strong></p>
-      </div>
+    <h2 class="h2">Real builders. <span class="gold">Real ROI.</span></h2>
+    <p class="guar-lede">Tap any card to watch the story. These are deck builders who said the same thing on day one &mdash; <em>&ldquo;too good to be true&rdquo;</em> &mdash; and changed their minds because the system kept delivering.</p>
+    <style>
+      .rv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px;text-align:left;}
+      @media (max-width:900px){.rv-grid{grid-template-columns:repeat(2,1fr);}}
+      @media (max-width:600px){.rv-grid{grid-template-columns:1fr;}}
+      .rv-card{background:#1A1917;border-radius:14px;border-top:3px solid var(--rv-accent);
+        padding:16px 16px 20px;text-align:left;display:flex;flex-direction:column;}
+      .rv-video{position:relative;display:block;text-decoration:none;border-radius:10px;overflow:hidden;aspect-ratio:16/9;}
+      .rv-video img.rv-tn{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
+      .rv-quote{position:absolute;inset-inline:0;bottom:0;padding:26px 12px 10px;margin:0;
+        background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.5) 65%,transparent 100%);
+        color:#fff;font-size:13.5px;font-weight:700;font-style:italic;line-height:1.25;}
+      .rv-head{display:flex;align-items:center;gap:11px;margin-top:15px;}
+      .rv-avatar{width:44px;height:44px;border-radius:50%;object-fit:cover;
+        border:2px solid rgba(199,150,63,.35);flex-shrink:0;}
+      .rv-name{color:#F8F7F3;font-size:15px;font-weight:700;line-height:1.2;margin:0;}
+      .rv-niche{color:#C7963F;font-size:11.5px;font-weight:500;line-height:1.3;margin:2px 0 0;}
+      .rv-stat{color:var(--rv-accent);font-size:23px;font-weight:800;letter-spacing:-.01em;
+        margin:13px 0 0;line-height:1.1;}
+      .rv-context{color:rgba(248,247,243,.5);font-size:12.5px;margin:5px 0 0;}
+      .rv-body{color:rgba(248,247,243,.65);font-size:13px;line-height:1.55;margin:11px 0 0;}
+    </style>
+    <div class="rv-grid">
+      <article class="rv-card" style="--rv-accent:#0EA5E9">
+        <a class="rv-video" href="https://youtu.be/TvFv_EIM-MI" target="_blank" rel="noopener" aria-label="Watch: Billy S.">
+          <img class="rv-tn" src="/yt-thumbs/TvFv_EIM-MI.webp" alt="" loading="lazy" decoding="async">
+          <p class="rv-quote">&ldquo;It&rsquo;s true. It&rsquo;s true.&rdquo;</p>
+        </a>
+        <div class="rv-head">
+          <img class="rv-avatar" src="/proof-faces/billy-s.jpg" alt="" loading="lazy" width="44" height="44">
+          <div><p class="rv-name">Billy S.</p><p class="rv-niche">Deck &amp; patio builder &middot; Greenville, SC</p></div>
+        </div>
+        <p class="rv-stat">$196,383 In His First Week</p>
+        <p class="rv-context">Signed contracts &middot; June 2026</p>
+        <p class="rv-body">Closing most of his appointments and booked out 14&ndash;16 weeks. He had spent $250K on shared leads before this.</p>
+      </article>
+      <article class="rv-card" style="--rv-accent:#22C55E">
+        <a class="rv-video" href="https://youtu.be/5kHvRM_2wYE" target="_blank" rel="noopener" aria-label="Watch: Chris W.">
+          <img class="rv-tn" src="/yt-thumbs/5kHvRM_2wYE.webp" alt="" loading="lazy" decoding="async">
+          <p class="rv-quote">&ldquo;Then I had to pause and hire.&rdquo;</p>
+        </a>
+        <div class="rv-head">
+          <img class="rv-avatar" src="/proof-faces/chris-w.jpg" alt="" loading="lazy" width="44" height="44">
+          <div><p class="rv-name">Chris W.</p><p class="rv-niche">Custom deck &amp; home builder &middot; Gulf Shores, AL</p></div>
+        </div>
+        <p class="rv-stat">$320K In His First 60 Days</p>
+        <p class="rv-context">On $100/day &middot; Summer 2026</p>
+        <p class="rv-body">13 to 14 on-site appointments a week, until he had more work than hands to do it with.</p>
+      </article>
+      <article class="rv-card" style="--rv-accent:#C7963F">
+        <a class="rv-video" href="https://youtu.be/Xt4TVn4zP7s" target="_blank" rel="noopener" aria-label="Watch: Jacob W.">
+          <img class="rv-tn" src="/yt-thumbs/Xt4TVn4zP7s.webp" alt="" loading="lazy" decoding="async">
+          <p class="rv-quote">&ldquo;We stopped chasing.&rdquo;</p>
+        </a>
+        <div class="rv-head">
+          <img class="rv-avatar" src="/proof-faces/jacob-w.jpg" alt="" loading="lazy" width="44" height="44">
+          <div><p class="rv-name">Jacob W.</p><p class="rv-niche">Deck builder &middot; Pennsylvania</p></div>
+        </div>
+        <p class="rv-stat">$480K Closed In 21 Days</p>
+        <p class="rv-context">Crews booked into September &middot; March 2026</p>
+        <p class="rv-body">Crews booked solid months out, from appointments that were already expecting him.</p>
+      </article>
+      <article class="rv-card" style="--rv-accent:#F97316">
+        <a class="rv-video" href="https://youtu.be/4TP1sTRASoA" target="_blank" rel="noopener" aria-label="Watch: Brian W.">
+          <img class="rv-tn" src="/yt-thumbs/4TP1sTRASoA.webp" alt="" loading="lazy" decoding="async">
+          <p class="rv-quote">&ldquo;I wanted to call your bluff.&rdquo;</p>
+        </a>
+        <div class="rv-head">
+          <img class="rv-avatar" src="/proof-faces/brian-w.jpg" alt="" loading="lazy" width="44" height="44">
+          <div><p class="rv-name">Brian W.</p><p class="rv-niche">Fence &amp; deck company &middot; Bend, OR</p></div>
+        </div>
+        <p class="rv-stat">25 Deck Jobs In 6 Weeks</p>
+        <p class="rv-context">After calling our bluff &middot; April 2026</p>
+        <p class="rv-body">He did not believe the guarantee, took it anyway, and did more in six weeks than the year before.</p>
+      </article>
     </div>
-    <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>See If Your Market Is Open</span><small>Month To Month &rarr;</small></a>
+    <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Get My 25 Estimates</span><small>Check if your zip is open &rarr;</small></a>
   </div>
-</section>
-
-<!-- ═══════════════════════ LOGO MARQUEE ═══════════════════════ -->
-<section class="logos" aria-label="Clients">
-  <p>Trusted By Deck Builders Across The Country</p>
-  <p class="logos-line" style="margin:0 auto;padding:0 16px;max-width:760px;text-align:center;font-size:15px;font-weight:600;letter-spacing:normal;text-transform:none;line-height:1.5;opacity:.85;">Deck builders, fence companies, patio cover and roofing contractors, from Oregon to Massachusetts.</p>
 </section>
 
 <!-- ═══════════════════════ RECENT RESULTS ═══════════════════════ -->
@@ -455,46 +531,6 @@
     <li><span class="z">&#9889;</span>Brian — 25 deck jobs in 6 weeks after "calling our bluff"<small>April 2026 · Fence &amp; deck company · Bend, OR</small></li>
     <li><span class="z">&#9889;</span>Mike — from 3 appointments a week to 11 a day<small>General contractor · South Shore, MA</small></li>
   </ul>
-</section>
-
-<!-- ═══════════════════════ VIDEO WALL ═══════════════════════ -->
-<section class="videos" id="proof">
-  <h2 class="h2">What Our Clients Say</h2>
-  <div class="vgrid">
-    <div class="vcard"><button class="yt" type="button" data-id="TvFv_EIM-MI" aria-label="Play: Billy S."><img src="/yt-thumbs/TvFv_EIM-MI.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">$300K+ In Deck Jobs In 17 Days On $1,657 Of Ads<small>Billy S. · Deck &amp; Patio Builder</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="5kHvRM_2wYE" aria-label="Play: Chris W."><img src="/yt-thumbs/5kHvRM_2wYE.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">$320K In Deck Jobs In 60 Days On $100/Day<small>Chris W. · Custom Deck &amp; Home Builder</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="4TP1sTRASoA" aria-label="Play: Brian W."><img src="/yt-thumbs/4TP1sTRASoA.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">"I Wanted To Call Your Bluff" — 25 Deck Jobs In 6 Weeks<small>Brian W. · Fence &amp; Deck Company</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="YJQxX5ZQ3aI" aria-label="Play: Justin W."><img src="/yt-thumbs/YJQxX5ZQ3aI.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">$1.2M Closed In Jan &amp; Feb After 6 Agencies Failed<small>Justin W. · Deck &amp; Patio Builder</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="ZT8C3xoQSLc" aria-label="Play: Mike B."><img src="/yt-thumbs/ZT8C3xoQSLc.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">From 3 Appointments A Week To 11 A Day<small>Mike B. · General Contractor</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="Xt4TVn4zP7s" aria-label="Play: Jacob W."><img src="/yt-thumbs/Xt4TVn4zP7s.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">$480K Closed In 21 Days — Doubled To $1M In 4 Months<small>Jacob W. · Deck Builder</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="-q18xO92akA" aria-label="Play: Jason F."><img src="/yt-thumbs/-q18xO92akA.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">Biggest Month In 15 Years — A $500K Month On $100/Day<small>Jason F. · Deck Builder</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="djsZ_YNn7wY" aria-label="Play: Ricardo C."><img src="/yt-thumbs/djsZ_YNn7wY.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">$105K Closed In The First 7 Days On Under $1,000<small>Ricardo C. · Concrete &amp; Deck Contractor</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="woPfBuocx-M" aria-label="Play: Billy G."><img src="/yt-thumbs/woPfBuocx-M.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">"I Rolled The Dice" — $50K Signed In Month One<small>Billy G. · Home Improvement Contractor</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="03CDvt0xR5Y" aria-label="Play: Derek L."><img src="/yt-thumbs/03CDvt0xR5Y.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">$46,000 In Deck Jobs In 30 Days On $1,295 Of Ads<small>Derek L. · Outdoor Living Contractor</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="ERQ84Dgz-Ow" aria-label="Play: Chip P."><img src="/yt-thumbs/ERQ84Dgz-Ow.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">$200K From 4 Appointments In 21 Days<small>Chip P. · Deck Builder</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="FKa_Zsji0bE" aria-label="Play: Jason B."><img src="/yt-thumbs/FKa_Zsji0bE.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">From 1 Crew To 5 In One Season — $100K In Month One<small>Jason B. · Deck Builder</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="vxqYn1E86LA" aria-label="Play: Mike H."><img src="/yt-thumbs/vxqYn1E86LA.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">52 Appointments In The First 10 Days On $1,500<small>Mike H. · Deck Builder</small></div></div>
-    <div class="vcard"><button class="yt" type="button" data-id="kK3oXzLb4-0" aria-label="Play: Eric E."><img src="/yt-thumbs/kK3oXzLb4-0.webp" width="480" height="270" alt="" loading="lazy" decoding="async"><span class="play"></span></button><div class="vt">65–70 Exclusive Appointments Every Week<small>Eric E. · Patio Cover Company</small></div></div>
-  </div>
-  <div class="cta-row"><a class="cta" href="#qs-card" data-scroll-survey>Check Your Market</a></div>
-</section>
-
-<!-- ═══════════════════════ THE RECEIPTS ═══════════════════════ -->
-<section class="receipts">
-  <p class="kicker">Every screenshot below is straight from a client's text thread or dashboard. Unedited.</p>
-  <h2 class="h2">Unfiltered Wins From Our Deck Builder Clients</h2>
-  <div class="masonry">
-    <img src="/wins/win-justin-w-492k.webp" width="900" height="1951" alt="Text thread: Justin W., $492K" loading="lazy" decoding="async">
-    <img src="/wins/win-mike-b-100k-deck-appt-2026-06-30.webp" width="900" height="815" alt="Text thread: Mike B., ~$100K deck from one appointment" loading="lazy" decoding="async">
-    <img src="/wins/win-ricardo-c-55k.webp" width="900" height="951" alt="Text thread: Ricardo C., $55K" loading="lazy" decoding="async">
-    <img src="/wins/mike-b-100k.webp" width="900" height="506" alt="Dashboard: Mike B., general contractor" loading="lazy" decoding="async">
-    <img src="/wins/win-jessica-m-booked-3-days.webp" width="900" height="603" alt="Text thread: Jessica M., booked in 3 days" loading="lazy" decoding="async">
-    <img src="/wins/chip-p.webp" width="900" height="506" alt="Text thread: Chip P." loading="lazy" decoding="async">
-    <img src="/wins/win-antonio-c-80k-deck-2026-05-21.webp" width="714" height="360" alt="Text thread: Antonio C., $80K deck" loading="lazy" decoding="async">
-    <img src="/wins/win-john-m-8500-job.webp" width="496" height="147" alt="Text thread: John M., $8,500 job" loading="lazy" decoding="async">
-    <img src="/wins/win-roofer-12of20-roofs-from-marketing-2026-06-19.webp" width="690" height="223" alt="Text thread: roofing contractor, 12 of 20 jobs from marketing" loading="lazy" decoding="async">
-  </div>
-  <div class="cta-row"><a class="cta" href="#qs-card" data-scroll-survey>Get My Appointments</a></div>
 </section>
 
 <!-- ═══════════════════════ WHAT YOU GET ON THIS CALL (the ad's spoken CTA promise) ═══════════════════════ -->
@@ -535,12 +571,12 @@
       <div class="guar-card">
         <p class="guar-k">Day 25</p>
         <p class="guar-t">25 Estimates In 25 Days</p>
-        <p class="guar-b">25 exclusive on-site estimate opportunities with ready-to-buy homeowners in your market, or a minimum of <strong>$50,000 in booked jobs.</strong> Month to month, so you are never locked in.</p>
+        <p class="guar-b">25 exclusive on-site estimate opportunities with ready-to-buy homeowners in your market, or a minimum of <strong>$50,000 in booked jobs.</strong> Seven days to launch. Month to month, so you are never locked in.</p>
       </div>
       <div class="guar-card">
         <p class="guar-k">If We Miss</p>
-        <p class="guar-t" id="guar2-t">We Work For Free Forever Until We Do</p>
-        <p class="guar-b" id="guar2-b">No new fee. No renegotiation. No &ldquo;well, the market changed.&rdquo; We keep running your ads, your pages and your follow-up at our own cost until you get there.</p>
+        <p class="guar-t" id="guar2-t">100% Free + We Cover Your Ad Spend</p>
+        <p class="guar-b" id="guar2-b"><strong>1.</strong> You pay us nothing more &mdash; no new fee, no renegotiation, no &ldquo;well, the market changed.&rdquo; <strong>2.</strong> We pick up your ad spend too, from the day we miss until your 25th estimate lands. Your first 25 days of spend stays yours, the same as any other month.</p>
       </div>
     </div>
     <div class="guar-terms" id="guar-terms">
@@ -551,7 +587,7 @@
         <li>Keep us connected to your ad account and pages, and don’t change the campaigns we run.</li>
         <li>Let us run the full deck job system: the ads, pages, and follow-up we’ve tested.</li>
       </ul>
-      <p style="margin:8px 0 0;" id="guar-scope">There is no long-term contract to get out of. You pay month to month, and ad spend goes from your card straight to Meta, so it is never ours to hold.</p>
+      <p style="margin:8px 0 0;" id="guar-scope">There is no long-term contract to get out of &mdash; you pay month to month. For the first 25 days your ad spend goes from your card straight to Meta, the way it always does. If we miss, we cover it from day 26 until we hit 25.</p>
       <p style="margin:8px 0 0;"><a href="/25/terms/" target="_blank" rel="noopener">Full terms</a></p>
     </div>
     <a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Get More Deck Jobs</span><small>Claim Your Zip Code &rarr;</small></a>
@@ -939,7 +975,8 @@
   }
   (function(){ var b=document.getElementById('mcb-btn'); if(b) b.addEventListener('click',mcbBook); var r=document.getElementById('mcb-retry'); if(r) r.addEventListener('click',function(e){ mcbLoad(e,true); }); })();
 
-  // GHL's form_embed.js (iframe auto-resize) used to be a parser-blocking <script> inside #mc-cal-wrap; it only matters on the non-ICP widget path, so it is injected on demand (2026-10-07).
+  // GHL's form_embed.js (iframe auto-resize) used to be a parser-blocking <script> inside #mc-cal-wrap. It only matters
+  // when the GHL widget calendar is shown (non-ICP path), so it is injected on demand there (2026-10-07).
   function loadGhlEmbed(){ if(window.__mjcGhlEmbed) return; window.__mjcGhlEmbed=true;
     try{ var s=document.createElement('script'); s.src='https://api.seasonproofgrowth.com/js/form_embed.js'; s.async=true; document.head.appendChild(s); }catch(e){} }
   function preloadCalendar(){ icp=isICP(formData); if(calPreloaded) return; calPreloaded=true;
@@ -1077,6 +1114,20 @@
   document.querySelectorAll('[data-scroll-survey], a[href="#apply"]').forEach(function(el){
     el.addEventListener('click',function(e){ e.preventDefault(); openModal(); });
   });
+  // Hero Q1 (Spencer 2026-10-07). Root binds its option handler as card.querySelectorAll('.qs-opt'),
+  // which is SCOPED TO THE CARD — the hero buttons live outside it and are therefore NOT bound by it.
+  // So this does the same work root's handler does, then opens the modal on the next question:
+  // record the answer under the real field key, fire the same funnel event, advance, open.
+  document.querySelectorAll('[data-hero-q1]').forEach(function(el){
+    el.addEventListener('click', function(){
+      markOpen();
+      formData[el.dataset.field] = el.dataset.value;
+      try{ dlTrack('q_'+el.dataset.field, OPT_IDX[el.dataset.field]||1,
+                   {field:el.dataset.field, value:el.dataset.value}); }catch(e){}
+      if(current < TOTAL_Q) show(current+1);
+      openModal();
+    });
+  });
   window.__openApply=openModal; window.__closeApply=closeModal; // QA hooks
 
   // QA: ?preview=cal → ICP native picker · ?preview=cal-nonicp → non-ICP widget. Nothing fires (no webhook/pixel/CRM write).
@@ -1107,7 +1158,7 @@
   document.querySelectorAll('.yt').forEach(function(btn){
     btn.addEventListener('click',function(){
       var id=btn.dataset.id; if(!id) return;
-      document.querySelectorAll('.yt iframe').forEach(function(f){ var p=f.parentNode; p.innerHTML='<img src="'+(p.dataset.thumb||('/yt-thumbs/'+p.dataset.id+'.webp'))+'" alt=""><span class="play"></span>'; });
+      document.querySelectorAll('.yt iframe').forEach(function(f){ var p=f.parentNode; p.innerHTML='<img src="'+(p.dataset.thumb||('/yt-thumbs/'+p.dataset.id+'.webp'))+'" alt="" decoding="async"><span class="play"></span>'; });
       if(btn.hasAttribute('data-reel')){ try{ if(!window.MJC_QA && window.clarity) clarity('event','proof_reel_play'); }catch(e){} }
       btn.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+id+'?autoplay=1&rel=0&modestbranding=1&playsinline=1" title="Client video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
     });
