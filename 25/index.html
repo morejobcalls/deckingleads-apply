@@ -1786,6 +1786,12 @@
 .mc-spinner{width:44px;height:44px;border:4px solid #ECE6DA;border-top-color:#1A1917;border-radius:50%;animation:mcSpin 1s linear infinite;margin-bottom:18px;}
 .mc-lock{overflow:hidden;}
 .mc-q{font-size:21px;}
+  /* Ravi-modelled survey: labelled inputs + Back/Next footer */
+  .mc-label{display:block;font-size:13.5px;font-weight:600;color:#1A1917;margin:4px 0 7px;}
+  .mc-next-row{display:flex;justify-content:flex-end;align-items:center;gap:14px;
+    border-top:1px solid #E8E3D8;margin-top:18px;padding-top:14px;}
+  .mc-fine a{color:#6B6A63;text-decoration:underline;}
+
 
   /* ── /25/ : Real builders card grid (R4) + What You Get On This Call ── */
   .rv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px;text-align:left;}
@@ -1841,70 +1847,64 @@
       <div id="mc-bar"><div id="mc-bar-fill"></div></div>
     </div>
 
-    <div class="mc-step active" data-step="1">
-      <h3 class="mc-q">How long have you been in business?</h3>
-      <p class="mc-sub">Rough is fine.</p>
+        <div class="mc-step active" data-step="1">
+      <h3 class="mc-q">Do you own a deck building company?</h3>
+      <p class="mc-sub">We only work with established builders.</p>
       <div class="mc-grid2">
-        <button class="mc-opt" data-field="years_in_business" data-value="lt_1">Less than a year</button>
-        <button class="mc-opt" data-field="years_in_business" data-value="1_3">1-3 Years</button>
-        <button class="mc-opt" data-field="years_in_business" data-value="3_5">3-5 Years</button>
-        <button class="mc-opt" data-field="years_in_business" data-value="5_plus">5+ Years</button>
+        <button class="mc-opt" data-field="own_business" data-value="yes">Yes</button>
+        <button class="mc-opt" data-field="own_business" data-value="no">No</button>
       </div>
     </div>
 
     <div class="mc-step" data-step="2">
-      <h3 class="mc-q">What’s your crew situation right now?</h3>
-      <p class="mc-sub">Be straight with us — it changes the plan we build for you.</p>
-      <button class="mc-opt" data-field="crew_situation" data-value="just_me">Just me — I’m on the tools</button>
-      <button class="mc-opt" data-field="crew_situation" data-value="subs_on_demand">Me + subs I can pull in when the work is there</button>
-      <button class="mc-opt" data-field="crew_situation" data-value="one_crew">1 full-time crew</button>
-      <button class="mc-opt" data-field="crew_situation" data-value="multi_crew">2+ full-time crews</button>
+      <h3 class="mc-q">What&rsquo;s your full name?</h3>
+      <p class="mc-sub">First and last name.</p>
+      <input id="mc-fullname" class="mc-input" type="text" autocomplete="name" placeholder="Jane Smith">
+      <p id="mc-fullname-err" class="mc-err">Please enter your first and last name.</p>
+      <div class="mc-next-row"><button class="mc-next" type="button" data-next="3">Next &#8594;</button></div>
     </div>
 
     <div class="mc-step" data-step="3">
-      <h3 class="mc-q">How much has your business invested in marketing the past 12 months?</h3>
-      <p class="mc-sub">Ballpark across all channels.</p>
-      <div class="mc-grid2">
-        <button class="mc-opt" data-field="marketing_spend" data-value="0_2_5k">$0–$2.5K</button>
-        <button class="mc-opt" data-field="marketing_spend" data-value="2_5_5k">$2.5k–$5k</button>
-        <button class="mc-opt" data-field="marketing_spend" data-value="5_10k">$5k–$10k</button>
-        <button class="mc-opt" data-field="marketing_spend" data-value="10_20k">$10–$20k</button>
-        <button class="mc-opt" data-field="marketing_spend" data-value="20_30k">$20k–$30k</button>
-        <button class="mc-opt" data-field="marketing_spend" data-value="30k_plus">$30k+</button>
+      <h3 class="mc-q">Where should we send the call details?</h3>
+      <p class="mc-sub">You&rsquo;ll get a text with the Zoom link and a reminder before the call.</p>
+      <label class="mc-label" for="mc-email">Business email address</label>
+      <input id="mc-email" class="mc-input" type="email" autocomplete="email" placeholder="janesmith@gmail.com">
+      <p id="mc-email-err" class="mc-err">Please enter a valid email address.</p>
+      <label class="mc-label" for="mc-phone">Phone number</label>
+      <div class="mc-phone-row">
+        <span class="mc-flag">&#127482;&#127480; +1</span>
+        <input id="mc-phone" class="mc-input" type="tel" inputmode="numeric" autocomplete="tel" placeholder="(361) 459-6148" maxlength="14" style="flex:1;margin-bottom:0;">
       </div>
+      <p id="mc-phone-err" class="mc-err" style="margin-top:12px;">Please enter a valid 10-digit phone number.</p>
+      <p class="mc-fine">By continuing, you agree to our <a href="/25/terms/" target="_blank" rel="noopener">Terms of Service</a> and <a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a>, and to receive calls, texts and emails about your inquiry. Consent not required to purchase. Msg &amp; data rates may apply. Reply STOP to opt out.</p>
+      <div class="mc-next-row"><button class="mc-next" type="button" data-next-final>Next &#8594;</button></div>
     </div>
 
     <div class="mc-step" data-step="4">
-      <h3 class="mc-q">How much revenue has your business generated within the past 12 months?</h3>
-      <p class="mc-sub">Rough range is fine. No wrong answers.</p>
-      <button class="mc-opt" data-field="revenue" data-value="0_100k">0–$100K / Year</button>
-      <button class="mc-opt" data-field="revenue" data-value="100_200k">$100–$200K / Year</button>
-      <button class="mc-opt" data-field="revenue" data-value="200_300k">$200–$300K / Year</button>
-      <button class="mc-opt" data-field="revenue" data-value="300_500k">$300–500K / Year</button>
-      <button class="mc-opt" data-field="revenue" data-value="500k_1m">$500 – $1M / Year</button>
-      <button class="mc-opt" data-field="revenue" data-value="1m_3m">$1–3M / Year</button>
-      <button class="mc-opt" data-field="revenue" data-value="3m_plus">$3M+ / Year</button>
+      <h3 class="mc-q">Average revenue over the last 12 months?</h3>
+      <p class="mc-sub">Ballpark is fine.</p>
+      <div class="mc-grid2">
+        <button class="mc-opt" data-field="revenue" data-value="0_100k">Under $100k</button>
+        <button class="mc-opt" data-field="revenue" data-value="100_200k">$100k&ndash;$200k</button>
+        <button class="mc-opt" data-field="revenue" data-value="200_300k">$200k&ndash;$300k</button>
+        <button class="mc-opt" data-field="revenue" data-value="300_500k">$300k&ndash;$500k</button>
+        <button class="mc-opt" data-field="revenue" data-value="500k_1m">$500k&ndash;$1M</button>
+        <button class="mc-opt" data-field="revenue" data-value="1m_3m">$1M&ndash;$3M</button>
+        <button class="mc-opt" data-field="revenue" data-value="3m_plus">$3M+ / Year</button>
+      </div>
     </div>
 
     <div class="mc-step" data-step="5">
-      <h3 class="mc-q">We keep demo spots limited. Grab yours before they fill up this week.</h3>
-      <p class="mc-sub">Where should we send your demo details?</p>
-      <input id="mc-first" class="mc-input" type="text" autocomplete="given-name" placeholder="👋 Your first name">
-      <p id="mc-first-err" class="mc-err">Please enter your first name.</p>
-      <input id="mc-last" class="mc-input" type="text" autocomplete="family-name" placeholder="🧑 Your last name">
-      <p id="mc-last-err" class="mc-err">Please enter your last name.</p>
-      <input id="mc-bizname" class="mc-input" type="text" autocomplete="organization" placeholder="🏗️ Business name">
-      <p id="mc-bizname-err" class="mc-err">Please enter your business name.</p>
-      <div class="mc-phone-row">
-        <span class="mc-flag">🇺🇸 +1</span>
-        <input id="mc-phone" class="mc-input" type="tel" inputmode="numeric" autocomplete="tel" placeholder="Your phone number" maxlength="14" style="flex:1;margin-bottom:0;">
+      <h3 class="mc-q">If we determine there&rsquo;s a strong fit, how soon would you realistically want to begin?</h3>
+      <div class="mc-grid2">
+        <button class="mc-opt" data-field="timing" data-value="asap">ASAP</button>
+        <button class="mc-opt" data-field="timing" data-value="2_4_weeks">Next 2&ndash;4 weeks</button>
+        <button class="mc-opt" data-field="timing" data-value="later">Later</button>
+        <button class="mc-opt" data-field="timing" data-value="researching">Just researching</button>
       </div>
-      <p id="mc-phone-err" class="mc-err" style="margin-top:12px;">Please enter a valid 10-digit phone number.</p>
-      <input id="mc-email" class="mc-input" type="email" autocomplete="email" placeholder="✉️ Your email address" style="margin-top:12px;">
-      <p id="mc-email-err" class="mc-err">Please enter a valid email address.</p>
-      <p class="mc-fine">By continuing, you agree to receive SMS/text reminders about your call. Standard rates may apply. Reply STOP to opt out.</p>
-      <div class="mc-next-row"><button class="mc-next" type="button" data-next-final>Book My Demo &#8594;</button></div>
     </div>
+
+
 
     <div class="mc-step" data-step="6">
       <div style="text-align:center;margin-bottom:14px;">
@@ -1927,7 +1927,7 @@
   var backBtn=document.getElementById('mc-back');
   var closeBtn=document.getElementById('mc-close');
   var steps=overlay.querySelectorAll('.mc-step');
-  var TOTAL=6, PROG={1:14,2:30,3:48,4:66,5:84,6:100};
+  var TOTAL=6, PROG={1:25,2:50,3:80,4:95,5:99,6:100};
   var formData={}, current=1, icp=null, calPreloaded=false, submitted=false;
 
   var attribution=(function(){
@@ -1968,7 +1968,7 @@
   // Canonical idx (v8 survey, 2026-08-22): 0 landed · 1 survey_open · 2 years · 3 crew · 4 marketing_spend · 5 revenue · 6 contact · 7 submit
   var DL_SID=(function(){try{var s=sessionStorage.getItem('dl_sid'); if(!s){s=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'s'+Date.now()+Math.random().toString(36).slice(2,10); sessionStorage.setItem('dl_sid',s);} return s;}catch(e){return 's'+Date.now();}})();
   var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
-  var MC_OPT_IDX={years_in_business:2,crew_situation:3,marketing_spend:4,revenue:5};
+  var MC_OPT_IDX={own_business:2,revenue:4,timing:5};
   function dlTrack(step,idx,extra){
     try{
       var p={sid:DL_SID,step:step,idx:idx,
@@ -1992,7 +1992,7 @@
   // "1. New Lead" workflow, its Meta CAPI Lead event, and its notifications never
   // fire for partials and Meta optimization data stays clean.
   // KILL SWITCH: empty string = feature OFF (no request is ever sent).
-  var PARTIAL_WEBHOOK_URL='';
+  var PARTIAL_WEBHOOK_URL='https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675';
   var partialSent=false;
   function firePartialLead(){
     if(partialSent||submitted||!PARTIAL_WEBHOOK_URL) return; partialSent=true;
@@ -2035,11 +2035,24 @@
     btn.addEventListener('click',function(){
       formData[btn.dataset.field]=btn.dataset.value;
       dlTrack('q_'+btn.dataset.field, MC_OPT_IDX[btn.dataset.field]||current, {field:btn.dataset.field, value:btn.dataset.value});
-      if(btn.dataset.field==='revenue') preloadCalendar(); // ICP now determinable → preload correct calendar
+      if(btn.dataset.field==='revenue') preloadCalendar();
+      if(btn.dataset.field==='timing'){ submitAndShowCalendar(); return; } // ICP now determinable → preload correct calendar
       if(current<TOTAL) show(current+1);
     });
   });
 
+  var fullEl=document.getElementById('mc-fullname'), fullErr=document.getElementById('mc-fullname-err');
+  var nextName=overlay.querySelector('[data-next="3"]');
+  if(nextName) nextName.addEventListener('click',function(){
+    var v=(fullEl.value||'').trim().replace(/\s+/g,' ');
+    var ok=v.length>=3 && v.indexOf(' ')>0;
+    fullErr.classList.toggle('show',!ok);
+    if(!ok){ fullEl.focus(); return; }
+    var p=v.split(' ');
+    formData.name=v; formData.first_name=p[0]; formData.last_name=p.slice(1).join(' ');
+    dlTrack('q_full_name',3,{field:'full_name'});
+    show(3);
+  });
   var firstEl=document.getElementById('mc-first'), firstErr=document.getElementById('mc-first-err');
   var lastEl=document.getElementById('mc-last'), lastErr=document.getElementById('mc-last-err');
   var bizEl=document.getElementById('mc-bizname'), bizErr=document.getElementById('mc-bizname-err');
@@ -2053,17 +2066,15 @@
   });
 
   overlay.querySelector('[data-next-final]').addEventListener('click',function(){
-    var first=firstEl.value.trim(), last=lastEl.value.trim(), biz=bizEl.value.trim();
     var phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,''), email=emailEl.value.trim();
-    var fok=first.length>=1, lok=last.length>=1, bok=biz.length>=2;
     var pok=/^[2-9]\d{9}$/.test(phone), eok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    firstErr.classList.toggle('show',!fok); lastErr.classList.toggle('show',!lok); bizErr.classList.toggle('show',!bok);
     phoneErr.classList.toggle('show',!pok); emailErr.classList.toggle('show',!eok);
-    if(!fok){firstEl.focus();return;} if(!lok){lastEl.focus();return;} if(!bok){bizEl.focus();return;}
-    if(!pok){phoneEl.focus();return;} if(!eok){emailEl.focus();return;}
-    formData.first_name=first; formData.last_name=last; formData.name=(first+' '+last).trim();
-    formData.business_name=biz; formData.phone='+1'+phone; formData.email=email;
-    dlTrack('contact_info',6); firePartialLead(); submitAndShowCalendar();
+    if(!eok){emailEl.focus();return;}
+    if(!pok){phoneEl.focus();return;}
+    formData.phone='+1'+phone; formData.email=email;
+    dlTrack('contact_info',3);
+    firePartialLead();          // the lead lands here, before any qualifying question
+    show(4);
   });
 
   // Enter-to-advance (2026-08-19): Enter in any survey text input clicks that step's
