@@ -388,6 +388,16 @@
   .logo-cell--card { background: transparent; padding: 0 6px; border-radius: 0; }
   .logo-cell--card img { filter: grayscale(1); mix-blend-mode: multiply; max-height: 56px; max-width: 188px; }
 
+  /* ── /25/ : hero proof video (static poster → the same lightbox the proof cards use) ── */
+  .hero-vid{display:block;position:relative;width:100%;max-width:520px;margin:0 auto 10px;
+    border-radius:14px;overflow:hidden;border:1px solid rgba(199,150,63,.30);
+    box-shadow:0 18px 50px rgba(0,0,0,.45);background:#0B0B0B;cursor:pointer;}
+  .hero-vid img{display:block;width:100%;height:auto;}
+  .hero-vid-cap{font-size:12.5px;line-height:1.4;color:#8A8578;margin:0 auto 16px;max-width:430px;}
+  @media (max-width:640px){
+    .hero-vid{max-width:100%;margin-bottom:9px;}
+    .hero-vid-cap{font-size:12px;margin-bottom:13px;}
+  }
   /* ── /25/ : Real builders card grid (R4) + What You Get On This Call ── */
   .rv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px;text-align:left;}
   @media (max-width:1180px){.rv-grid{grid-template-columns:repeat(3,1fr);}}
@@ -459,7 +469,7 @@
 <section class="sec-dark relative overflow-hidden">
   <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse 60% 50% at 50% 0%, rgba(199, 150, 63, 0.14) 0%, transparent 60%);"></div>
 
-  <div class="relative max-w-3xl mx-auto px-5 pt-6 pb-8 sm:pt-14 sm:pb-14 text-center">
+  <div class="relative max-w-3xl mx-auto px-5 pt-5 pb-7 sm:pt-9 sm:pb-10 text-center">
 
     <!-- Eyebrow -->
     <div class="inline-flex items-center gap-2 mb-3 sm:mb-5 px-2.5 py-1 rounded-full border border-gold/40" style="background: rgba(199, 150, 63, 0.10);">
@@ -468,14 +478,30 @@
     </div>
 
     <!-- H1 -->
-    <h1 class="display-lg text-[28px] leading-[1.1] sm:text-[50px] sm:leading-[1.05] mb-4 sm:mb-8 max-w-3xl mx-auto">
+    <h1 class="display-lg text-[28px] leading-[1.1] sm:text-[50px] sm:leading-[1.05] mb-3 sm:mb-5 max-w-3xl mx-auto">
       25 Estimates In 25 Days <span class="text-gold">Or You Get Paid In 2 Ways:</span>
     </h1>
 
     <!-- Subheadline -->
-    <p class="text-sm sm:text-lg text-ink-muted max-w-xl mx-auto mb-4 sm:mb-8 leading-snug">
+    <p class="text-sm sm:text-lg text-ink-muted max-w-xl mx-auto mb-4 sm:mb-6 leading-snug">
       100% Free + We Cover Ad Spend &mdash; until you get 25 estimates, or $50,000 in booked jobs.
     </p>
+
+    <!-- Hero proof video. POSTER ONLY — the anchor carries .proof-thumb, so R4's existing video
+         lightbox preventDefault()s it and plays in-page. No YouTube iframe, script or cookie
+         loads above the fold; the embed is created only once someone actually clicks.
+         The play badge sits at 36% height on purpose: dead-centre would land it on the quote. -->
+    <a class="hero-vid proof-thumb group" href="https://youtu.be/HRYuMJmhpmY"
+       aria-label="Play: 12 deck builders on an unedited call recording, 11 minutes 38 seconds">
+      <img src="/25/hero-proof.webp" width="1120" height="630" loading="eager" decoding="async"
+           alt="Three deck builders on an unedited call recording, captioned: It sounds too good to be true, that&rsquo;s why we&rsquo;re all skeptical.">
+      <div class="absolute left-1/2 top-[36%] -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+        <div class="play-icon w-14 h-14 sm:w-16 sm:h-16 rounded-full gold-gradient flex items-center justify-center shadow-gold">
+          <svg class="w-6 h-6 sm:w-7 sm:h-7 ml-1 text-black" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+    </a>
+    <p class="hero-vid-cap">Watch this before you book &mdash; every one of them was skeptical first.</p>
 
     <!-- CTA -->
     <div class="flex justify-center">
@@ -584,6 +610,16 @@
   .rcpt-cols img { width:100%; border-radius:12px; border:1px solid #E4DECF; margin-bottom:18px;
     display:block; box-shadow:0 2px 10px rgba(26,25,23,.06); break-inside:avoid; }
 
+  /* ── /25/ : hero proof video (static poster → the same lightbox the proof cards use) ── */
+  .hero-vid{display:block;position:relative;width:100%;max-width:520px;margin:0 auto 10px;
+    border-radius:14px;overflow:hidden;border:1px solid rgba(199,150,63,.30);
+    box-shadow:0 18px 50px rgba(0,0,0,.45);background:#0B0B0B;cursor:pointer;}
+  .hero-vid img{display:block;width:100%;height:auto;}
+  .hero-vid-cap{font-size:12.5px;line-height:1.4;color:#8A8578;margin:0 auto 16px;max-width:430px;}
+  @media (max-width:640px){
+    .hero-vid{max-width:100%;margin-bottom:9px;}
+    .hero-vid-cap{font-size:12px;margin-bottom:13px;}
+  }
   /* ── /25/ : Real builders card grid (R4) + What You Get On This Call ── */
   .rv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px;text-align:left;}
   @media (max-width:1180px){.rv-grid{grid-template-columns:repeat(3,1fr);}}
@@ -1787,12 +1823,26 @@
 .mc-lock{overflow:hidden;}
 .mc-q{font-size:21px;}
   /* Ravi-modelled survey: labelled inputs + Back/Next footer */
+  /* Ordered scales (revenue, timing) stack in one column so least->most reads straight down.
+     Tighter padding + left align keeps all seven revenue buckets on screen without scrolling. */
+  .mc-grid1{display:grid;grid-template-columns:1fr;gap:9px;}
+  .mc-grid1 .mc-opt{text-align:left;padding:14px 18px;}
   .mc-label{display:block;font-size:13.5px;font-weight:600;color:#1A1917;margin:4px 0 7px;}
   .mc-next-row{display:flex;justify-content:flex-end;align-items:center;gap:14px;
     border-top:1px solid #E8E3D8;margin-top:18px;padding-top:14px;}
   .mc-fine a{color:#6B6A63;text-decoration:underline;}
 
 
+  /* ── /25/ : hero proof video (static poster → the same lightbox the proof cards use) ── */
+  .hero-vid{display:block;position:relative;width:100%;max-width:520px;margin:0 auto 10px;
+    border-radius:14px;overflow:hidden;border:1px solid rgba(199,150,63,.30);
+    box-shadow:0 18px 50px rgba(0,0,0,.45);background:#0B0B0B;cursor:pointer;}
+  .hero-vid img{display:block;width:100%;height:auto;}
+  .hero-vid-cap{font-size:12.5px;line-height:1.4;color:#8A8578;margin:0 auto 16px;max-width:430px;}
+  @media (max-width:640px){
+    .hero-vid{max-width:100%;margin-bottom:9px;}
+    .hero-vid-cap{font-size:12px;margin-bottom:13px;}
+  }
   /* ── /25/ : Real builders card grid (R4) + What You Get On This Call ── */
   .rv-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:36px;text-align:left;}
   @media (max-width:1180px){.rv-grid{grid-template-columns:repeat(3,1fr);}}
@@ -1866,7 +1916,7 @@
 
     <div class="mc-step" data-step="3">
       <h3 class="mc-q">Where should we send the call details?</h3>
-      <p class="mc-sub">You&rsquo;ll get a text with the Zoom link and a reminder before the call.</p>
+      <p class="mc-sub">You&rsquo;ll get a text with the Google Meet link and a reminder before the call.</p>
       <label class="mc-label" for="mc-email">Business email address</label>
       <input id="mc-email" class="mc-input" type="email" autocomplete="email" placeholder="janesmith@gmail.com">
       <p id="mc-email-err" class="mc-err">Please enter a valid email address.</p>
@@ -1883,7 +1933,7 @@
     <div class="mc-step" data-step="4">
       <h3 class="mc-q">Average revenue over the last 12 months?</h3>
       <p class="mc-sub">Ballpark is fine.</p>
-      <div class="mc-grid2">
+      <div class="mc-grid1">
         <button class="mc-opt" data-field="revenue" data-value="0_100k">Under $100k</button>
         <button class="mc-opt" data-field="revenue" data-value="100_200k">$100k&ndash;$200k</button>
         <button class="mc-opt" data-field="revenue" data-value="200_300k">$200k&ndash;$300k</button>
@@ -1896,7 +1946,7 @@
 
     <div class="mc-step" data-step="5">
       <h3 class="mc-q">If we determine there&rsquo;s a strong fit, how soon would you realistically want to begin?</h3>
-      <div class="mc-grid2">
+      <div class="mc-grid1">
         <button class="mc-opt" data-field="timing" data-value="asap">ASAP</button>
         <button class="mc-opt" data-field="timing" data-value="2_4_weeks">Next 2&ndash;4 weeks</button>
         <button class="mc-opt" data-field="timing" data-value="later">Later</button>
@@ -2063,7 +2113,13 @@
     if(d.length>=7) f='('+d.slice(0,3)+') '+d.slice(3,6)+'-'+d.slice(6);
     else if(d.length>=4) f='('+d.slice(0,3)+') '+d.slice(3);
     phoneEl.value=f;
+    if(d.length===10 && phoneEl._mcPrev<10){
+      phoneEl.blur();
+      setTimeout(function(){overlay.querySelector('[data-next-final]').click();},120);
+    }
+    phoneEl._mcPrev=d.length;
   });
+  phoneEl._mcPrev=0;
 
   overlay.querySelector('[data-next-final]').addEventListener('click',function(){
     var phone=phoneEl.value.replace(/\D/g,'').replace(/^1(?=\d{10}$)/,''), email=emailEl.value.trim();
