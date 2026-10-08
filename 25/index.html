@@ -353,7 +353,14 @@
      being pushed a screen and a half down by a 760px-wide 16:9 frame. */
   @media(min-width:900px){.hero-proof{max-width:620px;}}
 
-  /* ── /25/ HERO: two-prong subline, social proof, inline Q1 (Spencer 2026-10-07) ── */
+  /* ── /25/ HERO (Spencer 2026-10-07) ──
+     Root's .hero fades to var(--seam) at 100% because the white survey card used to close the hero and
+     the seam blended into it. On /25/ the card lives in the modal, so that fade washed the bottom of the
+     hero out and made the proof line unreadable. Hold the dark ground; keep the gold glow. */
+  .hero{background:radial-gradient(48% 22% at 50% -4%, rgba(245,185,62,.26) 0%, transparent 70%), var(--bg) !important;}
+  .hero-proofline{color:rgba(248,247,243,.58) !important;}
+
+  /* ── /25/ HERO: two-prong subline + social proof ── */
   .h1-prongs{font-weight:800;font-size:19px;letter-spacing:-.01em;color:#F5B93E;margin-top:10px;}
   @media(min-width:640px){.h1-prongs{font-size:25px;}}
   .h1-prongs .plus{opacity:.55;margin:0 2px;font-weight:700;}
@@ -414,15 +421,6 @@
       </div>
       <div class="cta-row"><a class="cta cta-2" href="#qs-card" data-scroll-survey><span>Get My 25 Estimates</span><small>Check if your zip is open &rarr;</small></a></div>
       <p class="hero-proofline">100+ Contractors Served &middot; $100M+ In Booked Jobs</p>
-      <div class="hero-q1">
-        <p class="hero-q1-h">How many sales appointments are you CURRENTLY running per week?</p>
-        <div class="qs-opts two">
-          <button class="qs-opt" type="button" data-hero-q1 data-field="current_appts_per_week" data-value="0 - 5 appointments per week">0&ndash;5 per week</button>
-          <button class="qs-opt" type="button" data-hero-q1 data-field="current_appts_per_week" data-value="5 - 10 appointments per week">5&ndash;10 per week</button>
-          <button class="qs-opt" type="button" data-hero-q1 data-field="current_appts_per_week" data-value="10 - 20 appointments per week">10&ndash;20 per week</button>
-          <button class="qs-opt" type="button" data-hero-q1 data-field="current_appts_per_week" data-value="20+ appointments per week">20+ per week</button>
-        </div>
-      </div>
     </div>
 
   </div>
