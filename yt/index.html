@@ -621,7 +621,10 @@
       else if(navigator.sendBeacon){ navigator.sendBeacon(DL_TRACK_URL,new Blob([body],{type:'text/plain'})); }
     }catch(e){}
   }
-  dlTrack('landed',0);
+  // Perf (2026-10-07): the 'landed' beacon fires after the first paint entry (1.5 s cap) so it is not in the first-paint network path.
+  (function(){ var done=false; function fire(){ if(done) return; done=true; dlTrack('landed',0); }
+    try{ var po=new PerformanceObserver(function(){ try{ po.disconnect(); }catch(e){} fire(); }); po.observe({type:'paint',buffered:true}); }catch(e){ fire(); return; }
+    setTimeout(fire,1500); })();
   var surveyOpened=false;
   function markOpen(){ if(surveyOpened) return; surveyOpened=true; dlTrack('survey_open',1); }
 
