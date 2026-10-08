@@ -75,7 +75,10 @@
     function go(){t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
     y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}
     function idle(){('requestIdleCallback' in c)?c.requestIdleCallback(go,{timeout:2500}):setTimeout(go,500);}
-    if(l.readyState==='complete') idle(); else c.addEventListener('load',idle);
+    function afterPaint(){var done=false;function fire(){if(done)return;done=true;idle();}
+      try{var po=new PerformanceObserver(function(){try{po.disconnect();}catch(e){}fire();});po.observe({type:'paint',buffered:true});}catch(e){fire();return;}
+      setTimeout(fire,1500);}  // first paint (or 1.5s max) → idle → tag: never inside the first-paint path
+    if(l.readyState==='complete') afterPaint(); else c.addEventListener('load',afterPaint);
   })(window, document, "clarity", "script", "wpznuz610a");
 </script>
 
