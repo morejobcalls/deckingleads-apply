@@ -55,7 +55,9 @@
   n.queue=[];function go(){t=b.createElement(e);t.async=!0;
   t.src=v;s=b.getElementsByTagName(e)[0];
   s.parentNode.insertBefore(t,s)}
-  function later(){(f.requestAnimationFrame||setTimeout)(function(){setTimeout(go,0);});}
+  function later(){var done=false;function fire(){if(done)return;done=true;setTimeout(go,0);}
+  try{var po=new PerformanceObserver(function(){try{po.disconnect();}catch(e){}fire();});po.observe({type:'paint',buffered:true});}catch(e){fire();return;}
+  setTimeout(fire,1500);}  // waits for the first paint entry (or 1.5s max) so the pixel never lands in the first-paint path
   if(b.readyState==='complete') later(); else f.addEventListener('load',later);}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '839107878270720');
