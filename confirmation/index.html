@@ -7,7 +7,7 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#0D0D0D">
-<title>You're Booked · Deck Jobs Strategy Session</title>
+<title>Confirm Your Call · Deck Jobs Strategy Session</title>
 <meta name="description" content="Your Deck Jobs Strategy Session is tentatively scheduled. Watch the video and complete the steps to confirm your call.">
 <meta name="robots" content="noindex, nofollow">
 
@@ -177,11 +177,40 @@
   .ft small{display:block;max-width:860px;margin:1rem auto 0;font-size:.6875rem;
     color:rgba(245,242,236,.22);line-height:1.6;}
 
+  /* not-confirmed state (2026-10-09): amber ring + loud text-YES card */
+  .ring.warn::before{border-color:#C7963F;}
+  .ring.warn .ring-in{background:#FDF4E6;border-color:#C7963F;}
+  .cal-confirm.hot{background:#FFF8EC;border:2px solid #C7963F;box-shadow:0 8px 24px rgba(199,150,63,.18);}
+  .cal-confirm-t b{color:#B5462F;}
+  .cal-confirm-num{display:block;font-size:1.35rem;font-weight:900;color:#1A1917;letter-spacing:-.01em;
+    margin:.1rem 0 .7rem;text-decoration:none;}
+
+  /* 25-in-25 timeline (2026-10-09) */
+  .day-tag{display:block;font-size:.6875rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;
+    color:#C7963F;margin:0 0 .25rem;}
+  .rm-dot.day{width:30px;height:30px;left:-2.6rem;top:1rem;}
+  .rm-dot.day span{font-size:10.5px;}
+  .roadmap.days{padding-left:2.6rem;}
+  .roadmap.days::before{left:14px;}
+  .rm-step.goal .rm-card{background:#FDF4E6;border:2px solid #C7963F;}
+  .rm-step.goal .rm-dot{background:#C7963F;}
+  .rm-step.goal .rm-dot span{color:#fff;}
+  .rm-step.goal .rm-title{font-size:1.15rem;}
+  .gtee{margin-top:1.5rem;background:#1A1917;color:#F5F2EC;border-radius:16px;padding:1.5rem 1.6rem;}
+  .gtee-ey{font-size:.6875rem;font-weight:800;letter-spacing:.17em;text-transform:uppercase;color:#C7963F;margin:0 0 .35rem;}
+  .gtee-h{font-size:1.2rem;font-weight:800;margin:0 0 .8rem;letter-spacing:-.01em;}
+  .gtee ol{margin:0;padding-left:1.15rem;}
+  .gtee li{font-size:.9rem;line-height:1.65;margin-bottom:.4rem;color:rgba(245,242,236,.88);}
+  .gtee li b{color:#fff;}
+  .gtee small{display:block;margin-top:.8rem;font-size:.72rem;line-height:1.55;color:rgba(245,242,236,.5);}
+  .gtee small a{color:#C7963F;}
+
   @media(max-width:640px){
     .sec{padding:3.25rem 1.1rem;}
     .stats{grid-template-columns:repeat(2,1fr);}
     .prep-card{padding:1.4rem 1.25rem;}
     .roadmap{padding-left:1.9rem;} .rm-dot{left:-1.9rem;}
+    .roadmap.days{padding-left:2.4rem;} .rm-dot.day{left:-2.4rem;}
     .bk-slots{grid-template-columns:repeat(2,1fr);}
   }
 </style>
@@ -246,23 +275,24 @@
 <section class="hero">
   <div class="hero-in">
     <div class="rv" style="display:flex;justify-content:center;">
-      <div class="ring"><div class="ring-in"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M6 15l7 8L24 8" stroke="#00B67A" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/></svg></div></div>
+      <div class="ring warn"><div class="ring-in"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true"><path d="M15 7v10" stroke="#C7963F" stroke-width="3" stroke-linecap="round"/><circle cx="15" cy="22.5" r="1.9" fill="#C7963F"/></svg></div></div>
     </div>
 
     <div class="rv d1">
-      <h1 class="bk-h1" id="bk-h1">You&rsquo;re Booked.</h1>
-      <p class="bk-sub" id="bk-sub">Your Deck Jobs Strategy Session is confirmed.</p>
+      <h1 class="bk-h1" id="bk-h1">Your Call Is Not Confirmed Yet.</h1>
+      <p class="bk-sub" id="bk-sub">We&rsquo;re holding your time. Text us YES to confirm it.</p>
     </div>
 
     <div class="rv d2 cal-block">
-      <p class="cal-ey">Your call is scheduled for</p>
+      <p class="cal-ey">We&rsquo;re holding this time for you</p>
       <p class="bk-when" id="bk-when">Check your confirmation text &amp; email</p>
 
-      <div class="cal-confirm">
-        <p class="cal-confirm-t">Confirm your attendance</p>
-        <p class="cal-confirm-s">So nobody books over your slot.</p>
+      <div class="cal-confirm hot">
+        <p class="cal-confirm-t">Your call is <b>not confirmed</b> until you text us.</p>
+        <p class="cal-confirm-s">Text this number and reply <b>YES</b> to confirm your call time.</p>
+        <a class="cal-confirm-num" href="sms:+15012363920?&amp;body=YES">(501) 236-3920</a>
         <a id="confirm-sms" class="cal-confirm-btn"
-           href="sms:+15012363920?&amp;body=Confirming%20my%20Deck%20Jobs%20Strategy%20Session.">Confirm via Text</a>
+           href="sms:+15012363920?&amp;body=YES">Text YES to Confirm</a>
         <p id="sms-preview-text" style="display:none;"></p>
       </div>
 
@@ -301,79 +331,80 @@
 <section class="sec sec-paper" id="precall">
   <div class="wrap-wide">
     <div class="rv sec-head">
-      <div class="ey-row"><span class="ey-dot"></span><span class="ey">Watch First</span></div>
-      <h2 class="h2">Watch This <span>Before Your Call</span></h2>
+      <div class="ey-row"><span class="ey-dot"></span><span class="ey">Watch Now</span></div>
+      <h2 class="h2">Watch This <span>Right Now</span></h2>
       <p class="lede">Twelve deck builders, in their own words, on what changed and how fast.
         Use the chapters to jump to whatever you&rsquo;re still wondering about.</p>
     </div>
     <div class="rv d1 video-wrap">
       <iframe src="https://www.youtube-nocookie.com/embed/HRYuMJmhpmY?rel=0&amp;modestbranding=1"
-              title="Before your Deck Jobs Strategy Session" loading="lazy"
+              title="Watch this right now" loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
 </section>
 
-<!-- ════ THE SYSTEM ════ -->
+<!-- ════ 25 ESTIMATES IN 25 DAYS (2026-10-09: outcome-first timeline + guarantee) ════ -->
 <section class="sec sec-white" id="the-system">
   <div class="wrap">
     <div class="rv sec-head">
-      <div class="ey-row"><span class="ey-dot"></span><span class="ey">What You&rsquo;re Getting</span></div>
-      <h2 class="h2">Here&rsquo;s What We Build and Install<br/><span>in 25 Days</span></h2>
-      <p class="lede">Seven days to launch, then the system runs. Month to month &mdash;
-        you are never locked in.</p>
+      <div class="ey-row"><span class="ey-dot"></span><span class="ey">What You Get</span></div>
+      <h2 class="h2">25 Estimates <span>in 25 Days</span></h2>
+      <p class="lede">Here&rsquo;s how we guarantee it.</p>
     </div>
-    <div class="rv d1 roadmap">
+    <div class="rv d1 roadmap days">
       <div class="rm-step">
-        <div class="rm-dot"><span>1</span></div>
+        <div class="rm-dot day"><span>0</span></div>
         <div class="rm-card">
-          <p class="rm-title">Map your market</p>
-          <p class="rm-desc">We pull the zip codes around you that actually buy decks, and the job types worth your crew&rsquo;s time. One builder per market, so the first thing we check is whether yours is still open.</p>
+          <span class="day-tag">Day 0</span>
+          <p class="rm-title">Make your payment</p>
+          <p class="rm-desc">We map your market, pull the zip codes that actually buy decks, and start building your offer and ads the same day.</p>
         </div>
       </div>
       <div class="rm-step">
-        <div class="rm-dot"><span>2</span></div>
+        <div class="rm-dot day"><span>7</span></div>
         <div class="rm-card">
-          <p class="rm-title">Build the offer</p>
-          <p class="rm-desc">The reason a homeowner calls you instead of getting three quotes. We write it, you approve it &mdash; nothing runs that doesn&rsquo;t sound like you.</p>
+          <span class="day-tag">Day 7</span>
+          <p class="rm-title">Your Deck Jobs System is online</p>
+          <p class="rm-desc">Ads live, an application qualifying every homeowner before they book, and an instant text and call the moment one lands.</p>
         </div>
       </div>
       <div class="rm-step">
-        <div class="rm-dot"><span>3</span></div>
+        <div class="rm-dot day"><span>14</span></div>
         <div class="rm-card">
-          <p class="rm-title">Shoot and launch the ads</p>
-          <p class="rm-desc">Creative made for deck buyers, not a generic contractor template. Live in seven days from the day you say go.</p>
+          <span class="day-tag">Day 14</span>
+          <p class="rm-title">7 estimates on your calendar</p>
+          <p class="rm-desc">Exclusive on-site estimate opportunities &mdash; never shared, never resold. The homeowner is already expecting your visit.</p>
         </div>
       </div>
       <div class="rm-step">
-        <div class="rm-dot"><span>4</span></div>
+        <div class="rm-dot day"><span>21</span></div>
         <div class="rm-card">
-          <p class="rm-title">Qualify before they book</p>
-          <p class="rm-desc">An application stands between the ad and your calendar. Budget, timeline and project scope get answered before anyone takes a slot.</p>
+          <span class="day-tag">Day 21</span>
+          <p class="rm-title">20 estimates</p>
+          <p class="rm-desc">We scale what&rsquo;s booking and kill what isn&rsquo;t. You see every appointment and every cost per booked estimate.</p>
         </div>
       </div>
-      <div class="rm-step">
-        <div class="rm-dot"><span>5</span></div>
+      <div class="rm-step goal">
+        <div class="rm-dot day"><span>25</span></div>
         <div class="rm-card">
-          <p class="rm-title">Fill the calendar</p>
-          <p class="rm-desc">Exclusive on-site estimate opportunities &mdash; never shared, never resold. They land on your calendar with the homeowner already expecting the visit.</p>
+          <span class="day-tag">Day 25</span>
+          <p class="rm-title">25 estimates</p>
+          <p class="rm-desc">25 exclusive on-site estimate opportunities with ready-to-buy homeowners in your market, or a minimum of $50,000 in booked jobs.</p>
         </div>
       </div>
-      <div class="rm-step">
-        <div class="rm-dot"><span>6</span></div>
-        <div class="rm-card">
-          <p class="rm-title">Hit them while they&rsquo;re hot</p>
-          <p class="rm-desc">Instant text and call the moment an application lands, then a reminder cadence up to the appointment. Speed to lead is most of the show rate.</p>
-        </div>
-      </div>
-      <div class="rm-step">
-        <div class="rm-dot"><span>7</span></div>
-        <div class="rm-card">
-          <p class="rm-title">Measure and scale</p>
-          <p class="rm-desc">You see every appointment, every cost per booked estimate, every closed job. We scale what closes and kill what doesn&rsquo;t.</p>
-        </div>
-      </div>
+    </div>
+    <div class="rv d2 gtee">
+      <p class="gtee-ey">The Guarantee</p>
+      <p class="gtee-h">If we miss, you get paid in 2 ways.</p>
+      <ol>
+        <li><b>You pay us nothing more</b> &mdash; no new fee, no renegotiation.</li>
+        <li><b>We pick up your ad spend too</b>, from the day we miss until your 25th estimate lands.</li>
+      </ol>
+      <small>Your first 25 days of ad spend stays yours, the same as any other month. Month to month,
+        never locked in. Full guarantee terms are in your Engagement Agreement and our
+        <a href="/25/terms/">Terms</a>.</small>
     </div>
   </div>
 </section>
@@ -658,10 +689,8 @@
 
     var sms = document.getElementById('confirm-sms');
     if (!sms) return;
-    var body = "Hey Spencer, it's " + (state.first || '[your name]') + ' from ' +
-      (state.biz || '[company]') + '. Just booked a call. Looking forward to seeing how ' +
-      'the 20 deck jobs in 100 days process could work for us here in ' +
-      (state.zip || '[your zip]') + '.';
+    var who = state.first ? (' This is ' + state.first + (state.biz ? ' from ' + state.biz : '') + '.') : '';
+    var body = 'YES, confirming my call.' + who;
     sms.href = 'sms:+15012363920?&body=' + encodeURIComponent(body);
     var pv = document.getElementById('sms-preview-text');
     if (pv) pv.textContent = body;
@@ -718,7 +747,7 @@ window.addEventListener('load', function () {
     var s=fmt(iso);
     if(!s) return;
     el('bk-when').textContent=s;
-    el('bk-sub').textContent='Your Deck Jobs Strategy Session is '+s+'.';
+    el('bk-sub').textContent='We\u2019re holding '+s+' for you. Text us YES to confirm it.';
   }
   function note(msg,kind){
     var n=el('bk-note'); n.textContent=msg||'';
@@ -732,7 +761,7 @@ window.addEventListener('load', function () {
                    && (!qs.get('a') || !ref.appointmentId || qs.get('a')===ref.appointmentId);
   if(!refMatches) ref={};
   var first=String(ref.name||'').trim().split(/\s+/)[0]||'';
-  if(first) el('bk-h1').textContent='You\u2019re Booked, '+first+'.';
+  if(first) el('bk-h1').textContent=first+', Your Call Is Not Confirmed Yet.';
   if(ref.email){
     el('bk-invite').innerHTML='\u2713 A calendar invite is on its way to <b></b> \u2014 check your calendar.';
     el('bk-invite').querySelector('b').textContent=ref.email;
