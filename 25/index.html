@@ -491,9 +491,10 @@
       100% Free + We Cover Ad Spend &mdash; until you get 25 estimates, or $50,000 in booked jobs.
     </p>
 
-    <!-- Hero proof video. POSTER ONLY — the anchor carries .proof-thumb, so R4's existing video
-         lightbox preventDefault()s it and plays in-page. No YouTube iframe, script or cookie
-         loads above the fold; the embed is created only once someone actually clicks.
+    <!-- Hero proof video. POSTER ONLY — initInlineVideos preventDefault()s the anchor and swaps
+         the poster for an iframe in this same frame (no lightbox, Spencer 2026-10-08).
+         No YouTube iframe, script or cookie loads above the fold; the embed is created
+         only once someone actually clicks.
          The play badge sits at 36% height on purpose: dead-centre would land it on the quote.
          Deliberately NOT .proof-thumb: that class is what hands a thumbnail to the page's
          lightbox. Spencer wants this one to play where it sits, so it keeps its own handler
@@ -1031,7 +1032,7 @@
 <section id="on-the-call" class="sec-charcoal">
   <div class="max-w-5xl mx-auto px-5 py-12 sm:py-20">
     <div class="text-center max-w-2xl mx-auto">
-      <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold mb-3">One Call &middot; 45 Minutes</p>
+      <p class="text-[11px] font-bold tracking-[0.18em] uppercase text-gold mb-3">One Call &middot; 30 Minutes</p>
       <h2 class="display-lg text-[26px] sm:text-[40px] leading-[1.08] mb-3">What You Get On <span class="text-gold">This Call</span></h2>
       <p class="text-base text-ink-muted">No pitch deck, no three-call runaround. You leave knowing everything you need to decide.</p>
     </div>
@@ -1046,7 +1047,7 @@
     <div class="flex justify-center mt-9">
       <a href="#apply" class="cta-btn inline-flex flex-col items-center justify-center gap-1 px-8 py-3.5 sm:py-4 rounded-md gold-gradient gold-gradient-hover text-black shadow-gold">
         <span class="text-base font-black tracking-wider uppercase">Book The Call</span>
-        <span class="text-[13px] font-medium opacity-85">45 Minutes &rarr;</span>
+        <span class="text-[13px] font-medium opacity-85">30 Minutes &rarr;</span>
       </a>
     </div>
   </div>
