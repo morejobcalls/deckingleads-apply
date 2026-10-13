@@ -61,11 +61,9 @@
   if(b.readyState==='complete') later(); else f.addEventListener('load',later);}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '839107878270720');
-  fbq('init', '1832632181230934'); // ICP pixel — browser Lead is ICP-gated + seasoned-only; ICP pixel takes Lead from the server relay
   if(!window.MJC_QA) fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1832632181230934&ev=PageView&noscript=1"/></noscript>
 
 <!-- Microsoft Clarity (same project as root) -->
 <script type="text/javascript">
@@ -960,17 +958,11 @@
         try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
         payload.meta_ad=metaAd?'yes':'no'; // after leadFields so the page's own answer (with the URL fallback) wins
         if(TEST_CODE){
-          // target:'icp' is REQUIRED here (2026-09-15). A test_event_code is scoped to ONE dataset —
-          // ours comes from the ICP pixel's Test events tab. Without target the relay's default path
-          // also copies the event to the seasoned pixel, which can't recognize that code and would
-          // process the copy as a real conversion. ICP-only + event_name 'Lead' is exactly what the
-          // ICP pixel receives in production (the relay mirrors QualifiedLead→Lead there).
-          // Non-ICP submissions never reach the ICP pixel in production, so test mode sends nothing
-          // for them rather than faking a Lead the live funnel would not produce.
-          if(icp){
-            var testEvent=Object.assign({},payload,{event_name:'Lead',target:'icp',test_event_code:TEST_CODE});
-            await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
-          } else { console.log('[v9 test mode] non-ICP submission — nothing sent (the test code is ICP-pixel scoped).'); }
+          // One pixel (2026-10-13): the code is the MAIN pixel's (839107878270720 → Test events). No target, so the
+          // relay (v10) sends exactly what production sends: Lead for everyone, + QualifiedLead when icp=yes.
+          var testEvent=Object.assign({},payload,{event_name:'Lead',test_event_code:TEST_CODE});
+          await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
+          console.log('[v9 test mode] coded Lead'+(icp?' + QualifiedLead':'')+' sent to the main pixel. No GHL write.');
         } else if(window.MJC_QA){
           console.log('[v9 QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
         } else {

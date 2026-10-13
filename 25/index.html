@@ -2006,7 +2006,7 @@
 
 <div id="mc-overlay" role="dialog" aria-modal="true" aria-label="Book a free call">
   <div id="mc-card">
-    <script>if(window.MJC_QA||window.MJC_TEST){document.write('<p style="margin:0 0 8px;padding:6px 10px;border-radius:6px;background:#3a2f00;color:#ffd84d;font:600 12px/1.4 Inter,Arial,sans-serif">'+(window.MJC_TEST?'Meta TEST mode: an ICP submit sends one coded Lead to the ICP pixel. No CRM write, no booking.':'QA mode: nothing is sent to GHL, Meta, or the calendar.')+'</p>');}</script>
+    <script>if(window.MJC_QA||window.MJC_TEST){document.write('<p style="margin:0 0 8px;padding:6px 10px;border-radius:6px;background:#3a2f00;color:#ffd84d;font:600 12px/1.4 Inter,Arial,sans-serif">'+(window.MJC_TEST?'Meta TEST mode: sends a coded Lead (plus QualifiedLead if $500K+) to the main pixel. No CRM write, no booking.':'QA mode: nothing is sent to GHL, Meta, or the calendar.')+'</p>');}</script>
     <button id="mc-close" type="button" aria-label="Close">&#10005;</button>
     <div id="mc-top">
       <button id="mc-back" type="button">&#8249; Back</button>
@@ -2724,13 +2724,11 @@
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||'',
           fbc:fbc,in_app_browser:in_app,offer:'25-in-25',guarantee:'25in25-free-forever',meta_ad:metaAd?'yes':'no'};
         if(TEST_CODE){
-          // Test code is scoped to the ICP pixel's Test events tab, so target:'icp' (same as root).
-          // Non-ICP never reaches the ICP pixel in production, so nothing is sent for it.
-          if(icp){
-            var testEvent=Object.assign({},payload,{event_name:'Lead',target:'icp',test_event_code:TEST_CODE});
-            await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
-            console.log('[25 test mode] coded Lead sent to the ICP pixel only. No GHL write.');
-          } else { console.log('[25 test mode] non-ICP submission: nothing sent (the test code is ICP-pixel scoped).'); }
+          // One pixel (2026-10-13): MAIN pixel's test code, no target -> relay v10 sends what production sends:
+          // Lead for everyone, + QualifiedLead when icp=yes.
+          var testEvent=Object.assign({},payload,{event_name:'Lead',test_event_code:TEST_CODE});
+          await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
+          console.log('[25 test mode] coded Lead'+(icp?' + QualifiedLead':'')+' sent to the main pixel. No GHL write.');
         } else if(window.MJC_QA){
           console.log('[25 QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
         } else {
