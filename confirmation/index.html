@@ -11,14 +11,15 @@
 <meta name="description" content="Your Deck Jobs Strategy Session is tentatively scheduled. Watch the video and complete the steps to confirm your call.">
 <meta name="robots" content="noindex, nofollow">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<!-- Perf (2026-10-13): Inter self-hosted (same file as root and /25/) - no third-party font CSS in the render path. -->
+<link rel="preload" href="/fonts/inter-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+<style>@font-face{font-family:'Inter';font-style:normal;font-weight:100 900;font-display:swap;src:url(/fonts/inter-latin-var.woff2) format('woff2');unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}</style>
+<style>@font-face{font-family:'Inter Fallback';src:local('Arial');size-adjust:104.6%;}@font-face{font-family:'Inter Fallback Android';src:local('Roboto');size-adjust:113.5%;}</style>
 <style>
   /* ── Confirmation pages, light mirror of the reference design (2026-10-09) ─────────── */
   *{box-sizing:border-box;}
   body{margin:0;background:#F8F7F3;color:#1A1917;
-    font-family:'Inter',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
+    font-family:'Inter','Inter Fallback','Inter Fallback Android',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;}
   img{max-width:100%;display:block;}
   .wrap{max-width:680px;margin:0 auto;}
@@ -120,6 +121,9 @@
   .video-wrap{position:relative;width:100%;padding-top:56.25%;border-radius:16px;overflow:hidden;
     background:#000;box-shadow:0 18px 50px rgba(0,0,0,.14);}
   .video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0;}
+  .vid-poster{position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;background:#000;cursor:pointer;}
+  .vid-poster img{width:100%;height:100%;object-fit:cover;display:block;}
+  .vid-play i{transform:scale(1.5);}
 
   /* roadmap */
   .roadmap{position:relative;padding-left:2.25rem;}
@@ -256,8 +260,14 @@
   if (window.__TOP_LEVEL__) {
     (function(c,l,a,r,i,t,y){
         c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        // Perf (2026-10-13): tag after first paint + idle, same as root - no third-party script before first paint.
+        function go(){t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);}
+        function idle(){('requestIdleCallback' in c)?c.requestIdleCallback(go,{timeout:2500}):setTimeout(go,500);}
+        function afterPaint(){var done=false;function fire(){if(done)return;done=true;idle();}
+          try{var po=new PerformanceObserver(function(){try{po.disconnect();}catch(e){}fire();});po.observe({type:'paint',buffered:true});}catch(e){fire();return;}
+          setTimeout(fire,1500);}
+        if(l.readyState==='complete') afterPaint(); else c.addEventListener('load',afterPaint);
     })(window, document, "clarity", "script", "wpznuz610a");
   }
 </script>
@@ -337,10 +347,11 @@
         Use the chapters to jump to whatever you&rsquo;re still wondering about.</p>
     </div>
     <div class="rv d1 video-wrap">
-      <iframe src="https://www.youtube-nocookie.com/embed/HRYuMJmhpmY?rel=0&amp;modestbranding=1"
-              title="Watch this right now" loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      <!-- Perf (2026-10-13): poster first, real player on tap (the iframe cost ~1 MB at load). -->
+      <button type="button" class="vid-poster" data-vid="HRYuMJmhpmY" data-title="Watch this right now" aria-label="Play: Watch this right now">
+        <img src="/yt-thumbs/HRYuMJmhpmY.webp" alt="" width="960" height="540" decoding="async">
+        <span class="story-play vid-play"><i></i></span>
+      </button>
     </div>
   </div>
 </section>
@@ -898,6 +909,17 @@ window.addEventListener('load', function () {
   });
   // Swap the poster for the real embed only on click - five autoplaying iframes would
   // cost more than the whole rest of the page.
+  // Pre-call video: swap the poster for the autoplaying embed on tap (2026-10-13 perf).
+  document.querySelectorAll('.vid-poster').forEach(function(b){
+    b.addEventListener('click',function(){
+      var f=document.createElement('iframe');
+      f.src='https://www.youtube-nocookie.com/embed/'+b.getAttribute('data-vid')+'?autoplay=1&rel=0&modestbranding=1';
+      f.title=b.getAttribute('data-title')||'Video';
+      f.allow='accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      f.setAttribute('referrerpolicy','strict-origin-when-cross-origin'); f.setAttribute('allowfullscreen','');
+      b.parentNode.replaceChild(f,b);
+    });
+  });
   var grid=document.getElementById('stories');
   if(grid) grid.addEventListener('click',function(ev){
     var b=ev.target.closest('.story'); if(!b) return;

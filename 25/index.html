@@ -17,6 +17,7 @@
 <!-- only for ICP-qualified submitters (see submit handler below).       -->
 <!-- Replace 839107878270720 with the real Meta Pixel ID before launch.    -->
 <!-- ================================================================== -->
+<script>window.MJC_QA=/[?&]qa=1(&|$)/.test(location.search)||/^(localhost|127\.0\.0\.1|0\.0\.0\.0)$/.test(location.hostname);window.MJC_TEST=(new URLSearchParams(location.search).get('test_event_code')||'').replace(/[^A-Za-z0-9]/g,'').slice(0,20);</script>
 <script>
   !function(f,b,e,v,n,t,s)
   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -33,7 +34,7 @@
   if(b.readyState==='complete') later(); else f.addEventListener('load',later);}(window, document,'script',
   'https://connect.facebook.net/en_US/fbevents.js');
   fbq('init', '839107878270720');
-  fbq('track', 'PageView');
+  if(!window.MJC_QA) fbq('track', 'PageView');
 </script>
 <noscript><img height="1" width="1" style="display:none"
   src="https://www.facebook.com/tr?id=839107878270720&ev=PageView&noscript=1"/></noscript>
@@ -2005,6 +2006,7 @@
 
 <div id="mc-overlay" role="dialog" aria-modal="true" aria-label="Book a free call">
   <div id="mc-card">
+    <script>if(window.MJC_QA||window.MJC_TEST){document.write('<p style="margin:0 0 8px;padding:6px 10px;border-radius:6px;background:#3a2f00;color:#ffd84d;font:600 12px/1.4 Inter,Arial,sans-serif">'+(window.MJC_TEST?'Meta TEST mode: an ICP submit sends one coded Lead to the ICP pixel. No CRM write, no booking.':'QA mode: nothing is sent to GHL, Meta, or the calendar.')+'</p>');}</script>
     <button id="mc-close" type="button" aria-label="Close">&#10005;</button>
     <div id="mc-top">
       <button id="mc-back" type="button">&#8249; Back</button>
@@ -2169,6 +2171,7 @@
   var DL_TRACK_URL='https://mjc-funnel-events.spencer-80c.workers.dev/';
   var MC_OPT_IDX={own_business:2,revenue:4,timing:5};
   function dlTrack(step,idx,extra){
+    if(window.MJC_QA||window.MJC_TEST) return; // QA/test: never write funnel_events
     try{
       var p={sid:DL_SID,step:step,idx:idx,
         utm_source:attribution.utm_source||'',utm_content:attribution.utm_content||'',utm_campaign:attribution.utm_campaign||'',
@@ -2199,7 +2202,7 @@
   var PARTIAL_WEBHOOK_URL='https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/oq0gjQIEarFwi6mXrGmK';
   var partialSent=false;
   function firePartialLead(){
-    if(partialSent||submitted||!PARTIAL_WEBHOOK_URL) return; partialSent=true;
+    if(partialSent||submitted||!PARTIAL_WEBHOOK_URL||window.MJC_QA||window.MJC_TEST) return; partialSent=true;
     try{
       var parts=(formData.name||'').trim().split(/\s+/);
       var payload={lead_stage:'partial',partial_step:'contact-info',timezone:(Intl.DateTimeFormat().resolvedOptions().timeZone||''),
@@ -2600,6 +2603,7 @@
   }
   function mccBookSlot(iso, btn){
     if(mccBooking) return;
+    if(window.MJC_QA||window.MJC_TEST){ btn.textContent='Test mode: no booking made'; return; }
     mccBooking=true;
     var e=mccEl('mcc-err'); if(e) e.classList.remove('show');
     mccBusy(btn);
@@ -2670,6 +2674,14 @@
     }catch(e){}
   })();
 
+  function metaAdClick(){
+    function hit(med,src,fb){ med=(med||'').toLowerCase(); src=(src||'').toLowerCase();
+      return /paid/.test(med)&&(/^(fb|ig|facebook|instagram|meta)$/.test(src)||!!fb); }
+    try{ var q=new URLSearchParams(location.search); if(hit(q.get('utm_medium'),q.get('utm_source'),q.get('fbclid'))) return true; }catch(e){}
+    try{ if(attribution&&attribution._ts&&(Date.now()-attribution._ts)<7*864e5) return hit(attribution.utm_medium,attribution.utm_source,attribution.fbclid); }catch(e){}
+    return false;
+  }
+
   function submitAndShowCalendar(){
     icp=isICP(formData);
     setCalCopy();
@@ -2680,12 +2692,16 @@
          var cw=document.getElementById('mc-cal-wrap'); if(cw) cw.style.display='block'; }catch(e){}
     if(submitted) return; submitted=true;
     dlTrack('submit',7,{icp:icp});
+    var TEST_CODE=window.MJC_TEST||'';
 
     formData.icp=icp; formData.submitted_at=new Date().toISOString();
     var event_id=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
     formData.event_id=event_id;
 
-    if(icp && typeof fbq==='function'){ try{ fbq('track','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
+    // Browser Lead: ICP AND a proven Meta ad click in the last 7 days (root rule, 2026-09-30).
+    var metaAd=metaAdClick();
+    try{ sessionStorage.setItem('dl_meta_ad',metaAd?'1':'0'); }catch(e){}
+    if(icp && metaAd && !TEST_CODE && !window.MJC_QA && typeof fbq==='function'){ try{ fbq('track','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id}); }catch(e){} }
     try{ sessionStorage.setItem('dl_qualify_data',JSON.stringify(formData)); sessionStorage.setItem('dl_qualify_icp',icp?'1':'0'); }catch(e){}
 
     (async function(){
@@ -2695,6 +2711,8 @@
         var first_name=formData.first_name||'', last_name=formData.last_name||'';
         var h=await Promise.all([sha256Hex(email.toLowerCase().trim()),sha256Hex(phoneForHash),sha256Hex(first_name.toLowerCase().trim()),sha256Hex(last_name.toLowerCase().trim())]);
         var fbp=(document.cookie.match(/(?:^|;\s*)_fbp=([^;]+)/)||[])[1]||'';
+        var fbc=(document.cookie.match(/(?:^|;\s*)_fbc=([^;]+)/)||[])[1]||'';
+        var in_app=/Instagram/i.test(navigator.userAgent)?'instagram':(/FBAN|FBAV|FB_IAB/i.test(navigator.userAgent)?'facebook':'');
         var payload={lead_stage:'full',first_name:first_name,last_name:last_name,full_name:formData.name,email:email,phone:formData.phone,
           business_name:formData.business_name||'',years_in_business:formData.years_in_business||'',crew_situation:formData.crew_situation||'',marketing_spend:formData.marketing_spend||'',revenue:formData.revenue||'',icp:icp?'yes':'no',
           event_id:event_id,email_sha256:h[0],phone_sha256:h[1],first_name_sha256:h[2],last_name_sha256:h[3],fbp:fbp,
@@ -2703,8 +2721,21 @@
           source:'deckingleads.com lp v1',variant:'v8',lp_version:'survey-v3',page_url:location.href,
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
-          landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
+          landing_url:attribution.landing_url||'',referrer:attribution.referrer||'',
+          fbc:fbc,in_app_browser:in_app,offer:'25-in-25',guarantee:'25in25-free-forever',meta_ad:metaAd?'yes':'no'};
+        if(TEST_CODE){
+          // Test code is scoped to the ICP pixel's Test events tab, so target:'icp' (same as root).
+          // Non-ICP never reaches the ICP pixel in production, so nothing is sent for it.
+          if(icp){
+            var testEvent=Object.assign({},payload,{event_name:'Lead',target:'icp',test_event_code:TEST_CODE});
+            await fetch('https://meta-capi-relay.spencer-80c.workers.dev/',{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain'},body:JSON.stringify(testEvent),keepalive:true});
+            console.log('[25 test mode] coded Lead sent to the ICP pixel only. No GHL write.');
+          } else { console.log('[25 test mode] non-ICP submission: nothing sent (the test code is ICP-pixel scoped).'); }
+        } else if(window.MJC_QA){
+          console.log('[25 QA mode] webhook NOT sent. Payload:', JSON.stringify(payload));
+        } else {
         await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+        }
       }catch(e){ console.warn('[v2-ravi] GHL webhook failed:',e); }
     })();
   }
