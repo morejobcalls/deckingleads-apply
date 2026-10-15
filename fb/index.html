@@ -673,6 +673,15 @@
     });
   });
 
+  // ── Location from IP (2026-10-15, same mjc-geo worker as /25). The typed ZIP stays the postal code;
+  // IP adds city/state/country. Never blocks anything; empty on failure.
+  var MJC_GEO={};
+  (function(){ try{
+    var ac=('AbortController' in window)?new AbortController():null; if(ac) setTimeout(function(){ try{ac.abort();}catch(e){} },2500);
+    fetch('https://mjc-geo.spencer-80c.workers.dev/',{method:'GET',mode:'cors',cache:'no-store',signal:ac?ac.signal:undefined})
+      .then(function(r){ return r.ok?r.json():{}; }).then(function(g){ if(g&&typeof g==='object') MJC_GEO=g; }).catch(function(){});
+  }catch(e){} })();
+
   // Q3 service-area ZIP. Auto-advances at 5 digits so it feels like the tap questions around it.
   var zipEl=document.getElementById('qs-zip'), zipErr=document.getElementById('qs-zip-err');
   function zipOk(){ return /^\d{5}$/.test(zipEl.value.trim()); }
@@ -898,6 +907,8 @@
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
         try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
+        try{ var g=MJC_GEO||{}; payload.city=g.city||''; payload.state=g.region_code||g.region||''; payload.country=g.country||'';
+             payload.geo_source=(g.city||g.region)?'ip':''; payload.ip_postal_code=g.postal_code||''; }catch(e){}
         if(TEST_CODE){
           // Organic leads never reach Meta CAPI (the organic workflow has no relay steps), so there is nothing to test-fire.
           console.log('[fb test mode] organic page sends no CAPI events — nothing sent. Payload:', JSON.stringify(payload));
