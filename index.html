@@ -726,6 +726,15 @@
     });
   });
 
+  // ── Location from IP (2026-10-15, same mjc-geo worker as /25). The typed ZIP stays the postal code;
+  // IP adds city/state/country. Never blocks anything; empty on failure.
+  var MJC_GEO={};
+  (function(){ try{
+    var ac=('AbortController' in window)?new AbortController():null; if(ac) setTimeout(function(){ try{ac.abort();}catch(e){} },2500);
+    fetch('https://mjc-geo.spencer-80c.workers.dev/',{method:'GET',mode:'cors',cache:'no-store',signal:ac?ac.signal:undefined})
+      .then(function(r){ return r.ok?r.json():{}; }).then(function(g){ if(g&&typeof g==='object') MJC_GEO=g; }).catch(function(){});
+  }catch(e){} })();
+
   // Q3 service-area ZIP. Auto-advances at 5 digits so it feels like the tap questions around it.
   var zipEl=document.getElementById('qs-zip'), zipErr=document.getElementById('qs-zip-err');
   function zipOk(){ return /^\d{5}$/.test(zipEl.value.trim()); }
@@ -957,6 +966,8 @@
           guarantee:window.MJC_G_TEST?window.MJC_G:'',guarantee_test:window.MJC_G_TEST?'MJC_Launch_W1':'',ad_hero:window.MJC_AD||'',ad_state:window.MJC_STATE||''};
         try{ if(window.mjcJourney) Object.assign(payload, mjcJourney.leadFields()); }catch(e){} // Journey Ledger: journey_vid / first + last touch / touch count / days to lead
         payload.meta_ad=metaAd?'yes':'no'; // after leadFields so the page's own answer (with the URL fallback) wins
+        try{ var g=MJC_GEO||{}; payload.city=g.city||''; payload.state=g.region_code||g.region||''; payload.country=g.country||'';
+             payload.geo_source=(g.city||g.region)?'ip':''; payload.ip_postal_code=g.postal_code||''; }catch(e){}
         if(TEST_CODE){
           // One pixel (2026-10-13): the code is the MAIN pixel's (839107878270720 → Test events). No target, so the
           // relay (v10) sends exactly what production sends: Lead for everyone, + QualifiedLead when icp=yes.
