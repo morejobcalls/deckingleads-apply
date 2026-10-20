@@ -13,31 +13,99 @@ if(!window.MJC_QA) fbq('track','PageView');
 .err{color:#b42318;font-size:12px;margin:6px 0 0}.bad{border-color:#d92d20!important}.consent{font-size:11px;color:#7a828c;line-height:1.45;margin:14px 0 0}.consent a{color:#7a828c}.qa{margin:0 0 14px;padding:6px 10px;border-radius:6px;background:#3a2f00;color:#ffd84d;font:600 12px/1.4 Arial,sans-serif}
 .loading{text-align:center;padding:40px 0;color:#66707a;font-weight:700}.spin{width:34px;height:34px;margin:0 auto 14px;border:3px solid #e2e5e9;border-top-color:#d1a458;border-radius:50%;animation:sp .8s linear infinite}@keyframes sp{to{transform:rotate(360deg)}}
 #calendar-wrap h3{font-size:clamp(20px,3.2vw,26px);line-height:1.25;margin:0 0 6px;text-align:center}#calendar-wrap>p{margin:0 0 6px;color:#5c646e;text-align:center}#inline-calendar{width:100%;height:74vh;min-height:540px;border:0;display:block;margin-top:16px}@media(max-width:640px){#inline-calendar{height:80vh;min-height:520px}}
-  #mcb{display:none;margin-top:14px;}
-  .mcb-state{text-align:center;font-size:14px;color:#7A7870;padding:18px 0 8px;line-height:1.6;}
-  .mcb-state a{color:#B07A1E;font-weight:700;}
-  .mcb-days{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;margin:8px -2px 6px;-webkit-overflow-scrolling:touch;}
-  .mcb-day{flex:1 0 auto;min-width:84px;border:2px solid #ECE6DA;border-radius:11px;background:#fff;padding:9px 10px;text-align:center;cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s;}
-  .mcb-day span{display:block;}
-  .mcb-dow{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#7A7870;}
-  .mcb-date{font-size:15px;font-weight:800;color:#1A1917;}
-  .mcb-day.mcb-sel{border-color:#1A1917;background:#1A1917;}
-  .mcb-day.mcb-sel span{color:#fff;}
-  .mcb-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:6px;}
-  @media(max-width:400px){.mcb-slots{grid-template-columns:repeat(2,1fr);}}
-  @media(min-width:760px){.mcb-slots{grid-template-columns:repeat(4,1fr);}}
-  .mcb-slot{border:2px solid #ECE6DA;border-radius:10px;background:#fff;padding:12px 6px;font-family:inherit;font-size:14px;font-weight:700;color:#1A1917;cursor:pointer;transition:border-color .15s,background .15s;}
-  .mcb-slot:hover{border-color:#C7963F;background:#FAF6EE;}
-  .mcb-slot.mcb-sel{border-color:#C7963F;background:#C7963F;}
-  .mcb-book{border-top:1px solid #ECE6DA;margin-top:16px;padding-top:16px;text-align:center;}
-  .mcb-when{font-size:14px;color:#7A7870;margin:0 0 12px;}
-  .mcb-when strong{color:#1A1917;}
-  .mcb-err{font-size:13px;font-weight:700;color:#B91C1C;margin:0 0 10px;}
-  .mcb-btn{width:100%;background:#C7963F;color:#1A1917;border:none;border-radius:9px;padding:14px 20px;font-family:inherit;font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 18px rgba(199,150,63,.4);transition:background .15s,transform .1s;}
-  .mcb-btn:hover:not(:disabled){background:#AB8032;transform:translateY(-1px);}
-  .mcb-btn:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none;}
-  .mcb-tz{font-size:12px;color:#9A968D;margin:0 0 4px;text-align:center;}
 
+  /* Instant booking picker (replaces the GHL iframe). Light palette so it reads as part of the
+     survey card rather than an embedded third-party widget. One tap books: hovering a slot
+     turns it into its own confirm button, so there is no second click. */
+  #mcc{padding:2px 0 4px;}
+  #mcc [hidden]{display:none !important;}
+  .mcc-eyebrow{font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+    color:#8A8780;margin:0 0 9px;}
+  .mcc-days{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;margin-bottom:12px;
+    -webkit-overflow-scrolling:touch;scrollbar-width:none;}
+  .mcc-days::-webkit-scrollbar{display:none;}
+  .mcc-day{flex:1 0 auto;min-width:104px;padding:11px 12px;background:#fff;border:1px solid #E2DBCE;
+    border-radius:10px;cursor:pointer;font-family:inherit;text-align:center;line-height:1.35;
+    transition:border-color .15s,background .15s;}
+  .mcc-day:hover{border-color:#C7963F;background:#FFFBF3;}
+  .mcc-day b,.mcc-day span,.mcc-day i{display:block;font-style:normal;}
+  .mcc-day b{font-size:13px;font-weight:500;color:#6B6A63;}
+  .mcc-day span{font-size:16px;font-weight:800;color:#1A1917;}
+  .mcc-day i{font-size:13px;font-weight:500;color:#6B6A63;}
+  .mcc-day[aria-selected="true"]{background:#FDF4E6;border-color:#C7963F;}
+  .mcc-day[aria-selected="true"] b,.mcc-day[aria-selected="true"] i{color:#B8893A;}
+  .mcc-day[aria-selected="true"] span{color:#A8762B;}
+  .mcc-metarow{display:flex;align-items:center;justify-content:space-between;gap:10px;
+    flex-wrap:wrap;margin:0 0 11px;}
+  .mcc-dur{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:500;color:#6B6A63;}
+  .mcc-dur svg{flex:0 0 auto;color:#C7963F;}
+  .mcc-tzwrap{position:relative;display:inline-block;}
+  .mcc-tzbtn{display:inline-flex;align-items:center;gap:5px;background:none;border:0;padding:2px 0;
+    font-family:inherit;font-size:12.5px;font-weight:600;color:#C7963F;cursor:pointer;}
+  .mcc-tzbtn:hover{color:#A8762B;}
+  .mcc-tzbtn svg{flex:0 0 auto;transition:transform .15s;}
+  .mcc-tzwrap.open .mcc-tzbtn svg{transform:rotate(180deg);}
+  /* #mc-cal-wrap is overflow:hidden (it used to crop the GHL iframe), which clips this
+     dropdown. mccOpenTz lifts that for as long as the list is open. */
+  #mc-cal-wrap.mcc-tz-open{overflow:visible;}
+  .mcc-tzpop{position:absolute;right:0;bottom:calc(100% + 9px);width:252px;max-height:300px;
+    display:flex;flex-direction:column;background:#fff;border:1px solid #E2DBCE;border-radius:12px;
+    box-shadow:0 18px 50px rgba(0,0,0,.24);z-index:40;overflow:hidden;text-align:left;}
+  .mcc-tzpop.below{bottom:auto;top:calc(100% + 9px);}
+  .mcc-tzq{width:100%;box-sizing:border-box;padding:11px 13px;border:0;border-bottom:1px solid #EFEAE0;
+    font-family:inherit;font-size:13px;color:#1A1917;outline:none;background:#fff;border-radius:0;}
+  .mcc-tzq::placeholder{color:#A8A49C;}
+  .mcc-tzlist{overflow-y:auto;padding-bottom:4px;}
+  .mcc-tzgroup{padding:7px 13px 5px;font-size:10px;font-weight:800;letter-spacing:.13em;
+    text-transform:uppercase;color:#8A8780;background:#FAF7F1;}
+  .mcc-tzopt{display:block;width:100%;text-align:left;padding:9px 13px;background:none;border:0;
+    font-family:inherit;font-size:13.5px;color:#1A1917;cursor:pointer;}
+  .mcc-tzopt:hover{background:#FBF7EF;}
+  .mcc-tzopt[aria-selected="true"]{background:#FDF4E6;color:#A8762B;font-weight:700;}
+  .mcc-tznone{margin:0;padding:15px 13px;font-size:13px;color:#8A8780;text-align:center;}
+  .mcc-slots{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+  .mcc-slot{position:relative;padding:13px 6px;background:#fff;border:1px solid #E2DBCE;
+    border-radius:10px;font-family:inherit;font-size:14.5px;font-weight:700;color:#1A1917;
+    cursor:pointer;transition:border-color .15s,background .15s,color .15s;}
+  .mcc-slot .mcc-c{display:none;}
+  .mcc-slot:hover,.mcc-slot:focus-visible{background:linear-gradient(to bottom,#C19A3C,#A8862F);
+    border-color:transparent;color:#fff;outline:none;}
+  .mcc-slot:hover .mcc-t,.mcc-slot:focus-visible .mcc-t{display:none;}
+  .mcc-slot:hover .mcc-c,.mcc-slot:focus-visible .mcc-c{display:inline;}
+  /* While one booking is in flight the rest of the grid stops being clickable. */
+  .mcc-slots-busy .mcc-slot{opacity:.4;pointer-events:none;}
+  .mcc-slot-busy,.mcc-slots-busy .mcc-slot-busy{opacity:1;background:#C6A96B;border-color:transparent;
+    color:#fff;cursor:default;}
+  .mcc-slot-busy .mcc-c{display:none;}
+  .mcc-cta{display:flex;width:100%;align-items:center;justify-content:center;gap:8px;
+    padding:16px 20px;border:0;border-radius:12px;background:linear-gradient(to bottom,#C7963F,#AB8032);
+    color:#000;font-family:inherit;font-size:15px;font-weight:900;letter-spacing:.04em;
+    text-transform:uppercase;text-decoration:none;cursor:pointer;}
+  .mcc-cta:hover{filter:brightness(1.06);}
+  .mcc-cta-sm{display:inline-flex;width:auto;padding:12px 18px;font-size:13px;}
+  .mcc-ghost{padding:12px 18px;background:#fff;border:1px solid #E2DBCE;border-radius:12px;
+    font-family:inherit;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;
+    color:#1A1917;cursor:pointer;}
+  .mcc-ghost:hover{border-color:#C7963F;background:#FFFBF3;}
+  .mcc-msg{text-align:center;padding:18px 0 6px;}
+  .mcc-msg-h{font-size:15px;font-weight:800;color:#1A1917;margin:0 0 6px;}
+  .mcc-msg-b{font-size:13.5px;color:#8A8780;margin:0 0 14px;}
+  .mcc-msg-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .mcc-skel i{display:block;background:linear-gradient(90deg,#F3EEE4 25%,#E8E3D8 37%,#F3EEE4 63%);
+    background-size:400% 100%;animation:mccShim 1.3s ease infinite;border-radius:10px;}
+  .mcc-skel-days{display:flex;gap:10px;margin-bottom:12px;}
+  .mcc-skel-days i{flex:1;height:64px;}
+  .mcc-skel-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;}
+  .mcc-skel-grid i{height:46px;}
+  @keyframes mccShim{0%{background-position:100% 50%}100%{background-position:0 50%}}
+  @media(max-width:480px){
+    .mcc-slots,.mcc-skel-grid{grid-template-columns:repeat(2,1fr);}
+    .mcc-day{min-width:92px;}
+    .mcc-slot{font-size:13.5px;}
+    .mcc-tzpop{width:236px;}
+  }
+  .mc-err{font-size:12.5px;color:#DC2626;font-weight:600;margin:-6px 0 12px;display:none;}
+  .mc-err.show{display:block;}
 @media(max-width:540px){header{padding:16px}.hero{padding:25px 18px 30px}.form{padding:25px 18px}.options{grid-template-columns:1fr}.proofs{padding:35px 20px}.phone{font-size:12px}}
 </style></head><body><div class="wrap"><header><div class="logo">MORE<span class="gold">JOB</span>CALLS</div><a class="phone" href="tel:+15012632597"><small>Call/Text</small>501-263-2597</a></header>
 <section class="hero"><div class="quote"><img class="face" src="/lying/faces/justin-wylie.jpg" alt="Justin Wylie" width="56" height="56"><div><p>“You're the best of seven companies I've worked with.”</p><div class="by">Justin Wylie · Top U.S. Deckorators Builder</div></div></div><h1>I'll Pay You <span class="gold">$2,000</span> If We Don't Book <span class="gold">100 Deck Appointments</span> In 100 Days.</h1><p class="sub">Appointments with homeowners with <span class="gold">$20K–$60K deck projects</span> ready to start in <span class="gold">November or December.</span></p><div class="guarantee"><small>Our performance guarantee</small><h2>Full Refund + $2,000 Cash*</h2><p>If we don't book 100 deck appointments in 100 days.</p></div></section>
@@ -61,34 +129,49 @@ if(!window.MJC_QA) fbq('track','PageView');
 <div class="actions"><button type="button" class="btn secondary" id="back">BACK</button><button type="submit" class="btn">SEE IF I QUALIFY →</button></div><div class="clock">Free to apply. No obligation to purchase.</div></div></form>
 <div id="loading" class="hidden loading" role="status"><div class="spin"></div>Reviewing your application…</div>
 <div id="calendar-wrap" class="hidden"><h3>Pick a time that works for you</h3><p>We'll review your answers and your market before the call.</p><div id="cal-iframe-wrap" class="hidden"><iframe id="inline-calendar" title="Book your call" scrolling="yes" allow="payment"></iframe></div>
-        <div id="mcb">
-          <p class="mcb-tz">45 minutes on Google Meet &middot; times shown in <span id="mcb-tz">your time zone</span></p>
-          <div id="mcb-loading" class="mcb-state">Checking open times&hellip;</div>
-          <div id="mcb-live" style="display:none;">
-            <div class="mcb-days" id="mcb-days"></div>
-            <div class="mcb-slots" id="mcb-slots"></div>
-            <div class="mcb-book" id="mcb-book" style="display:none;">
-              <p class="mcb-when">Locking in <strong id="mcb-when"></strong></p>
-              <p class="mcb-err" id="mcb-err" style="display:none;"></p>
-              <button type="button" class="mcb-btn" id="mcb-btn">Lock In My Call &rarr;</button>
+<div id="mcc">
+      <p class="mcc-eyebrow">Schedule</p>
+      <div id="mcc-loading" class="mcc-skel">
+        <div class="mcc-skel-days"><i></i><i></i><i></i></div>
+        <div class="mcc-skel-grid"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div id="mcc-live" hidden>
+        <div id="mcc-days" class="mcc-days"></div>
+        <div class="mcc-metarow">
+          <span class="mcc-dur"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>Select a time &middot; 30 min</span>
+          <span id="mcc-tzwrap" class="mcc-tzwrap">
+            <button type="button" id="mcc-tzbtn" class="mcc-tzbtn" aria-haspopup="listbox" aria-expanded="false"><span id="mcc-tz">America/Chicago</span><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"></path></svg></button>
+            <div id="mcc-tzpop" class="mcc-tzpop" hidden>
+              <input type="text" id="mcc-tzq" class="mcc-tzq" placeholder="Search timezone&hellip;" autocomplete="off" spellcheck="false">
+              <div id="mcc-tzlist" class="mcc-tzlist" role="listbox"></div>
+              <p id="mcc-tznone" class="mcc-tznone" hidden>No match</p>
             </div>
-          </div>
-          <div id="mcb-empty" class="mcb-state" style="display:none;">
-            <p><strong>The next few days are spoken for.</strong></p>
-            <p>Text us at <a href="sms:+15012363920">(501) 236-3920</a> and we'll find you a time.</p>
-          </div>
-          <div id="mcb-error" class="mcb-state" style="display:none;">
-            <p><strong>Couldn't load the calendar.</strong></p>
-            <p><a href="#" id="mcb-retry">Try again</a> or text us at <a href="sms:+15012363920">(501) 236-3920</a>.</p>
-          </div>
+          </span>
         </div>
+        <div id="mcc-slots" class="mcc-slots"></div>
+        <p id="mcc-err" class="mc-err" style="text-align:center;margin-top:12px;"></p>
+      </div>
+      <div id="mcc-empty" hidden class="mcc-msg">
+        <p class="mcc-msg-h">Those times are spoken for.</p>
+        <p class="mcc-msg-b">New times open every morning &mdash; or text us and we&rsquo;ll find you a spot.</p>
+        <a class="mcc-cta mcc-cta-sm" href="sms:+15012363920?&amp;body=I want to book my Deck Jobs Strategy Session">Text (501) 236-3920</a>
+      </div>
+      <div id="mcc-error" hidden class="mcc-msg">
+        <p class="mcc-msg-h">Couldn&rsquo;t load the calendar.</p>
+        <p class="mcc-msg-b">Give it one more try &mdash; or text us and we&rsquo;ll book you by hand.</p>
+        <div class="mcc-msg-row">
+          <button type="button" id="mcc-retry" class="mcc-ghost">Try Again</button>
+          <a class="mcc-cta mcc-cta-sm" href="sms:+15012363920?&amp;body=I want to book my Deck Jobs Strategy Session">Text (501) 236-3920</a>
+        </div>
+      </div>
+    </div>
 </div></section>
 <section class="proofs"><h2>What Some Of Our Guys Are Doing</h2><article class="proof"><img class="face" src="/lying/faces/billy-stewart.jpg" alt="Billy Stewart" width="56" height="56" loading="lazy" decoding="async"><div><strong>$2.5M in first 12 weeks with us</strong><p>$300K+ in contracts and deposits in first 17 days</p><span>Billy Stewart · Deck &amp; patio builder · Greenville, SC</span></div></article>
 <article class="proof"><img class="face" src="/lying/faces/brian-wallace.jpg" alt="Brian Wallace" width="56" height="56" loading="lazy" decoding="async"><div><strong>25 jobs closed in first 6 weeks with us</strong><span>Brian Wallace · Fence &amp; deck company · Bend, OR</span></div></article>
 <article class="proof"><img class="face" src="/lying/faces/justin-wylie.jpg" alt="Justin Wylie" width="56" height="56" loading="lazy" decoding="async"><div><strong>$1.2M closed in January and February</strong><p>Crossed $3M by June</p><span>Justin Wylie · Deck &amp; patio builder · San Antonio, TX</span></div></article>
 <article class="proof"><img class="face" src="/lying/faces/mike-biviano.jpg" alt="Mike Biviano" width="56" height="56" loading="lazy" decoding="async"><div><strong>$1.6M booked in first 9 months with us</strong><p>From 3 appointments a week to as many as 11 a day</p><span>Mike Biviano · General contractor · South Shore, MA</span></div></article>
 <article class="proof"><img class="face" src="/lying/faces/jason-flynn.jpg" alt="Jason" width="56" height="56" loading="lazy" decoding="async"><div><strong>$500K+ month within first 12 weeks with us</strong><span>Jason · Deck builder · Northern Virginia</span></div></article>
-<article class="proof"><img class="face" src="/lying/faces/jacob-weaver.jpg" alt="Jacob" width="56" height="56" loading="lazy" decoding="async"><div><strong>$480K in contracts in 21 days</strong><p>Previously grew from $500K to $2M in 4 months</p><span>Jacob · Deck builder · Pennsylvania</span></div></article>
+<article class="proof"><img class="face" src="/lying/faces/jacob-weaver.jpg" alt="Jacob" width="56" height="56" loading="lazy" decoding="async"><div><strong>$480K in contracts in first 21 days with us</strong><p>Previously grew from $500K to $2M in 4 months</p><span>Jacob · Deck builder · Pennsylvania</span></div></article>
 <article class="proof"><img class="face" src="/lying/faces/ricardo-cervantes.jpg" alt="Ricardo" width="56" height="56" loading="lazy" decoding="async"><div><strong>$105K closed in first 7 days with us</strong><span>Ricardo · Concrete &amp; decks · Colorado</span></div></article>
 <article class="proof"><img class="face" src="/lying/faces/billy-gallegos.jpg" alt="Billy G." width="56" height="56" loading="lazy" decoding="async"><div><strong>$50K closed in first month with us</strong><span>Billy G. · Home improvement · Corpus Christi, TX</span></div></article>
 <article class="proof"><img class="face" src="/lying/faces/eric-engle.jpg" alt="Eric" width="56" height="56" loading="lazy" decoding="async"><div><strong>Grew from $4M to an $8M annual run rate</strong><span>Eric · Patio cover builder · Los Angeles, CA</span></div></article>
@@ -150,16 +233,16 @@ $('next').addEventListener('click',()=>{const c=contact();
   const ok=[flag('fullName',c.name.split(' ').length>=2&&c.first_name.length>=2),flag('email',/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(c.email)),flag('phone',c.digits.length===10),flag('zip',/^\d{5}$/.test(c.zip))].every(Boolean);
   if(!ok)return;firePartial(c);showStep(2);});
 $('back').addEventListener('click',()=>showStep(1));
-form.querySelectorAll('input[name=revenue]').forEach(el=>el.addEventListener('change',()=>{if(isICP(el.value))mcbFetch().catch(()=>{});}));
+form.querySelectorAll('input[name=revenue]').forEach(el=>el.addEventListener('change',()=>{try{mccPrefetch();}catch(_){}}));
 $('bottom-cta').addEventListener('click',()=>{if(submitted){applyEl.scrollIntoView({behavior:'smooth'});return;}showStep(1);$('fullName').focus({preventScroll:true});});
 
 form.addEventListener('submit',e=>{e.preventDefault();
   const fd=new FormData(form),v=k=>(fd.get(k)||'').toString().trim();
   const complete=['capacity','revenue','goal','start','why'].every(k=>v(k));$('step2-err').classList.toggle('hidden',complete);if(!complete)return;
   if(submitted)return;submitted=true;
-  const c=contact(),revenue=v('revenue'),icp=isICP(revenue),timing=timingFromDate(v('start')),metaAd=metaAdClick(),TEST=window.MJC_TEST||'';
+  const c=contact(),revenue=v('revenue'),timing=timingFromDate(v('start')),metaAd=metaAdClick(),TEST=window.MJC_TEST||'';
   const event_id=(crypto.randomUUID&&crypto.randomUUID())||'dl_'+Date.now()+'_'+Math.random().toString(36).slice(2,10);
-  if(icp&&metaAd&&!TEST&&!window.MJC_QA&&typeof fbq==='function'){try{fbq('track','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id});}catch(_){}}
+  icp=isICP(revenue);if(icp&&metaAd&&!TEST&&!window.MJC_QA&&typeof fbq==='function'){try{fbq('track','Lead',{content_name:'Deck Jobs Strategy Session',value:0,currency:'USD'},{eventID:event_id});}catch(_){}}
   const answers={capacity:v('capacity'),revenue_goal:v('goal'),start_date:v('start'),why_now:v('why')};
   try{sessionStorage.setItem('dl_qualify_data',JSON.stringify(Object.assign({name:c.name,email:c.email,phone:'+1'+c.digits,zip:c.zip,revenue,timing,icp,event_id},answers)));sessionStorage.setItem('dl_qualify_icp',icp?'1':'0');sessionStorage.setItem('dl_meta_ad',metaAd?'1':'0');}catch(_){}
   (async()=>{try{
@@ -178,102 +261,324 @@ form.addEventListener('submit',e=>{e.preventDefault();
   }catch(err){console.warn('[lying] GHL webhook failed',err);}})();
 
   form.classList.add('hidden');$('form-heading').classList.add('hidden');$('progress').classList.add('hidden');$('loading').classList.remove('hidden');applyEl.scrollIntoView({behavior:'smooth',block:'start'});
-  Object.assign(PICK,{first_name:c.first_name,last_name:c.last_name,email:c.email,phone:'+1'+c.digits});
-  if(icp){$('loading').classList.add('hidden');$('calendar-wrap').classList.remove('hidden');$('mcb').style.display='block';mcbLoad();}
-  else{loadGhlEmbed();const u=new URL(CAL_NON_ICP);u.searchParams.set('first_name',c.first_name);if(c.last_name)u.searchParams.set('last_name',c.last_name);u.searchParams.set('name',c.name);u.searchParams.set('full_name',c.name);u.searchParams.set('email',c.email);u.searchParams.set('phone','+1'+c.digits);
-    if(!window.MJC_QA&&!TEST)$('inline-calendar').src=u.toString();else $('inline-calendar').setAttribute('data-src',u.toString());
-    setTimeout(()=>{$('loading').classList.add('hidden');$('calendar-wrap').classList.remove('hidden');$('cal-iframe-wrap').classList.remove('hidden');},1400);}
+  Object.assign(PICK,{name:c.name,email:c.email,phone:'+1'+c.digits});icp=isICP(revenue);
+  $('loading').classList.add('hidden');$('calendar-wrap').classList.remove('hidden');
+  try{mccShow(icp);}catch(_){mccIframeFallback();}
 });
 
-// Same native picker + mjc-self-book Worker as the root apply page (ICP). Non-ICP keeps the GHL widget, as on root (it collects the deposit).
-const PICK={};
-  // ── NATIVE SLOT PICKER (ICP leads) — identical to root; slots + booking via mjc-self-book Worker ──
-  var MCB_WORKER='https://mjc-self-book.spencer-80c.workers.dev';
-  var mcbTz='America/Chicago'; try{ mcbTz=Intl.DateTimeFormat().resolvedOptions().timeZone||mcbTz; }catch(e){}
-  var mcbCache={}, mcbDays={}, mcbDay=null, mcbSlot=null;
-  function mcbState(id){ ['mcb-loading','mcb-live','mcb-empty','mcb-error'].forEach(function(x){ var el=document.getElementById(x); if(el) el.style.display=(x===id)?'':'none'; }); }
-  function mcbTime(iso){ return new Date(iso).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:mcbTz}); }
-  function mcbWhen(iso){ return new Date(iso).toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',timeZone:mcbTz})+' at '+mcbTime(iso); }
-  function mcbFetch(force){
-    if(force||!mcbCache.p){
-      mcbCache.p=fetch(MCB_WORKER+'/slots?icp=yes&tz='+encodeURIComponent(mcbTz))
-        .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
-        .catch(function(err){ delete mcbCache.p; throw err; });
+// Tap-to-book picker, same as /25 (mjc-self-book Worker): tapping a time books it. ICP → ICP calendar → /confirmation/, non-ICP → non-ICP calendar → /scheduled/.
+// If the Worker is unreachable, falls back to the GHL widget.
+const PICK={};let icp=false;
+function buildCalUrl(){const u=new URL(icp?'https://api.seasonproofgrowth.com/widget/booking/6Ck4IfG5SatgIkAZJ7yo':CAL_NON_ICP);const q=PICK.name.split(' ');u.searchParams.set('first_name',q[0]||'');if(q.length>1)u.searchParams.set('last_name',q.slice(1).join(' '));u.searchParams.set('name',PICK.name);u.searchParams.set('full_name',PICK.name);u.searchParams.set('email',PICK.email);u.searchParams.set('phone',PICK.phone);return u.toString();}
+  // ── Instant booking picker ──────────────────────────────────────────────────────────────
+  // Talks to mjc-self-book (same worker /book/ has used since 2026-07): GET /slots proxies
+  // GHL free-slots, POST /book creates the confirmed appointment server-side. Prefetched on
+  // modal open so step 6 paints from cache with no spinner.
+  //
+  // One tap books (Spencer 2026-10-09). Hovering a slot relabels it "Confirm 10:30 AM", and
+  // the click itself is the booking — no second confirm button to lose people on.
+  var MCC_W = 'https://mjc-self-book.spencer-80c.workers.dev';
+  var MCC_TZ_KEY = 'mjc_tz';
+  var mccTz = 'America/Chicago';
+  try{ mccTz = Intl.DateTimeFormat().resolvedOptions().timeZone || mccTz; }catch(e){}
+  try{
+    var _svtz = localStorage.getItem(MCC_TZ_KEY);
+    if(_svtz && /^[A-Za-z_]+\/[A-Za-z_+-]+(\/[A-Za-z_+-]+)?$/.test(_svtz)) mccTz = _svtz;
+  }catch(e){}
+  var mccCache={}, mccInflight={}, mccFetchedAt={}, mccDays={}, mccDay=null;
+  var mccBooking=false, mccDotsTimer=null;
+  var MCC_STALE_MS = 5*60*1000;   // past this, repaint from a fresh fetch
+
+  // Offered timezones. Grouped by their IANA region, US-first because the audience is
+  // US contractors; the browser's own zone is spliced in below if it is not already here.
+  var MCC_ZONES = [
+    ['America','America/New_York','New York'],
+    ['America','America/Chicago','Chicago'],
+    ['America','America/Denver','Denver'],
+    ['America','America/Phoenix','Phoenix'],
+    ['America','America/Los_Angeles','Los Angeles'],
+    ['America','America/Anchorage','Anchorage'],
+    ['America','America/Toronto','Toronto'],
+    ['America','America/Vancouver','Vancouver'],
+    ['America','America/Edmonton','Edmonton'],
+    ['America','America/Winnipeg','Winnipeg'],
+    ['America','America/Halifax','Halifax'],
+    ['America','America/Puerto_Rico','Puerto Rico'],
+    ['Pacific','Pacific/Honolulu','Honolulu'],
+    ['Europe','Europe/London','London']
+  ];
+  (function mccSeedZone(){
+    for(var i=0;i<MCC_ZONES.length;i++){ if(MCC_ZONES[i][1]===mccTz) return; }
+    if(mccTz.indexOf('/')<1) return;
+    var p=mccTz.split('/'), last=-1;
+    for(var j=0;j<MCC_ZONES.length;j++){ if(MCC_ZONES[j][0]===p[0]) last=j; }
+    MCC_ZONES.splice(last>=0?last+1:0, 0,
+      [p[0], mccTz, p[p.length-1].replace(/_/g,' ')]);
+  })();
+
+  function mccEl(id){ return document.getElementById(id); }
+  function mccView(id){
+    ['mcc-loading','mcc-live','mcc-empty','mcc-error'].forEach(function(x){
+      var n=mccEl(x); if(n) n.hidden = (x!==id);
+    });
+  }
+  function mccSeg(isIcp){ return isIcp ? 'yes' : 'no'; }
+  // Cache is per segment AND per timezone: the same slot carries a different offset in each.
+  function mccKey(seg){ return seg+'|'+mccTz; }
+
+  function mccFetch(seg, force){
+    var k=mccKey(seg);
+    if(!force && mccCache[k] && (Date.now()-(mccFetchedAt[k]||0)) < MCC_STALE_MS){
+      return Promise.resolve(mccCache[k]);
     }
-    return mcbCache.p;
+    if(mccInflight[k]) return mccInflight[k];
+    mccInflight[k] = fetch(MCC_W+'/slots?icp='+seg+'&tz='+encodeURIComponent(mccTz))
+      .then(function(r){ if(!r.ok) throw new Error('slots '+r.status); return r.json(); })
+      .then(function(d){ mccCache[k]=d; mccFetchedAt[k]=Date.now(); mccInflight[k]=null; return d; })
+      .catch(function(err){ mccInflight[k]=null; throw err; });
+    return mccInflight[k];
   }
-  function mcbLoad(e,force){
-    if(e) e.preventDefault();
-    var tzEl=document.getElementById('mcb-tz'); if(tzEl) tzEl.textContent=mcbTz.replace(/_/g,' ');
-    mcbState('mcb-loading');
-    var lo=document.getElementById('mcb-loading'); lo.textContent='Checking open times…';
-    var slow=setTimeout(function(){ lo.textContent='Still pulling up the calendar… hang tight, this can take a few seconds.'; },4000);
-    mcbFetch(force).then(function(data){
-      clearTimeout(slow); mcbDays={};
-      Object.keys(data.days||{}).forEach(function(d){
-        var sl=((data.days[d]||{}).slots||[]).filter(function(iso){ return /T\d\d:(00|15|30|45):00/.test(iso); });
-        if(sl.length) mcbDays[d]=sl;
-      });
-      var keys=Object.keys(mcbDays).sort();
-      if(!keys.length){ mcbState('mcb-empty'); return; }
-      if(!mcbDay||!mcbDays[mcbDay]) mcbDay=keys[0];
-      if(mcbSlot&&mcbDays[mcbDay].indexOf(mcbSlot)===-1) mcbSlot=null;
-      mcbRenderDays(); mcbRenderSlots(); mcbState('mcb-live');
-    }).catch(function(){ clearTimeout(slow); mcbState('mcb-error'); });
+
+  // Warm BOTH segments: which calendar they land on isn't known until the revenue step,
+  // and two ~700-byte GETs are cheaper than making anyone watch a spinner.
+  function mccPrefetch(){
+    ['yes','no'].forEach(function(s){ mccFetch(s).catch(function(){}); });
   }
-  function mcbRenderDays(){
-    var row=document.getElementById('mcb-days'); row.innerHTML='';
-    Object.keys(mcbDays).sort().forEach(function(d){
-      var dt=new Date(d+'T12:00:00Z'); var b=document.createElement('button'); b.type='button';
-      b.className='mcb-day'+(d===mcbDay?' mcb-sel':'');
-      b.innerHTML='<span class="mcb-dow">'+dt.toLocaleDateString('en-US',{weekday:'short',timeZone:'UTC'})+'</span><span class="mcb-date">'+dt.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'})+'</span>';
-      b.onclick=function(){ mcbDay=d; mcbSlot=null; mcbRenderDays(); mcbRenderSlots(); };
+
+  function mccAbbr(tz){
+    try{
+      var parts=new Intl.DateTimeFormat('en-US',{timeZone:tz,timeZoneName:'short'})
+        .formatToParts(new Date());
+      for(var i=0;i<parts.length;i++){ if(parts[i].type==='timeZoneName') return parts[i].value; }
+    }catch(e){}
+    return '';
+  }
+  function mccDayLabel(ymd){
+    var d=new Date(ymd+'T12:00:00Z');
+    return { dow:d.toLocaleDateString('en-US',{weekday:'short',timeZone:'UTC'}),
+             day:d.toLocaleDateString('en-US',{day:'numeric',timeZone:'UTC'}),
+             mon:d.toLocaleDateString('en-US',{month:'short',timeZone:'UTC'}) };
+  }
+  function mccTime(iso){
+    return new Date(iso).toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',timeZone:mccTz});
+  }
+
+  function mccRenderDays(){
+    var row=mccEl('mcc-days'); if(!row) return;
+    row.innerHTML='';
+    Object.keys(mccDays).sort().forEach(function(ymd){
+      var l=mccDayLabel(ymd), b=document.createElement('button');
+      b.type='button'; b.className='mcc-day';
+      b.setAttribute('aria-selected', String(ymd===mccDay));
+      b.innerHTML='<b></b><span></span><i></i>';
+      b.childNodes[0].textContent=l.dow;
+      b.childNodes[1].textContent=l.day;
+      b.childNodes[2].textContent=l.mon;
+      b.onclick=function(){ if(mccBooking) return; mccDay=ymd; mccRenderDays(); mccRenderSlots(); };
       row.appendChild(b);
     });
   }
-  function mcbRenderSlots(){
-    var grid=document.getElementById('mcb-slots'); grid.innerHTML='';
-    (mcbDays[mcbDay]||[]).forEach(function(iso){
-      var b=document.createElement('button'); b.type='button';
-      b.className='mcb-slot'+(iso===mcbSlot?' mcb-sel':''); b.textContent=mcbTime(iso);
-      b.onclick=function(){ mcbSlot=iso; mcbRenderSlots(); mcbShowBook(); };
+  function mccRenderSlots(){
+    var grid=mccEl('mcc-slots'); if(!grid) return;
+    grid.classList.remove('mcc-slots-busy');
+    grid.innerHTML='';
+    (mccDays[mccDay]||[]).forEach(function(iso){
+      var t=mccTime(iso), b=document.createElement('button');
+      b.type='button'; b.className='mcc-slot';
+      b.setAttribute('aria-label','Book '+t);
+      b.innerHTML='<span class="mcc-t"></span><span class="mcc-c"></span>';
+      b.childNodes[0].textContent=t;
+      b.childNodes[1].textContent='Confirm '+t;
+      b.onclick=function(){ mccBookSlot(iso,b); };
       grid.appendChild(b);
     });
-    if(!mcbSlot) document.getElementById('mcb-book').style.display='none';
   }
-  function mcbShowBook(){
-    document.getElementById('mcb-when').textContent=mcbWhen(mcbSlot);
-    document.getElementById('mcb-err').style.display='none';
-    var box=document.getElementById('mcb-book'); box.style.display='';
-    try{ box.scrollIntoView({behavior:'smooth',block:'nearest'}); }catch(e){}
+  function mccError(msg){
+    var e=mccEl('mcc-err'); if(!e) return;
+    e.textContent=msg; e.classList.add('show');
   }
-  function mcbError(msg){ var el=document.getElementById('mcb-err'); el.textContent=msg; el.style.display=''; }
-  function mcbBook(){
-    if(!mcbSlot) return;
-    var btn=document.getElementById('mcb-btn'); btn.disabled=true; btn.textContent='Locking It In…';
-    if(window.MJC_QA){ btn.textContent='QA mode: no booking made'; return; }
-    var fn=PICK.first_name||'', ln=PICK.last_name||'';
-    // Same contact the inbound webhook created (Worker upserts by email/phone). Source echoes the LP's own so upsert never relabels it.
-    fetch(MCB_WORKER+'/book',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      icp:'yes', startTime:mcbSlot, timezone:mcbTz, firstName:fn, lastName:ln, email:PICK.email||'', phone:PICK.phone||'',
-      source:SOURCE, tags:['lp-native-booked','lp-lying'] })})
-    .then(function(r){ return r.json().then(function(b){ return {status:r.status,body:b}; }); })
-    .then(function(res){
-      if(res.status===200&&res.body&&res.body.ok){
-        btn.textContent='Booked! One sec…';
-        try{ localStorage.setItem('mjc_booked_ref',JSON.stringify({contactId:res.body.contactId||'',calendarId:res.body.calendarId||'',t:Date.now()})); }catch(e){}
-        location.href='/confirmation/?c='+encodeURIComponent(res.body.contactId||'')+'&cal='+encodeURIComponent(res.body.calendarId||'');
-        return;
-      }
-      btn.disabled=false; btn.textContent='Lock In My Call →';
-      if(res.status===409){ mcbError('That time was just taken. Pick another one.'); mcbSlot=null; mcbLoad(null,true); }
-      else { mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); }
-    })
-    .catch(function(){ btn.disabled=false; btn.textContent='Lock In My Call →'; mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); });
-  }
-  (function(){ var b=document.getElementById('mcb-btn'); if(b) b.addEventListener('click',mcbBook); var r=document.getElementById('mcb-retry'); if(r) r.addEventListener('click',function(e){ mcbLoad(e,true); }); })();
 
-function loadGhlEmbed(){if(window.__mjcGhlEmbed)return;window.__mjcGhlEmbed=true;try{const t=document.createElement('script');t.src='https://api.seasonproofgrowth.com/js/form_embed.js';t.async=true;document.head.appendChild(t);}catch(_){}}
+  function mccPaint(data){
+    mccDays={};
+    var src=(data&&data.days)||{};
+    Object.keys(src).forEach(function(ymd){
+      var s=(src[ymd]||{}).slots||[]; if(s.length) mccDays[ymd]=s;
+    });
+    var keys=Object.keys(mccDays).sort();
+    if(!keys.length){ mccView('mcc-empty'); return; }
+    if(!mccDay || !mccDays[mccDay]) mccDay=keys[0];
+    mccRenderDays(); mccRenderSlots(); mccView('mcc-live');
+  }
+
+  // Paint cache first (instant), then reconcile against a fresh read so a slot taken
+  // while they were answering questions can't survive on screen.
+  function mccShow(isIcp){
+    var cached=mccCache[mccKey(mccSeg(isIcp))];
+    if(cached) mccPaint(cached); else mccView('mcc-loading');
+    mccFetch(mccSeg(isIcp), !!cached)
+      .then(mccPaint)
+      .catch(function(){ if(!cached) mccView('mcc-error'); });
+  }
+
+  // ── timezone picker ────────────────────────────────────────────────────────────────────
+  function mccTzLabel(){
+    var n=mccEl('mcc-tz'); if(!n) return;
+    var a=mccAbbr(mccTz);
+    n.textContent = mccTz + (a ? ' '+a : '');
+  }
+  function mccRenderTzList(q){
+    var list=mccEl('mcc-tzlist'); if(!list) return;
+    q=String(q||'').trim().toLowerCase();
+    list.innerHTML='';
+    var group='', shown=0;
+    MCC_ZONES.forEach(function(z){
+      var region=z[0], id=z[1], city=z[2], abbr=mccAbbr(id);
+      if(q && (city+' '+region+' '+abbr+' '+id).toLowerCase().indexOf(q)===-1) return;
+      if(region!==group){
+        group=region;
+        var h=document.createElement('div');
+        h.className='mcc-tzgroup'; h.textContent=region;
+        list.appendChild(h);
+      }
+      var b=document.createElement('button');
+      b.type='button'; b.className='mcc-tzopt'; b.setAttribute('role','option');
+      b.setAttribute('aria-selected', String(id===mccTz));
+      b.textContent = city + (abbr ? ' \u00b7 '+abbr : '');
+      b.onclick=function(){ mccSetTz(id); };
+      list.appendChild(b); shown++;
+    });
+    var none=mccEl('mcc-tznone'); if(none) none.hidden = (shown>0);
+  }
+  function mccOpenTz(){
+    var w=mccEl('mcc-tzwrap'), pop=mccEl('mcc-tzpop'), btn=mccEl('mcc-tzbtn');
+    if(!w||!pop||!btn) return;
+    mccRenderTzList('');
+    var q=mccEl('mcc-tzq'); if(q) q.value='';
+    var wrap=mccEl('calendar-wrap'); if(wrap) wrap.classList.add('mcc-tz-open');
+    pop.hidden=false; w.classList.add('open'); btn.setAttribute('aria-expanded','true');
+    // Opens upward (it sits low in the card); flips down only if there is no room above.
+    try{
+      pop.classList.toggle('below', btn.getBoundingClientRect().top < pop.offsetHeight + 16);
+    }catch(e){}
+    // Focusing would throw up the keyboard on a phone and hide the list.
+    try{ if(q && !('ontouchstart' in window)) q.focus(); }catch(e){}
+  }
+  function mccCloseTz(){
+    var w=mccEl('mcc-tzwrap'), pop=mccEl('mcc-tzpop'), btn=mccEl('mcc-tzbtn');
+    var wrap=mccEl('calendar-wrap'); if(wrap) wrap.classList.remove('mcc-tz-open');
+    if(pop){ pop.hidden=true; pop.classList.remove('below'); }
+    if(w) w.classList.remove('open');
+    if(btn) btn.setAttribute('aria-expanded','false');
+  }
+  function mccSetTz(tz){
+    mccCloseTz();
+    if(tz===mccTz || mccBooking) return;
+    mccTz=tz;
+    try{ localStorage.setItem(MCC_TZ_KEY, tz); }catch(e){}
+    mccTzLabel();
+    mccDay=null;                       // day keys are tz-localized; let the fresh read pick
+    mccShow(icp);
+  }
+
+  // Last resort: if the worker is unreachable, fall back to the GHL widget that used to live here.
+  function mccIframeFallback(){
+    try{
+      if(window.loadGhlEmbed) loadGhlEmbed();   // auto-resize runtime, only now that we need it
+      var host=document.getElementById('mcc'); if(host) host.hidden=true;
+      var f=document.getElementById('mc-cal');
+      if(f){ if(!f.getAttribute('src')) f.src=buildCalUrl(); var fw=document.getElementById('cal-iframe-wrap'); if(fw) fw.classList.remove('hidden'); }
+    }catch(e){}
+  }
+
+  // ── booking ────────────────────────────────────────────────────────────────────────────
+  function mccBusy(btn){
+    var grid=mccEl('mcc-slots'); if(grid) grid.classList.add('mcc-slots-busy');
+    btn.disabled=true; btn.classList.add('mcc-slot-busy');
+    btn.innerHTML='<span class="mcc-t">Booking<span id="mcc-dots">.</span></span>';
+    var n=0, d=mccEl('mcc-dots');
+    mccDotsTimer=setInterval(function(){
+      n=(n+1)%3; if(d) d.textContent=['.','..','...'][n];
+    }, 380);
+  }
+  function mccFail(msg, refetch){
+    if(mccDotsTimer){ clearInterval(mccDotsTimer); mccDotsTimer=null; }
+    mccBooking=false;
+    mccError(msg);
+    if(refetch) mccShow(icp); else mccRenderSlots();
+  }
+  function mccBookSlot(iso, btn){
+    if(mccBooking) return;
+    if(window.MJC_QA||window.MJC_TEST){ btn.textContent='Test mode: no booking made'; return; }
+    mccBooking=true;
+    var e=mccEl('mcc-err'); if(e) e.classList.remove('show');
+    mccBusy(btn);
+    var parts=String(PICK.name||'').trim().split(/\s+/);
+    var payload={ icp: mccSeg(icp), startTime: iso, timezone: mccTz,
+                  firstName: parts.shift()||'', lastName: parts.join(' '),
+                  email: PICK.email||'', phone: PICK.phone||'', source: SOURCE, tags: ['lp-lying'] };
+    fetch(MCC_W+'/book',{method:'POST',headers:{'Content-Type':'application/json'},
+                         body:JSON.stringify(payload)})
+      .then(function(r){ return r.json().then(function(b){ return {status:r.status, body:b}; }); })
+      .then(function(res){
+        if(res.status===200 && res.body && res.body.ok){
+          
+          // Same ref the widget flow set — the confirmation pages read it to render
+          // add-to-calendar via the mjc-appointment-time worker. Name/email stay HERE
+          // rather than in the redirect URL so no PII rides in a query string.
+          try{ localStorage.setItem('mjc_booked_ref', JSON.stringify(
+                 {contactId:res.body.contactId, calendarId:res.body.calendarId,
+                  appointmentId:res.body.appointmentId, startTime:iso, timezone:mccTz,
+                  name:PICK.name||'', email:PICK.email||'', t:Date.now()})); }catch(_){}
+          // Ids + time also ride the URL — covers Safari private mode, where the write fails.
+          location.href=(icp?'/confirmation/':'/scheduled/')
+            +'?c='+encodeURIComponent(res.body.contactId||'')
+            +'&cal='+encodeURIComponent(res.body.calendarId||'')
+            +'&a='+encodeURIComponent(res.body.appointmentId||'')
+            +'&t='+encodeURIComponent(iso)
+            +'&tz='+encodeURIComponent(mccTz);
+          return;
+        }
+        if(res.status===409) mccFail('That time was just taken \u2014 pick another one.', true);
+        else mccFail('Something hiccuped. Try again, or text us at (501) 236-3920.', false);
+      })
+      .catch(function(){
+        mccFail('Something hiccuped. Try again, or text us at (501) 236-3920.', false);
+      });
+  }
+
+  (function mccWire(){
+    try{
+      mccTzLabel();
+      var tzb=mccEl('mcc-tzbtn');
+      if(tzb) tzb.addEventListener('click', function(ev){
+        ev.stopPropagation();
+        var pop=mccEl('mcc-tzpop');
+        if(pop && pop.hidden) mccOpenTz(); else mccCloseTz();
+      });
+      var tzq=mccEl('mcc-tzq');
+      if(tzq){
+        tzq.addEventListener('input', function(){ mccRenderTzList(tzq.value); });
+        tzq.addEventListener('click', function(ev){ ev.stopPropagation(); });
+      }
+      document.addEventListener('click', function(ev){
+        var w=mccEl('mcc-tzwrap');
+        if(w && !w.contains(ev.target)) mccCloseTz();
+      });
+      // Capture phase + stopPropagation: Escape closes the dropdown WITHOUT also
+      // closing the survey modal behind it.
+      document.addEventListener('keydown', function(ev){
+        if(ev.key!=='Escape') return;
+        var pop=mccEl('mcc-tzpop');
+        if(pop && !pop.hidden){ ev.stopPropagation(); mccCloseTz(); }
+      }, true);
+      var rt=mccEl('mcc-retry');
+      if(rt) rt.addEventListener('click', function(){
+        mccView('mcc-loading');
+        mccFetch(mccSeg(icp), true).then(mccPaint).catch(mccIframeFallback);
+      });
+    }catch(e){}
+  })();
+window.loadGhlEmbed=loadGhlEmbed;function loadGhlEmbed(){if(window.__mjcGhlEmbed)return;window.__mjcGhlEmbed=true;try{const t=document.createElement('script');t.src='https://api.seasonproofgrowth.com/js/form_embed.js';t.async=true;document.head.appendChild(t);}catch(_){}}
 // Stash {contactId, calendarId} from the GHL widget so /confirmation/ can show add-to-calendar (same as /25).
 let contactId=null;window.addEventListener('message',e=>{try{const d=e.data;if(!Array.isArray(d))return;
   if(d[0]==='set-sticky-contacts'&&typeof d[2]==='string'){const m=d[2].match(/"id":"([^"]+)"/);if(m)contactId=m[1];}
