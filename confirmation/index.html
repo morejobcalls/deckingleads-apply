@@ -300,9 +300,9 @@
       <div class="cal-confirm hot">
         <p class="cal-confirm-t">Your call is <b>not confirmed</b> until you text us.</p>
         <p class="cal-confirm-s">Text this number and reply <b>YES</b> to confirm your call time.</p>
-        <a class="cal-confirm-num" href="sms:+15012363920?&amp;body=YES">(501) 236-3920</a>
+        <a class="cal-confirm-num" href="sms:+15012632597?&amp;body=YES">(501) 263-2597</a>
         <a id="confirm-sms" class="cal-confirm-btn"
-           href="sms:+15012363920?&amp;body=YES">Text YES to Confirm</a>
+           href="sms:+15012632597?&amp;body=YES">Text YES to Confirm</a>
         <p id="sms-preview-text" style="display:none;"></p>
       </div>
 
@@ -702,7 +702,7 @@
     if (!sms) return;
     var who = state.first ? (' This is ' + state.first + (state.biz ? ' from ' + state.biz : '') + '.') : '';
     var body = 'YES, confirming my call.' + who;
-    sms.href = 'sms:+15012363920?&body=' + encodeURIComponent(body);
+    sms.href = 'sms:+15012632597?&body=' + encodeURIComponent(body);
     var pv = document.getElementById('sms-preview-text');
     if (pv) pv.textContent = body;
   }
@@ -827,10 +827,10 @@ window.addEventListener('load', function () {
         days={}; var src=(d&&d.days)||{};
         Object.keys(src).forEach(function(k){ var s=(src[k]||{}).slots||[]; if(s.length) days[k]=s; });
         var keys=Object.keys(days).sort();
-        if(!keys.length){ note('No open times right now \u2014 text us at (501) 236-3920 and we\u2019ll move it.','err'); return; }
+        if(!keys.length){ note('No open times right now \u2014 text us at (501) 263-2597 and we\u2019ll move it.','err'); return; }
         day=keys[0]; note('',''); renderDays(); renderSlots();
       })
-      .catch(function(){ note('Couldn\u2019t load times. Text (501) 236-3920 and we\u2019ll move it.','err'); });
+      .catch(function(){ note('Couldn\u2019t load times. Text (501) 263-2597 and we\u2019ll move it.','err'); });
   }
   function move(iso,btn){
     if(busy) return; busy=true;
@@ -850,11 +850,11 @@ window.addEventListener('load', function () {
           return;
         }
         if(res.s===409){ note('That time was just taken \u2014 pick another.','err'); loadSlots(); }
-        else note('Couldn\u2019t move it. Text (501) 236-3920 and we\u2019ll sort it.','err');
+        else note('Couldn\u2019t move it. Text (501) 263-2597 and we\u2019ll sort it.','err');
       })
       .catch(function(){
         busy=false; el('bk-slots').classList.remove('busy');
-        note('Couldn\u2019t move it. Text (501) 236-3920 and we\u2019ll sort it.','err');
+        note('Couldn\u2019t move it. Text (501) 263-2597 and we\u2019ll sort it.','err');
       });
   }
   var rb=el('bk-resched-btn');
@@ -889,10 +889,10 @@ window.addEventListener('load', function () {
           note('',''); try{ localStorage.removeItem('mjc_booked_ref'); }catch(e){}
           return;
         }
-        note('Couldn\u2019t cancel it. Text (501) 236-3920 and we\u2019ll take care of it.','err');
+        note('Couldn\u2019t cancel it. Text (501) 263-2597 and we\u2019ll take care of it.','err');
       })
       .catch(function(){ busy=false; cb.textContent='Cancel';
-        note('Couldn\u2019t cancel it. Text (501) 236-3920 and we\u2019ll take care of it.','err'); });
+        note('Couldn\u2019t cancel it. Text (501) 263-2597 and we\u2019ll take care of it.','err'); });
   });
 })();
 </script>
