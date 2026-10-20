@@ -448,11 +448,11 @@
           </div>
           <div id="mcb-empty" class="mcb-state" style="display:none;">
             <p><strong>The next few days are spoken for.</strong></p>
-            <p>Text us at <a href="sms:+15012363920">(501) 236-3920</a> and we'll find you a time.</p>
+            <p>Text us at <a href="sms:+15012632597">(501) 263-2597</a> and we'll find you a time.</p>
           </div>
           <div id="mcb-error" class="mcb-state" style="display:none;">
             <p><strong>Couldn't load the calendar.</strong></p>
-            <p><a href="#" id="mcb-retry">Try again</a> or text us at <a href="sms:+15012363920">(501) 236-3920</a>.</p>
+            <p><a href="#" id="mcb-retry">Try again</a> or text us at <a href="sms:+15012632597">(501) 263-2597</a>.</p>
           </div>
         </div>
       </div>
@@ -830,9 +830,9 @@
       }
       btn.disabled=false; btn.textContent='Lock In My Call →';
       if(res.status===409){ mcbError('That time was just taken. Pick another one.'); mcbSlot=null; mcbLoad(null,true); }
-      else { mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); }
+      else { mcbError('Something hiccuped. Try again, or text us at (501) 263-2597.'); }
     })
-    .catch(function(){ btn.disabled=false; btn.textContent='Lock In My Call →'; mcbError('Something hiccuped. Try again, or text us at (501) 236-3920.'); });
+    .catch(function(){ btn.disabled=false; btn.textContent='Lock In My Call →'; mcbError('Something hiccuped. Try again, or text us at (501) 263-2597.'); });
   }
   (function(){ var b=document.getElementById('mcb-btn'); if(b) b.addEventListener('click',mcbBook); var r=document.getElementById('mcb-retry'); if(r) r.addEventListener('click',function(e){ mcbLoad(e,true); }); })();
 
