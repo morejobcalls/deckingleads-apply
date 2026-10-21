@@ -2201,7 +2201,7 @@
       .then(function(r){ return r.ok?r.json():{}; }).then(function(g){ if(g&&typeof g==='object') MJC_GEO=g; }).catch(function(){});
   }catch(e){} })();
   function geoFields(){ var g=MJC_GEO||{};
-    return {city:g.city||'',state:g.region_code||g.region||'',postal_code:g.postal_code||'',country:g.country||'',geo_source:g.city||g.postal_code?'ip':''}; }
+    return {city:g.city||'',state:g.region_code||g.region||'',postal_code:formData.zip||g.postal_code||'',ip_postal_code:g.postal_code||'',country:g.country||'',geo_source:g.city||g.postal_code?'ip':''}; }
   var LABELS={revenue:{'0_100k':'Under $100k','100_200k':'$100k–$200k','200_300k':'$200k–$300k','300_500k':'$300k–$500k',
       '500k_1m':'$500k–$1M','1m_3m':'$1M–$3M','3m_plus':'$3M+'},
     timing:{asap:'ASAP','2_4_weeks':'Next 2–4 weeks',later:'Later',researching:'Just researching'},
