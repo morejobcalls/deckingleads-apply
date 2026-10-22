@@ -30,7 +30,7 @@ async function newPage(){const page=await browser.newPage();await page.setViewpo
  ok(await page.evaluate(()=>typeof fbq==='function'&&!!window.fbq.loaded&&typeof clarity==='function'),'fbq + clarity stubs present');
  // hero video click → iframe
  await page.click('.hero-vid'); await new Promise(r=>setTimeout(r,300));
- ok(await page.evaluate(()=>{const a=document.querySelector('.hero-vid');return a.classList.contains('is-playing')&&!!a.querySelector('iframe[src*="youtube.com/embed/HRYuMJmhpmY"]');}),'hero video swaps to player on tap');
+ ok(await page.evaluate(()=>{const a=document.querySelector('.hero-vid');return a.classList.contains('is-playing')&&!!a.querySelector('iframe[src*="youtube.com/embed/T9rqN3_zWAM"]');}),'hero video swaps to player on tap');
  // modal walk
  await page.click('.cta-btn'); await page.waitForSelector('#mc-overlay.open',{timeout:5000}); ok(true,'CTA opens the modal');
  const step=n=>page.waitForSelector(`.mc-step[data-step="${n}"].active`,{timeout:5000});
