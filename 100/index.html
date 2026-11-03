@@ -396,6 +396,7 @@
     })(window, document, "clarity", "script", "wpznuz610a");
 </script>
 
+<script src="/journey.js" defer></script>
 </head>
 <body class="bg-bg text-ink antialiased">
 
@@ -1512,6 +1513,7 @@
           landing_url: attribution.landing_url || '',
           referrer: attribution.referrer || ''
         };
+        try{if(window.mjcJourney){Object.assign(ghlPayload,mjcJourney.leadFields());mjcJourney.track('submit',{lead_ref:ghlPayload.event_id,label:'100 survey',value:ghlPayload.icp==='yes'?'icp':'non-icp'});}}catch(_){} // Journey Ledger (2026-11-03 funnel audit)
         await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

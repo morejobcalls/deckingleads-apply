@@ -442,6 +442,7 @@
     })(window, document, "clarity", "script", "wpznuz610a");
 </script>
 
+<script src="/journey.js" defer></script>
 </head>
 <body class="bg-bg text-ink antialiased">
 
@@ -2744,6 +2745,7 @@
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||'',
           fbc:fbc,in_app_browser:in_app,offer:'25-in-25',guarantee:'25in25-free-forever',meta_ad:metaAd?'yes':'no'};
         Object.assign(payload,geoFields());
+        try{if(window.mjcJourney){Object.assign(payload,mjcJourney.leadFields(),{meta_ad:metaAd?'yes':'no'});mjcJourney.track('submit',{lead_ref:event_id,label:'25 survey',value:icp?'icp':'non-icp'});}}catch(_){} // Journey Ledger: source fields + submit (2026-11-03 funnel audit)
         if(TEST_CODE){
           // One pixel (2026-10-13): MAIN pixel's test code, no target -> relay v10 sends what production sends:
           // Lead for everyone, + QualifiedLead when icp=yes.

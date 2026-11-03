@@ -208,6 +208,15 @@
       var href = el.getAttribute('href') || '';
       var id = ytId(href);
       if (id) { track('video_play', { label: labelOf(el) || ('youtube:' + id), value: 'youtube:' + id, meta: { how: 'link' } }); return; }
+      // morejobcalls.com buttons hard-code utm_medium=organic-seo, which stamps Lead Channel = seo on anyone who
+      // clicks through (2026-11-03 funnel audit). Keep it only when this visitor really came from search or an AI.
+      if (/apply\.morejobcalls\.com/.test(href) && /utm_medium=organic-seo/.test(href)) {
+        var ftCh = (getCookie('mjc_ft') || '').split('|')[0], ltCh = (getCookie('mjc_lt') || '').split('|')[0];
+        if (!/^(search|llm)$/.test(ftCh) && !/^(search|llm)$/.test(ltCh)) {
+          href = href.replace('utm_medium=organic-seo', 'utm_medium=website');
+          el.setAttribute('href', href);
+        }
+      }
       var onclick = el.getAttribute('onclick') || '';
       var isCta = el.matches('[data-open-apply],[data-cta],a[href="#apply"],.mc-next,.mcb-btn,.sv-next') ||
         /openSurveyModal|svBook|__openApply/.test(onclick) ||
