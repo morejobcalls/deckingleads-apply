@@ -1730,6 +1730,7 @@
           utm_source:attribution.utm_source||'',utm_medium:attribution.utm_medium||'',utm_campaign:attribution.utm_campaign||'',
           utm_content:attribution.utm_content||'',utm_term:attribution.utm_term||'',fbclid:attribution.fbclid||'',gclid:attribution.gclid||'',
           landing_url:attribution.landing_url||'',referrer:attribution.referrer||''};
+        try{if(window.mjcJourney){Object.assign(payload,mjcJourney.leadFields());mjcJourney.track('submit',{lead_ref:event_id,label:'next survey',value:icp?'icp':'non-icp'});}}catch(_){} // Journey Ledger (2026-11-03 funnel audit)
         await fetch('https://services.leadconnectorhq.com/hooks/X6hS5G8dcD7NqDBOVDNP/webhook-trigger/90c90b32-ded8-44eb-8743-c0d29f3c7675',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),keepalive:true});
       }catch(e){ console.warn('[v2-ravi] GHL webhook failed:',e); }
     })();
